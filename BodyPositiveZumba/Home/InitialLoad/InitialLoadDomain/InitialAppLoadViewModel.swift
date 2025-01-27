@@ -20,7 +20,7 @@ class InitialAppLoadViewModel {
     
     private func startScreenLoad() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {
             self.showHomeScreen = true
         }
     }
