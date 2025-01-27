@@ -11,7 +11,7 @@ import SwiftUI
 class InitialAppLoadViewModel: ObservableObject {
 
     var viewState = InitialAppLoadViewState()
-    let loadingDuration: Double = 2.2
+    let loadingDuration: Double = Double.random(in: 1.11...3.33)
 
     init() {
         startScreenLoad()
