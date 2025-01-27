@@ -45,7 +45,7 @@ struct InitialAppLoadView: View {
                             )
                             .animation(
                                 .linear(
-                                    duration: viewModel.loadingDuration
+                                    duration: viewModel.barLoadDuration
                                 ),
                                 value: viewModel.viewState.progress
                             )
