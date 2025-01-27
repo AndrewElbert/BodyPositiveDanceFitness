@@ -1,6 +1,6 @@
 //
 //  HomeView.swift
-//  BodyPositiveZumba
+//  InitialHome
 //
 //  Created by Andrew Elbert on 1/26/25.
 //
