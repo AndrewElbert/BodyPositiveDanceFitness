@@ -11,9 +11,11 @@ import SwiftUI
 class InitialAppLoadViewModel: ObservableObject {
 
     var viewState = InitialAppLoadViewState()
-    let loadingDuration: Double = Double.random(in: 1.11...3.33)
+    var homeLoadDuration: Double
+    let barLoadDuration: Double = Double.random(in: 0.88...2.22)
 
     init() {
+        homeLoadDuration = barLoadDuration + 0.11
         startScreenLoad()
     }
 
@@ -31,7 +33,7 @@ class InitialAppLoadViewModel: ObservableObject {
     }
 
     private func startScreenLoad() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + homeLoadDuration ) {
             self.viewState.showHomeScreen = true
         }
     }
