@@ -24,9 +24,14 @@ struct HomeView: View {
                             .foregroundColor(.gray)
                             .padding()
                     }
+                    
                     Spacer()
+                    Image(Constants.Common.logoName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 50)
                 }
-                .background(Color.white.shadow(radius: 5))
+                .frame(maxWidth: .infinity, alignment: .center)
 
                 ScrollView {
                     VStack {
@@ -71,7 +76,7 @@ struct HomeView: View {
                             viewModel.updateDragOffset(value.translation)
                         }
                         .onEnded { _ in
-                            viewModel.endDragGesture(widthThreshold: 100)
+                            viewModel.endDragGesture()
                         }
                 )
                 .animation(.easeInOut(duration: 0.3), value: viewModel.viewState.isMenuOpen)
