@@ -12,30 +12,4 @@ import SwiftUI
 @Observable
 class HomeViewModel {
 
-    var viewState: HomeViewState = HomeViewState()
-
-    func toggleMenu() {
-        viewState.isMenuOpen.toggle()
-    }
-
-    func closeMenu() {
-        viewState.isMenuOpen = false
-    }
-
-    func openMenu() {
-        viewState.isMenuOpen = true
-    }
-
-    func updateDragOffset(_ offset: CGSize) {
-        viewState.dragOffset = offset
-    }
-
-    func endDragGesture(widthThreshold: CGFloat = 30) {
-        if viewState.dragOffset.width < -widthThreshold {
-            closeMenu()
-        } else {
-            openMenu()
-        }
-        viewState.dragOffset = .zero
-    }
 }
