@@ -19,15 +19,17 @@ struct DrawerButton: View {
                     .resizable()
                     .frame(
                         width: Constants.SideDrawer.iconSize,
-                        height: Constants.SideDrawer.iconSize)
-                    .foregroundColor(Color(white: 0.99))
+                        height: Constants.SideDrawer.iconSize
+                    )
+                    .foregroundColor(.white)
 
                 Text(title)
                     .font(.system(
                         size: Constants.SideDrawer.fontSize,
-                        weight: .bold)
-                    )
-                    .foregroundColor(Color(white: 0.99))
+                        weight: .semibold,
+                        design: .default
+                    ))
+                    .foregroundColor(.white)
             }
             .padding(.vertical, 12)
             .padding(.leading, 20)
@@ -36,8 +38,8 @@ struct DrawerButton: View {
                 RoundedRectangle(cornerRadius: Constants.SideDrawer.cornerRadius)
                     .fill(LinearGradient(
                         gradient: Gradient(colors: [
-                            Constants.SideDrawer.buttonStartColor,
-                            Constants.SideDrawer.buttonEndColor
+                            Color.black.opacity(0.8),
+                            Color.gray.opacity(0.5)
                         ]),
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -46,10 +48,11 @@ struct DrawerButton: View {
             .cornerRadius(Constants.SideDrawer.cornerRadius)
             .overlay(
                 RoundedRectangle(cornerRadius: Constants.SideDrawer.cornerRadius)
-                    .stroke(Color.black, lineWidth: 1)
+                    .stroke(Color.white, lineWidth: 1)
             )
             .padding(.horizontal, 10)
             .scaleEffect(1.05)
+            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
         }
         .hoverEffect(.highlight)
     }
