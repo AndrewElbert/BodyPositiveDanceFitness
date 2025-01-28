@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SideDrawerView: View {
+
     @ObservedObject var viewModel: SideDrawerViewModel
+    @State private var newsLetterIsPressed: Bool = false
     let menuItems: [SideBarMenuItem]
 
     init(viewModel: SideDrawerViewModel, menuItems: [SideBarMenuItem] = defaultMenuItems) {
@@ -84,7 +86,8 @@ struct SideDrawerView: View {
                                     .font(
                                         .system(
                                             size: Constants.SideDrawer.newsLetterFontSize,
-                                            weight: .medium
+                                            weight: .medium,
+                                            design: .serif
                                         )
                                     )
                                     .foregroundColor(.black)
@@ -98,10 +101,25 @@ struct SideDrawerView: View {
                                         height: Constants.SideDrawer.newsLetterImageSize
                                     )
                             }
-                            .padding(.leading, 15)
-                            .padding(.trailing, 15)
+                            .padding(.leading, 11)
+                            .padding(.trailing, 11)
+                            .scaleEffect(newsLetterIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
+                            .opacity(newsLetterIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .simultaneousGesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { _ in
+                                    withAnimation(.easeInOut(duration: 0.1)) {
+                                        newsLetterIsPressed = true
+                                    }
+                                }
+                                .onEnded { _ in
+                                    withAnimation(.spring()) {
+                                        newsLetterIsPressed = false
+                                    }
+                                }
+                        )
 
                         HStack(spacing: 16) {
                             Button(action: {
@@ -122,7 +140,13 @@ struct SideDrawerView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
 
                         Text(Constants.Common.companyName)
-                            .font(.caption)
+                            .font(
+                                .system(
+                                    size: Constants.SideDrawer.companyNameFontSize,
+                                    weight: .thin,
+                                    design: .serif
+                                )
+                            )
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 30)

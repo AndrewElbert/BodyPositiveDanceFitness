@@ -53,7 +53,13 @@ struct InitialAppLoadView: View {
                     .frame(width: UIScreen.main.bounds.width * 0.8)
 
                     Text(Constants.Common.tradeMarkSlogan)
-                        .font(.headline)
+                        .font(
+                            .system(
+                                size: Constants.Home.tradeMarkSloganSize,
+                                weight: .semibold,
+                                design: .serif
+                            )
+                        )
                         .multilineTextAlignment(.center)
                         .padding(.top)
                         .opacity(viewModel.viewState.fadeInProgress)
