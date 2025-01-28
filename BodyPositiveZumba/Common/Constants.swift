@@ -42,12 +42,13 @@ struct Constants {
             "Welcome to Body Positive Dance Fitness",
             comment: "home screen greeting message"
         )
+        static let tradeMarkSloganSize: CGFloat = 18
     }
 
     enum SideDrawer {
 
         static let iconSize: CGFloat = 24
-        static let fontSize: CGFloat = 18
+        static let fontSize: CGFloat = 20
         // Yellow
         static let buttonStartColor: Color = Color(red: 0.957, green: 0.698, blue: 0.243)
         // Orange
@@ -120,14 +121,18 @@ struct Constants {
         )
 
         static let newsLetterFontSize: CGFloat = 15
-        static let newsLetterImageSize: CGFloat = 15
+        static let companyNameFontSize: CGFloat = 12
+        static let newsLetterImageSize: CGFloat = 9
         static let startRadius: CGFloat = 40
         static let endRadius: CGFloat = 400
         static let backgroundOpacity: Double = 0.6
         static let animationDuration: Double = 0.33
         static let frameWidth: CGFloat = 250
-        static let buttonSpacing: CGFloat = 33
+        static let buttonSpacing: CGFloat = 40
         static let outerCircleColorRadius: Color = Color(red: 0.0, green: 0.9, blue: 0.94)
         static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
+        static let buttonPressOpacity: CGFloat = 0.5
+        static let buttonPressScale: CGFloat = 0.9
+        static let sideDrawerButtonImageSize: CGFloat = 20
     }
 }
