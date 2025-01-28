@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Constants {
     enum Common {
-        
+
         static let instagramLink: String = NSLocalizedString(
             "https://www.instagram.com/",
             comment: "instagram link")
-        
+
         static let facebookLink: String = NSLocalizedString(
             "https://www.facebook.com/",
             comment: "instagram link")
@@ -26,11 +26,11 @@ struct Constants {
         static let logoName: String = NSLocalizedString(
             "BodyPositiveLogo",
             comment: "string file name")
-        
+
         static let companyName: String = NSLocalizedString(
             "© Body Positive Dance Fitness LLC 2023",
             comment: "company name")
-        
+
     }
 
     enum Home {
@@ -110,11 +110,24 @@ struct Constants {
             "FacebookLogo",
             comment: "facebook logo image"
         )
+        static let newsletterText: String = NSLocalizedString(
+            "Subscribe to our newsletter!",
+            comment: "newsletter text"
+        )
+        static let newsletterImage: String = NSLocalizedString(
+            "arrow.right",
+            comment: "newsletter image"
+        )
+
+        static let newsLetterFontSize: CGFloat = 15
+        static let newsLetterImageSize: CGFloat = 15
+        static let startRadius: CGFloat = 40
+        static let endRadius: CGFloat = 400
         static let backgroundOpacity: Double = 0.6
         static let animationDuration: Double = 0.33
         static let frameWidth: CGFloat = 250
-        static let buttonSpacing: CGFloat = 44
+        static let buttonSpacing: CGFloat = 33
         static let outerCircleColorRadius: Color = Color(red: 0.0, green: 0.9, blue: 0.94)
-        static let innerCircleColorRadius: Color = Color(.white)
+        static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
     }
 }
