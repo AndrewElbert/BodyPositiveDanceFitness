@@ -15,7 +15,7 @@ class InitialAppLoadViewModel: ObservableObject {
     let barLoadDuration: Double = Double.random(in: 0.88...2.22)
 
     init() {
-        homeLoadDuration = barLoadDuration + 0.11
+        homeLoadDuration = barLoadDuration + 0.22
         startScreenLoad()
     }
 
