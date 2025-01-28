@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-
     @State private var viewModel = HomeViewModel()
 
     var body: some View {
@@ -18,13 +17,13 @@ struct HomeView: View {
                     Button(action: {
                         viewModel.toggleMenu()
                     }) {
-                        Image(systemName: "line.horizontal.3")
+                        Image(systemName: Constants.Home.buttonImage)
                             .resizable()
                             .frame(width: 24, height: 18)
                             .foregroundColor(.gray)
                             .padding()
                     }
-                    
+
                     Spacer()
                     Image(Constants.Common.logoName)
                         .resizable()
@@ -35,7 +34,7 @@ struct HomeView: View {
 
                 ScrollView {
                     VStack {
-                        Text("Welcome to Body Positive Dance Fitness")
+                        Text(Constants.Home.grettingMessage)
                             .font(.largeTitle)
                             .bold()
                             .padding()
@@ -52,24 +51,63 @@ struct HomeView: View {
                 }
             }
 
-            Color.black.opacity(viewModel.viewState.isMenuOpen ? 0.5 : 0)
+            Color.black.opacity(
+                viewModel.viewState.isMenuOpen ? Constants.SideDrawer.backgroundOpacity : 0
+            )
                 .ignoresSafeArea()
                 .onTapGesture {
                     viewModel.closeMenu()
                 }
-                .animation(.easeInOut(duration: 0.3), value: viewModel.viewState.isMenuOpen)
+                .animation(
+                    .easeInOut(duration: Constants.SideDrawer.animationDuration),
+                    value: viewModel.viewState.isMenuOpen)
 
             HStack {
-                VStack(alignment: .leading) {
-                    DrawerButton(title: "About", action: {})
-                    DrawerButton(title: "Classes", action: {})
-                    DrawerButton(title: "Newcomers/FAQ", action: {})
-                    DrawerButton(title: "Sign In", action: {})
+                VStack(
+                    alignment: .leading, spacing: Constants.SideDrawer.buttonSpacing) {
+                    Spacer()
+                    DrawerButton(
+                        title: Constants.SideDrawer.joinNowText,
+                        icon: Constants.SideDrawer.joinNowImage,
+                        action: {})
+                    DrawerButton(
+                        title: Constants.SideDrawer.classesText,
+                        icon: Constants.SideDrawer.classesImage,
+                        action: {
+                        })
+                    DrawerButton(
+                        title: Constants.SideDrawer.faqText,
+                        icon: Constants.SideDrawer.faqImage,
+                        action: {
+                        })
+                    DrawerButton(
+                        title: Constants.SideDrawer.aboutText,
+                        icon: Constants.SideDrawer.aboutImage,
+                        action: {
+                        })
+                    DrawerButton(
+                        title: Constants.SideDrawer.signInText,
+                        icon: Constants.SideDrawer.signInImage,
+                        action: {
+                        })
                     Spacer()
                 }
-                .frame(width: 250)
-                .background(Color.white)
-                .offset(x: viewModel.viewState.isMenuOpen ? 0 : -250 + viewModel.viewState.dragOffset.width)
+                .frame(width: Constants.SideDrawer.frameWidth)
+                .background(
+                    RadialGradient(
+                        gradient: Gradient(colors: [
+                            Constants.SideDrawer.innerCircleColorRadius,
+                            Constants.SideDrawer.outerCircleColorRadius
+                        ]),
+                        center: .center,
+                        startRadius: 44,
+                        endRadius: 444
+                    )
+                )
+                .offset(
+                    x: viewModel.viewState.isMenuOpen ?
+                    0 : -(Constants.SideDrawer.frameWidth + viewModel.viewState.dragOffset.width)
+                )
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
@@ -79,7 +117,9 @@ struct HomeView: View {
                             viewModel.endDragGesture()
                         }
                 )
-                .animation(.easeInOut(duration: 0.3), value: viewModel.viewState.isMenuOpen)
+                .animation(
+                    .easeInOut(duration: Constants.SideDrawer.animationDuration),
+                    value: viewModel.viewState.isMenuOpen)
 
                 Spacer()
             }
