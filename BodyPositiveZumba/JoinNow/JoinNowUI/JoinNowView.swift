@@ -1,15 +1,15 @@
 //
-//  HomeView.swift
-//  InitialHome
+//  JoinNowView.swift
+//  JoinNowUI
 //
-//  Created by Andrew Elbert on 1/26/25.
+//  Created by Andrew Elbert on 1/28/25.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct JoinNowView: View {
 
-    @StateObject private var homeViewModel = HomeViewModel()
+    @StateObject private var joinNowViewModel = JoinNowViewModel()
     @StateObject private var sideDrawerViewModel = SideDrawerViewModel()
 
     var body: some View {
