@@ -8,7 +8,5 @@
 import SwiftUI
 
 struct HomeViewState {
-    var isMenuOpen: Bool = false
-    var showDimBackground: Bool = false
-    var dragOffset = CGSize.zero
+
 }
