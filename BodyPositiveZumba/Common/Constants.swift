@@ -81,6 +81,14 @@ struct Constants {
             "calendar",
             comment: "classes button image"
         )
+        static let contactText: String = NSLocalizedString(
+            "Contact",
+            comment: "contact button text"
+        )
+        static let contactImage: String = NSLocalizedString(
+            "envelope.circle",
+            comment: "contact button image"
+        )
         static let backgroundOpacity: Double = 0.6
         static let animationDuration: Double = 0.33
         static let frameWidth: CGFloat = 250
