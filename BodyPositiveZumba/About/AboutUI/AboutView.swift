@@ -1,15 +1,15 @@
 //
-//  HomeView.swift
-//  InitialHome
+//  AboutView.swift
+//  AboutUI
 //
-//  Created by Andrew Elbert on 1/26/25.
+//  Created by Andrew Elbert on 1/28/25.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct AboutView: View {
 
-    @StateObject private var homeViewModel = HomeViewModel()
+    @StateObject private var aboutViewModel = AboutViewModel()
     @StateObject private var sideDrawerViewModel = SideDrawerViewModel()
 
     var body: some View {
