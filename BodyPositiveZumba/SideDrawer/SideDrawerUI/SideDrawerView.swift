@@ -73,6 +73,32 @@ struct SideDrawerView: View {
                     }
 
                     Spacer()
+                    
+                    HStack {
+                        Button(action: {
+                            if let url = URL(string: Constants.Common.facebookLink) {
+                                UIApplication.shared.open(url)
+                            }
+                        }) {
+                            Image(Constants.SideDrawer.facebookLogo)
+                        }
+                        Button(action: {
+                            if let url = URL(string: Constants.Common.instagramLink) {
+                                UIApplication.shared.open(url)
+                            }
+                        }) {
+                            Image(Constants.SideDrawer.instagramLogo)
+                        }
+                    }
+                    .padding(.bottom, 10)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    Text(Constants.Common.companyName)
+                        .font(.caption)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 30)
+                        .padding(.bottom, 10)
                 }
                 .frame(width: Constants.SideDrawer.frameWidth)
                 .background(

@@ -10,6 +10,14 @@ import SwiftUI
 
 struct Constants {
     enum Common {
+        
+        static let instagramLink: String = NSLocalizedString(
+            "https://www.instagram.com/",
+            comment: "instagram link")
+        
+        static let facebookLink: String = NSLocalizedString(
+            "https://www.facebook.com/",
+            comment: "instagram link")
 
         static let tradeMarkSlogan: String = NSLocalizedString(
             "Are You Ready For The Happiest Workout In Maine?™",
@@ -18,12 +26,17 @@ struct Constants {
         static let logoName: String = NSLocalizedString(
             "BodyPositiveLogo",
             comment: "string file name")
+        
+        static let companyName: String = NSLocalizedString(
+            "© Body Positive Dance Fitness LLC 2023",
+            comment: "company name")
+        
     }
 
     enum Home {
         static let buttonImage: String = NSLocalizedString(
             "line.horizontal.3",
-            comment: "system name"
+            comment: "system image name"
         )
         static let grettingMessage: String = NSLocalizedString(
             "Welcome to Body Positive Dance Fitness",
@@ -88,6 +101,14 @@ struct Constants {
         static let contactImage: String = NSLocalizedString(
             "envelope.circle",
             comment: "contact button image"
+        )
+        static let instagramLogo: String = NSLocalizedString(
+            "InstagramLogo",
+            comment: "instagram logo image"
+        )
+        static let facebookLogo: String = NSLocalizedString(
+            "FacebookLogo",
+            comment: "facebook logo image"
         )
         static let backgroundOpacity: Double = 0.6
         static let animationDuration: Double = 0.33
