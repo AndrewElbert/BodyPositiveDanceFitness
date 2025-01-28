@@ -34,12 +34,12 @@ struct SideDrawerView: View {
             icon: Constants.SideDrawer.aboutImage,
             action: {}),
         SideBarMenuItem(
-            title: Constants.SideDrawer.signInText,
-            icon: Constants.SideDrawer.signInImage,
-            action: {}),
-        SideBarMenuItem(
             title: Constants.SideDrawer.contactText,
             icon: Constants.SideDrawer.contactImage,
+            action: {}),
+        SideBarMenuItem(
+            title: Constants.SideDrawer.signInText,
+            icon: Constants.SideDrawer.signInImage,
             action: {})
     ]
 
@@ -72,6 +72,64 @@ struct SideDrawerView: View {
                         )
                     }
 
+                    Divider()
+                        .background(Color.gray)
+
+                    VStack(spacing: 16) {
+                        Button(action: {
+
+                        }) {
+                            HStack {
+                                Text(Constants.SideDrawer.newsletterText)
+                                    .font(
+                                        .system(
+                                            size: Constants.SideDrawer.newsLetterFontSize,
+                                            weight: .medium
+                                        )
+                                    )
+                                    .foregroundColor(.black)
+
+                                Image(
+                                    systemName: Constants.SideDrawer.newsletterImage
+                                )
+                                    .foregroundColor(.black)
+                                    .frame(
+                                        width: Constants.SideDrawer.newsLetterImageSize,
+                                        height: Constants.SideDrawer.newsLetterImageSize
+                                    )
+                            }
+                            .padding(.leading, 15)
+                            .padding(.trailing, 15)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+
+                        HStack(spacing: 16) {
+                            Button(action: {
+                                if let url = URL(string: Constants.Common.facebookLink) {
+                                    UIApplication.shared.open(url)
+                                }
+                            }) {
+                                Image(Constants.SideDrawer.facebookLogo)
+                            }
+                            Button(action: {
+                                if let url = URL(string: Constants.Common.instagramLink) {
+                                    UIApplication.shared.open(url)
+                                }
+                            }) {
+                                Image(Constants.SideDrawer.instagramLogo)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+
+                        Text(Constants.Common.companyName)
+                            .font(.caption)
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 30)
+                            .padding(.bottom, 10)
+                    }
+                    .padding(.bottom, 8)
+
                     Spacer()
                 }
                 .frame(width: Constants.SideDrawer.frameWidth)
@@ -82,8 +140,8 @@ struct SideDrawerView: View {
                             Constants.SideDrawer.outerCircleColorRadius
                         ]),
                         center: .center,
-                        startRadius: 44,
-                        endRadius: 444
+                        startRadius: Constants.SideDrawer.startRadius,
+                        endRadius: Constants.SideDrawer.endRadius
                     )
                 )
                 .offset(
