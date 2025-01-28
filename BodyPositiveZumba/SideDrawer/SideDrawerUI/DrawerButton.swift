@@ -9,51 +9,53 @@ import SwiftUI
 
 struct DrawerButton: View {
     let title: String
-    let icon: String
+    let icon: String?
     let action: () -> Void
+
+    @State private var isPressed: Bool = false
 
     var body: some View {
         Button(action: action) {
-            HStack {
-                Image(systemName: icon)
-                    .resizable()
-                    .frame(
-                        width: Constants.SideDrawer.iconSize,
-                        height: Constants.SideDrawer.iconSize
-                    )
-                    .foregroundColor(.white)
+            HStack(spacing: icon == nil ? 0 : 11) {
+                if let icon = icon {
+                    Image(systemName: icon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(
+                            width: Constants.SideDrawer.sideDrawerButtonImageSize,
+                            height: Constants.SideDrawer.sideDrawerButtonImageSize
+                        )
+                        .foregroundColor(.black)
+                }
 
                 Text(title)
-                    .font(.system(
-                        size: Constants.SideDrawer.fontSize,
-                        weight: .semibold,
-                        design: .default
-                    ))
-                    .foregroundColor(.white)
+                    .font(
+                        .system(
+                            size: Constants.SideDrawer.fontSize,
+                            weight: .semibold,
+                            design: .serif
+                        )
+                    )
+                    .foregroundColor(.black)
             }
-            .padding(.vertical, 12)
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
-            .background(
-                RoundedRectangle(cornerRadius: Constants.SideDrawer.cornerRadius)
-                    .fill(LinearGradient(
-                        gradient: Gradient(colors: [
-                            Color.black.opacity(0.8),
-                            Color.gray.opacity(0.5)
-                        ]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ))
-            )
-            .cornerRadius(Constants.SideDrawer.cornerRadius)
-            .overlay(
-                RoundedRectangle(cornerRadius: Constants.SideDrawer.cornerRadius)
-                    .stroke(Color.white, lineWidth: 1)
-            )
-            .padding(.horizontal, 10)
-            .scaleEffect(1.05)
-            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
+            .scaleEffect(isPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
+            .opacity(isPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
         }
-        .hoverEffect(.highlight)
+        .buttonStyle(PlainButtonStyle())
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { _ in
+                    withAnimation(.easeInOut(duration: 0.1)) {
+                        isPressed = true
+                    }
+                }
+                .onEnded { _ in
+                    withAnimation(.spring()) {
+                        isPressed = false
+                    }
+                }
+        )
     }
 }
