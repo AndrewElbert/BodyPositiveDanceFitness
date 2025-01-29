@@ -8,7 +8,14 @@
 import SwiftUI
 
 class SideDrawerViewModel: ObservableObject {
-    @Published var viewState: SideDrawerViewState = SideDrawerViewState()
+
+    @Published public var viewState: SideDrawerViewState = SideDrawerViewState()
+
+    init (
+        viewState: SideDrawerViewState = SideDrawerViewState()
+    ) {
+        self.viewState = viewState
+    }
 
     func toggleMenu() {
         viewState.isMenuOpen.toggle()
@@ -34,59 +41,34 @@ class SideDrawerViewModel: ObservableObject {
         }
         viewState.dragOffset = .zero
     }
-    
-    func handleAction(_ action: SideDrawerView.Action) {
-            switch action {
-            case .joinNow:
-                navigateJoinNow()
-            case .classes:
-                navigateClasses()
-            case .newcomers:
-                navigateNewcomers()
-            case .about:
-                navigateAbout()
-            case .contact:
-                navigateContact()
-            case .signIn:
-                navigateSignIn()
-            case .subscription:
-                navigateSubscription()
-            }
-        }
 
-        // Separate function for each action
-        private func navigateJoinNow() {
-            // Code for the "Join Now" action
-            print("Navigate to Join Now")
-        }
-
-        private func navigateClasses() {
-            // Code for the "Classes" action
-            print("Navigate to Classes")
-        }
-
-        private func navigateNewcomers() {
-            // Code for the "Newcomers" action
-            print("Navigate to Newcomers")
-        }
-
-        private func navigateAbout() {
-            // Code for the "About" action
-            print("Navigate to About")
-        }
-
-        private func navigateContact() {
-            // Code for the "Contact" action
-            print("Navigate to Contact")
-        }
-
-        private func navigateSignIn() {
-            // Code for the "Sign In" action
-            print("Navigate to Sign In")
-        }
-
-        private func navigateSubscription() {
-            // Code for the "Subscription" action
-            print("Navigate to Subscription")
-        }
+    // Separate function for each action
+    func navigateJoinNow() {
+        // Code for the "Join Now" action
+        print("Navigate to Join Now")
+    }
+    func navigateClasses() {
+        // Code for the "Classes" action
+        print("Navigate to Classes")
+    }
+    func navigateNewcomers() {
+        // Code for the "Newcomers" action
+        print("Navigate to Newcomers")
+    }
+    func navigateAbout() {
+        // Code for the "About" action
+        print("Navigate to About")
+    }
+    func navigateContact() {
+        // Code for the "Contact" action
+        print("Navigate to Contact")
+    }
+    func navigateSignIn() {
+        // Code for the "Sign In" action
+        print("Navigate to Sign In")
+    }
+    func navigateSubscription() {
+        // Code for the "Subscription" action
+        print("Navigate to Subscription")
+    }
 }
