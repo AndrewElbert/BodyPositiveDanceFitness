@@ -8,10 +8,10 @@
 import SwiftUI
 
 protocol ActionableView {
-    
+
+    typealias ActionClosure = ( (Action) -> Void )?
+
     associatedtype Action
-    
-    typealias ActionClosure = ((Action) -> Void)?
-    
-    var onAction: ActionClosure { get set}
+
+    var onAction: ActionClosure { get set }
 }
