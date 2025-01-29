@@ -7,15 +7,32 @@
 
 import SwiftUI
 
-struct SideDrawerView: View {
+struct SideDrawerView: View, ActionableView {
+    
+    enum Action {
+        case joinNow
+        case classes
+        case newcomers
+        case about
+        case contact
+        case signIn
+        case subscription
+    }
 
     @ObservedObject var viewModel: SideDrawerViewModel
     @State private var newsLetterIsPressed: Bool = false
+    
     let menuItems: [SideBarMenuItem]
+    var onAction: ActionClosure
 
-    init(viewModel: SideDrawerViewModel, menuItems: [SideBarMenuItem] = defaultMenuItems) {
+    init(
+        viewModel: SideDrawerViewModel,
+        menuItems: [SideBarMenuItem] = defaultMenuItems,
+        onAction: ActionClosure
+    ) {
         self.viewModel = viewModel
         self.menuItems = menuItems
+        self.onAction = onAction
     }
 
     private static let defaultMenuItems: [SideBarMenuItem] = [
