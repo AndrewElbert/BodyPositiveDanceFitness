@@ -7,56 +7,45 @@
 
 import SwiftUI
 
-struct SideDrawerView: View {
+struct SideDrawerView: View, ActionableView {
 
-    @ObservedObject var viewModel: SideDrawerViewModel
-    @State private var newsLetterIsPressed: Bool = false
-    let menuItems: [SideBarMenuItem]
-
-    init(viewModel: SideDrawerViewModel, menuItems: [SideBarMenuItem] = defaultMenuItems) {
-        self.viewModel = viewModel
-        self.menuItems = menuItems
+    enum Action {
+        case joinNow
+        case classes
+        case newcomers
+        case about
+        case contact
+        case signIn
+        case subscription
+        case endDragGesture
+        case closeMenu
+        case updateDrag(CGSize)
     }
 
-    private static let defaultMenuItems: [SideBarMenuItem] = [
-        SideBarMenuItem(
-            title: Constants.SideDrawer.joinNowText,
-            icon: Constants.SideDrawer.joinNowImage,
-            action: {}),
-        SideBarMenuItem(
-            title: Constants.SideDrawer.classesText,
-            icon: Constants.SideDrawer.classesImage,
-            action: {}),
-        SideBarMenuItem(
-            title: Constants.SideDrawer.faqText,
-            icon: Constants.SideDrawer.faqImage,
-            action: {}),
-        SideBarMenuItem(
-            title: Constants.SideDrawer.aboutText,
-            icon: Constants.SideDrawer.aboutImage,
-            action: {}),
-        SideBarMenuItem(
-            title: Constants.SideDrawer.contactText,
-            icon: Constants.SideDrawer.contactImage,
-            action: {}),
-        SideBarMenuItem(
-            title: Constants.SideDrawer.signInText,
-            icon: Constants.SideDrawer.signInImage,
-            action: {})
-    ]
+    @Binding var viewState: SideDrawerViewState
+    var onAction: ((Action) -> Void )?
+    @State private var newsLetterIsPressed: Bool = false
+
+    public init(
+        viewState: Binding<SideDrawerViewState>,
+        onAction: @escaping (Action) -> Void
+    ) {
+        self._viewState = viewState
+        self.onAction = onAction
+    }
 
     var body: some View {
         ZStack {
             Color.black.opacity(
-                viewModel.viewState.isMenuOpen ? Constants.SideDrawer.backgroundOpacity : 0
+                viewState.isMenuOpen ? Constants.SideDrawer.backgroundOpacity : 0
             )
             .ignoresSafeArea()
             .onTapGesture {
-                viewModel.closeMenu()
+                onAction?(.closeMenu)
             }
             .animation(
                 .easeInOut(duration: Constants.SideDrawer.animationDuration),
-                value: viewModel.viewState.isMenuOpen
+                value: viewState.isMenuOpen
             )
 
             HStack {
@@ -66,13 +55,41 @@ struct SideDrawerView: View {
                 ) {
                     Spacer()
 
-                    ForEach(menuItems, id: \.title) { item in
-                        DrawerButton(
-                            title: item.title,
-                            icon: item.icon,
-                            action: item.action
-                        )
-                    }
+                    DrawerButton(
+                        title: Constants.SideDrawer.joinNowText,
+                        icon: Constants.SideDrawer.joinNowImage,
+                        action: { onAction?(.joinNow) }
+                    )
+
+                    DrawerButton(
+                        title: Constants.SideDrawer.classesText,
+                        icon: Constants.SideDrawer.classesImage,
+                        action: { onAction?(.classes) }
+                    )
+
+                    DrawerButton(
+                        title: Constants.SideDrawer.faqText,
+                        icon: Constants.SideDrawer.faqImage,
+                        action: { onAction?(.newcomers) }
+                    )
+
+                    DrawerButton(
+                        title: Constants.SideDrawer.aboutText,
+                        icon: Constants.SideDrawer.aboutImage,
+                        action: { onAction?(.about) }
+                    )
+
+                    DrawerButton(
+                        title: Constants.SideDrawer.contactText,
+                        icon: Constants.SideDrawer.contactImage,
+                        action: { onAction?(.contact) }
+                    )
+
+                    DrawerButton(
+                        title: Constants.SideDrawer.signInText,
+                        icon: Constants.SideDrawer.signInImage,
+                        action: { onAction?(.signIn) }
+                    )
 
                     Divider()
                         .background(Color.gray)
@@ -169,21 +186,21 @@ struct SideDrawerView: View {
                     )
                 )
                 .offset(
-                    x: viewModel.viewState.isMenuOpen ?
-                        0 : -(Constants.SideDrawer.frameWidth + viewModel.viewState.dragOffset.width)
+                    x: viewState.isMenuOpen ?
+                        0 : -(Constants.SideDrawer.frameWidth + viewState.dragOffset.width)
                 )
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
-                            viewModel.updateDragOffset(value.translation)
+                            onAction?(.updateDrag(value.translation))
                         }
                         .onEnded { _ in
-                            viewModel.endDragGesture()
+                            onAction?(.endDragGesture)
                         }
                 )
                 .animation(
                     .easeInOut(duration: Constants.SideDrawer.animationDuration),
-                    value: viewModel.viewState.isMenuOpen
+                    value: viewState.isMenuOpen
                 )
 
                 Spacer()

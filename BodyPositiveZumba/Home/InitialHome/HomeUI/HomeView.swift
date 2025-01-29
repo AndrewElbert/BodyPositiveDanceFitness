@@ -38,8 +38,12 @@ struct HomeView: View {
                     }
                 }
             }
-            SideDrawerView(viewModel: sideDrawerViewModel)
+            displaySideDrawerView
         }
+    }
+
+    private var displaySideDrawerView: some View {
+        SideDrawerComponent(viewModel: sideDrawerViewModel)
     }
 }
 
