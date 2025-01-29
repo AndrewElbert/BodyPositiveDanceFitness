@@ -11,7 +11,9 @@ import SwiftUI
 struct BodyPositiveZumbaApp: App {
     var body: some Scene {
         WindowGroup {
-            InitialAppLoadView()
+            NavigationStack {
+                InitialAppLoadView()
+            }
         }
     }
 }
