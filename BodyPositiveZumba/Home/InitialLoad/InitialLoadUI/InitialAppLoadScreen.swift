@@ -18,7 +18,7 @@ struct InitialAppLoadScreen: View {
     var body: some View {
         InitialAppLoadView(
             viewState: $viewModel.viewState
-        ){ action in
+        ) { action in
             switch action {
             case .navigateHomeScreen:
                 viewModel.navigateToHomeScreen()

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TopBarView: View, ActionableView {
-    
+
     enum Action {
         case toggleMenu
     }
-    
+
     var onAction: ((Action) -> Void )?
     @State private var newsLetterIsPressed: Bool = false
 
