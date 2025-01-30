@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct InitialAppLoadView: View {
-    
+
     enum Action {
         case navigateHomeScreen
         case startLoading
         case startAnimations
     }
-    
+
     var onAction: ((Action) -> Void )?
     @Binding var viewState: InitialAppLoadViewState
 
@@ -25,7 +25,7 @@ struct InitialAppLoadView: View {
         self._viewState = viewState
         self.onAction = onAction
     }
-    
+
     var body: some View {
         VStack {
             if viewState.showHomeScreen {

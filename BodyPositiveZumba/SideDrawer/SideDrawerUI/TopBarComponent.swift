@@ -16,7 +16,7 @@ struct TopBarComponent: View {
     }
 
     var body: some View {
-        TopBarView() { action in
+        TopBarView { action in
             switch action {
             case .toggleMenu:
                 viewModel.toggleMenu()

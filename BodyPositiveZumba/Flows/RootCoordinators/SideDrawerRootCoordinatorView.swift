@@ -10,9 +10,9 @@ import Foundation
 import SwiftUI
 
 struct SideDrawerRootCoordinatorView: View {
-    
+
     @ObservedObject var coordinator: SideDrawerRootCoordinator
-    
+
     var body: some View {
         Router($coordinator.routes) { screen, _ in
             switch screen {
@@ -36,4 +36,3 @@ struct SideDrawerRootCoordinatorView: View {
         }
     }
 }
-

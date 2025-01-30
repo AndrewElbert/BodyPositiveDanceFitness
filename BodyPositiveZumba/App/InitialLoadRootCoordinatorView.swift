@@ -10,9 +10,9 @@ import Foundation
 import SwiftUI
 
 struct InitialLoadRootCoordinatorView: View {
-    
+
     @StateObject private var coordinator = InitialLoadRootCoordinator()
-    
+
     var body: some View {
         Router($coordinator.routes) { screen, _ in
             switch screen {

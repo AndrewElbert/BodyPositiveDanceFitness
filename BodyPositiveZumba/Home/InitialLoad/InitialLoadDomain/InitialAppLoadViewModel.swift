@@ -12,7 +12,7 @@ class InitialAppLoadViewModel: ObservableObject {
 
     var viewState = InitialAppLoadViewState()
     var homeLoadDuration: Double = 0
-    
+
     unowned let coordinator: InitialLoadCoordinator
 
     init(
@@ -35,7 +35,7 @@ class InitialAppLoadViewModel: ObservableObject {
         viewState.barColorStart = Color.cyan.opacity(0.6)
         viewState.barColorEnd = Color.blue.opacity(0.9)
     }
-    
+
     func navigateToHomeScreen() {
         coordinator.initialLoad_viewHome()
     }

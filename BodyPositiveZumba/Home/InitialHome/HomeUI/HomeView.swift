@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     @StateObject private var homeViewModel = HomeViewModel()
     unowned let coordinator: SideDrawerRootCoordinator
     @ObservedObject private var sideDrawerViewModel: SideDrawerViewModel
-    
+
     var body: some View {
         ZStack {
             VStack {
