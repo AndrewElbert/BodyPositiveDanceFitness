@@ -7,13 +7,26 @@
 
 import SwiftUI
 
-struct TopBarView: View {
-    let buttonAction: () -> Void
-    let logoName: String
+struct TopBarView: View, ActionableView {
+    
+    enum Action {
+        case toggleMenu
+    }
+    
+    var onAction: ((Action) -> Void )?
+    @State private var newsLetterIsPressed: Bool = false
+
+    public init(
+        onAction: ( (Action) -> Void)? = nil
+    ) {
+        self.onAction = onAction
+    }
 
     var body: some View {
         HStack {
-            Button(action: buttonAction) {
+            Button(action: {
+                onAction?(.toggleMenu)
+            }) {
                 Image(systemName: Constants.Home.buttonImage)
                     .resizable()
                     .frame(width: 24, height: 18)
@@ -22,7 +35,7 @@ struct TopBarView: View {
             }
 
             Spacer()
-            Image(logoName)
+            Image(Constants.Common.logoName)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 50)
