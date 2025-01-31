@@ -19,4 +19,15 @@ struct InitialUI {
         )
 
     }
+    
+    static func initialHome(
+        coordinator: InitialLoadCoordinator
+    ) -> some View {
+        InitialHomeScreen(
+            viewModel: InitialAppLoadViewModel(
+                coordinator: coordinator
+            )
+        )
+
+    }
 }
