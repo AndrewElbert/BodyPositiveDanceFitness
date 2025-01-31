@@ -19,7 +19,24 @@ struct InitialLoadRootCoordinatorView: View {
             case .root:
                 InitialUI.initialLoad(coordinator: coordinator)
             case .home:
-                InitialUI.initialHome(coordinator: coordinator)
+                InitialUI.initialHome(
+                    homeCoordinator: coordinator,
+                    sideDrawerCoordinator: coordinator
+                )
+            case .joinNow:
+                Text("Join Now")
+            case .classes:
+                Text("Classes")
+            case .newcomers:
+                Text("Newcomers")
+            case .about:
+                Text("About")
+            case .contact:
+                Text("Contact")
+            case .signIn:
+                Text("Sign In")
+            case .subscription:
+                Text("Subscription")
             }
         }
     }

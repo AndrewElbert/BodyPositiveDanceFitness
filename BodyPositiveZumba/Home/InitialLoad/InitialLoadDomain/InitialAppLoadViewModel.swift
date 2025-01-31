@@ -12,7 +12,7 @@ class InitialAppLoadViewModel: ObservableObject {
 
     var viewState = InitialAppLoadViewState()
     var homeLoadDuration: Double = 0
-    
+
     unowned let coordinator: InitialLoadCoordinator
 
     init(

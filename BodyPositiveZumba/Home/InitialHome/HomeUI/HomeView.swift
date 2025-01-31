@@ -9,21 +9,26 @@ import SwiftUI
 
 struct HomeView: View {
 
+    unowned let coordinator: SideDrawerCoordinator
+    @StateObject private var sideDrawerViewModel: SideDrawerViewModel
+
     enum Action {
     }
-
     var onAction: ((Action) -> Void )?
 
     public init(
-        onAction: ( (Action) -> Void)? = nil
+        coordinator: SideDrawerCoordinator,
+        onAction: ((Action) -> Void)? = nil
     ) {
+        self.coordinator = coordinator
+        _sideDrawerViewModel = StateObject(wrappedValue: SideDrawerViewModel(coordinator: coordinator))
         self.onAction = onAction
     }
 
     var body: some View {
         ZStack {
             VStack {
-                // displayTopBarView
+                 displayTopBarView
 
                 // Main content
                 ScrollView {
@@ -44,14 +49,14 @@ struct HomeView: View {
                     }
                 }
             }
-            // displaySideDrawerView
+             displaySideDrawerView
         }
     }
-//    private var displayTopBarView: some View {
-//        TopBarComponent(viewModel: sideDrawerViewModel)
-//    }
-//
-//    private var displaySideDrawerView: some View {
-//        SideDrawerComponent(viewModel: sideDrawerViewModel)
-//    }
+    private var displayTopBarView: some View {
+        TopBarComponent(viewModel: sideDrawerViewModel)
+    }
+
+    private var displaySideDrawerView: some View {
+        SideDrawerComponent(viewModel: sideDrawerViewModel)
+    }
 }

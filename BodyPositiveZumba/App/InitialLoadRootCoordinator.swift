@@ -13,6 +13,13 @@ class InitialLoadRootCoordinator: RootCoordinator {
     enum Screen {
         case root
         case home
+        case joinNow
+        case classes
+        case newcomers
+        case about
+        case contact
+        case signIn
+        case subscription
     }
 
     @Published var routes: Routes<Screen>
@@ -30,4 +37,53 @@ extension InitialLoadRootCoordinator: InitialLoadCoordinator {
 
 extension InitialLoadRootCoordinator: HomeCoordinator {
 
+}
+
+extension InitialLoadRootCoordinator: SideDrawerCoordinator {
+
+    func sideDrawer_viewSignIn() {
+        routes.presentSheet(
+            .signIn
+        )
+    }
+
+    func sideDrawer_dismissLastPresented() {
+        routes.dismiss()
+    }
+
+    func sideDrawer_viewJoinNow() {
+        routes.presentSheet(
+            .joinNow
+        )
+    }
+
+    func sideDrawer_viewClasses() {
+        routes.presentSheet(
+            .classes
+        )
+    }
+
+    func sideDrawer_viewNewcomers() {
+        routes.presentSheet(
+            .newcomers
+        )
+    }
+
+    func sideDrawer_viewAbout() {
+        routes.presentSheet(
+            .about
+        )
+    }
+
+    func sideDrawer_viewContact() {
+        routes.presentSheet(
+            .contact
+        )
+    }
+
+    func sideDrawer_viewSubscription() {
+        routes.presentSheet(
+            .subscription
+        )
+    }
 }
