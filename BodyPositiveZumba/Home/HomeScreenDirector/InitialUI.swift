@@ -1,6 +1,6 @@
 //
 //  InitialUI.swift
-//  BodyPositiveZumba
+//  HomeScreenDirector
 //
 //  Created by Andrew Elbert on 1/30/25.
 //

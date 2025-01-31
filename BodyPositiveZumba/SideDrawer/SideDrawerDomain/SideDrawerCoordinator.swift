@@ -1,6 +1,6 @@
 //
 //  SideDrawerCoordinator.swift
-//  BodyPositiveZumba
+//  SideDrawerDomain
 //
 //  Created by Andrew Elbert on 1/29/25.
 //

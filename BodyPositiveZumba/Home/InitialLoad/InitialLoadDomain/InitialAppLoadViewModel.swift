@@ -1,8 +1,8 @@
 //
-//  InitialAppLoadViewModel.swift
-//  InitialLoad
+//  InitialAppLoadViewModel 2.swift
+//  InitialLoadDomain
 //
-//  Created by Andrew Elbert on 1/26/25.
+//  Created by Andrew Elbert on 1/30/25.
 //
 
 import SwiftUI
@@ -12,28 +12,45 @@ class InitialAppLoadViewModel: ObservableObject {
 
     var viewState = InitialAppLoadViewState()
     var homeLoadDuration: Double = 0
-
+    
     unowned let coordinator: InitialLoadCoordinator
 
     init(
         coordinator: InitialLoadCoordinator
     ) {
         self.coordinator = coordinator
-        homeLoadDuration = viewState.barLoadDuration + 1.0
+        homeLoadDuration = viewState.barLoadDuration + viewState.barLoadPause
         startScreenLoad()
     }
 
     func startLoading() {
-        withAnimation {
+        withAnimation(.linear(duration: viewState.barLoadDuration)) {
             viewState.progress = 1.0
+        }
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + viewState.barLoadDuration + viewState.colorChangeDelay
+        ) {
+            self.fadeToNeonCyan()
+        }
+    }
+
+    func fadeToNeonCyan() {
+
+        withAnimation(.easeIn(duration: 0.8)) {
+            viewState.barColorStart = viewState.neonCyan
+            viewState.barColorEnd = viewState.neonCyan
+        }
+
+        withAnimation(.easeIn(duration: 0.4)) {
+            viewState.barOutlineColor = Color.orange
         }
     }
 
     func startAnimations() {
         viewState.fadeInProgress = 1.0
-        viewState.textColor = Color.blue.opacity(0.9)
-        viewState.barColorStart = Color.cyan.opacity(0.6)
-        viewState.barColorEnd = Color.blue.opacity(0.9)
+        viewState.textColor = Color.blue.opacity(0.8)
+        viewState.barColorStart = Color.cyan.opacity(0.25)
+        viewState.barColorEnd = Color.blue
     }
 
     func navigateToHomeScreen() {

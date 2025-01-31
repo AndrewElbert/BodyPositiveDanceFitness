@@ -1,6 +1,6 @@
 //
 //  BodyPositiveZumbaApp.swift
-//  BodyPositiveZumba
+//  App
 //
 //  Created by Andrew Elbert on 1/26/25.
 //

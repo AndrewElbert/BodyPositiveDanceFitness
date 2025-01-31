@@ -42,7 +42,7 @@ struct Constants {
             "Welcome to Body Positive Dance Fitness",
             comment: "home screen greeting message"
         )
-        static let tradeMarkSloganSize: CGFloat = 18
+        static let tradeMarkSloganSize: CGFloat = 22
     }
 
     enum SideDrawer {

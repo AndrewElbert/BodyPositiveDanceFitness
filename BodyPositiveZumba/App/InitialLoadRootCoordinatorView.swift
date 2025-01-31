@@ -1,6 +1,6 @@
 //
 //  InitialLoadRootCoordinatorView.swift
-//  BodyPositiveZumba
+//  App
 //
 //  Created by Andrew Elbert on 1/30/25.
 //
