@@ -1,8 +1,24 @@
 //
 //  HomeScreen.swift
-//  BodyPositiveZumba
+//  InitialHome
 //
 //  Created by Andrew Elbert on 1/28/25.
 //
 
 import SwiftUI
+
+struct HomeScreen: View {
+
+    @ObservedObject private var viewModel: HomeViewModel
+
+    public init(viewModel: HomeViewModel) {
+        self._viewModel = ObservedObject(wrappedValue: viewModel)
+    }
+
+    var body: some View {
+        HomeView { action in
+            switch action {
+            }
+        }
+    }
+}
