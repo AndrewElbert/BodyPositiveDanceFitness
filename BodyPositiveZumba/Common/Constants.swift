@@ -51,6 +51,88 @@ struct Constants {
         )
         static let tradeMarkSloganSize: CGFloat = 22
     }
+    
+    enum NewComers {
+        
+        struct FAQItem {
+            let question: String
+            let answer: String
+        }
+
+        static let faqItems: [FAQItem] = [
+            FAQItem(
+                question: "Do I need dance experience?",
+                answer: "No! We welcome anyone and everyone who has a desire to move their body!"
+            ),
+            FAQItem(
+                question: "What should I wear?",
+                answer: "Most people wear comfortable workout clothes. And please, no street shoes. We love our floors!"
+            ),
+            FAQItem(
+                question: "Do you have changing rooms?",
+                answer: "No, but we do have several large bathrooms with space to change."
+            ),
+            FAQItem(
+                question: "Where do I store my things?",
+                answer: "There is plenty of space for coats and shoes in our lobby, as well as cubbies inside our dance rooms!"
+            ),
+            FAQItem(
+                question: "What if I'm late for class (or need to leave early)?",
+                answer: "All good! We understand that life doesn’t always run on a schedule, but we want you to be able to dance. Just check in with the front desk."
+            ),
+            FAQItem(
+                question: "Do I need to make a reservation?",
+                answer: "Reservations are always helpful, but not required. Even if you’ve made a reservation, please check in at the front desk. If you have a reservation and don’t check in, we will assume you were in the class, and your account will reflect that. If you’ve made a reservation but cannot attend, please cancel online, or call the studio at 207-536-4617."
+            ),
+            FAQItem(
+                question: "How do I pay?",
+                answer: "You can pay online when you register, with a card at the studio, via Venmo, or cash."
+            ),
+            FAQItem(
+                question: "What do you recommend to someone new?",
+                answer: "Come for the fun, the community, and the moves! Don’t worry about getting it “right.” As long as you’re moving and having fun, that’s great! And, it usually takes a few classes to feel comfortable with the routines."
+            ),
+            FAQItem(
+                question: "How many classes a day am I allowed to take?",
+                answer: "As many as you like! All day dancing is encouraged!"
+            ),
+            FAQItem(
+                question: "Do I book a massage with you?",
+                answer: "Please book your massage directly with the massage therapist. Info and scheduling info can be found on the massage room door at the studio. Or, to book a massage with Lindsey online, please visit ladyloveholistics.com."
+            ),
+            FAQItem(
+                question: "Do you take cash?",
+                answer: "Yes!"
+            ),
+            FAQItem(
+                question: "Can I try it for free before I sign up?",
+                answer: "Yes!! Make a reservation online or drop in any time!"
+            ),
+            FAQItem(
+                question: "Can I leave my kid in the lobby?",
+                answer: "No. We are not equipped or licensed to provide childcare."
+            ),
+            FAQItem(
+                question: "Will I get shut out if I’m late?",
+                answer: "No! We have wonderful, understanding front desk staff that want to get you in the room dancing! Just check in with them."
+            ),
+            FAQItem(
+                question: "Are you sensitive about your plumbing?",
+                answer: "Yes! We have had several expensive plumbing emergencies due to 'flushable' items being flushed. Please dispose of everything except toilet paper in our trash cans."
+            ),
+            FAQItem(
+                question: "Can I have my private party with you?",
+                answer: "Yes! We are happy to host your special event! Think staff gathering, team building event, TikTok party, bachelorette party, wedding dance lessons, you name it! Please email Hilary at hilary@bodypositivedancefitness.com."
+            ),
+            FAQItem(
+                question: "Do you sell water?",
+                answer: "No, due to the environmental impact of plastic bottles. We sell brand-new BPDF water bottles, as well as upcycled water bottles for a minimal fee. Please use our bottle fillers/water fountains."
+            )
+        ]
+        
+        static let pageTitle = "Frequently Asked Questions"
+        static let chevron = "chevron.down"
+    }
 
     enum SideDrawer {
 
