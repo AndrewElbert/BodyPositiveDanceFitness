@@ -1,6 +1,6 @@
 //
 //  InitialAppLoadView.swift
-//  InitialLoad
+//  InitialLoadUI
 //
 //  Created by Andrew Elbert on 1/26/25.
 //
@@ -43,7 +43,7 @@ struct InitialAppLoadView: View {
                 VStack {
                     ZStack(alignment: .leading) {
                         Capsule()
-                            .fill(Color.gray.opacity(0.2))
+                            .stroke(viewState.barOutlineColor, lineWidth: 4) // Added outline with dynamic color (NEW)
                             .frame(height: 20)
 
                         Capsule()

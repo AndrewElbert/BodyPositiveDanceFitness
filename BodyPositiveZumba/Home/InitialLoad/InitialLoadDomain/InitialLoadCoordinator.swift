@@ -1,6 +1,6 @@
 //
 //  InitialLoadCoordinator.swift
-//  InitialLoad
+//  InitialLoadDomain
 //
 //  Created by Andrew Elbert on 1/30/25.
 //
