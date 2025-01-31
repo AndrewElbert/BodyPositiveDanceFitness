@@ -27,3 +27,7 @@ extension InitialLoadRootCoordinator: InitialLoadCoordinator {
         routes.presentCover(.home)
     }
 }
+
+extension InitialLoadRootCoordinator: HomeCoordinator {
+
+}

@@ -19,7 +19,7 @@ struct InitialLoadRootCoordinatorView: View {
             case .root:
                 InitialUI.initialLoad(coordinator: coordinator)
             case .home:
-                InitialUI.initialHome()
+                InitialUI.initialHome(coordinator: coordinator)
             }
         }
     }
