@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct FAQView: View {
+    @Environment(\.dismiss) var dismiss // Access the dismiss environment value
     @State private var expandedQuestions: Set<Int> = []
+    @State private var closingIndex: Int? = nil
 
     let faqItems: [(question: String, answer: String)] = [
         ("Do I need dance experience?", "No! We welcome anyone and everyone who has a desire to move their body!"),
@@ -31,29 +33,56 @@ struct FAQView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Frequently Asked Questions")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.bottom, 8)
+        ZStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Frequently Asked Questions")
+                        .font(.system(size: 24, weight: .bold, design: .serif))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 24)
+                        .padding(.bottom, 20)
 
-                ForEach(faqItems.indices, id: \.self) { index in
-                    FAQItem(
-                        question: faqItems[index].question,
-                        answer: faqItems[index].answer,
-                        isExpanded: expandedQuestions.contains(index),
-                        toggleExpanded: { toggleQuestion(index) }
-                    )
+                    ForEach(faqItems.indices, id: \.self) { index in
+                        FAQItem(
+                            question: faqItems[index].question,
+                            answer: faqItems[index].answer,
+                            isExpanded: expandedQuestions.contains(index),
+                            isClosing: closingIndex == index,
+                            toggleExpanded: { toggleQuestion(index) }
+                        )
+                    }
                 }
+                .padding()
             }
-            .padding()
+
+            // Dismiss button (smaller and grey)
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        dismiss() // Dismiss the view
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20) // Smaller size
+                            .foregroundColor(Color.gray) // Grey color
+                            .padding(8)
+                    }
+                    .padding(.top, 5)
+                    .padding(.trailing, 5)
+                }
+                Spacer()
+            }
         }
     }
 
     private func toggleQuestion(_ index: Int) {
         if expandedQuestions.contains(index) {
-            expandedQuestions.remove(index)
+            closingIndex = index
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                expandedQuestions.remove(index) // Remove after fade-out
+                closingIndex = nil
+            }
         } else {
             expandedQuestions.insert(index)
         }
@@ -64,32 +93,63 @@ struct FAQItem: View {
     let question: String
     let answer: String
     let isExpanded: Bool
+    let isClosing: Bool
     let toggleExpanded: () -> Void
 
+    @State private var showText = false
+
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Button(action: toggleExpanded) {
                 HStack {
                     Text(question)
-                        .font(.headline)
-                        .foregroundColor(.primary)
+                        .font(.system(size: 18, weight: .regular, design: .serif))
+                        .foregroundColor(isExpanded ? Color.orange.opacity(0.8) : .primary) // Dark orange when expanded
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
                     Spacer()
-                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                    Image(systemName: "chevron.down")
+                        .rotationEffect(.degrees(isExpanded ? 180 : 0)) // Flips immediately
+                        .animation(.none, value: isExpanded) // No lag
                         .foregroundColor(.gray)
                 }
                 .padding()
-            }
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
-
-            if isExpanded {
-                Text(answer)
-                    .padding()
-                    .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(isExpanded ? Color.orange : Constants.Colors.neonCyan, lineWidth: 2)
+                )
+                .background(
+                    RadialGradient(
+                        gradient: Gradient(colors: [Constants.Colors.neonCyan.opacity(0.1), Constants.Colors.neonCyan.opacity(0.2)]),
+                        center: .center,
+                        startRadius: 22,
+                        endRadius: 111
+                    )
                     .cornerRadius(10)
-                    .transition(.opacity)
+                )
             }
+
+            ZStack {
+                if isExpanded || isClosing {
+                    Text(answer)
+                        .font(.system(size: 16, weight: .regular, design: .serif))
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .opacity(showText ? 1 : 0)
+                        .animation(.easeInOut(duration: 0.4), value: showText)
+                        .onAppear {
+                            showText = true // Fade in
+                        }
+                        .onChange(of: isClosing) { newValue in
+                            if newValue {
+                                showText = false // Fade out when closing
+                            }
+                        }
+                }
+            }
+            .frame(maxHeight: isExpanded || isClosing ? nil : 0)
+            .animation(.easeInOut(duration: 0.4), value: isExpanded)
         }
-        .animation(.easeInOut(duration: 0.3), value: isExpanded)
     }
 }
