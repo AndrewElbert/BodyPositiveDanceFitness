@@ -20,10 +20,10 @@ class InitialLoadRootCoordinator: RootCoordinator {
     init() {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
+}
 
+extension InitialLoadRootCoordinator: InitialLoadCoordinator {
     func initialLoad_viewHome() {
-        routes.push(
-            .home
-        )
+        routes.presentCover(.home)
     }
 }

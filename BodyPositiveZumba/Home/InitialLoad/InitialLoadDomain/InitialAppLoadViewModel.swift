@@ -19,7 +19,7 @@ class InitialAppLoadViewModel: ObservableObject {
         coordinator: InitialLoadCoordinator
     ) {
         self.coordinator = coordinator
-        homeLoadDuration = viewState.barLoadDuration + 0.22
+        homeLoadDuration = viewState.barLoadDuration + 1.0
         startScreenLoad()
     }
 
