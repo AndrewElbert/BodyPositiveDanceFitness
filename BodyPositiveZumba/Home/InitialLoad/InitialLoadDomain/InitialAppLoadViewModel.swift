@@ -27,20 +27,17 @@ class InitialAppLoadViewModel: ObservableObject {
         withAnimation(.linear(duration: viewState.barLoadDuration)) {
             viewState.progress = 1.0
         }
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + viewState.barLoadDuration + viewState.colorChangeDelay
-        ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + viewState.barLoadDuration + viewState.colorChangeDelay) {
             self.fadeToNeonCyan()
         }
     }
 
     func fadeToNeonCyan() {
-
         withAnimation(.easeIn(duration: 0.8)) {
             viewState.barColorStart = viewState.neonCyan
-            viewState.barColorEnd = viewState.neonCyan
+            viewState.barColorEnd = Color(red: 0, green: 0, blue: 0.5)
+            viewState.textColor = Color(red: 0, green: 0, blue: 0.5)
         }
-
         withAnimation(.easeIn(duration: 0.4)) {
             viewState.barOutlineColor = Color.orange
         }
@@ -58,7 +55,7 @@ class InitialAppLoadViewModel: ObservableObject {
     }
 
     private func startScreenLoad() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + homeLoadDuration ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + homeLoadDuration) {
             self.viewState.showHomeScreen = true
         }
     }
