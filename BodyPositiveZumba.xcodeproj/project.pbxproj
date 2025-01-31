@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		629016DF2D4B329200E8999C /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 629016DE2D4B329200E8999C /* FlowStacks */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		622150432D4703E700F89553 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				629016DF2D4B329200E8999C /* FlowStacks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = BodyPositiveZumba;
 			packageProductDependencies = (
+				629016DE2D4B329200E8999C /* FlowStacks */,
 			);
 			productName = BodyPositiveZumba;
 			productReference = 622150322D4703E100F89553 /* BodyPositiveZumba.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 622150292D4703E000F89553;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				62DBD2EA2D4B2CE700D6BBC3 /* XCRemoteSwiftPackageReference "FlowStacks" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 622150332D4703E100F89553 /* Products */;
 			projectDirPath = "";
@@ -552,6 +561,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		62DBD2EA2D4B2CE700D6BBC3 /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks";
+			requirement = {
+				kind = exactVersion;
+				version = 0.3.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		629016DE2D4B329200E8999C /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62DBD2EA2D4B2CE700D6BBC3 /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6221502A2D4703E000F89553 /* Project object */;
 }

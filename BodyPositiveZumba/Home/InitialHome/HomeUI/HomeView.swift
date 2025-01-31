@@ -10,14 +10,13 @@ import SwiftUI
 struct HomeView: View {
 
     @StateObject private var homeViewModel = HomeViewModel()
-    @StateObject private var sideDrawerViewModel = SideDrawerViewModel()
+    unowned let coordinator: SideDrawerRootCoordinator
+    @ObservedObject private var sideDrawerViewModel: SideDrawerViewModel
 
     var body: some View {
         ZStack {
             VStack {
-                TopBarView(buttonAction: {
-                    sideDrawerViewModel.toggleMenu()
-                }, logoName: Constants.Common.logoName)
+                displayTopBarView
 
                 // Main content
                 ScrollView {
@@ -41,12 +40,11 @@ struct HomeView: View {
             displaySideDrawerView
         }
     }
+    private var displayTopBarView: some View {
+        TopBarComponent(viewModel: sideDrawerViewModel)
+    }
 
     private var displaySideDrawerView: some View {
         SideDrawerComponent(viewModel: sideDrawerViewModel)
     }
-}
-
-#Preview {
-    HomeView()
 }

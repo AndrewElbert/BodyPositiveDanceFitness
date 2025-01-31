@@ -11,11 +11,15 @@ import SwiftUI
 class InitialAppLoadViewModel: ObservableObject {
 
     var viewState = InitialAppLoadViewState()
-    var homeLoadDuration: Double
-    let barLoadDuration: Double = Double.random(in: 0.88...2.22)
+    var homeLoadDuration: Double = 0
 
-    init() {
-        homeLoadDuration = barLoadDuration + 0.22
+    unowned let coordinator: InitialLoadCoordinator
+
+    init(
+        coordinator: InitialLoadCoordinator
+    ) {
+        self.coordinator = coordinator
+        homeLoadDuration = viewState.barLoadDuration + 1.0
         startScreenLoad()
     }
 
@@ -30,6 +34,10 @@ class InitialAppLoadViewModel: ObservableObject {
         viewState.textColor = Color.blue.opacity(0.9)
         viewState.barColorStart = Color.cyan.opacity(0.6)
         viewState.barColorEnd = Color.blue.opacity(0.9)
+    }
+
+    func navigateToHomeScreen() {
+        coordinator.initialLoad_viewHome()
     }
 
     private func startScreenLoad() {
