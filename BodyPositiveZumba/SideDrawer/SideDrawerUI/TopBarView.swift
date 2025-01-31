@@ -14,7 +14,6 @@ struct TopBarView: View, ActionableView {
     }
 
     var onAction: ((Action) -> Void )?
-    @State private var newsLetterIsPressed: Bool = false
 
     public init(
         onAction: ( (Action) -> Void)? = nil
