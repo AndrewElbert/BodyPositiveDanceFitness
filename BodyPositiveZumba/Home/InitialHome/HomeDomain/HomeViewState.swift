@@ -1,6 +1,6 @@
 //
 //  HomeViewState.swift
-//  InitialHome
+//  HomeDomain
 //
 //  Created by Andrew Elbert on 1/27/25.
 //

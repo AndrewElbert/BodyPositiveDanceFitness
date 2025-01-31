@@ -1,6 +1,6 @@
 //
 //  InitialLoadRootCoordinator.swift
-//  Coordinator
+//  App
 //
 //  Created by Andrew Elbert on 1/30/25.
 //

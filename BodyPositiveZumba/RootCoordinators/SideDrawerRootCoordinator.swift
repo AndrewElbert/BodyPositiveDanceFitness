@@ -1,6 +1,6 @@
 //
 //  SideDrawerRootCoordinator.swift
-//  BodyPositiveZumba
+//  RootCoordinators
 //
 //  Created by Andrew Elbert on 1/29/25.
 //
