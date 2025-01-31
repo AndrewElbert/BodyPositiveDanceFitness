@@ -9,12 +9,29 @@ import SwiftUI
 
 struct InitialAppLoadView: View {
 
-    @StateObject private var viewModel = InitialAppLoadViewModel()
+    enum Action {
+        case navigateHomeScreen
+        case startLoading
+        case startAnimations
+    }
+
+    var onAction: ((Action) -> Void )?
+    @Binding var viewState: InitialAppLoadViewState
+
+    public init(
+        viewState: Binding<InitialAppLoadViewState>,
+        onAction: ( (Action) -> Void)? = nil
+    ) {
+        self._viewState = viewState
+        self.onAction = onAction
+    }
 
     var body: some View {
         VStack {
-            if viewModel.viewState.showHomeScreen {
-                HomeView()
+            if viewState.showHomeScreen {
+                Color.clear.onAppear {
+                    onAction?(.navigateHomeScreen)
+                }
             } else {
                 Image(Constants.Common.logoName)
                     .resizable()
@@ -33,21 +50,21 @@ struct InitialAppLoadView: View {
                             .fill(
                                 LinearGradient(
                                     gradient: Gradient(
-                                        colors: [viewModel.viewState.barColorStart, viewModel.viewState.barColorEnd]
+                                        colors: [viewState.barColorStart, viewState.barColorEnd]
                                     ),
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
                             )
                             .frame(
-                                width: viewModel.viewState.progress * UIScreen.main.bounds.width * 0.8,
+                                width: viewState.progress * UIScreen.main.bounds.width * 0.8,
                                 height: 20
                             )
                             .animation(
                                 .linear(
-                                    duration: viewModel.barLoadDuration
+                                    duration: viewState.barLoadDuration
                                 ),
-                                value: viewModel.viewState.progress
+                                value: viewState.progress
                             )
                     }
                     .frame(width: UIScreen.main.bounds.width * 0.8)
@@ -62,18 +79,18 @@ struct InitialAppLoadView: View {
                         )
                         .multilineTextAlignment(.center)
                         .padding(.top)
-                        .opacity(viewModel.viewState.fadeInProgress)
-                        .foregroundColor(viewModel.viewState.textColor)
+                        .opacity(viewState.fadeInProgress)
+                        .foregroundColor(viewState.textColor)
                         .onAppear {
                             withAnimation(
                                 Animation.easeIn(duration: 0.8)
                             ) {
-                                viewModel.startAnimations()
+                                onAction?(.startAnimations)
                             }
                         }
                 }
                 .onAppear {
-                    viewModel.startLoading()
+                    onAction?(.startLoading)
                 }
             }
         }
