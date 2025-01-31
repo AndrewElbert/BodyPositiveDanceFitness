@@ -1,6 +1,6 @@
 //
 //  TopBarComponent.swift
-//  BodyPositiveZumba
+//  SideDrawerUI
 //
 //  Created by Andrew Elbert on 1/30/25.
 //
