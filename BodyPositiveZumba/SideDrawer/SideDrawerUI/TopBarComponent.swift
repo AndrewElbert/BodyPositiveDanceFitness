@@ -12,7 +12,6 @@ struct TopBarComponent: View {
     @ObservedObject private var viewModel: SideDrawerViewModel
 
     public init(viewModel: SideDrawerViewModel) {
-        print("initialized")
         self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
 

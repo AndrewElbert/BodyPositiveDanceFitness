@@ -18,7 +18,6 @@ class SideDrawerViewModel: ObservableObject {
     }
 
     func toggleMenu() {
-        print("reached")
         viewState.isMenuOpen.toggle()
     }
 
