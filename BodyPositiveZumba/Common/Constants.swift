@@ -32,11 +32,12 @@ struct Constants {
             comment: "company name")
 
     }
-    
+
     enum Colors {
-        
+
         static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0, opacity: 1.0)
-        static let darkOrange = Color(red: 0.8, green: 0.4, blue: 0.1)
+        static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)
+
     }
 
     enum Home {

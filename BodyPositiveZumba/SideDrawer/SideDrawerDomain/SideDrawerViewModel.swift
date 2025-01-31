@@ -41,7 +41,7 @@ class SideDrawerViewModel: ObservableObject {
         }
         viewState.dragOffset = .zero
     }
-    
+
     func navigateJoinNow() {
         coordinator.sideDrawer_viewJoinNow()
     }
@@ -61,7 +61,7 @@ class SideDrawerViewModel: ObservableObject {
         coordinator.sideDrawer_viewSignIn()
     }
     func navigateSubscription() {
-        print ("entered subs")
+        print("entered subs")
         coordinator.sideDrawer_viewSubscription()
     }
 }

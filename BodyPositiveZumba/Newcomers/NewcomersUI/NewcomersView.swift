@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct FAQView: View {
-    @Environment(\.dismiss) var dismiss // Access the dismiss environment value
+    @Environment(\.dismiss) var dismiss
     @State private var expandedQuestions: Set<Int> = []
-    @State private var closingIndex: Int? = nil
+    @State private var closingIndex: Int?
 
     let faqItems: [(question: String, answer: String)] = [
         ("Do I need dance experience?", "No! We welcome anyone and everyone who has a desire to move their body!"),
@@ -55,17 +55,16 @@ struct FAQView: View {
                 .padding()
             }
 
-            // Dismiss button (smaller and grey)
             VStack {
                 HStack {
                     Spacer()
                     Button(action: {
-                        dismiss() // Dismiss the view
+                        dismiss()
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()
-                            .frame(width: 20, height: 20) // Smaller size
-                            .foregroundColor(Color.gray) // Grey color
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color.gray)
                             .padding(8)
                     }
                     .padding(.top, 5)
@@ -80,7 +79,7 @@ struct FAQView: View {
         if expandedQuestions.contains(index) {
             closingIndex = index
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                expandedQuestions.remove(index) // Remove after fade-out
+                expandedQuestions.remove(index)
                 closingIndex = nil
             }
         } else {
@@ -104,13 +103,13 @@ struct FAQItem: View {
                 HStack {
                     Text(question)
                         .font(.system(size: 18, weight: .regular, design: .serif))
-                        .foregroundColor(isExpanded ? Color.orange.opacity(0.8) : .primary) // Dark orange when expanded
+                        .foregroundColor(isExpanded ? Constants.Colors.darkOrange : .primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .multilineTextAlignment(.leading)
                     Spacer()
                     Image(systemName: "chevron.down")
-                        .rotationEffect(.degrees(isExpanded ? 180 : 0)) // Flips immediately
-                        .animation(.none, value: isExpanded) // No lag
+                        .rotationEffect(.degrees(isExpanded ? 180 : 0))
+                        .animation(.none, value: isExpanded)
                         .foregroundColor(.gray)
                 }
                 .padding()
@@ -139,11 +138,11 @@ struct FAQItem: View {
                         .opacity(showText ? 1 : 0)
                         .animation(.easeInOut(duration: 0.4), value: showText)
                         .onAppear {
-                            showText = true // Fade in
+                            showText = true
                         }
-                        .onChange(of: isClosing) { newValue in
-                            if newValue {
-                                showText = false // Fade out when closing
+                        .onChange(of: isClosing) {
+                            if isClosing {
+                                showText = false
                             }
                         }
                 }
