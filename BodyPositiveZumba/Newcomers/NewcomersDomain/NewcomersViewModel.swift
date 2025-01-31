@@ -8,5 +8,18 @@
 import SwiftUI
 
 class NewcomersViewModel: ObservableObject {
-
+    
+    @Published var viewState = NewcomersViewState()
+    
+    func toggleQuestion(_ index: Int) {
+        if viewState.expandedQuestions.contains(index) {
+            viewState.closingIndex = index
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.viewState.expandedQuestions.remove(index)
+                self.viewState.closingIndex = nil
+            }
+        } else {
+            viewState.expandedQuestions.insert(index)
+        }
+    }
 }

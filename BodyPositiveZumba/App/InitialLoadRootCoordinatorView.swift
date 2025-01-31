@@ -28,7 +28,7 @@ struct InitialLoadRootCoordinatorView: View {
             case .classes:
                 Text("Classes")
             case .newcomers:
-                FAQView()
+                NewcomersUI.newcomersPage()
             case .about:
                 Text("About")
             case .contact:
