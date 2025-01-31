@@ -11,12 +11,16 @@ struct HomeScreen: View {
 
     @ObservedObject private var viewModel: HomeViewModel
 
-    public init(viewModel: HomeViewModel) {
+    public init(
+        viewModel: HomeViewModel
+    ) {
         self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        HomeView { action in
+        HomeView(
+            coordinator: viewModel.sideDrawerCoordinator
+        ) { action in
             switch action {
             }
         }
