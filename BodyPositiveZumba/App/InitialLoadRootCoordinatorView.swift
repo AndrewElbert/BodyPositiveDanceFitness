@@ -17,7 +17,7 @@ struct InitialLoadRootCoordinatorView: View {
         Router($coordinator.routes) { screen, _ in
             switch screen {
             case .root:
-                Text("load screen")
+                InitialUI.initialLoad(coordinator: coordinator)
             case .home:
                 Text("Home Screen")
             }
