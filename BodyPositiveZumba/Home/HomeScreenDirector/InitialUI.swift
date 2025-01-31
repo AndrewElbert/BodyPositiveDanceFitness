@@ -19,7 +19,7 @@ struct InitialUI {
         )
 
     }
-    
+
     static func initialHome(
         coordinator: InitialLoadCoordinator
     ) -> some View {
