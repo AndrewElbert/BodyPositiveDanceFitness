@@ -9,47 +9,27 @@ import SwiftUI
 
 struct MassageView: View {
     
-    let cardsData: [CardModel] = [
-        CardModel(
-            id: UUID(),
-            name: Constants.HeadShots.LindseyHerseyName,
-            imageName: Constants.HeadShots.LindseyHerseyHeadShot,
-            parlor: Constants.Massage.LindseyHerseyParlor,
-            bio: Constants.Massage.LindseyHerseyBio
-        ),
-        CardModel(
-            id: UUID(),
-            name: Constants.HeadShots.ShelbySwannName,
-            imageName: Constants.HeadShots.ShelbySwannHeadShot,
-            parlor: Constants.Massage.ShelbySwannParlor,
-            bio: Constants.Massage.ShelbySwannBio
-        )
-    ]
-
     @Environment(\.dismiss) var dismiss
-    @State private var currentIndex: Int = 0
-    @State private var isAnimating = false
-    @State private var isCardExpanded = false
-    @State private var bookingURL: WebViewURL?
-
+    @ObservedObject var viewModel: MassageViewModel
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack {
-                Text(Constants.Massage.pageTitle)
+                Text(viewModel.viewState.pageTitle)
                     .font(.system(size: 34, weight: .bold, design: .serif))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Constants.Colors.darkerCyan)
                     .padding()
 
-                Text(Constants.Massage.pageBio)
+                Text(viewModel.viewState.pageBio)
                     .font(.system(size: 16, design: .serif))
                     .foregroundColor(.black.opacity(0.7))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                     .padding(.bottom, 16)
 
-                InfiniteCarouselView(items: cardsData,
-                                       currentIndex: $currentIndex,
+                InfiniteCarouselView(items: viewModel.viewState.cards,
+                                       currentIndex: $viewModel.viewState.currentIndex,
                                        spacing: 10,
                                        sideSpacing: 40) { card, isCurrentCard in
                     SwipableCardView(card: card)
@@ -66,24 +46,13 @@ struct MassageView: View {
                         .font(.system(size: 16, weight: .medium, design: .serif))
                         .foregroundColor(.gray)
 
-                    SwipeAnimationView(isAnimating: $isAnimating)
+                    SwipeAnimationView(isAnimating: $viewModel.viewState.isAnimating)
                 }
                 .padding(.top, 60)
                 .padding(.bottom, 15)
 
                 Button(action: {
-                    let normalizedIndex = ((currentIndex % cardsData.count) + cardsData.count) % cardsData.count
-
-                    var urlString: String
-                    if normalizedIndex == 0 {
-                        urlString = Constants.Massage.ladyLoveHolisticURL
-                    } else {
-                        urlString = Constants.Massage.swannsHealingElementsURL
-                    }
-
-                    if let url = URL(string: urlString) {
-                        bookingURL = WebViewURL(url: url)
-                    }
+                    viewModel.updateBookingURL()
                 }) {
                     Text("Book Today!")
                         .font(.system(size: 18, weight: .bold))
@@ -112,7 +81,7 @@ struct MassageView: View {
                 dismiss()
             })
         }
-        .sheet(item: $bookingURL) { booking in
+        .sheet(item: $viewModel.viewState.bookingURL) { booking in
             WebView(url: booking.url)
                 .overlay(
                     CloseButton(dismiss: {
@@ -122,3 +91,4 @@ struct MassageView: View {
         }
     }
 }
+
