@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MassageView: View, ActionableView {
-    
+
     enum Action {
         case updateUrl
     }
@@ -24,7 +24,7 @@ struct MassageView: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-    
+
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack {
@@ -112,4 +112,3 @@ struct MassageView: View, ActionableView {
         }
     }
 }
-

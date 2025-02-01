@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MassageViewState {
-    
+
     var pageTitle: String = Constants.Massage.pageTitle
     var pageBio: String = Constants.Massage.pageBio
     var isAnimating: Bool = false
-    var bookingURL: WebViewURL? = nil
+    var bookingURL: WebViewURL?
     var currentIndex: Int = 0
-    
+
     var cards: [CardModel] = [
         CardModel(
             id: UUID(),
@@ -32,4 +32,3 @@ struct MassageViewState {
         )
     ]
 }
-
