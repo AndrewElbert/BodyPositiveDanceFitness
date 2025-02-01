@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CloseButton: View {
     var dismiss: () -> Void
-    
+
     var body: some View {
         VStack {
             HStack {
