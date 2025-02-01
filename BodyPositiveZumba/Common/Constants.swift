@@ -129,6 +129,32 @@ struct Constants {
         static let pageTitle = "Frequently Asked Questions"
         static let chevron = "chevron.down"
     }
+    
+    // MARK: Headshots
+    
+    enum HeadShots {
+        
+        static let ShelbySwannHeadShot: String = NSLocalizedString(
+            "ShelbySwannHeadShot",
+            comment: "Shelby Swann HeadShot"
+        )
+        
+        static let ShelbySwannName: String = NSLocalizedString(
+            "Shelby Swann",
+            comment: "Shelby Swann"
+        )
+        
+        static let LindseyHerseyHeadShot: String = NSLocalizedString(
+            "LindseyHerseyHeadShot",
+            comment: "Lindsey Hersey Head Shot"
+        )
+        
+        static let LindseyHerseyName: String = NSLocalizedString(
+            "Lindsey Hersey",
+            comment: "Lindsey Hersey"
+        )
+        
+    }
 
     // MARK: Home
 
@@ -196,13 +222,13 @@ struct Constants {
             "calendar",
             comment: "classes button image"
         )
-        static let contactText: String = NSLocalizedString(
-            "Contact",
-            comment: "contact button text"
+        static let massageText: String = NSLocalizedString(
+            "Massage",
+            comment: "massage button text"
         )
-        static let contactImage: String = NSLocalizedString(
+        static let massageImage: String = NSLocalizedString(
             "envelope.circle",
-            comment: "contact button image"
+            comment: "massage button image"
         )
         static let instagramLogo: String = NSLocalizedString(
             "InstagramLogo",
