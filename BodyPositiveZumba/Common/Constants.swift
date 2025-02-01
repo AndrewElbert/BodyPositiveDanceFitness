@@ -8,7 +8,20 @@
 import Foundation
 import SwiftUI
 
+// swiftlint:disable line_length
 struct Constants {
+
+    // MARK: Colors
+
+    enum Colors {
+
+        static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0, opacity: 1.0)
+        static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)
+
+    }
+
+    // MARK: Common
+
     enum Common {
 
         static let instagramLink: String = NSLocalizedString(
@@ -33,27 +46,10 @@ struct Constants {
 
     }
 
-    enum Colors {
+    // MARK: FAQ
 
-        static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0, opacity: 1.0)
-        static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)
+    enum FAQ {
 
-    }
-
-    enum Home {
-        static let buttonImage: String = NSLocalizedString(
-            "line.horizontal.3",
-            comment: "system image name"
-        )
-        static let grettingMessage: String = NSLocalizedString(
-            "Welcome to Body Positive Dance Fitness",
-            comment: "home screen greeting message"
-        )
-        static let tradeMarkSloganSize: CGFloat = 22
-    }
-    
-    enum NewComers {
-        
         struct FAQItem {
             let question: String
             let answer: String
@@ -129,10 +125,26 @@ struct Constants {
                 answer: "No, due to the environmental impact of plastic bottles. We sell brand-new BPDF water bottles, as well as upcycled water bottles for a minimal fee. Please use our bottle fillers/water fountains."
             )
         ]
-        
+
         static let pageTitle = "Frequently Asked Questions"
         static let chevron = "chevron.down"
     }
+
+    // MARK: Home
+
+    enum Home {
+        static let buttonImage: String = NSLocalizedString(
+            "line.horizontal.3",
+            comment: "system image name"
+        )
+        static let grettingMessage: String = NSLocalizedString(
+            "Welcome to Body Positive Dance Fitness",
+            comment: "home screen greeting message"
+        )
+        static let tradeMarkSloganSize: CGFloat = 22
+    }
+
+    // MARK: SideDrawer
 
     enum SideDrawer {
 

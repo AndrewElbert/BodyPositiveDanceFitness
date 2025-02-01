@@ -12,7 +12,7 @@ struct SideDrawerView: View, ActionableView {
     enum Action {
         case joinNow
         case classes
-        case newcomers
+        case faq
         case about
         case contact
         case signIn
@@ -28,7 +28,7 @@ struct SideDrawerView: View, ActionableView {
 
     public init(
         viewState: Binding<SideDrawerViewState>,
-        onAction: @escaping (Action) -> Void
+        onAction: ((Action) -> Void)? = nil
     ) {
         self._viewState = viewState
         self.onAction = onAction
@@ -70,7 +70,7 @@ struct SideDrawerView: View, ActionableView {
                     DrawerButton(
                         title: Constants.SideDrawer.faqText,
                         icon: Constants.SideDrawer.faqImage,
-                        action: { onAction?(.newcomers) }
+                        action: { onAction?(.faq) }
                     )
 
                     DrawerButton(

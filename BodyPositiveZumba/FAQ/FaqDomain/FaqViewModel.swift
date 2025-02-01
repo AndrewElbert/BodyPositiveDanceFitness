@@ -1,16 +1,16 @@
 //
-//  NewcomersViewModel.swift
-//  NewcomersDomain
+//  FaqViewModel.swift
+//  FaqDomain
 //
 //  Created by Andrew Elbert on 1/28/25.
 //
 
 import SwiftUI
 
-class NewcomersViewModel: ObservableObject {
-    
-    @Published var viewState = NewcomersViewState()
-    
+class FaqViewModel: ObservableObject {
+
+    @Published var viewState = FaqViewState()
+
     func toggleQuestion(_ index: Int) {
         if viewState.expandedQuestions.contains(index) {
             viewState.closingIndex = index
@@ -20,6 +20,12 @@ class NewcomersViewModel: ObservableObject {
             }
         } else {
             viewState.expandedQuestions.insert(index)
+        }
+    }
+
+    func updateShowText(isClosing: Bool) {
+        if isClosing {
+            viewState.showText = false
         }
     }
 }

@@ -22,7 +22,7 @@ struct SideDrawerRootCoordinatorView: View {
                 Text("Join Now Screen")
             case .classes:
                 Text("Classes Screen")
-            case .newcomers:
+            case .faq:
                 Text("text")
             case .about:
                 Text("About Screen")

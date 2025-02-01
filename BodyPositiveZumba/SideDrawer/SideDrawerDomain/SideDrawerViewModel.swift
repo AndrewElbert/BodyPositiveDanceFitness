@@ -48,8 +48,8 @@ class SideDrawerViewModel: ObservableObject {
     func navigateClasses() {
         coordinator.sideDrawer_viewClasses()
     }
-    func navigateNewcomers() {
-        coordinator.sideDrawer_viewNewcomers()
+    func navigateFaq() {
+        coordinator.sideDrawer_viewFaq()
     }
     func navigateAbout() {
         coordinator.sideDrawer_viewAbout()

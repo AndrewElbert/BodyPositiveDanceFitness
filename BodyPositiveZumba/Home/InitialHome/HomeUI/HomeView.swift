@@ -14,7 +14,7 @@ struct HomeView: View {
 
     enum Action {
     }
-    var onAction: ((Action) -> Void )?
+    var onAction: ((Action) -> Void)?
 
     public init(
         coordinator: SideDrawerCoordinator,
