@@ -54,8 +54,8 @@ class SideDrawerViewModel: ObservableObject {
     func navigateAbout() {
         coordinator.sideDrawer_viewAbout()
     }
-    func navigateContact() {
-        coordinator.sideDrawer_viewContact()
+    func navigateMassage() {
+        coordinator.sideDrawer_viewMassage()
     }
     func navigateSignIn() {
         coordinator.sideDrawer_viewSignIn()

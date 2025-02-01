@@ -26,8 +26,8 @@ struct SideDrawerRootCoordinatorView: View {
                 Text("text")
             case .about:
                 Text("About Screen")
-            case .contact:
-                Text("Contact Screen")
+            case .massage:
+                Text("Massage Screen")
             case .signIn:
                 Text("Sign In Screen")
             case .subscription:
