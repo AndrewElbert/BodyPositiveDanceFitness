@@ -15,7 +15,7 @@ class InitialLoadRootCoordinator: RootCoordinator {
         case home
         case joinNow
         case classes
-        case newcomers
+        case faq
         case about
         case contact
         case signIn
@@ -63,9 +63,9 @@ extension InitialLoadRootCoordinator: SideDrawerCoordinator {
         )
     }
 
-    func sideDrawer_viewNewcomers() {
+    func sideDrawer_viewFaq() {
         routes.presentSheet(
-            .newcomers
+            .faq
         )
     }
 

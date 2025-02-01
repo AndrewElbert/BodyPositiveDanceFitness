@@ -11,7 +11,7 @@ protocol SideDrawerCoordinator: ScreenCoordinator {
 
     func sideDrawer_viewJoinNow()
     func sideDrawer_viewClasses()
-    func sideDrawer_viewNewcomers()
+    func sideDrawer_viewFaq()
     func sideDrawer_viewAbout()
     func sideDrawer_viewContact()
     func sideDrawer_viewSignIn()
