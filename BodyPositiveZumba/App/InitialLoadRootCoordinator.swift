@@ -17,7 +17,7 @@ class InitialLoadRootCoordinator: RootCoordinator {
         case classes
         case faq
         case about
-        case contact
+        case massage
         case signIn
         case subscription
     }
@@ -75,9 +75,9 @@ extension InitialLoadRootCoordinator: SideDrawerCoordinator {
         )
     }
 
-    func sideDrawer_viewContact() {
+    func sideDrawer_viewMassage() {
         routes.presentSheet(
-            .contact
+            .massage
         )
     }
 
