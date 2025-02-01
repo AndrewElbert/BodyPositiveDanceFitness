@@ -10,7 +10,7 @@ import SwiftUI
 struct SwipableCardView: View {
     var card: CardModel
     @State private var isExpanded: Bool = false
-    
+
     var body: some View {
         VStack {
             Image(card.imageName)
@@ -19,16 +19,16 @@ struct SwipableCardView: View {
                 .frame(width: 250, height: 250)
                 .clipped()
                 .cornerRadius(15)
-            
+
             Text(card.name)
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.top, 10)
-            
+
             Text(card.parlor)
                 .font(.subheadline)
                 .foregroundColor(Constants.Colors.darkOrange)
-            
+
             if isExpanded {
                 Text(card.bio)
                     .font(.body)
@@ -44,7 +44,7 @@ struct SwipableCardView: View {
                     .foregroundColor(.blue)
                     .padding(.top, 5)
             }
-            
+
             Spacer()
         }
         .padding()

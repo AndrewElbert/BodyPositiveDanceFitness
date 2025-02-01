@@ -31,13 +31,13 @@ struct MassageView: View {
             bio: Constants.Massage.ShelbySwannBio
         )
     ]
-    
+
     @Environment(\.dismiss) var dismiss
     @State private var currentIndex: Int = 0
     @State private var isAnimating = false
     @State private var isCardExpanded = false
     @State private var bookingURL: BookingURL?
-    
+
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack {
@@ -45,14 +45,14 @@ struct MassageView: View {
                     .font(.system(size: 34, weight: .bold, design: .serif))
                     .multilineTextAlignment(.center)
                     .padding()
-                
+
                 Text(Constants.Massage.pageBio)
                     .font(.system(size: 16, design: .serif))
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                     .padding(.bottom, 16)
-                
+
                 InfiniteCarouselView(items: cardsData,
                                        currentIndex: $currentIndex,
                                        spacing: 10,
@@ -65,12 +65,12 @@ struct MassageView: View {
                         .shadow(color: isCurrentCard ? Color.orange.opacity(0.3) : Color.clear, radius: 10)
                 }
                 .frame(height: 400)
-                
+
                 VStack(spacing: 8) {
                     Text("Swipe")
                         .font(.system(size: 16, weight: .medium, design: .serif))
                         .foregroundColor(.gray)
-                    
+
                     SwipeAnimationView(isAnimating: $isAnimating)
                 }
                 .padding(.top, 60)
@@ -78,14 +78,14 @@ struct MassageView: View {
 
                 Button(action: {
                     let normalizedIndex = ((currentIndex % cardsData.count) + cardsData.count) % cardsData.count
-                    
+
                     var urlString: String = ""
                     if normalizedIndex == 0 {
                         urlString = "https://ladyloveholistics.com/"
                     } else {
                         urlString = "https://swanns-healing-elements.square.site/"
                     }
-                    
+
                     if let url = URL(string: urlString) {
                         bookingURL = BookingURL(url: url)
                     }
@@ -112,7 +112,7 @@ struct MassageView: View {
                 }
                 .padding(.top, 2)
             }
-            
+
             CloseButton(dismiss: {
                 dismiss()
             })
@@ -130,24 +130,24 @@ struct MassageView: View {
 
 struct SwipeAnimationView: View {
     @Binding var isAnimating: Bool
-    
+
     var body: some View {
         HStack(spacing: 16) {
             ZStack {
                 Image(systemName: "hand.point.left.fill")
                     .offset(x: isAnimating ? -10 : 0)
                     .opacity(isAnimating ? 0 : 1)
-                
+
                 Image(systemName: "arrow.left")
                     .offset(x: isAnimating ? -10 : 0)
                     .opacity(isAnimating ? 1 : 0)
             }
-            
+
             ZStack {
                 Image(systemName: "hand.point.right.fill")
                     .offset(x: isAnimating ? 10 : 0)
                     .opacity(isAnimating ? 0 : 1)
-                
+
                 Image(systemName: "arrow.right")
                     .offset(x: isAnimating ? 10 : 0)
                     .opacity(isAnimating ? 1 : 0)
@@ -170,20 +170,20 @@ struct InfiniteCarouselView<Content: View, T: Identifiable>: View {
     var spacing: CGFloat = 10
     var sideSpacing: CGFloat = 40
     var content: (T, Bool) -> Content
-    
+
     private var circularItems: [T] {
         guard let first = items.first, let last = items.last else { return items }
         return [last] + items + [first]
     }
-    
+
     @GestureState private var dragOffset: CGFloat = 0
-    
+
     var body: some View {
         GeometryReader { proxy in
             let cardWidth = max(0, proxy.size.width - (sideSpacing * 2))
             let cardWithSpacing = cardWidth + spacing
             let displayIndex = CGFloat(currentIndex + 1)
-            
+
             HStack(spacing: spacing) {
                 ForEach(Array(circularItems.enumerated()), id: \.offset) { index, item in
                     content(item, index == currentIndex + 1)
@@ -210,7 +210,7 @@ struct InfiniteCarouselView<Content: View, T: Identifiable>: View {
                         }
                     }
             )
-            .onChange(of: currentIndex) { oldValue, newValue in
+            .onChange(of: currentIndex) { _, newValue in
                 if newValue < 0 {
                     DispatchQueue.main.async {
                         withAnimation(.none) {
@@ -235,7 +235,7 @@ struct WebView: UIViewRepresentable {
     func makeUIView(context: Context) -> WKWebView {
         return WKWebView()
     }
-    
+
     func updateUIView(_ uiView: WKWebView, context: Context) {
         let request = URLRequest(url: url)
         uiView.load(request)
