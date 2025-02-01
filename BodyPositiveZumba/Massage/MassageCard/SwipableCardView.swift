@@ -32,7 +32,7 @@ struct SwipableCardView: View {
             if isExpanded {
                 Text(card.bio)
                     .font(.body)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.black.opacity(0.7))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
                     .lineLimit(nil)

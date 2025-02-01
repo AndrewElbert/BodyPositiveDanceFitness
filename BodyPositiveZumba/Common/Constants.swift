@@ -15,7 +15,8 @@ struct Constants {
 
     enum Colors {
 
-        static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0, opacity: 1.0)
+        static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0)
+        static let darkerCyan: Color = Color(red: 0.0, green: 0.88, blue: 0.88)
         static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)
 
     }
@@ -180,6 +181,11 @@ struct Constants {
         static let ShelbySwannParlor: String = "Swann's Healing Elements"
         static let LindseyHerseyBio: String = "Lindsey is an experienced massage therapist who specializes in sports massage, health coaching, and Reiki."
         static let ShelbySwannBio: String = "Shelby is a skilled massage therapist offering a range of healing techniques, including Reiki and massage therapy."
+        static let ladyLoveHolisticURL: String = "https://ladyloveholistics.com/"
+        static let swannsHealingElementsURL: String = "https://swanns-healing-elements.square.site/"
+
+        static let buttonText: String = "Book Today!"
+
     }
 
     // MARK: SideDrawer
