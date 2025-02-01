@@ -129,31 +129,31 @@ struct Constants {
         static let pageTitle = "Frequently Asked Questions"
         static let chevron = "chevron.down"
     }
-    
+
     // MARK: Headshots
-    
+
     enum HeadShots {
-        
+
         static let ShelbySwannHeadShot: String = NSLocalizedString(
             "ShelbySwannHeadShot",
             comment: "Shelby Swann HeadShot"
         )
-        
+
         static let ShelbySwannName: String = NSLocalizedString(
             "Shelby Swann",
             comment: "Shelby Swann"
         )
-        
+
         static let LindseyHerseyHeadShot: String = NSLocalizedString(
             "LindseyHerseyHeadShot",
             comment: "Lindsey Hersey Head Shot"
         )
-        
+
         static let LindseyHerseyName: String = NSLocalizedString(
             "Lindsey Hersey",
             comment: "Lindsey Hersey"
         )
-        
+
     }
 
     // MARK: Home
@@ -169,13 +169,13 @@ struct Constants {
         )
         static let tradeMarkSloganSize: CGFloat = 22
     }
-    
+
     // MARK: Massage
-    
+
     enum Massage {
         static let pageTitle: String = "Massage Services"
         static let pageBio: String = "Partnering with Lindsey (Lady Love Holistics) and Shelby (Swann's Healing Elements), we now offer sports massage, therapy, health coaching, and Reiki for our members and community!"
-        
+
         static let LindseyHerseyParlor: String = "Lady Love Holistics"
         static let ShelbySwannParlor: String = "Swann's Healing Elements"
         static let LindseyHerseyBio: String = "Lindsey is an experienced massage therapist who specializes in sports massage, health coaching, and Reiki."

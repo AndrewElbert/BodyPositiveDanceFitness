@@ -14,4 +14,3 @@ struct CardModel: Identifiable {
     var parlor: String
     var bio: String
 }
-
