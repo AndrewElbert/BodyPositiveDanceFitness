@@ -183,9 +183,9 @@ struct Constants {
         static let ShelbySwannBio: String = "Shelby is a skilled massage therapist offering a range of healing techniques, including Reiki and massage therapy."
         static let ladyLoveHolisticURL: String = "https://ladyloveholistics.com/"
         static let swannsHealingElementsURL: String = "https://swanns-healing-elements.square.site/"
-        
+
         static let buttonText: String = "Book Today!"
-        
+
     }
 
     // MARK: SideDrawer
