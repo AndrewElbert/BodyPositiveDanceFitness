@@ -14,7 +14,7 @@ class SideDrawerRootCoordinator: RootCoordinator {
         case root
         case joinNow
         case classes
-        case newcomers
+        case faq
         case about
         case contact
         case signIn
@@ -43,9 +43,9 @@ class SideDrawerRootCoordinator: RootCoordinator {
         )
     }
 
-    func sideDrawer_viewNewcomers() {
+    func sideDrawer_viewFaq() {
         routes.push(
-            .newcomers
+            .faq
         )
     }
 

@@ -24,8 +24,8 @@ struct SideDrawerComponent: View {
                 viewModel.navigateJoinNow()
             case .classes:
                 viewModel.navigateClasses()
-            case .newcomers:
-                viewModel.navigateNewcomers()
+            case .faq:
+                viewModel.navigateFaq()
             case .about:
                 viewModel.navigateAbout()
             case .contact:
