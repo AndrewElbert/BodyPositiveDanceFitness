@@ -169,6 +169,18 @@ struct Constants {
         )
         static let tradeMarkSloganSize: CGFloat = 22
     }
+    
+    // MARK: Massage
+    
+    enum Massage {
+        static let pageTitle: String = "Massage Services"
+        static let pageBio: String = "Partnering with Lindsey (Lady Love Holistics) and Shelby (Swann's Healing Elements), we now offer sports massage, therapy, health coaching, and Reiki for our members and community!"
+        
+        static let LindseyHerseyParlor: String = "Lady Love Holistics"
+        static let ShelbySwannParlor: String = "Swann's Healing Elements"
+        static let LindseyHerseyBio: String = "Lindsey is an experienced massage therapist who specializes in sports massage, health coaching, and Reiki."
+        static let ShelbySwannBio: String = "Shelby is a skilled massage therapist offering a range of healing techniques, including Reiki and massage therapy."
+    }
 
     // MARK: SideDrawer
 
