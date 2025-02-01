@@ -16,7 +16,7 @@ class SideDrawerRootCoordinator: RootCoordinator {
         case classes
         case faq
         case about
-        case contact
+        case massage
         case signIn
         case subscription
     }
@@ -55,9 +55,9 @@ class SideDrawerRootCoordinator: RootCoordinator {
         )
     }
 
-    func sideDrawer_viewContact() {
+    func sideDrawer_viewMassage() {
         routes.push(
-            .contact
+            .massage
         )
     }
 

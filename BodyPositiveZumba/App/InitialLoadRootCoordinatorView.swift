@@ -31,8 +31,8 @@ struct InitialLoadRootCoordinatorView: View {
                 FaqUI.faqPage()
             case .about:
                 Text("About")
-            case .contact:
-                Text("Contact")
+            case .massage:
+                MassageView()
             case .signIn:
                 Text("Sign In")
             case .subscription:
