@@ -14,7 +14,7 @@ struct SideDrawerView: View, ActionableView {
         case classes
         case faq
         case about
-        case contact
+        case massage
         case signIn
         case subscription
         case endDragGesture
@@ -80,9 +80,9 @@ struct SideDrawerView: View, ActionableView {
                     )
 
                     DrawerButton(
-                        title: Constants.SideDrawer.contactText,
-                        icon: Constants.SideDrawer.contactImage,
-                        action: { onAction?(.contact) }
+                        title: Constants.SideDrawer.massageText,
+                        icon: Constants.SideDrawer.massageImage,
+                        action: { onAction?(.massage) }
                     )
 
                     DrawerButton(

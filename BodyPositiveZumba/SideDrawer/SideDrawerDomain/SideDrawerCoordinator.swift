@@ -13,7 +13,7 @@ protocol SideDrawerCoordinator: ScreenCoordinator {
     func sideDrawer_viewClasses()
     func sideDrawer_viewFaq()
     func sideDrawer_viewAbout()
-    func sideDrawer_viewContact()
+    func sideDrawer_viewMassage()
     func sideDrawer_viewSignIn()
     func sideDrawer_viewSubscription()
 }

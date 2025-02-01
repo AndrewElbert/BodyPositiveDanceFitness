@@ -28,8 +28,8 @@ struct SideDrawerComponent: View {
                 viewModel.navigateFaq()
             case .about:
                 viewModel.navigateAbout()
-            case .contact:
-                viewModel.navigateContact()
+            case .massage:
+                viewModel.navigateMassage()
             case .signIn:
                 viewModel.navigateSignIn()
             case .subscription:
