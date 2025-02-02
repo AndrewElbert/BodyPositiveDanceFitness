@@ -14,6 +14,6 @@ protocol SideDrawerCoordinator: ScreenCoordinator {
     func sideDrawer_viewFaq()
     func sideDrawer_viewAbout()
     func sideDrawer_viewMassage()
-    func sideDrawer_viewspaceRental()
+    func sideDrawer_viewSpaceRental()
     func sideDrawer_viewSubscription()
 }

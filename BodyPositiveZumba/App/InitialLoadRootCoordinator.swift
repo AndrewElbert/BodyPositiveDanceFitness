@@ -41,7 +41,7 @@ extension InitialLoadRootCoordinator: HomeCoordinator {
 
 extension InitialLoadRootCoordinator: SideDrawerCoordinator {
 
-    func sideDrawer_viewspaceRental() {
+    func sideDrawer_viewSpaceRental() {
         routes.presentSheet(
             .spaceRental
         )

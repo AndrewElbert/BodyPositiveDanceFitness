@@ -97,15 +97,17 @@ struct ExpandableSection: View {
 }
 
 struct SpaceRentalView: View {
+
+    @Environment(\.dismiss) var dismiss
     @State private var showMessage = false
 
     private let amenities = [
-        ("Three available spaces of varying sizes dependent upon scheduling", "✨"),
-        ("Tables, chairs, tablecloths, whiteboards, speakers, projectors", "✨"),
-        ("Convenient location & easy parking, with many nearby amenities", "✨"),
-        ("Includes usage of 1,890 sf room, 1366 sf room, or 668 sf room", "✨")
+        ("Three available spaces of varying sizes dependent upon scheduling", "🏢"),
+        ("Tables, chairs, tablecloths, whiteboards, speakers, projectors", "🪑"),
+        ("Convenient location & easy parking, with many nearby amenities", "🚗"),
+        ("Includes usage of 1,890 sf room, 1366 sf room, or 668 sf room", "📐")
     ]
-    
+
     private let privateEvents = [
         ("Wedding-related events", "👰"),
         ("Birthday parties", "🎂"),
@@ -113,7 +115,7 @@ struct SpaceRentalView: View {
         ("Special occasion nights with friends", "🎉"),
         ("Any reason to party!", "🎊")
     ]
-    
+
     private let spaceRental = [
         ("Board meetings", "🎯"),
         ("Trainings", "💫"),
@@ -122,20 +124,40 @@ struct SpaceRentalView: View {
         ("Corporate retreats", "🌟"),
         ("Practice space", "🎭")
     ]
-    
+
+    private let spaceImages = [
+        "SpaceRental1",
+        "SpaceRental2",
+        "SpaceRental3",
+        "SpaceRental4"
+    ]
+
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 0) {
+                HStack {
+                    Spacer()
+                    CloseButton(dismiss: {
+                        dismiss()
+                    })
+                    .padding(.trailing, 16)
+                    .padding(.top, 16)
+                }
+
                 Text("Private Events & Space Rental")
-                    .font(.system(size: 34, weight: .bold, design: .serif))
+                    .font(.system(size: 22, weight: .bold, design: .serif))
                     .multilineTextAlignment(.center)
-                    .padding(.top, 20)
+                    .foregroundColor(Constants.Colors.darkerCyan)
+                    .padding(.horizontal)
+
                 Text("If you can dream it, we can help you achieve it!")
-                    .font(.system(size: 22, design: .serif))
+                    .font(.system(size: 16, design: .serif))
                     .foregroundColor(.black.opacity(0.8))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
-                VStack(spacing: 10) {
+                    .padding(.top, 16)
+
+                VStack(spacing: 16) {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.4)) {
                             showMessage.toggle()
@@ -162,6 +184,7 @@ struct SpaceRentalView: View {
                             )
                             .cornerRadius(10)
                     }
+
                     if showMessage {
                         VStack(spacing: 4) {
                             Text("Competitive pricing! Contact Hilary at")
@@ -169,7 +192,7 @@ struct SpaceRentalView: View {
                                 .foregroundColor(.black.opacity(0.8))
                                 .transition(.opacity)
                             Text("hilary@bodypositivedancefitness.com")
-                                .font(.system(size: 18, weight: .bold, design: .serif))
+                                .font(.system(size: 15, weight: .bold, design: .serif))
                                 .foregroundColor(.orange)
                                 .transition(.opacity)
                         }
@@ -177,16 +200,105 @@ struct SpaceRentalView: View {
                     }
                 }
                 .padding(.horizontal)
+                .padding(.top, 16)
+
+                CircularCarousel(
+                    images: spaceImages
+                )
+                .frame(height: 250)
+                .padding(.horizontal)
+                .padding(.top, 20)
+
                 VStack(spacing: 16) {
                     ExpandableSection(title: "Venue Amenities", items: amenities)
                     ExpandableSection(title: "Private Events", items: privateEvents)
                     ExpandableSection(title: "General Space Rental", items: spaceRental)
                 }
                 .padding(.horizontal)
+                .padding(.top, 16)
             }
             .padding()
         }
     }
 }
 
+struct CircularCarousel: View {
+    let images: [String]
+    @State private var currentIndex: Int = 0
+    @State private var dragOffset: CGFloat = 0
+    private let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
 
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color.cyan.opacity(0.6),
+                                Color.cyan.opacity(0.5)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .blur(radius: 40)
+
+                HStack(spacing: 0) {
+                    ForEach(0..<images.count * 8, id: \.self) { index in
+                        Image(images[index % images.count])
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .clipped()
+                            .cornerRadius(20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.cyan.opacity(0.3), lineWidth: 2)
+                                    .shadow(color: .cyan.opacity(0.3), radius: 5)
+                            )
+                    }
+                }
+                .frame(width: geometry.size.width * CGFloat(images.count * 8), height: geometry.size.height)
+                .offset(x: -geometry.size.width * CGFloat(currentIndex) + dragOffset)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            dragOffset = value.translation.width
+                        }
+                        .onEnded { value in
+                            let threshold = geometry.size.width * 0.3
+                            withAnimation(.easeInOut(duration: 1.25)) {
+                                if value.translation.width > threshold {
+                                    currentIndex -= 1
+                                } else if value.translation.width < -threshold {
+                                    currentIndex += 1
+                                }
+                                dragOffset = 0
+                            }
+                            currentIndex = (currentIndex + images.count * 8) % (images.count * 8)
+                        }
+                )
+                .animation(.easeInOut(duration: 1.25), value: dragOffset)
+
+                HStack(spacing: 8) {
+                    ForEach(0..<images.count, id: \.self) { index in
+                        Circle()
+                            .fill(index == currentIndex % images.count ? Color.cyan : Color.gray.opacity(0.5))
+                            .frame(width: 8, height: 8)
+                            .scaleEffect(index == currentIndex % images.count ? 1.2 : 1.0)
+                            .animation(.easeInOut(duration: 0.2), value: currentIndex)
+                    }
+                }
+                .padding(.bottom, 16)
+                .frame(maxHeight: .infinity, alignment: .bottom)
+            }
+        }
+        .onReceive(timer) { _ in
+            withAnimation(.easeInOut(duration: 1.25)) {
+                currentIndex += 1
+                currentIndex = (currentIndex + images.count * 8) % (images.count * 8)
+            }
+        }
+    }
+}

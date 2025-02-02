@@ -58,7 +58,7 @@ class SideDrawerViewModel: ObservableObject {
         coordinator.sideDrawer_viewMassage()
     }
     func navigatespaceRental() {
-        coordinator.sideDrawer_viewspaceRental()
+        coordinator.sideDrawer_viewSpaceRental()
     }
     func navigateSubscription() {
         print("entered subs")
