@@ -10,15 +10,15 @@ import SwiftUI
 @MainActor
 class InfiniteCarouselViewModel<T: Identifiable>: ObservableObject {
 
-    var viewState: Binding<InfiniteCarouselViewState<T>>
+    @Binding var viewState: InfiniteCarouselViewState<T>
 
     init(viewState: Binding<InfiniteCarouselViewState<T>>) {
-        self.viewState = viewState
+        self._viewState = viewState
     }
 
     func handleDragEnd(translation: CGFloat, cardWidth: CGFloat) {
         let threshold: CGFloat = cardWidth / 2
-        var newIndex = viewState.wrappedValue.currentIndex
+        var newIndex = $viewState.wrappedValue.currentIndex
 
         if translation < -threshold {
             newIndex += 1
@@ -27,18 +27,18 @@ class InfiniteCarouselViewModel<T: Identifiable>: ObservableObject {
         }
 
         withAnimation(.easeInOut) {
-            viewState.wrappedValue.currentIndex = newIndex
+            $viewState.wrappedValue.currentIndex = newIndex
         }
     }
 
     func handleIndexChange() {
-        if viewState.wrappedValue.currentIndex < 0 {
+        if $viewState.wrappedValue.currentIndex < 0 {
             withAnimation(.none) {
-                viewState.wrappedValue.currentIndex = viewState.wrappedValue.items.count - 1
+                $viewState.wrappedValue.currentIndex = $viewState.wrappedValue.items.count - 1
             }
-        } else if viewState.wrappedValue.currentIndex >= viewState.wrappedValue.items.count {
+        } else if $viewState.wrappedValue.currentIndex >= $viewState.wrappedValue.items.count {
             withAnimation(.none) {
-                viewState.wrappedValue.currentIndex = 0
+                $viewState.wrappedValue.currentIndex = 0
             }
         }
     }
