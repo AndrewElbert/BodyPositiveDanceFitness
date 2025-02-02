@@ -22,7 +22,7 @@ struct InfiniteCarouselComponent<Content: View, T: Identifiable>: View {
 
     var body: some View {
         InfiniteCarouselView<Content, T>(
-            viewState: viewModel.viewState
+            viewState: $viewModel.viewState
         ) { action in
             switch action {
             case .dragEnded(let translation, let cardWidth):
