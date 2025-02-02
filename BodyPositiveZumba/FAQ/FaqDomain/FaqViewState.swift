@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct FaqViewState {
-
     var expandedQuestions: Set<Int> = []
     var closingIndex: Int?
-    let faqItems = Constants.FAQ.faqItems
 
-    var showText = false
+    var faqItems: [FaqItemViewState]
+
+    init() {
+        self.faqItems = Constants.FAQ.faqItems.enumerated().map { _, item in
+            FaqItemViewState(
+                question: item.question,
+                answer: item.answer
+            )
+        }
+    }
 }

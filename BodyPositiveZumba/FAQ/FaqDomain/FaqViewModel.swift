@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class FaqViewModel: ObservableObject {
 
     @Published var viewState = FaqViewState()
@@ -20,12 +21,6 @@ class FaqViewModel: ObservableObject {
             }
         } else {
             viewState.expandedQuestions.insert(index)
-        }
-    }
-
-    func updateShowText(isClosing: Bool) {
-        if isClosing {
-            viewState.showText = false
         }
     }
 }

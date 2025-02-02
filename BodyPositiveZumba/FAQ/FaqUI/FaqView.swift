@@ -36,22 +36,12 @@ struct FaqView: View, ActionableView {
                         .padding(.bottom, 20)
 
                     ForEach(viewState.faqItems.indices, id: \.self) { index in
-                        FaqItem(
-                            question: viewState.faqItems[index].question,
-                            answer: viewState.faqItems[index].answer,
-                            isExpanded: viewState.expandedQuestions.contains(index),
-                            isClosing: viewState.closingIndex == index,
-                            toggleExpanded: {
-                                onAction?(.toggleQuestion(index))
-                            }
-                        )
+                        FaqItemComponent(viewModel: FaqItemViewModel(viewState: $viewState.faqItems[index]))
                     }
                 }
                 .padding()
             }
-            CloseButton(dismiss: {
-                dismiss()
-            })
+            CloseButton(dismiss: { dismiss() })
         }
     }
 }
