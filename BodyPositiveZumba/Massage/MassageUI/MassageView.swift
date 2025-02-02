@@ -101,7 +101,6 @@ struct MassageView: View, ActionableView {
                 }
                 .padding(.top, 2)
             }
-
             CloseButton(dismiss: {
                 dismiss()
             })

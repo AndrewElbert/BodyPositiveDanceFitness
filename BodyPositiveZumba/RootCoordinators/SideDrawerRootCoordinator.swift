@@ -17,7 +17,7 @@ class SideDrawerRootCoordinator: RootCoordinator {
         case faq
         case about
         case massage
-        case signIn
+        case spaceRental
         case subscription
     }
 
@@ -61,9 +61,9 @@ class SideDrawerRootCoordinator: RootCoordinator {
         )
     }
 
-    func sideDrawer_viewSignin() {
+    func sideDrawer_viewspaceRental() {
         routes.push(
-            .signIn
+            .spaceRental
         )
     }
 

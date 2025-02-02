@@ -200,13 +200,13 @@ struct Constants {
         static let buttonEndColor: Color = Color(red: 0.933, green: 0.427, blue: 0.176)
         static let cornerRadius: CGFloat = 15
 
-        static let signInText: String = NSLocalizedString(
-            "Sign In",
-            comment: "sign in button text"
+        static let spaceRentalText: String = NSLocalizedString(
+            "Space Rental",
+            comment: "Space rental button text"
         )
-        static let signInImage: String = NSLocalizedString(
+        static let spaceRentalImage: String = NSLocalizedString(
             "person.badge.plus",
-            comment: "sign in button image"
+            comment: "Space rental button image"
         )
         static let joinNowText: String = NSLocalizedString(
             "Join Now!",
@@ -241,7 +241,7 @@ struct Constants {
             comment: "classes button image"
         )
         static let massageText: String = NSLocalizedString(
-            "Massage",
+            "Massage Services",
             comment: "massage button text"
         )
         static let massageImage: String = NSLocalizedString(
