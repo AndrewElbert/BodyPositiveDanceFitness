@@ -24,7 +24,6 @@ struct SideDrawerView: View, ActionableView {
 
     @Binding var viewState: SideDrawerViewState
     var onAction: ((Action) -> Void )?
-    @State private var newsLetterIsPressed: Bool = false
 
     public init(
         viewState: Binding<SideDrawerViewState>,
@@ -96,7 +95,7 @@ struct SideDrawerView: View, ActionableView {
 
                     VStack(spacing: 16) {
                         Button(action: {
-
+                            onAction?(.subscription)
                         }) {
                             HStack {
                                 Text(Constants.SideDrawer.newsletterText)
@@ -120,20 +119,20 @@ struct SideDrawerView: View, ActionableView {
                             }
                             .padding(.leading, 11)
                             .padding(.trailing, 11)
-                            .scaleEffect(newsLetterIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
-                            .opacity(newsLetterIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
+                            .scaleEffect(viewState.newsLetterIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
+                            .opacity(viewState.newsLetterIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
                         }
                         .buttonStyle(PlainButtonStyle())
                         .simultaneousGesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { _ in
                                     withAnimation(.easeInOut(duration: 0.1)) {
-                                        newsLetterIsPressed = true
+                                        viewState.newsLetterIsPressed = true
                                     }
                                 }
                                 .onEnded { _ in
                                     withAnimation(.spring()) {
-                                        newsLetterIsPressed = false
+                                        viewState.newsLetterIsPressed = false
                                     }
                                 }
                         )

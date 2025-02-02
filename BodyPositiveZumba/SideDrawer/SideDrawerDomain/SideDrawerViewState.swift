@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SideDrawerViewState {
+
     var isMenuOpen: Bool = false
     var showDimBackground: Bool = false
     var dragOffset = CGSize.zero
+    var newsLetterIsPressed: Bool = false
 }
