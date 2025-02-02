@@ -18,7 +18,7 @@ class InitialLoadRootCoordinator: RootCoordinator {
         case faq
         case about
         case massage
-        case signIn
+        case spaceRental
         case subscription
     }
 
@@ -41,9 +41,9 @@ extension InitialLoadRootCoordinator: HomeCoordinator {
 
 extension InitialLoadRootCoordinator: SideDrawerCoordinator {
 
-    func sideDrawer_viewSignIn() {
+    func sideDrawer_viewspaceRental() {
         routes.presentSheet(
-            .signIn
+            .spaceRental
         )
     }
 
