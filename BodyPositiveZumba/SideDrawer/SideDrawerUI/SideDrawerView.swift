@@ -15,7 +15,7 @@ struct SideDrawerView: View, ActionableView {
         case faq
         case about
         case massage
-        case signIn
+        case spaceRental
         case subscription
         case endDragGesture
         case closeMenu
@@ -85,9 +85,9 @@ struct SideDrawerView: View, ActionableView {
                     )
 
                     DrawerButton(
-                        title: Constants.SideDrawer.signInText,
-                        icon: Constants.SideDrawer.signInImage,
-                        action: { onAction?(.signIn) }
+                        title: Constants.SideDrawer.spaceRentalText,
+                        icon: Constants.SideDrawer.spaceRentalImage,
+                        action: { onAction?(.spaceRental) }
                     )
 
                     Divider()
