@@ -14,7 +14,7 @@ class MassageViewModel: ObservableObject {
 
     func updateBookingURL() {
 
-        let normalizedIndex = viewState.infiniteCarouselViewState.currentIndex % viewState.cards.count
+        let normalizedIndex = viewState.swipableCarouselViewState.currentIndex % viewState.cards.count
         var urlString: String
         if normalizedIndex == 0 {
             urlString = Constants.Massage.ladyLoveHolisticURL

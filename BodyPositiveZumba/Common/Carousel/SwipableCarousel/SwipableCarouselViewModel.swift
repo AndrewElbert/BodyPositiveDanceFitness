@@ -1,5 +1,5 @@
 //
-//  InfiniteCarouselViewModel.swift
+//  SwipableCarouselViewModel.swift
 //  Carousel
 //
 //  Created by Andrew Elbert on 2/1/25.
@@ -8,11 +8,11 @@
 import SwiftUI
 
 @MainActor
-class InfiniteCarouselViewModel<T: Identifiable>: ObservableObject {
+class SwipableCarouselViewModel<T: Identifiable>: ObservableObject {
 
-    @Binding var viewState: InfiniteCarouselViewState<T>
+    @Binding var viewState: SwipableCarouselViewState<T>
 
-    init(viewState: Binding<InfiniteCarouselViewState<T>>) {
+    init(viewState: Binding<SwipableCarouselViewState<T>>) {
         self._viewState = viewState
     }
 

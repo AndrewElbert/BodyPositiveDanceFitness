@@ -10,7 +10,7 @@ import SwiftUI
 struct MassageViewState {
 
     var swipeAnimationViewState = SwipeAnimationViewState()
-    var infiniteCarouselViewState = InfiniteCarouselViewState<CardModel>(
+    var swipableCarouselViewState = SwipableCarouselViewState<CardModel>(
         items: [
             CardModel(
                 id: UUID(),
