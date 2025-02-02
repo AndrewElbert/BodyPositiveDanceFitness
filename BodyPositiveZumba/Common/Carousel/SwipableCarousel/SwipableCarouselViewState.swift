@@ -1,5 +1,5 @@
 //
-//  InfiniteCarouselViewState.swift
+//  SwipableCarouselViewState.swift
 //  Carousel
 //
 //  Created by Andrew Elbert on 2/1/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfiniteCarouselViewState<T: Identifiable> {
+struct SwipableCarouselViewState<T: Identifiable> {
 
     var items: [T]
     var currentIndex: Int

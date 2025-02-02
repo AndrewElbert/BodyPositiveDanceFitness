@@ -40,9 +40,9 @@ struct MassageView: View, ActionableView {
                     .padding(.horizontal)
                     .padding(.bottom, 16)
 
-                InfiniteCarouselComponent<AnyView, CardModel>(
-                    viewModel: InfiniteCarouselViewModel(
-                        viewState: $viewState.infiniteCarouselViewState
+                SwipableCarouselComponent<AnyView, CardModel>(
+                    viewModel: SwipableCarouselViewModel(
+                        viewState: $viewState.swipableCarouselViewState
                     )
                 ) { card, isCurrentCard in
                     AnyView(
