@@ -8,5 +8,7 @@
 import SwiftUI
 
 struct HomeViewState {
+    
+    var sideDrawerViewState: SideDrawerViewState = SideDrawerViewState()
 
 }

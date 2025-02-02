@@ -43,7 +43,7 @@ struct InitialAppLoadView: View {
                 VStack {
                     ZStack(alignment: .leading) {
                         Capsule()
-                            .stroke(viewState.barOutlineColor, lineWidth: 4) // Added outline with dynamic color (NEW)
+                            .stroke(viewState.barOutlineColor, lineWidth: 4)
                             .frame(height: 20)
 
                         Capsule()
