@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MassageView: View, ActionableView {
-
     enum Action {
         case updateUrl
     }
@@ -41,18 +40,19 @@ struct MassageView: View, ActionableView {
                     .padding(.horizontal)
                     .padding(.bottom, 16)
 
-                InfiniteCarouselView(
-                    items: viewState.cards,
-                    currentIndex: $viewState.currentIndex,
-                    spacing: 10,
-                    sideSpacing: 40
+                InfiniteCarouselComponent<AnyView, CardModel>(
+                    viewModel: InfiniteCarouselViewModel(
+                        viewState: $viewState.infiniteCarouselViewState
+                    )
                 ) { card, isCurrentCard in
-                    SwipableCardView(card: card)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(isCurrentCard ? Color.orange : Color.clear, lineWidth: 3)
-                        )
-                        .shadow(color: isCurrentCard ? Color.orange.opacity(0.3) : Color.clear, radius: 10)
+                    AnyView(
+                        SwipableCardView(card: card)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(isCurrentCard ? Color.orange : Color.clear, lineWidth: 3)
+                            )
+                            .shadow(color: isCurrentCard ? Color.orange.opacity(0.3) : Color.clear, radius: 10)
+                    )
                 }
                 .frame(height: 400)
 
@@ -67,7 +67,11 @@ struct MassageView: View, ActionableView {
                         )
                         .foregroundColor(.gray)
 
-                    SwipeAnimationView(isAnimating: $viewState.isAnimating)
+                    SwipeAnimationComponent(
+                        viewModel: SwipeAnimationViewModel(
+                            viewState: viewState.swipeAnimationViewState
+                        )
+                    )
                 }
                 .padding(.top, 60)
                 .padding(.bottom, 15)
