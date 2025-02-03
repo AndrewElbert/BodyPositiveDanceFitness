@@ -22,9 +22,10 @@ class AnimatedCarouselViewModel: ObservableObject {
 
     func startAutoScroll() {
         guard viewState.isAnimating else { return }
-        withAnimation(.easeInOut(duration: 1.25)) {
+        
+        withAnimation(.smooth(duration: 0.75)) {
             viewState.currentIndex += 1
-            viewState.currentIndex = (viewState.currentIndex + viewState.items.count * 8) % (viewState.items.count * 8)
+            viewState.currentIndex %= (viewState.items.count * 8)
         }
     }
 
@@ -34,14 +35,15 @@ class AnimatedCarouselViewModel: ObservableObject {
 
     func handleDragEnded(_ translation: CGSize, in geometry: GeometryProxy) {
         let threshold = geometry.size.width * 0.3
-        withAnimation(.easeInOut(duration: 1.25)) {
+        let totalItemCount = viewState.items.count * 8
+        
+        withAnimation(.easeInOut(duration: 0.5)) {
             if translation.width > threshold {
-                viewState.currentIndex -= 1
+                viewState.currentIndex = (viewState.currentIndex - 1 + totalItemCount) % totalItemCount
             } else if translation.width < -threshold {
-                viewState.currentIndex += 1
+                viewState.currentIndex = (viewState.currentIndex + 1) % totalItemCount
             }
             viewState.dragOffset = 0
         }
-        viewState.currentIndex = (viewState.currentIndex + viewState.items.count * 8) % (viewState.items.count * 8)
     }
 }
