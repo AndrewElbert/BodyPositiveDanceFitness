@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnimatedBulletPointComponent: View {
+    
     @ObservedObject private var viewModel: AnimatedBulletPointViewModel
     
     init(viewModel: AnimatedBulletPointViewModel) {
