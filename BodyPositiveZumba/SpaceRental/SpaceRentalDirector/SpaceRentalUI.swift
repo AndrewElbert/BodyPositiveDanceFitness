@@ -10,6 +10,6 @@ import SwiftUI
 struct SpaceRentalUI {
     static func spaceRentalPage(
     ) -> some View {
-        SpaceRentalView()
+        SpaceRentalScreen(viewModel: SpaceRentalViewModel())
     }
 }
