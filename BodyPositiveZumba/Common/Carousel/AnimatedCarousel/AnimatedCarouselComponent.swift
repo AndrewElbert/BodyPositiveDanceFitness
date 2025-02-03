@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AnimatedCarouselComponent: View {
-    @ObservedObject private var viewModel: AnimatedCarouselViewModel
     
-    init(viewModel: AnimatedCarouselViewModel) {
+    @ObservedObject private var viewModel: AnimatedCarouselViewModel
+
+    public init(viewModel: AnimatedCarouselViewModel) {
         self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
     
@@ -19,13 +20,12 @@ struct AnimatedCarouselComponent: View {
             viewState: $viewModel.viewState
         ) { action in
             switch action {
-            case .dragChanged(let offset):
-                viewModel.updateDragOffset(offset)
-            case .dragEnded(let translation, let screenWidth):
-                viewModel.handleDragEnd(translation: translation, screenWidth: screenWidth)
-            case .timerFired:
-                // Handle timer action if needed
-                break
+            case .dragChanged(let translation, let geomotry):
+                viewModel.handleDragChanged(translation, in: geomotry)
+            case .dragEnded(let translation, let geomotry):
+                viewModel.handleDragEnded(translation, in: geomotry)
+            case .startAutoScroll:
+                viewModel.startAutoScroll()
             }
         }
     }

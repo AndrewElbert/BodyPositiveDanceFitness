@@ -93,7 +93,11 @@ struct SpaceRentalView: View, ActionableView {
                 .padding(.horizontal)
                 .padding(.top, 16)
                 
-                AnimatedCarouselComponent(viewModel: AnimatedCarouselViewModel(viewState: $viewState.animatedCarouselViewState))
+                AnimatedCarouselComponent(
+                    viewModel: AnimatedCarouselViewModel(
+                        viewState: $viewState.animatedCarouselViewState
+                    )
+                )
                     .frame(height: 250)
                     .padding(.horizontal)
                     .padding(.top, 20)

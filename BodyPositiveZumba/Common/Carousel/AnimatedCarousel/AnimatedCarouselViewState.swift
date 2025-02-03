@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct AnimatedCarouselViewState {
+    
+    let timer = Timer.publish(every: 2.2, on: .main, in: .common).autoconnect()
     var images: [String]
-    var currentIndex: Int
-    var dragOffset: CGFloat
+    var items: [CarouselItemModel]
+    var currentIndex: Int = 0
+    var dragOffset: CGFloat = 0
+    var isAnimating: Bool = true
     
     init(
-        images: [String] = [],
-        currentIndex: Int = 0,
-        dragOffset: CGFloat = 0
+        images: [String]? = nil
     ) {
-        self.images = images
-        self.currentIndex = currentIndex
-        self.dragOffset = dragOffset
-    }
-    
-    var repeatingImages: [String] {
-        Array(repeating: images, count: 8).flatMap { $0 }
-    }
-    
-    var currentImageIndex: Int {
-        currentIndex % images.count
+        self.images = images ?? Constants.SpaceRental.spaceImages
+        self.items = self.images.map {
+            CarouselItemModel(
+                id: UUID(),
+                imageName: $0
+            )
+        }
     }
 }
+
+
