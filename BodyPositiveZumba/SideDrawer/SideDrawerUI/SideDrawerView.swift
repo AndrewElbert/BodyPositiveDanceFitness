@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SideDrawerView: View, ActionableView {
+    
     enum Action {
         case joinNow
         case classes
@@ -15,7 +16,7 @@ struct SideDrawerView: View, ActionableView {
         case about
         case massage
         case spaceRental
-        case subscription
+        case contact
         case endDragGesture
         case closeMenu
         case updateDrag(CGSize)
@@ -53,50 +54,25 @@ struct SideDrawerView: View, ActionableView {
                 ) {
                     Spacer()
 
-                    DrawerButton(
-                        title: Constants.SideDrawer.joinNowText,
-                        icon: Constants.SideDrawer.joinNowImage,
-                        action: { onAction?(.joinNow) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.classesText,
-                        icon: Constants.SideDrawer.classesImage,
-                        action: { onAction?(.classes) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.faqText,
-                        icon: Constants.SideDrawer.faqImage,
-                        action: { onAction?(.faq) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.aboutText,
-                        icon: Constants.SideDrawer.aboutImage,
-                        action: { onAction?(.about) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.massageText,
-                        icon: Constants.SideDrawer.massageImage,
-                        action: { onAction?(.massage) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.spaceRentalText,
-                        icon: Constants.SideDrawer.spaceRentalImage,
-                        action: { onAction?(.spaceRental) }
-                    )
+                    ForEach($viewState.drawerButtons) { $buttonState in
+                        DrawerButton(
+                            title: buttonState.title,
+                            icon: buttonState.icon,
+                            action: {
+                                onAction?(buttonState.type)
+                            },
+                            isPressed: $buttonState.isPressed
+                        )
+                    }
 
                     Divider()
                         .background(Color.gray)
 
                     VStack(spacing: 16) {
                         Button(action: {
-                            onAction?(.subscription)
+                            onAction?(.contact)
                         }) {
-                            HStack {
+                            HStack(spacing: 4) {
                                 Text(Constants.SideDrawer.newsletterText)
                                     .font(
                                         .system(
@@ -214,3 +190,4 @@ struct SideDrawerView: View, ActionableView {
         }
     }
 }
+
