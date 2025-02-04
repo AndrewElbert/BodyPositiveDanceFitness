@@ -1,5 +1,5 @@
 //
-//  InfiniteCarouselView.swift
+//  SwipableCarouselView.swift
 //  Common
 //
 //  Created by Andrew Elbert on 2/1/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfiniteCarouselView<Content: View, T: Identifiable>: View, ActionableView {
+struct SwipableCarouselView<Content: View, T: Identifiable>: View, ActionableView {
 
     enum Action {
         case dragEnded(translation: CGFloat, cardWidth: CGFloat)
@@ -15,12 +15,12 @@ struct InfiniteCarouselView<Content: View, T: Identifiable>: View, ActionableVie
     }
 
     var onAction: ((Action) -> Void)?
-    @Binding var viewState: InfiniteCarouselViewState<T>
+    @Binding var viewState: SwipableCarouselViewState<T>
     @GestureState private var dragOffset: CGFloat = 0
     private let content: (T, Bool) -> Content
 
     init(
-        viewState: Binding<InfiniteCarouselViewState<T>>,
+        viewState: Binding<SwipableCarouselViewState<T>>,
         onAction: ((Action) -> Void)? = nil,
         @ViewBuilder content: @escaping (T, Bool) -> Content
     ) {
