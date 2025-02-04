@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SideDrawerViewState {
-    
+
     var isMenuOpen: Bool = false
     var showDimBackground: Bool = false
     var dragOffset: CGSize = .zero
     var newsLetterIsPressed: Bool = false
-    
+
     var drawerButtons: [DrawerButtonViewState] = [
         DrawerButtonViewState(
             title: Constants.SideDrawer.joinNowText,
@@ -47,4 +47,3 @@ struct SideDrawerViewState {
         )
     ]
 }
-

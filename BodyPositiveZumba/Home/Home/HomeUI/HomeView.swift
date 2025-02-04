@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     unowned let coordinator: SideDrawerCoordinator
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
@@ -88,7 +88,7 @@ struct HomeView: View {
 
     private var displaySideDrawerView: some View {
         SideDrawerComponent(viewModel: sideDrawerViewModel)
-            .onChange(of: dragState.translation) { notNeeded, translation in
+            .onChange(of: dragState.translation) { _, translation in
                 if !sideDrawerViewModel.viewState.isMenuOpen {
                     sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
                 }

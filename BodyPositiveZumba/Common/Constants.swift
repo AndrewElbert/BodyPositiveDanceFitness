@@ -274,7 +274,6 @@ struct Constants {
             comment: "Newsletter button image"
         )
 
-
         static let newsLetterFontSize: CGFloat = 16
         static let companyNameFontSize: CGFloat = 12
         static let newsLetterImageSize: CGFloat = 4

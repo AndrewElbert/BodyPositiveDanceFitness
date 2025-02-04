@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideDrawerView: View, ActionableView {
-    
+
     enum Action {
         case joinNow
         case classes
@@ -181,7 +181,7 @@ struct SideDrawerView: View, ActionableView {
             }
         }
     }
-    
+
     private func calculateDrawerOffset() -> CGFloat {
         if viewState.isMenuOpen {
             return max(-Constants.SideDrawer.frameWidth, min(0, viewState.dragOffset.width))
@@ -190,4 +190,3 @@ struct SideDrawerView: View, ActionableView {
         }
     }
 }
-
