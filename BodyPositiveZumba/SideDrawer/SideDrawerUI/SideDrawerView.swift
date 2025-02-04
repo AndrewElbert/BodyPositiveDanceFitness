@@ -16,14 +16,14 @@ struct SideDrawerView: View, ActionableView {
         case about
         case massage
         case spaceRental
-        case subscription
+        case contact
         case endDragGesture
         case closeMenu
         case updateDrag(CGSize)
     }
 
     @Binding var viewState: SideDrawerViewState
-    var onAction: ((Action) -> Void )?
+    var onAction: ((Action) -> Void)?
 
     public init(
         viewState: Binding<SideDrawerViewState>,
@@ -54,85 +54,58 @@ struct SideDrawerView: View, ActionableView {
                 ) {
                     Spacer()
 
-                    DrawerButton(
-                        title: Constants.SideDrawer.joinNowText,
-                        icon: Constants.SideDrawer.joinNowImage,
-                        action: { onAction?(.joinNow) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.classesText,
-                        icon: Constants.SideDrawer.classesImage,
-                        action: { onAction?(.classes) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.faqText,
-                        icon: Constants.SideDrawer.faqImage,
-                        action: { onAction?(.faq) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.aboutText,
-                        icon: Constants.SideDrawer.aboutImage,
-                        action: { onAction?(.about) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.massageText,
-                        icon: Constants.SideDrawer.massageImage,
-                        action: { onAction?(.massage) }
-                    )
-
-                    DrawerButton(
-                        title: Constants.SideDrawer.spaceRentalText,
-                        icon: Constants.SideDrawer.spaceRentalImage,
-                        action: { onAction?(.spaceRental) }
-                    )
+                    ForEach($viewState.drawerButtons) { $buttonState in
+                        DrawerButton(
+                            title: buttonState.title,
+                            icon: buttonState.icon,
+                            action: {
+                                onAction?(buttonState.type)
+                            },
+                            isPressed: $buttonState.isPressed
+                        )
+                    }
 
                     Divider()
                         .background(Color.gray)
 
                     VStack(spacing: 16) {
                         Button(action: {
-                            onAction?(.subscription)
+                            onAction?(.contact)
                         }) {
-                            HStack {
-                                Text(Constants.SideDrawer.newsletterText)
+                            HStack(spacing: 20) {
+                                Text(Constants.SideDrawer.contactText)
                                     .font(
                                         .system(
-                                            size: Constants.SideDrawer.newsLetterFontSize,
+                                            size: Constants.SideDrawer.contactFontSize,
                                             weight: .medium,
                                             design: .serif
                                         )
                                     )
                                     .foregroundColor(.black)
 
-                                Image(
-                                    systemName: Constants.SideDrawer.newsletterImage
-                                )
+                                Image(systemName: Constants.SideDrawer.contactImage)
                                     .foregroundColor(.black)
                                     .frame(
-                                        width: Constants.SideDrawer.newsLetterImageSize,
-                                        height: Constants.SideDrawer.newsLetterImageSize
+                                        width: Constants.SideDrawer.contactImageSize,
+                                        height: Constants.SideDrawer.contactImageSize
                                     )
                             }
                             .padding(.leading, 11)
                             .padding(.trailing, 11)
-                            .scaleEffect(viewState.newsLetterIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
-                            .opacity(viewState.newsLetterIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
+                            .scaleEffect(viewState.contactIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
+                            .opacity(viewState.contactIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
                         }
                         .buttonStyle(PlainButtonStyle())
                         .simultaneousGesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { _ in
                                     withAnimation(.easeInOut(duration: 0.1)) {
-                                        viewState.newsLetterIsPressed = true
+                                        viewState.contactIsPressed = true
                                     }
                                 }
                                 .onEnded { _ in
                                     withAnimation(.spring()) {
-                                        viewState.newsLetterIsPressed = false
+                                        viewState.contactIsPressed = false
                                     }
                                 }
                         )
@@ -144,6 +117,8 @@ struct SideDrawerView: View, ActionableView {
                                 }
                             }) {
                                 Image(Constants.SideDrawer.facebookLogo)
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
                             }
                             Button(action: {
                                 if let url = URL(string: Constants.Common.instagramLink) {
@@ -151,6 +126,8 @@ struct SideDrawerView: View, ActionableView {
                                 }
                             }) {
                                 Image(Constants.SideDrawer.instagramLogo)
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -184,12 +161,9 @@ struct SideDrawerView: View, ActionableView {
                         endRadius: Constants.SideDrawer.endRadius
                     )
                 )
-                .offset(
-                    x: viewState.isMenuOpen ?
-                        0 : -(Constants.SideDrawer.frameWidth + viewState.dragOffset.width)
-                )
+                .offset(x: calculateDrawerOffset())
                 .gesture(
-                    DragGesture(minimumDistance: 0)
+                    DragGesture()
                         .onChanged { value in
                             onAction?(.updateDrag(value.translation))
                         }
@@ -198,12 +172,25 @@ struct SideDrawerView: View, ActionableView {
                         }
                 )
                 .animation(
-                    .easeInOut(duration: Constants.SideDrawer.animationDuration),
-                    value: viewState.isMenuOpen
+                    .interpolatingSpring(
+                        mass: 1.0,
+                        stiffness: 100,
+                        damping: 16,
+                        initialVelocity: 0
+                    ),
+                    value: viewState.dragOffset
                 )
 
                 Spacer()
             }
+        }
+    }
+
+    private func calculateDrawerOffset() -> CGFloat {
+        if viewState.isMenuOpen {
+            return max(-Constants.SideDrawer.frameWidth, min(0, viewState.dragOffset.width))
+        } else {
+            return -Constants.SideDrawer.frameWidth + max(0, min(Constants.SideDrawer.frameWidth, viewState.dragOffset.width))
         }
     }
 }

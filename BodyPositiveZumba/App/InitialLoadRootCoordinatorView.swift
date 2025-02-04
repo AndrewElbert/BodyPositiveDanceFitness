@@ -35,8 +35,8 @@ struct InitialLoadRootCoordinatorView: View {
                 MassageUI.massagePage()
             case .spaceRental:
                 SpaceRentalUI.spaceRentalPage()
-            case .subscription:
-                Text("Subscription")
+            case .contact:
+                Text("Contact")
             }
         }
     }

@@ -1,18 +1,18 @@
 //
 //  DrawerButton.swift
-//  SideDrawerUI
+//  BodyPositiveZumba
 //
-//  Created by Andrew Elbert on 1/27/25.
+//  Created by Andrew Elbert on 2/4/25.
 //
 
 import SwiftUI
 
 struct DrawerButton: View {
+
     let title: String
     let icon: String?
     let action: () -> Void
-
-    @State private var isPressed: Bool = false
+    @Binding var isPressed: Bool
 
     var body: some View {
         Button(action: action) {
@@ -27,7 +27,6 @@ struct DrawerButton: View {
                         )
                         .foregroundColor(.black)
                 }
-
                 Text(title)
                     .font(
                         .system(
