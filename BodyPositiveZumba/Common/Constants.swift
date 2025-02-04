@@ -185,6 +185,8 @@ struct Constants {
         static let swannsHealingElementsURL: String = "https://swanns-healing-elements.square.site/"
 
         static let buttonText: String = "Book Today!"
+        static let bioTap: String = "Tap for bio"
+        static let swipe: String = "Swipe!"
 
     }
 
