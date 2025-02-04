@@ -194,8 +194,7 @@ struct Constants {
 
     enum SideDrawer {
 
-        static let iconSize: CGFloat = 33
-        static let fontSize: CGFloat = 25
+        static let fontSize: CGFloat = 24
         // Yellow
         static let buttonStartColor: Color = Color(red: 0.957, green: 0.698, blue: 0.243)
         // Orange
@@ -287,7 +286,7 @@ struct Constants {
         static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
         static let buttonPressOpacity: CGFloat = 0.5
         static let buttonPressScale: CGFloat = 0.9
-        static let sideDrawerButtonImageSize: CGFloat = 20
+        static let sideDrawerButtonImageSize: CGFloat = 24
     }
 
     // MARK: Space Rental
