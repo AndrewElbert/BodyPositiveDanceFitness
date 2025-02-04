@@ -18,7 +18,7 @@ class SideDrawerRootCoordinator: RootCoordinator {
         case about
         case massage
         case spaceRental
-        case subscription
+        case contact
     }
 
     @Published var routes: Routes<Screen>
@@ -67,9 +67,9 @@ class SideDrawerRootCoordinator: RootCoordinator {
         )
     }
 
-    func sideDrawer_viewSubscription() {
+    func sideDrawer_viewContact() {
         routes.push(
-            .subscription
+            .contact
         )
     }
 }

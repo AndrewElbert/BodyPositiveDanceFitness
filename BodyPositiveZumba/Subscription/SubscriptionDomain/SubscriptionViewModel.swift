@@ -1,12 +1,12 @@
 //
-//  SubscriptionViewModel.swift
-//  SubscriptionDomain
+//  ContactViewModel.swift
+//  ContactDomain
 //
 //  Created by Andrew Elbert on 1/28/25.
 //
 
 import SwiftUI
 
-class SubscriptionViewModel: ObservableObject {
+class ContactViewModel: ObservableObject {
 
 }
