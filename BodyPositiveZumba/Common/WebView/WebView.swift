@@ -28,6 +28,7 @@ struct WebView: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
+        // intentionally useless - need to conform to protocol
         return Coordinator(self)
     }
 
