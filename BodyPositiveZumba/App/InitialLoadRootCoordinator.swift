@@ -19,7 +19,7 @@ class InitialLoadRootCoordinator: RootCoordinator {
         case about
         case massage
         case spaceRental
-        case subscription
+        case contact
     }
 
     @Published var routes: Routes<Screen>
@@ -81,9 +81,9 @@ extension InitialLoadRootCoordinator: SideDrawerCoordinator {
         )
     }
 
-    func sideDrawer_viewSubscription() {
+    func sideDrawer_viewContact() {
         routes.presentSheet(
-            .subscription
+            .contact
         )
     }
 }

@@ -84,8 +84,8 @@ class SideDrawerViewModel: ObservableObject {
         coordinator.sideDrawer_viewSpaceRental()
     }
     
-    func navigateSubscription() {
-        coordinator.sideDrawer_viewSubscription()
+    func navigateContact() {
+        coordinator.sideDrawer_viewContact()
     }
 }
 
