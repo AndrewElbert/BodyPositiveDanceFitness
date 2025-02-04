@@ -40,8 +40,6 @@ struct MassageView: View, ActionableView {
                     .padding(.horizontal)
                     .padding(.bottom, 16)
 
-                Divider()
-
                 SwipableCarouselComponent<AnyView, CardModel>(
                     viewModel: SwipableCarouselViewModel(
                         viewState: $viewState.swipableCarouselViewState
@@ -126,12 +124,10 @@ struct MassageView: View, ActionableView {
             }
         }
         .sheet(item: $viewState.bookingURL) { booking in
-            WebView(url: booking.url)
-                .overlay(
-                    CloseButton(dismiss: {
-                        dismiss()
-                    }))
-                .edgesIgnoringSafeArea(.all)
+            WebViewContainer(
+                url: booking.url,
+                title: booking.title
+            )
         }
     }
 }
