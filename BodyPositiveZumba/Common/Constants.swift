@@ -265,18 +265,18 @@ struct Constants {
             comment: "Facebook logo image"
         )
 
-        static let newsletterText: String = NSLocalizedString(
-            "Subscribe to our newsletter!",
-            comment: "Newsletter text"
+        static let contactText: String = NSLocalizedString(
+            "Contact us!",
+            comment: "Contact text"
         )
-        static let newsletterImage: String = NSLocalizedString(
+        static let contactImage: String = NSLocalizedString(
             "envelope.badge",
-            comment: "Newsletter button image"
+            comment: "Contact button image"
         )
 
-        static let newsLetterFontSize: CGFloat = 16
+        static let contactFontSize: CGFloat = 20
         static let companyNameFontSize: CGFloat = 12
-        static let newsLetterImageSize: CGFloat = 4
+        static let contactImageSize: CGFloat = 4
         static let startRadius: CGFloat = 40
         static let endRadius: CGFloat = 400
         static let backgroundOpacity: Double = 0.6

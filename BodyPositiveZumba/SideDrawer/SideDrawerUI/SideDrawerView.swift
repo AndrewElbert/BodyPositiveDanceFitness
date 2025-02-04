@@ -72,40 +72,40 @@ struct SideDrawerView: View, ActionableView {
                         Button(action: {
                             onAction?(.contact)
                         }) {
-                            HStack(spacing: 4) {
-                                Text(Constants.SideDrawer.newsletterText)
+                            HStack(spacing: 20) {
+                                Text(Constants.SideDrawer.contactText)
                                     .font(
                                         .system(
-                                            size: Constants.SideDrawer.newsLetterFontSize,
+                                            size: Constants.SideDrawer.contactFontSize,
                                             weight: .medium,
                                             design: .serif
                                         )
                                     )
                                     .foregroundColor(.black)
 
-                                Image(systemName: Constants.SideDrawer.newsletterImage)
+                                Image(systemName: Constants.SideDrawer.contactImage)
                                     .foregroundColor(.black)
                                     .frame(
-                                        width: Constants.SideDrawer.newsLetterImageSize,
-                                        height: Constants.SideDrawer.newsLetterImageSize
+                                        width: Constants.SideDrawer.contactImageSize,
+                                        height: Constants.SideDrawer.contactImageSize
                                     )
                             }
                             .padding(.leading, 11)
                             .padding(.trailing, 11)
-                            .scaleEffect(viewState.newsLetterIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
-                            .opacity(viewState.newsLetterIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
+                            .scaleEffect(viewState.contactIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
+                            .opacity(viewState.contactIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
                         }
                         .buttonStyle(PlainButtonStyle())
                         .simultaneousGesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { _ in
                                     withAnimation(.easeInOut(duration: 0.1)) {
-                                        viewState.newsLetterIsPressed = true
+                                        viewState.contactIsPressed = true
                                     }
                                 }
                                 .onEnded { _ in
                                     withAnimation(.spring()) {
-                                        viewState.newsLetterIsPressed = false
+                                        viewState.contactIsPressed = false
                                     }
                                 }
                         )
@@ -117,6 +117,8 @@ struct SideDrawerView: View, ActionableView {
                                 }
                             }) {
                                 Image(Constants.SideDrawer.facebookLogo)
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
                             }
                             Button(action: {
                                 if let url = URL(string: Constants.Common.instagramLink) {
@@ -124,6 +126,8 @@ struct SideDrawerView: View, ActionableView {
                                 }
                             }) {
                                 Image(Constants.SideDrawer.instagramLogo)
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
