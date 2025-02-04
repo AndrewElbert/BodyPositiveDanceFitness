@@ -8,9 +8,8 @@
 import SwiftUI
 
 class SideDrawerViewModel: ObservableObject {
-
+    
     @Published public var viewState: SideDrawerViewState = SideDrawerViewState()
-
     unowned let coordinator: SideDrawerCoordinator
 
     init(coordinator: SideDrawerCoordinator) {
@@ -21,47 +20,72 @@ class SideDrawerViewModel: ObservableObject {
         viewState.isMenuOpen.toggle()
     }
 
-    func closeMenu() {
-        viewState.isMenuOpen = false
-    }
-
-    func openMenu() {
-        viewState.isMenuOpen = true
-    }
-
     func updateDragOffset(_ offset: CGSize) {
         viewState.dragOffset = offset
     }
 
-    func endDragGesture(widthThreshold: CGFloat = 30) {
-        if viewState.dragOffset.width < -widthThreshold {
-            closeMenu()
+    func endDragGesture() {
+        let dragThreshold: CGFloat = Constants.SideDrawer.frameWidth * 0.3
+        
+        if viewState.isMenuOpen {
+            if viewState.dragOffset.width < -dragThreshold {
+                closeMenu()
+            } else {
+                openMenu()
+            }
         } else {
-            openMenu()
+            if viewState.dragOffset.width > dragThreshold {
+                openMenu()
+            } else {
+                closeMenu()
+            }
         }
-        viewState.dragOffset = .zero
+        
+        withAnimation {
+            viewState.dragOffset = .zero
+        }
+    }
+
+    func closeMenu() {
+        withAnimation {
+            viewState.isMenuOpen = false
+            viewState.dragOffset = .zero
+        }
+    }
+
+    func openMenu() {
+        withAnimation {
+            viewState.isMenuOpen = true
+            viewState.dragOffset = .zero
+        }
     }
 
     func navigateJoinNow() {
         coordinator.sideDrawer_viewJoinNow()
     }
+    
     func navigateClasses() {
         coordinator.sideDrawer_viewClasses()
     }
+    
     func navigateFaq() {
         coordinator.sideDrawer_viewFaq()
     }
+    
     func navigateAbout() {
         coordinator.sideDrawer_viewAbout()
     }
+    
     func navigateMassage() {
         coordinator.sideDrawer_viewMassage()
     }
+    
     func navigatespaceRental() {
         coordinator.sideDrawer_viewSpaceRental()
     }
+    
     func navigateSubscription() {
-        print("entered subs")
         coordinator.sideDrawer_viewSubscription()
     }
 }
+
