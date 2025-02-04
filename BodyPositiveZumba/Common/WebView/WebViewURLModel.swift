@@ -8,6 +8,7 @@
 import Foundation
 
 struct WebViewURL: Identifiable {
+    let title: String
     let id = UUID()
     let url: URL
 }
