@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SideDrawerView: View, ActionableView {
-
     enum Action {
         case joinNow
         case classes
@@ -23,7 +22,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     @Binding var viewState: SideDrawerViewState
-    var onAction: ((Action) -> Void )?
+    var onAction: ((Action) -> Void)?
 
     public init(
         viewState: Binding<SideDrawerViewState>,
@@ -108,9 +107,7 @@ struct SideDrawerView: View, ActionableView {
                                     )
                                     .foregroundColor(.black)
 
-                                Image(
-                                    systemName: Constants.SideDrawer.newsletterImage
-                                )
+                                Image(systemName: Constants.SideDrawer.newsletterImage)
                                     .foregroundColor(.black)
                                     .frame(
                                         width: Constants.SideDrawer.newsLetterImageSize,
@@ -184,12 +181,9 @@ struct SideDrawerView: View, ActionableView {
                         endRadius: Constants.SideDrawer.endRadius
                     )
                 )
-                .offset(
-                    x: viewState.isMenuOpen ?
-                        0 : -(Constants.SideDrawer.frameWidth + viewState.dragOffset.width)
-                )
+                .offset(x: calculateDrawerOffset())
                 .gesture(
-                    DragGesture(minimumDistance: 0)
+                    DragGesture()
                         .onChanged { value in
                             onAction?(.updateDrag(value.translation))
                         }
@@ -198,12 +192,25 @@ struct SideDrawerView: View, ActionableView {
                         }
                 )
                 .animation(
-                    .easeInOut(duration: Constants.SideDrawer.animationDuration),
-                    value: viewState.isMenuOpen
+                    .interpolatingSpring(
+                        mass: 1.0,
+                        stiffness: 100,
+                        damping: 16,
+                        initialVelocity: 0
+                    ),
+                    value: viewState.dragOffset
                 )
 
                 Spacer()
             }
+        }
+    }
+    
+    private func calculateDrawerOffset() -> CGFloat {
+        if viewState.isMenuOpen {
+            return max(-Constants.SideDrawer.frameWidth, min(0, viewState.dragOffset.width))
+        } else {
+            return -Constants.SideDrawer.frameWidth + max(0, min(Constants.SideDrawer.frameWidth, viewState.dragOffset.width))
         }
     }
 }

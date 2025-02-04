@@ -26,12 +26,12 @@ struct Constants {
     enum Common {
 
         static let instagramLink: String = NSLocalizedString(
-            "https://www.instagram.com/",
-            comment: "instagram link")
+            "https://www.instagram.com/bodypositivedancefitness?igsh=MXdtOGgwazFkYjZ1ag%3D%3D&utm_source=qr",
+            comment: "ig link")
 
         static let facebookLink: String = NSLocalizedString(
-            "https://www.facebook.com/",
-            comment: "instagram link")
+            "https://www.facebook.com/share/1BPU8L8kyF/?mibextid=wwXIfr",
+            comment: "fb link")
 
         static let tradeMarkSlogan: String = NSLocalizedString(
             "Are You Ready For The Happiest Workout In Maine?™",
@@ -274,7 +274,7 @@ struct Constants {
         static let endRadius: CGFloat = 400
         static let backgroundOpacity: Double = 0.6
         static let animationDuration: Double = 0.33
-        static let frameWidth: CGFloat = 250
+        static let frameWidth: CGFloat = 300
         static let buttonSpacing: CGFloat = 40
         static let outerCircleColorRadius: Color = Color(red: 0.0, green: 0.9, blue: 0.94)
         static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
