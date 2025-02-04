@@ -11,10 +11,10 @@ struct ExpandableSection: View, ActionableView {
     enum Action {
         case toggleExpansion
     }
-    
+
     @Binding var viewState: ExpandableSectionViewState
     var onAction: ((Action) -> Void)?
-    
+
     init(
         viewState: Binding<ExpandableSectionViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -22,17 +22,17 @@ struct ExpandableSection: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-    
+
     var body: some View {
         VStack(spacing: 12) {
             headerButton
-            
+
             if viewState.isExpanded {
                 contentSection
             }
         }
     }
-    
+
     private var headerButton: some View {
         Button(action: { onAction?(.toggleExpansion) }) {
             HStack {
@@ -48,13 +48,13 @@ struct ExpandableSection: View, ActionableView {
             .cornerRadius(10)
         }
     }
-    
+
     private var titleText: some View {
         Text(viewState.title)
             .font(.system(size: 20, weight: .bold, design: .serif))
             .foregroundColor(.black)
     }
-    
+
     private var expandCollapseIcon: some View {
         Image(systemName: viewState.isExpanded ? "chevron.down" : "chevron.right")
             .font(.system(size: 18, weight: .bold))
@@ -62,7 +62,7 @@ struct ExpandableSection: View, ActionableView {
             .rotationEffect(.degrees(viewState.isExpanded ? 180 : 0))
             .animation(.easeInOut(duration: 0.4), value: viewState.isExpanded)
     }
-    
+
     private var headerBackground: some View {
         RadialGradient(
             gradient: Gradient(colors: [
@@ -74,12 +74,12 @@ struct ExpandableSection: View, ActionableView {
             endRadius: 88
         )
     }
-    
+
     private var headerBorder: some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(Color.cyan, lineWidth: 2)
     }
-    
+
     private var contentSection: some View {
         VStack(alignment: .leading, spacing: 6) {
             ForEach(viewState.items.indices, id: \.self) { index in
@@ -96,4 +96,3 @@ struct ExpandableSection: View, ActionableView {
         .transition(.scale.combined(with: .opacity))
     }
 }
-

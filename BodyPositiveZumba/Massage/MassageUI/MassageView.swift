@@ -39,7 +39,7 @@ struct MassageView: View, ActionableView {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                     .padding(.bottom, 16)
-                
+
                 Divider()
 
                 SwipableCarouselComponent<AnyView, CardModel>(
@@ -57,7 +57,7 @@ struct MassageView: View, ActionableView {
                     )
                 }
                 .frame(height: 400)
-                
+
                 Spacer()
 
                 Button(action: {
@@ -135,8 +135,3 @@ struct MassageView: View, ActionableView {
         }
     }
 }
-
-
-
-
-

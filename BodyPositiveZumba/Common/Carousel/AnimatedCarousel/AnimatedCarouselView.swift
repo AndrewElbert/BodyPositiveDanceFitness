@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct AnimatedCarouselView: View, ActionableView {
-    
+
     enum Action {
         case dragChanged(CGSize, GeometryProxy)
         case dragEnded(CGSize, GeometryProxy)
         case startAutoScroll
     }
-    
+
     @Binding var viewState: AnimatedCarouselViewState
     var onAction: ((Action) -> Void)?
-    
+
     init(
         viewState: Binding<AnimatedCarouselViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -25,7 +25,7 @@ struct AnimatedCarouselView: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -42,7 +42,7 @@ struct AnimatedCarouselView: View, ActionableView {
                     )
                     .blur(radius: 50)
                     .padding(-40)
-                
+
                 GeometryReader { innerGeo in
                     HStack(spacing: 0) {
                         ForEach(0..<viewState.items.count * 8, id: \.self) { index in
@@ -70,7 +70,7 @@ struct AnimatedCarouselView: View, ActionableView {
                             }
                     )
                 }
-                
+
                 VStack {
                     Spacer()
                     HStack(spacing: 8) {

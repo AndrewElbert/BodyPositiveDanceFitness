@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct AnimatedCarouselComponent: View {
-    
+
     @ObservedObject private var viewModel: AnimatedCarouselViewModel
 
     public init(viewModel: AnimatedCarouselViewModel) {
         self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         AnimatedCarouselView(
             viewState: $viewModel.viewState
