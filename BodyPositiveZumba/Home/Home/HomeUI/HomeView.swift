@@ -11,6 +11,21 @@ struct HomeView: View {
 
     unowned let coordinator: SideDrawerCoordinator
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
+    @GestureState private var dragState = DragState.inactive
+
+    enum DragState {
+        case inactive
+        case dragging(translation: CGFloat)
+
+        var translation: CGFloat {
+            switch self {
+            case .inactive:
+                return 0
+            case .dragging(let translation):
+                return translation
+            }
+        }
+    }
 
     enum Action {
     }
@@ -28,9 +43,8 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             VStack {
-                 displayTopBarView
+                displayTopBarView
 
-                // Main content
                 ScrollView {
                     VStack {
                         Text(Constants.Home.grettingMessage)
@@ -49,14 +63,35 @@ struct HomeView: View {
                     }
                 }
             }
-             displaySideDrawerView
+            .gesture(
+                DragGesture(minimumDistance: 30, coordinateSpace: .local)
+                    .updating($dragState) { value, state, _ in
+                        guard value.startLocation.x < 50 else { return }
+                        state = .dragging(translation: value.translation.width)
+                    }
+                    .onEnded { value in
+                        guard value.startLocation.x < 50 else { return }
+                        let threshold = Constants.SideDrawer.frameWidth * 0.3
+                        if value.translation.width > threshold {
+                            sideDrawerViewModel.openMenu()
+                        }
+                    }
+            )
+
+            displaySideDrawerView
         }
     }
+
     private var displayTopBarView: some View {
         TopBarComponent(viewModel: sideDrawerViewModel)
     }
 
     private var displaySideDrawerView: some View {
         SideDrawerComponent(viewModel: sideDrawerViewModel)
+            .onChange(of: dragState.translation) { _, translation in
+                if !sideDrawerViewModel.viewState.isMenuOpen {
+                    sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
+                }
+            }
     }
 }

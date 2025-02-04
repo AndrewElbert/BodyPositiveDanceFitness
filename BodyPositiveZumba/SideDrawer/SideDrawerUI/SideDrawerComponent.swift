@@ -32,8 +32,8 @@ struct SideDrawerComponent: View {
                 viewModel.navigateMassage()
             case .spaceRental:
                 viewModel.navigatespaceRental()
-            case .subscription:
-                viewModel.navigateSubscription()
+            case .contact:
+                viewModel.navigateContact()
             case .endDragGesture:
                 viewModel.endDragGesture()
             case .closeMenu:

@@ -30,8 +30,8 @@ struct SideDrawerRootCoordinatorView: View {
                 Text("Massage Screen")
             case .spaceRental:
                 Text("Space rental Screen")
-            case .subscription:
-                Text("Subscription Screen")
+            case .contact:
+                Text("Contact Screen")
             }
         }
     }
