@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct SpaceRentalView: View, ActionableView {
-    
+
     enum Action {
         case toggleMessage
     }
-    
+
     @Environment(\.dismiss) var dismiss
     @Binding var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
-    
+
     public init(
         viewState: Binding<SpaceRentalViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -24,7 +24,7 @@ struct SpaceRentalView: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-    
+
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -32,20 +32,20 @@ struct SpaceRentalView: View, ActionableView {
                     HStack {
                         CloseButton(dismiss: { dismiss() })
                     }
-                    
+
                     Text(Constants.SpaceRental.pageTitle)
                         .font(.system(size: 23, weight: .bold, design: .serif))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
                         .padding(.horizontal)
-                    
+
                     Text(Constants.SpaceRental.pageBio)
                         .font(.system(size: 16, design: .serif))
                         .foregroundColor(Constants.Colors.darkOrange)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 20)
                         .padding(.top, 16)
-                    
+
                     VStack(spacing: 24) {
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.4)) {
@@ -73,7 +73,7 @@ struct SpaceRentalView: View, ActionableView {
                                 )
                                 .cornerRadius(10)
                         }
-                        
+
                         if viewState.showMessage {
                             VStack(spacing: 4) {
                                 Text(Constants.SpaceRental.inquireTodayTitleText)
@@ -91,7 +91,7 @@ struct SpaceRentalView: View, ActionableView {
                     .padding(.horizontal)
                     .padding(.top, 16)
                     .zIndex(1)
-                    
+
                     AnimatedCarouselComponent(
                         viewModel: AnimatedCarouselViewModel(
                             viewState: $viewState.animatedCarouselViewState
@@ -102,7 +102,7 @@ struct SpaceRentalView: View, ActionableView {
                     .padding(.top, 30)
                     .padding(.bottom, 30)
                     .zIndex(0)
-                    
+
                     VStack(spacing: 16) {
                         ExpandableSectionComponent(
                             viewModel: ExpandableSectionViewModel(
@@ -110,35 +110,35 @@ struct SpaceRentalView: View, ActionableView {
                             )
                         )
                         .id("amenitiesSection")
-                        .onChange(of: viewState.amenitiesSectionState.isExpanded) { notNeeded, isExpanded in
+                        .onChange(of: viewState.amenitiesSectionState.isExpanded) { _, isExpanded in
                             if isExpanded {
                                 withAnimation {
                                     proxy.scrollTo("amenitiesSection", anchor: .center)
                                 }
                             }
                         }
-                     
+
                         ExpandableSectionComponent(
                             viewModel: ExpandableSectionViewModel(
                                 viewState: $viewState.privateEventsSectionState
                             )
                         )
                         .id("privateEventsSection")
-                        .onChange(of: viewState.privateEventsSectionState.isExpanded) { notNeeded, isExpanded in
+                        .onChange(of: viewState.privateEventsSectionState.isExpanded) { _, isExpanded in
                             if isExpanded {
                                 withAnimation {
                                     proxy.scrollTo("privateEventsSection", anchor: .center)
                                 }
                             }
                         }
-    
+
                         ExpandableSectionComponent(
                             viewModel: ExpandableSectionViewModel(
                                 viewState: $viewState.spaceRentalSectionState
                             )
                         )
                         .id("spaceRentalSection")
-                        .onChange(of: viewState.spaceRentalSectionState.isExpanded) { notNeeded, isExpanded in
+                        .onChange(of: viewState.spaceRentalSectionState.isExpanded) { _, isExpanded in
                             if isExpanded {
                                 withAnimation {
                                     proxy.scrollTo("spaceRentalSection", anchor: .center)
@@ -154,5 +154,3 @@ struct SpaceRentalView: View, ActionableView {
         }
     }
 }
-
-

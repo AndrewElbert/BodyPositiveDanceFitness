@@ -43,7 +43,7 @@ struct InitialAppLoadView: View {
                 VStack {
                     ZStack(alignment: .leading) {
                         Capsule()
-                            .stroke(viewState.barOutlineColor, lineWidth: 4)
+                            .stroke(viewState.barOutlineColor, lineWidth: 5)
                             .frame(height: 20)
 
                         Capsule()

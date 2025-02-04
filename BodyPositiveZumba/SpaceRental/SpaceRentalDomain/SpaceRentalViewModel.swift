@@ -8,7 +8,7 @@
 import SwiftUI
 
 class SpaceRentalViewModel: ObservableObject {
-    
+
     @Published var viewState = SpaceRentalViewState()
 
     func toggleMessage() {

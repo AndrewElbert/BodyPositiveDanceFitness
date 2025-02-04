@@ -35,6 +35,7 @@ struct MassageViewState {
     var pageTitle: String = Constants.Massage.pageTitle
     var pageBio: String = Constants.Massage.pageBio
     var isAnimating: Bool = false
+    var showSwipeAnimation = true
     var bookingURL: WebViewURL?
 
     var cards: [CardModel] = [

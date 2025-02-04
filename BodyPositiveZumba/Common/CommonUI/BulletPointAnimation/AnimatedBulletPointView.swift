@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AnimatedBulletPointView: View {
-    
+
     enum Action {
         case onAppear
     }
-    
+
     @Binding var viewState: AnimatedBulletPointViewState
     var onAction: (Action) -> Void
-    
+
     var body: some View {
         HStack(spacing: 10) {
             emojiView
@@ -26,14 +26,14 @@ struct AnimatedBulletPointView: View {
             onAction(.onAppear)
         }
     }
-    
+
     private var emojiView: some View {
         ZStack {
             Text(viewState.emoji)
                 .font(.system(size: 20))
                 .opacity(viewState.sparkleOpacity)
                 .scaleEffect(viewState.isAnimating ? 1.2 : 0.8)
-            
+
             Text(viewState.emoji)
                 .font(.system(size: 16))
                 .opacity(viewState.sparkleOpacity)
@@ -41,7 +41,7 @@ struct AnimatedBulletPointView: View {
         }
         .frame(width: 40, alignment: .leading)
     }
-    
+
     private var textView: some View {
         Text(viewState.text)
             .font(.system(size: 18, design: .serif))
