@@ -24,11 +24,11 @@ struct WebView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        // intentionally blank
+        // intentionally blank - need to conform to protocol
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        return Coordinator(self)
     }
 
     class Coordinator: NSObject, WKNavigationDelegate {
