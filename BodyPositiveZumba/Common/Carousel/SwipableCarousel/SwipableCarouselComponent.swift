@@ -1,5 +1,5 @@
 //
-//  InfiniteCarouselComponent.swift
+//  SwipableCarouselComponent.swift
 //  Carousel
 //
 //  Created by Andrew Elbert on 2/1/25.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct InfiniteCarouselComponent<Content: View, T: Identifiable>: View {
+struct SwipableCarouselComponent<Content: View, T: Identifiable>: View {
 
-    @ObservedObject private var viewModel: InfiniteCarouselViewModel<T>
+    @ObservedObject private var viewModel: SwipableCarouselViewModel<T>
     private let content: (T, Bool) -> Content
 
     init(
-        viewModel: InfiniteCarouselViewModel<T>,
+        viewModel: SwipableCarouselViewModel<T>,
         @ViewBuilder content: @escaping (T, Bool) -> Content
     ) {
         self._viewModel = ObservedObject(wrappedValue: viewModel)
@@ -21,7 +21,7 @@ struct InfiniteCarouselComponent<Content: View, T: Identifiable>: View {
     }
 
     var body: some View {
-        InfiniteCarouselView<Content, T>(
+        SwipableCarouselView<Content, T>(
             viewState: $viewModel.viewState
         ) { action in
             switch action {
