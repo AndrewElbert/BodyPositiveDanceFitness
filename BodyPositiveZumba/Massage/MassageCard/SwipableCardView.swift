@@ -21,25 +21,25 @@ struct SwipableCardView: View {
                 .cornerRadius(15)
 
             Text(card.name)
-                .font(.title)
+                .font(.system(size: 24, design: .serif))
                 .fontWeight(.bold)
                 .padding(.top, 10)
 
             Text(card.parlor)
-                .font(.subheadline)
+                .font(.system(size: 14, design: .serif))
                 .foregroundColor(Constants.Colors.darkOrange)
 
             if isExpanded {
                 Text(card.bio)
-                    .font(.body)
-                    .foregroundColor(.black.opacity(0.7))
+                    .font(.system(size: 16, design: .serif))
+                    .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
                     .transition(.opacity)
             } else {
-                Text("Tap for bio")
+                Text(Constants.Massage.bioTap)
                     .font(.caption)
                     .foregroundColor(.blue)
                     .padding(.top, 5)

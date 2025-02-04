@@ -12,7 +12,7 @@ struct ExpandableSectionViewState {
     var title: String
     var items: [(String, String)]
     var isExpanded: Bool
-    
+
     init(
         title: String,
         items: [(String, String)],
@@ -26,4 +26,3 @@ struct ExpandableSectionViewState {
         }
     }
 }
-

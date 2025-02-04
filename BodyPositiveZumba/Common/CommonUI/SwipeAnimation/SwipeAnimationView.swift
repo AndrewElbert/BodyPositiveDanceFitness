@@ -18,36 +18,24 @@ struct SwipeAnimationView: View {
     }
 
     var body: some View {
-        HStack(spacing: 16) {
-            ZStack {
-                Image(systemName: "hand.point.left.fill")
-                    .offset(x: viewState.isAnimating ? -10 : 0)
-                    .opacity(viewState.isAnimating ? 0 : 1)
-
-                Image(systemName: "arrow.left")
-                    .offset(x: viewState.isAnimating ? -10 : 0)
-                    .opacity(viewState.isAnimating ? 1 : 0)
-            }
-
-            ZStack {
-                Image(systemName: "hand.point.right.fill")
-                    .offset(x: viewState.isAnimating ? 10 : 0)
-                    .opacity(viewState.isAnimating ? 0 : 1)
-
-                Image(systemName: "arrow.right")
-                    .offset(x: viewState.isAnimating ? 10 : 0)
-                    .opacity(viewState.isAnimating ? 1 : 0)
-            }
+        ZStack {
+            Image(systemName: "hand.point.right.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color.gray.opacity(0.8))
+                .offset(x: viewState.isAnimating ? 30 : -30)
+                .opacity(viewState.isAnimating ? 1 : 0.3)
+                .animation(
+                    Animation.easeInOut(duration: 1.8)
+                        .repeatForever(autoreverses: true),
+                    value: viewState.isAnimating
+                )
+                .rotationEffect(.degrees(viewState.isAnimating ? 10 : -10))
         }
-        .font(.system(size: 24))
-        .foregroundColor(.gray)
-        .frame(width: 120, height: 30)
+        .frame(width: 100, height: 50)
         .onAppear {
-            withAnimation(
-                Animation.easeInOut(duration: 1.2).repeatForever(autoreverses: true)
-            ) {
-                viewState.isAnimating = true
-            }
+            viewState.isAnimating = true
         }
     }
 }
