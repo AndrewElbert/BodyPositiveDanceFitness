@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimatedCarouselViewState {
-    
+
     let timer = Timer.publish(every: 2.5, on: .main, in: .common).autoconnect()
     var images: [String]
     var items: [CarouselItemModel]
@@ -16,7 +16,7 @@ struct AnimatedCarouselViewState {
     var dragOffset: CGFloat = 0
     var isAnimating: Bool = true
     var autoScrollInterval: Double = 2.5
-    
+
     init(
         images: [String]? = nil,
         autoScrollInterval: Double = 2.5
@@ -31,5 +31,3 @@ struct AnimatedCarouselViewState {
         self.autoScrollInterval = autoScrollInterval
     }
 }
-
-

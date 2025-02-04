@@ -10,7 +10,7 @@ struct AnimatedBulletPointViewState {
     var emoji: String
     var isAnimating: Bool
     var sparkleOpacity: Double
-    
+
     init(
         text: String = "",
         emoji: String = "",

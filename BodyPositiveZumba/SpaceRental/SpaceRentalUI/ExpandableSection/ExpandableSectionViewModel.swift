@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ExpandableSectionViewModel: ObservableObject {
-    
+
     @Binding var viewState: ExpandableSectionViewState
 
     init(

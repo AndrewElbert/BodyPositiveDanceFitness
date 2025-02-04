@@ -282,18 +282,18 @@ struct Constants {
         static let buttonPressScale: CGFloat = 0.9
         static let sideDrawerButtonImageSize: CGFloat = 20
     }
-    
+
     // MARK: Space Rental
-    
+
     enum SpaceRental {
-        
+
         static let amenities = [
             ("Three available spaces of varying sizes dependent upon scheduling", "🏢"),
             ("Tables, chairs, tablecloths, whiteboards, speakers, projectors", "🪑"),
             ("Convenient location & easy parking, with many nearby amenities", "🚗"),
             ("Includes usage of 1,890 sf room, 1366 sf room, or 668 sf room", "📐")
         ]
-        
+
         static let privateEvents = [
             ("Wedding-related events", "👰"),
             ("Birthday parties", "🎂"),
@@ -301,7 +301,7 @@ struct Constants {
             ("Special occasion nights with friends", "🎉"),
             ("Any reason to party!", "🎊")
         ]
-        
+
         static let spaceRental = [
             ("Board meetings", "🎯"),
             ("Trainings", "💫"),
@@ -310,14 +310,14 @@ struct Constants {
             ("Corporate retreats", "🌟"),
             ("Practice space", "🎭")
         ]
-        
+
         static let spaceImages = [
             "SpaceRental1",
             "SpaceRental2",
             "SpaceRental3",
             "SpaceRental4"
         ]
-        
+
         static let pageTitle: String = "Private Events & Space Rental"
         static let pageBio: String = "If you can dream it, we can help you achieve it!"
         static let buttonText: String = "Inquire Today!"
