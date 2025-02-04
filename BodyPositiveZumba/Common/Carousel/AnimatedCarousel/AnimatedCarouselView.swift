@@ -33,8 +33,8 @@ struct AnimatedCarouselView: View, ActionableView {
                     .fill(
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                Color.cyan.opacity(0.4),
-                                Color.cyan.opacity(0.3)
+                                Color.cyan.opacity(0.7),
+                                Color.cyan.opacity(0.6)
                             ]),
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
