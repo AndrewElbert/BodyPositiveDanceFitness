@@ -26,4 +26,3 @@ struct DrawerButtonViewState: Identifiable {
         self.isPressed = isPressed
     }
 }
-

@@ -8,7 +8,7 @@
 import SwiftUI
 
 class SideDrawerViewModel: ObservableObject {
-    
+
     @Published public var viewState: SideDrawerViewState = SideDrawerViewState()
     unowned let coordinator: SideDrawerCoordinator
 
@@ -26,7 +26,7 @@ class SideDrawerViewModel: ObservableObject {
 
     func endDragGesture() {
         let dragThreshold: CGFloat = Constants.SideDrawer.frameWidth * 0.3
-        
+
         if viewState.isMenuOpen {
             if viewState.dragOffset.width < -dragThreshold {
                 closeMenu()
@@ -40,7 +40,7 @@ class SideDrawerViewModel: ObservableObject {
                 closeMenu()
             }
         }
-        
+
         withAnimation {
             viewState.dragOffset = .zero
         }
@@ -63,29 +63,28 @@ class SideDrawerViewModel: ObservableObject {
     func navigateJoinNow() {
         coordinator.sideDrawer_viewJoinNow()
     }
-    
+
     func navigateClasses() {
         coordinator.sideDrawer_viewClasses()
     }
-    
+
     func navigateFaq() {
         coordinator.sideDrawer_viewFaq()
     }
-    
+
     func navigateAbout() {
         coordinator.sideDrawer_viewAbout()
     }
-    
+
     func navigateMassage() {
         coordinator.sideDrawer_viewMassage()
     }
-    
+
     func navigatespaceRental() {
         coordinator.sideDrawer_viewSpaceRental()
     }
-    
+
     func navigateContact() {
         coordinator.sideDrawer_viewContact()
     }
 }
-

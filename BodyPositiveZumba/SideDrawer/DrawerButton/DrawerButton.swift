@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct DrawerButton: View {
-    
+
     let title: String
     let icon: String?
     let action: () -> Void
     @Binding var isPressed: Bool
-    
+
     var body: some View {
         Button(action: action) {
             HStack(spacing: icon == nil ? 0 : 11) {
