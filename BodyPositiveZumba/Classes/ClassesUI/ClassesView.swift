@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DanceClassCard: View {
+    
     var danceClass: DanceClass
     
     var body: some View {
@@ -38,7 +39,7 @@ struct DanceClassCard: View {
             .padding(.top, 35)
             .padding(.bottom, 15)
         }
-        .frame(width: 250, height: 250)
+        .frame(width: 250, height: 350)
         .background(
             RadialGradient(
                 gradient: Gradient(colors: [
@@ -59,16 +60,16 @@ struct DanceClassCard: View {
 }
 
 struct ClassesView: View {
+    
+    @Environment(\.dismiss) var dismiss
     @State var viewState = SwipableCarouselViewState(
         items: DanceClass.allCases,
         spacing: 10,
         sideSpacing: 60
     )
     
-    // State that tracks whether the bio is visible.
     @State private var isBioExpanded: Bool = false
     
-    // Compute the current dance class safely.
     var currentDanceClass: DanceClass {
         guard !viewState.items.isEmpty else {
             fatalError("No dance classes available.")
@@ -79,56 +80,95 @@ struct ClassesView: View {
     }
     
     var body: some View {
-        VStack(spacing: 10) {
-            // Use a frame height equal to the tile’s height.
-            SwipableCarouselComponent<AnyView, DanceClass>(
-                viewModel: SwipableCarouselViewModel(viewState: $viewState)
-            ) { danceClass, isCurrentCard in
-                AnyView(
-                    DanceClassCard(danceClass: danceClass)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(isCurrentCard ? danceClass.color : Color.clear,
-                                        lineWidth: isCurrentCard ? 3 : 0)
+        ZStack(alignment: .topTrailing) {
+            ScrollView {
+                VStack {
+                    Text("Classes")
+                        .font(.system(size: 33, weight: .bold, design: .serif))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+                        .padding(.top, 40)
+                        .padding(.bottom, 8)
+                    
+                    Text("Explore Our Wide Range of Classes Below!")
+                        .font(.system(size: 20, weight: .semibold, design: .serif))
+                        .foregroundColor(.black.opacity(0.9))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                        .padding(.bottom, 25)
+                    
+                    SwipableCarouselComponent<AnyView, DanceClass>(
+                        viewModel: SwipableCarouselViewModel(viewState: $viewState)
+                    ) { danceClass, isCurrentCard in
+                        AnyView(
+                            DanceClassCard(danceClass: danceClass)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(isCurrentCard ? danceClass.color : Color.clear,
+                                                lineWidth: isCurrentCard ? 3 : 0)
+                                )
+                                .shadow(
+                                    color: isCurrentCard ? danceClass.color.opacity(0.8) : Color.clear,
+                                    radius: 40, x: 0, y: 0
+                                )
+                                .shadow(
+                                    color: isCurrentCard ? danceClass.color.opacity(0.6) : Color.clear,
+                                    radius: 50, x: 0, y: 0
+                                )
                         )
-                        .shadow(
-                            color: isCurrentCard ? danceClass.color.opacity(0.8) : Color.clear,
-                            radius: 40, x: 0, y: 0
-                        )
-                        .shadow(
-                            color: isCurrentCard ? danceClass.color.opacity(0.6) : Color.clear,
-                            radius: 50, x: 0, y: 0
-                        )
-                )
-            }
-            .frame(height: 250)  // Adjusted to match the tile’s height
-            
-            // The button now sits immediately below the carousel tile.
-            Button(action: {
-                withAnimation(.easeInOut) {
-                    isBioExpanded.toggle()
+                    }
+                    .frame(height: 333)
+                    
+                    Button(action: {
+                        withAnimation(.easeInOut) {
+                            isBioExpanded.toggle()
+                        }
+                    }) {
+                        HStack(spacing: 4) {
+                            Text(isBioExpanded ? "Show Less" : "Learn More About \(currentDanceClass.rawValue)!")
+                                .font(.system(size: 16, weight: .semibold, design: .serif))
+                            Image(systemName: isBioExpanded ? "chevron.up" : "chevron.down")
+                        }
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 30)
+                    }
+                    
+                    if isBioExpanded {
+                        Text(currentDanceClass.description)
+                            .font(.system(size: 18, design: .serif))
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                    }
+                    
+                    Button(action: {
+                    }) {
+                        Text("View All Classes")
+                            .font(.system(size: 20, weight: .bold, design: .serif))
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 50)
+                            .padding(.vertical, 20)
+                            .background(currentDanceClass.color.opacity(0.1))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(.black, lineWidth: 3)
+                            )
+                            .cornerRadius(8)
+                    }
+                    .padding(.top, 50)
                 }
-            }) {
-                HStack(spacing: 4) {
-                    Text(isBioExpanded ? "Show Less" : "Learn More!")
-                        .font(.system(size: 14, weight: .semibold, design: .serif))
-                    Image(systemName: isBioExpanded ? "chevron.up" : "chevron.down")
-                }
-                .foregroundColor(.blue)
-                .padding(.vertical, 8)
+                .padding(.bottom, 20)
             }
             
-            // Conditionally show the bio text.
-            if isBioExpanded {
-                Text(currentDanceClass.description)
-                    .font(.system(size: 14, design: .serif))
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-            }
+            CloseButton(dismiss: {
+                dismiss()
+            })
+            .padding()
         }
     }
 }
+
 
 enum DanceClass: String, CaseIterable, Identifiable {
     case zumbaGold = "Zumba Gold®"
