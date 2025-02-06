@@ -30,7 +30,7 @@ struct MassageView: View, ActionableView {
                 Text(viewState.pageTitle)
                     .font(.system(size: 34, weight: .bold, design: .serif))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(Constants.Colors.darkerCyan)
+                    .foregroundColor(.black)
                     .padding()
 
                 Text(viewState.pageBio)
