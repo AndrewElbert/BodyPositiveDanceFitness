@@ -1,13 +1,14 @@
 //
-//  SwipableCardView.swift
-//  BodyPositiveZumba
+//  MassageCardView.swift
+//  MassageUI
 //
 //  Created by Andrew Elbert on 1/31/25.
 //
 
 import SwiftUI
 
-struct SwipableCardView: View {
+struct MassageCardView: View {
+
     var card: CardModel
     @State private var isExpanded: Bool = false
 

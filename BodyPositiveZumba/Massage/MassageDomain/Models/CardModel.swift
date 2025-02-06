@@ -1,6 +1,6 @@
 //
 //  CardModel.swift
-//  BodyPositiveZumba
+//  MassageDomain
 //
 //  Created by Andrew Elbert on 1/31/25.
 //
