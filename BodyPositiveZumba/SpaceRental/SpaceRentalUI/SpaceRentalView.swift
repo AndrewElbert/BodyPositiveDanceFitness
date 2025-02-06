@@ -8,14 +8,28 @@
 import SwiftUI
 
 struct SpaceRentalView: View, ActionableView {
-
     enum Action {
         case toggleMessage
     }
 
-    @Environment(\.dismiss) var dismiss
-    @Binding var viewState: SpaceRentalViewState
+    @Environment(\.dismiss) private var dismiss
+    @Binding private var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
+
+    private let titleStyle = Font.system(size: 23, weight: .bold, design: .serif)
+    private let bioStyle = Font.system(size: 16, design: .serif)
+    private let buttonTextStyle = Font.system(size: 20, weight: .bold, design: .serif)
+    private let buttonAnimation = Animation.easeInOut(duration: 0.4)
+
+    private let buttonGradient = RadialGradient(
+        gradient: Gradient(colors: [
+            Constants.Colors.neonCyan.opacity(0.1),
+            Constants.Colors.neonCyan.opacity(0.5)
+        ]),
+        center: .center,
+        startRadius: 8,
+        endRadius: 88
+    )
 
     public init(
         viewState: Binding<SpaceRentalViewState>,
@@ -28,80 +42,10 @@ struct SpaceRentalView: View, ActionableView {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                VStack(spacing: 0) {
-                    HStack {
-                        CloseButton(dismiss: { dismiss() })
-                    }
-
-                    Text(Constants.SpaceRental.pageTitle)
-                        .font(.system(size: 23, weight: .bold, design: .serif))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-                        .padding(.horizontal)
-
-                    Text(Constants.SpaceRental.pageBio)
-                        .font(.system(size: 16, design: .serif))
-                        .foregroundColor(Constants.Colors.darkOrange)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 16)
-
-                    VStack(spacing: 24) {
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                onAction?(.toggleMessage)
-                            }
-                        }) {
-                            Text(Constants.SpaceRental.buttonText)
-                                .font(.system(size: 20, weight: .bold, design: .serif))
-                                .foregroundColor(.black)
-                                .padding(.horizontal, 24)
-                                .padding(.vertical, 12)
-                                .frame(maxWidth: .infinity)
-                                .background(
-                                    RadialGradient(
-                                        gradient: Gradient(colors: [
-                                            Constants.Colors.neonCyan.opacity(0.1),
-                                            Constants.Colors.neonCyan.opacity(0.5)
-                                        ]),
-                                        center: .center, startRadius: 8, endRadius: 88
-                                    )
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.orange, lineWidth: 2)
-                                )
-                                .cornerRadius(10)
-                        }
-
-                        if viewState.showMessage {
-                            VStack(spacing: 4) {
-                                Text(Constants.SpaceRental.inquireTodayTitleText)
-                                    .font(.system(size: 19, design: .serif))
-                                    .foregroundColor(.black.opacity(0.8))
-                                    .transition(.opacity)
-                                Text(Constants.SpaceRental.contact)
-                                    .font(.system(size: 17, weight: .bold, design: .serif))
-                                    .foregroundColor(Constants.Colors.darkOrange)
-                                    .transition(.opacity)
-                            }
-                            .transition(.opacity)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.top, 16)
-                    .zIndex(1)
-
-                    AnimatedCarouselComponent(
-                        viewModel: AnimatedCarouselViewModel(
-                            viewState: $viewState.animatedCarouselViewState
-                        )
-                    )
-                    .frame(height: 250)
-                    .padding(.horizontal)
-                    .padding(.top, 30)
-                    .padding(.bottom, 30)
-                    .zIndex(0)
+                LazyVStack(spacing: 0) {
+                    headerSection
+                    messageSection
+                    carouselSection
 
                     VStack(spacing: 16) {
                         ExpandableSectionComponent(
@@ -152,5 +96,87 @@ struct SpaceRentalView: View, ActionableView {
                 .padding()
             }
         }
+    }
+
+    private var headerSection: some View {
+        Group {
+            HStack {
+                CloseButton {
+                    dismiss()
+                }
+            }
+
+            Text(Constants.SpaceRental.pageTitle)
+                .font(titleStyle)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.black)
+                .padding(.horizontal)
+
+            Text(Constants.SpaceRental.pageBio)
+                .font(bioStyle)
+                .foregroundColor(Constants.Colors.darkOrange)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                .padding(.top, 16)
+        }
+    }
+
+    private var messageSection: some View {
+        VStack(spacing: 24) {
+            actionButton
+
+            if viewState.showMessage {
+                messageContent
+            }
+        }
+        .padding(.horizontal)
+        .padding(.top, 16)
+        .zIndex(1)
+    }
+
+    private var actionButton: some View {
+        Button(action: {
+            withAnimation(buttonAnimation) {
+                onAction?(.toggleMessage)
+            }
+        }) {
+            Text(Constants.SpaceRental.buttonText)
+                .font(buttonTextStyle)
+                .foregroundColor(.black)
+                .padding(.horizontal, 24)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity)
+                .background(buttonGradient)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.orange, lineWidth: 2)
+                )
+                .cornerRadius(10)
+        }
+    }
+
+    private var messageContent: some View {
+        VStack(spacing: 4) {
+            Text(Constants.SpaceRental.inquireTodayTitleText)
+                .font(.system(size: 19, design: .serif))
+                .foregroundColor(.black.opacity(0.8))
+
+            Text(Constants.SpaceRental.contact)
+                .font(.system(size: 17, weight: .bold, design: .serif))
+                .foregroundColor(Constants.Colors.darkOrange)
+        }
+        .transition(.opacity)
+    }
+
+    private var carouselSection: some View {
+        AnimatedCarouselComponent(
+            viewModel: AnimatedCarouselViewModel(
+                viewState: $viewState.animatedCarouselViewState
+            )
+        )
+        .frame(height: 250)
+        .padding(.horizontal)
+        .padding(.vertical, 30)
+        .zIndex(0)
     }
 }
