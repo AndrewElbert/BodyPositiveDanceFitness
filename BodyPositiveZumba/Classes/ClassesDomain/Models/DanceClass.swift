@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 enum DanceClass: String, CaseIterable, Identifiable {
+
     case zumba = "Zumba®"
     case africanHipHop = "African Hip Hop"
     case shineLight = "SHiNE LIGHT"

@@ -8,9 +8,9 @@
 import SwiftUI
 
 class ClassesViewModel: ObservableObject {
-    
+
     @Published var viewState: ClassesViewState = ClassesViewState()
-    
+
     func toggleExpansion() {
         viewState.isBioExpanded.toggle()
     }
