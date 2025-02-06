@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MassageView: View, ActionableView {
+
     enum Action {
         case updateUrl
     }
@@ -46,7 +47,7 @@ struct MassageView: View, ActionableView {
                     )
                 ) { card, isCurrentCard in
                     AnyView(
-                        SwipableCardView(card: card)
+                        MassageCardView(card: card)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(isCurrentCard ? Color.orange : Color.clear, lineWidth: 4)

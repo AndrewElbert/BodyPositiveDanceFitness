@@ -11,6 +11,19 @@ import SwiftUI
 // swiftlint:disable line_length
 struct Constants {
 
+    // MARK: Classes
+
+    enum Classes {
+
+        static let pageTitle: String = "Classes"
+        static let pageBio: String = "Explore Our Wide Range of Classes Below!"
+        static let viewAllButtonText: String = "View All Classes"
+        static let closeButtonText: String = "Show Less"
+        static let openButtonText: String = "Learn More About "
+        static let joinNowButtonText: String = "Join Now!"
+        static let viewAllClassesUrl: String = "https://www.bodypositivedancefitness.com/calendar"
+    }
+
     // MARK: Colors
 
     enum Colors {
@@ -169,6 +182,13 @@ struct Constants {
             comment: "home screen greeting message"
         )
         static let tradeMarkSloganSize: CGFloat = 22
+    }
+
+    // MARK: Join Now
+
+    enum JoinNow {
+
+        static let joinNowUrl: String = "https://www.bodypositivedancefitness.com/join-now-1"
     }
 
     // MARK: Massage
