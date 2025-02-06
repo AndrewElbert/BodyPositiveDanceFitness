@@ -27,78 +27,102 @@ struct MassageView: View, ActionableView {
 
     var body: some View {
         ZStack {
-            VStack {
-                Text(viewState.pageTitle)
-                    .font(.system(size: 34, weight: .bold, design: .serif))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
-                    .padding()
+            mainContent
+            swipeAnimationOverlay
+            CloseButton { dismiss() }
+        }
+        .padding()
+        .onAppear(perform: dismissSwipeAnimationAfterDelay)
+        .sheet(item: $viewState.bookingURL) { booking in
+            WebViewContainer(url: booking.url, title: booking.title)
+        }
+    }
+}
 
-                Text(viewState.pageBio)
-                    .font(.system(size: 16, design: .serif))
-                    .foregroundColor(.black.opacity(0.9))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-                    .padding(.bottom, 16)
+private extension MassageView {
 
-                SwipableCarouselComponent<AnyView, CardModel>(
-                    viewModel: SwipableCarouselViewModel(
-                        viewState: $viewState.swipableCarouselViewState
+    var mainContent: some View {
+        VStack {
+            headerSection
+            carouselSection
+            Spacer()
+            actionButton
+        }
+    }
+
+    var headerSection: some View {
+        VStack {
+            Text(viewState.pageTitle)
+                .font(.system(size: 34, weight: .bold, design: .serif))
+                .multilineTextAlignment(.center)
+                .foregroundColor(.black)
+                .padding()
+
+            Text(viewState.pageBio)
+                .font(.system(size: 16, design: .serif))
+                .foregroundColor(.black.opacity(0.9))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+                .padding(.bottom, 16)
+        }
+    }
+
+    var carouselSection: some View {
+        SwipableCarouselComponent<AnyView, CardModel>(
+            viewModel: SwipableCarouselViewModel(
+                viewState: $viewState.swipableCarouselViewState
+            )
+        ) { card, isCurrentCard in
+            AnyView(
+                MassageCardView(card: card)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(isCurrentCard ? Color.orange : Color.clear,
+                                    lineWidth: 4)
                     )
-                ) { card, isCurrentCard in
-                    AnyView(
-                        MassageCardView(card: card)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(isCurrentCard ? Color.orange : Color.clear, lineWidth: 4)
-                            )
-                            .shadow(color: isCurrentCard ? Color.orange.opacity(0.3) : Color.clear, radius: 40)
+                    .shadow(
+                        color: isCurrentCard ? Color.orange.opacity(0.3) : Color.clear,
+                        radius: 40
                     )
-                }
-                .frame(height: 400)
+            )
+        }
+        .frame(height: 400)
+    }
 
-                Spacer()
+    var actionButton: some View {
+        Button(action: { onAction?(.updateUrl) }) {
+            Text(Constants.Massage.buttonText)
+                .font(.system(size: 24, weight: .bold, design: .serif))
+                .foregroundColor(.black)
+                .padding(.horizontal, 50)
+                .padding(.vertical, 20)
+                .background(
+                    RadialGradient(
+                        gradient: Gradient(colors: [
+                            Constants.Colors.neonCyan.opacity(0.1),
+                            Constants.Colors.neonCyan.opacity(0.5)
+                        ]),
+                        center: .center,
+                        startRadius: 50,
+                        endRadius: 100
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.orange, lineWidth: 3)
+                )
+                .cornerRadius(8)
+        }
+        .padding(.top, 2)
+    }
 
-                Button(action: {
-                    onAction?(.updateUrl)
-                }) {
-                    Text(Constants.Massage.buttonText)
-                        .font(.system(size: 24, weight: .bold, design: .serif))
-                        .foregroundColor(.black)
-                        .padding(.horizontal, 50)
-                        .padding(.vertical, 20
-                        )
-                        .background(
-                            RadialGradient(
-                                gradient: Gradient(colors: [
-                                    Constants.Colors.neonCyan.opacity(0.1),
-                                    Constants.Colors.neonCyan.opacity(0.5)
-                                ]),
-                                center: .center, startRadius: 50, endRadius: 100
-                            )
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(.orange, lineWidth: 3)
-                        )
-                        .cornerRadius(8)
-                }
-                .padding(.top, 2)
-            }
-            .padding()
-
+    var swipeAnimationOverlay: some View {
+        Group {
             if viewState.showSwipeAnimation {
                 VStack(spacing: 8) {
                     Text(Constants.Massage.swipe)
-                        .font(
-                            .system(
-                                size: 16,
-                                weight: .medium,
-                                design: .serif
-                            )
-                        )
+                        .font(.system(size: 16, weight: .medium, design: .serif))
                         .foregroundColor(.gray)
-
                     SwipeAnimationComponent(
                         viewModel: SwipeAnimationViewModel(
                             viewState: viewState.swipeAnimationViewState
@@ -112,23 +136,12 @@ struct MassageView: View, ActionableView {
                 .transition(.opacity)
                 .animation(.easeOut(duration: 1.5), value: viewState.showSwipeAnimation)
             }
+        }
+    }
 
-            CloseButton(dismiss: {
-                dismiss()
-            })
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
-                withAnimation {
-                    viewState.showSwipeAnimation = false
-                }
-            }
-        }
-        .sheet(item: $viewState.bookingURL) { booking in
-            WebViewContainer(
-                url: booking.url,
-                title: booking.title
-            )
+    func dismissSwipeAnimationAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
+            withAnimation { viewState.showSwipeAnimation = false }
         }
     }
 }
