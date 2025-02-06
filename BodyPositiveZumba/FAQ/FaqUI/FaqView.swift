@@ -13,9 +13,18 @@ struct FaqView: View, ActionableView {
         case toggleQuestion(Int)
     }
 
+    @Environment(\.dismiss) private var dismiss
+    @Binding private var viewState: FaqViewState
     var onAction: ((Action) -> Void)?
-    @Environment(\.dismiss) var dismiss
-    @Binding var viewState: FaqViewState
+
+    private let titleStyle = Font.system(size: 24, weight: .bold, design: .serif)
+    private let standardSpacing: CGFloat = 16
+    private let titlePadding = EdgeInsets(
+        top: 24,
+        leading: 0,
+        bottom: 20,
+        trailing: 0
+    )
 
     public init(
         viewState: Binding<FaqViewState>,
@@ -26,22 +35,47 @@ struct FaqView: View, ActionableView {
     }
 
     var body: some View {
-        ZStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(Constants.FAQ.pageTitle)
-                        .font(.system(size: 24, weight: .bold, design: .serif))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 24)
-                        .padding(.bottom, 20)
+        ZStack(alignment: .topLeading) {
+            scrollContent
+            closeButton
+        }
+    }
 
-                    ForEach(viewState.faqItems.indices, id: \.self) { index in
-                        FaqItemComponent(viewModel: FaqItemViewModel(viewState: $viewState.faqItems[index]))
-                    }
-                }
-                .padding()
+    private var scrollContent: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: standardSpacing) {
+                pageTitle
+                faqItems
             }
-            CloseButton(dismiss: { dismiss() })
+            .padding()
+        }
+    }
+
+    private var pageTitle: some View {
+        Text(Constants.FAQ.pageTitle)
+            .font(titleStyle)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(titlePadding)
+    }
+
+    @ViewBuilder
+    private var faqItems: some View {
+        ForEach(
+            Array(viewState.faqItems.indices),
+            id: \.self
+        ) { index in
+            FaqItemComponent(
+                viewModel: FaqItemViewModel(
+                    viewState: $viewState.faqItems[index]
+                )
+            )
+            .transition(.opacity)
+        }
+    }
+
+    private var closeButton: some View {
+        CloseButton {
+            dismiss()
         }
     }
 }
