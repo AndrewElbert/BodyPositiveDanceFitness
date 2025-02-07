@@ -42,23 +42,12 @@ struct ContactView: View {
                     ),
                     center: .center,
                     startRadius: 100,
-                    endRadius: 200
+                    endRadius: 300
                 )
             )
             .cornerRadius(20)
             .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.orange, lineWidth: 3))
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.orange, lineWidth: 3)
-                    .blur(radius: 18)
-                    .opacity(0.9)
-            )
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.orange, lineWidth: 6)
-                    .blur(radius: 36)
-                    .opacity(0.7)
-            )
+            .shadow(radius: 10)
             .padding()
         }
         .sheet(item: $viewModel.state.webViewURL) { webView in
