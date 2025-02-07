@@ -36,7 +36,7 @@ struct InitialLoadRootCoordinatorView: View {
             case .spaceRental:
                 SpaceRentalUI.spaceRentalPage()
             case .contact:
-                Text("Contact")
+                ContactUI.contactPage()
             }
         }
     }
