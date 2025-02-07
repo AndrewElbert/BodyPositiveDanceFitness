@@ -7,12 +7,29 @@
 
 import SwiftUI
 
-struct ContactView: View {
-    @StateObject private var viewModel = ContactViewModel()
-    @Environment(\.dismiss) private var dismiss
+struct ContactView: View, ActionableView {
+
+    enum Action {
+        case handleAction(
+            action: String,
+            title: String
+        )
+    }
+
+    var onAction: ((Action) -> Void)?
+    @Environment(\.dismiss) var dismiss
+    @Binding var viewState: ContactViewState
+
+    public init(
+        viewState: Binding<ContactViewState>,
+        onAction: ((Action) -> Void)? = nil
+    ) {
+        self._viewState = viewState
+        self.onAction = onAction
+    }
 
     var body: some View {
-        
+
         VStack(spacing: 0) {
             HStack {
                 CloseButton(
@@ -21,12 +38,19 @@ struct ContactView: View {
                     }
                 )
             }
-            
+
             VStack(spacing: 60) {
-                ForEach(viewModel.state.contactRows, id: \.title) { rowData in
+                ForEach(viewState.contactRows, id: \.title) { rowData in
                     ContactRow(
                         data: rowData,
-                        onAction: { viewModel.handleAction(rowData.action, title: rowData.title) }
+                        onAction: {
+                            onAction?(
+                                .handleAction(
+                                    action: rowData.action,
+                                    title: rowData.title
+                                )
+                            )
+                        }
                     )
                 }
             }
@@ -49,8 +73,9 @@ struct ContactView: View {
             .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.orange, lineWidth: 3))
             .shadow(radius: 10)
             .padding()
+            .padding(.bottom, 22)
         }
-        .sheet(item: $viewModel.state.webViewURL) { webView in
+        .sheet(item: $viewState.webViewURL) { webView in
             WebViewContainer(url: webView.url, title: webView.title)
         }
         Spacer()
@@ -58,7 +83,8 @@ struct ContactView: View {
 }
 
 struct ContactRow: View {
-    let data: ContactViewState.ContactRowData
+
+    let data: ContactRowData
     let onAction: () -> Void
 
     var body: some View {
@@ -70,7 +96,7 @@ struct ContactRow: View {
                 Image(systemName: data.icon)
                     .foregroundColor(.orange)
                     .font(.system(size: 29))
-                    .padding(.leading, 8)
+                    .padding(.leading, 5)
                     .padding(.bottom, 11)
             }
             Button(action: onAction) {

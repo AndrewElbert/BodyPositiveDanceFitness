@@ -1,4 +1,3 @@
-//
 //  SpaceRentalView.swift
 //  SpaceRentalUI
 //
@@ -13,6 +12,7 @@ struct SpaceRentalView: View, ActionableView {
     }
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL  // Added to handle email link opening
     @Binding private var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
 
@@ -163,7 +163,13 @@ struct SpaceRentalView: View, ActionableView {
 
             Text(Constants.SpaceRental.contact)
                 .font(.system(size: 17, weight: .bold, design: .serif))
-                .foregroundColor(Constants.Colors.darkOrange)
+                .foregroundColor(.blue)
+                .underline()
+                .onTapGesture {
+                    if let emailURL = URL(string: "mailto:\(Constants.SpaceRental.contact)") {
+                        openURL(emailURL)
+                    }
+                }
         }
         .transition(.opacity)
     }
