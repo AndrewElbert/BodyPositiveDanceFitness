@@ -8,15 +8,9 @@
 import SwiftUI
 
 struct ContactViewState {
-    
-    struct ContactRowData {
-        let title: String
-        let icon: String
-        let text: String
-        let action: String
-    }
-    
+
     var webViewURL: WebViewURL?
+
     let contactRows: [ContactRowData] = [
         ContactRowData(
             title: "Message Us!",
