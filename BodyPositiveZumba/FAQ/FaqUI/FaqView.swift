@@ -14,6 +14,7 @@ struct FaqView: View, ActionableView {
     }
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     @Binding private var viewState: FaqViewState
     var onAction: ((Action) -> Void)?
 
@@ -25,6 +26,10 @@ struct FaqView: View, ActionableView {
         bottom: 20,
         trailing: 0
     )
+    
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white : Color.black
+    }
 
     public init(
         viewState: Binding<FaqViewState>,
@@ -54,6 +59,7 @@ struct FaqView: View, ActionableView {
     private var pageTitle: some View {
         Text(Constants.FAQ.pageTitle)
             .font(titleStyle)
+            .foregroundColor(adaptiveTextColor)
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(titlePadding)
     }
@@ -79,3 +85,4 @@ struct FaqView: View, ActionableView {
         }
     }
 }
+

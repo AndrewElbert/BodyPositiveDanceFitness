@@ -13,8 +13,13 @@ struct AnimatedBulletPointView: View {
         case onAppear
     }
 
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: AnimatedBulletPointViewState
     var onAction: (Action) -> Void
+    
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white : Color.black
+    }
 
     var body: some View {
         HStack(spacing: 10) {
@@ -45,6 +50,6 @@ struct AnimatedBulletPointView: View {
     private var textView: some View {
         Text(viewState.text)
             .font(.system(size: 18, design: .serif))
-            .foregroundColor(.black.opacity(0.8))
+            .foregroundColor(adaptiveTextColor.opacity(0.8))
     }
 }
