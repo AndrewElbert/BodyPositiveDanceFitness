@@ -18,7 +18,7 @@ struct ExpandableSection: View, ActionableView {
     @Environment(\.colorScheme) private var colorScheme
     
     private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white : Color.black
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
     init(
@@ -57,13 +57,13 @@ struct ExpandableSection: View, ActionableView {
 
     private var titleText: some View {
         Text(viewState.title)
-            .font(.system(size: 20, weight: .bold, design: .serif))
+            .font(.sfProRoundedTextBold(size: 20))
             .foregroundColor(.black)
     }
 
     private var expandCollapseIcon: some View {
         Image(systemName: viewState.isExpanded ? "chevron.down" : "chevron.right")
-            .font(.system(size: 18, weight: .bold))
+            .font(.sfProBodyTextBold(size: 18))
             .foregroundColor(.white)
             .rotationEffect(.degrees(viewState.isExpanded ? 180 : 0))
             .animation(.easeInOut(duration: 0.4), value: viewState.isExpanded)

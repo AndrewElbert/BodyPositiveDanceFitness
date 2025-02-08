@@ -74,11 +74,9 @@ struct InitialAppLoadView: View {
 
                         Text(Constants.Common.tradeMarkSlogan)
                             .font(
-                                .system(
-                                    size: Constants.Home.tradeMarkSloganSize,
-                                    weight: .semibold,
-                                    design: .serif
-                                )
+                                .sfProRoundedTextBold(
+                                    size: Constants.Home.tradeMarkSloganSize
+                                    )
                             )
                             .multilineTextAlignment(.center)
                             .padding(.top)

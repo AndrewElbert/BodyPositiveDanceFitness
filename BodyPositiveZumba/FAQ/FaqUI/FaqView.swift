@@ -18,7 +18,7 @@ struct FaqView: View, ActionableView {
     @Binding private var viewState: FaqViewState
     var onAction: ((Action) -> Void)?
 
-    private let titleStyle = Font.system(size: 24, weight: .bold, design: .serif)
+    private let titleStyle = Font.sfProDisplayBold(size: 24)
     private let standardSpacing: CGFloat = 16
     private let titlePadding = EdgeInsets(
         top: 24,
@@ -27,11 +27,8 @@ struct FaqView: View, ActionableView {
         trailing: 0
     )
     
-    private var adaptiveTextTitleColor: Color {
-        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
-    }
     private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white : Color.black
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
     public init(
@@ -62,7 +59,7 @@ struct FaqView: View, ActionableView {
     private var pageTitle: some View {
         Text(Constants.FAQ.pageTitle)
             .font(titleStyle)
-            .foregroundColor(adaptiveTextTitleColor)
+            .foregroundColor(adaptiveTextColor)
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(titlePadding)
     }

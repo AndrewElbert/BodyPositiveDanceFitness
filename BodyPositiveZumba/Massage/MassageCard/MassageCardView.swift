@@ -22,18 +22,18 @@ struct MassageCardView: View {
                 .cornerRadius(15)
 
             Text(card.name)
-                .font(.system(size: 24, design: .serif))
+                .font(.sfProRoundedTextMedium(size: 24))
                 .fontWeight(.bold)
                 .foregroundColor(.black)
                 .padding(.top, 10)
 
             Text(card.parlor)
-                .font(.system(size: 14, design: .serif))
+                .font(.sfProBodyTextRegular(size: 14))
                 .foregroundColor(Constants.Colors.darkOrange)
 
             if isExpanded {
                 Text(card.bio)
-                    .font(.system(size: 16, design: .serif))
+                    .font(.sfProBodyTextRegular(size: 16))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -42,7 +42,7 @@ struct MassageCardView: View {
                     .transition(.opacity)
             } else {
                 Text(Constants.Massage.bioTap)
-                    .font(.caption)
+                    .font(.sfProBodyTextRegular(size: 14))
                     .foregroundColor(.blue)
                     .padding(.top, 5)
             }

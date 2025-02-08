@@ -17,9 +17,9 @@ struct SpaceRentalView: View, ActionableView {
     @Binding private var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
 
-    private let titleStyle = Font.system(size: 23, weight: .bold, design: .serif)
-    private let bioStyle = Font.system(size: 16, design: .serif)
-    private let buttonTextStyle = Font.system(size: 20, weight: .bold, design: .serif)
+    private let titleStyle = Font.sfProDisplayBold(size: 23)
+    private let bioStyle = Font.sfProBodyTextRegular(size: 18)
+    private let buttonTextStyle = Font.sfProRoundedTextBold(size: 20)
     private let buttonAnimation = Animation.easeInOut(duration: 0.4)
 
     private var buttonGradient: some View {
@@ -37,12 +37,8 @@ struct SpaceRentalView: View, ActionableView {
         }
     }
     
-    private var adaptiveTextTitleColor: Color {
-        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
-    }
-    
     private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white : Color.black
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
     public init(
@@ -123,12 +119,12 @@ struct SpaceRentalView: View, ActionableView {
             Text(Constants.SpaceRental.pageTitle)
                 .font(titleStyle)
                 .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextTitleColor)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.horizontal)
 
             Text(Constants.SpaceRental.pageBio)
                 .font(bioStyle)
-                .foregroundColor(Constants.Colors.darkOrange)
+                .foregroundColor(adaptiveTextColor)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
@@ -172,10 +168,10 @@ struct SpaceRentalView: View, ActionableView {
     private var messageContent: some View {
         VStack(spacing: 4) {
             Text(Constants.SpaceRental.inquireTodayTitleText)
-                .font(.system(size: 19, design: .serif))
+                .font(.sfProBodyTextRegular(size: 19))
                 .foregroundColor(adaptiveTextColor)
             Text(Constants.SpaceRental.contact)
-                .font(.system(size: 17, weight: .bold, design: .serif))
+                .font(.sfProBodyTextBold(size: 17))
                 .foregroundColor(.blue)
                 .underline()
                 .onTapGesture {

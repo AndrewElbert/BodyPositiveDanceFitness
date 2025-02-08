@@ -26,11 +26,8 @@ struct ClassesView: View, ActionableView {
         self.onAction = onAction
     }
     
-    private var adaptiveTextTitleColor: Color {
-        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
-    }
     private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white : Color.black
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
     var body: some View {
@@ -58,14 +55,14 @@ private extension ClassesView {
     var headerSection: some View {
         VStack(spacing: 0) {
             Text(Constants.Classes.pageTitle)
-                .font(.system(size: 33, weight: .bold, design: .serif))
+                .font(.sfProDisplayBold(size: 40))
                 .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextTitleColor)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.top, 40)
                 .padding(.bottom, 33)
 
             Text(Constants.Classes.pageBio)
-                .font(.system(size: 20, weight: .semibold, design: .serif))
+                .font(.sfProBodyTextMedium(size: 20))
                 .foregroundColor(adaptiveTextColor.opacity(0.9))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -104,8 +101,8 @@ private extension ClassesView {
         Button(action: toggleExpansion) {
             HStack(spacing: 4) {
                 Text(toggleButtonText)
-                    .font(.system(size: 16, weight: .semibold, design: .serif))
-                Image(systemName: viewState.isBioExpanded ? "chevron.right" : "chevron.down")
+                    .font(.sfProRoundedTextSemibold(size: 16))
+                Image(systemName: viewState.isBioExpanded ? "chevron.up" : "chevron.right")
             }
             .foregroundColor(adaptiveTextColor)
             .multilineTextAlignment(.center)
@@ -115,7 +112,7 @@ private extension ClassesView {
 
     var bioText: some View {
         Text(viewState.currentDanceClass.description)
-            .font(.system(size: 18, design: .serif))
+            .font(.sfProBodyTextRegular(size: 18))
             .foregroundColor(adaptiveTextColor)
             .multilineTextAlignment(.center)
             .padding(.horizontal)
@@ -124,7 +121,7 @@ private extension ClassesView {
     var viewAllClassesButton: some View {
         Button(action: openViewAllClassesURL) {
             Text(Constants.Classes.viewAllButtonText)
-                .font(.system(size: 20, weight: .bold, design: .serif))
+                .font(.sfProRoundedTextBold(size: 20))
                 .foregroundColor(adaptiveTextColor)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 20)
