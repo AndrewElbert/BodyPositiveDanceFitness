@@ -73,7 +73,7 @@ struct SideDrawerView: View, ActionableView {
                             onAction?(.contact)
                         }) {
                             HStack(spacing: 20) {
-                                
+
                                 Image(systemName: Constants.SideDrawer.contactImage)
                                     .foregroundColor(.black)
                                     .frame(
@@ -81,7 +81,7 @@ struct SideDrawerView: View, ActionableView {
                                         height: Constants.SideDrawer.contactImageSize
                                     )
                                     .padding(.bottom, 2)
-                                
+
                                 Text(Constants.SideDrawer.contactText)
                                     .font(
                                         .sfProRoundedTextSemibold(

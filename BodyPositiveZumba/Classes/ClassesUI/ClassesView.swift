@@ -25,7 +25,7 @@ struct ClassesView: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
@@ -171,4 +171,3 @@ struct PressableButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.03), value: configuration.isPressed)
     }
 }
-

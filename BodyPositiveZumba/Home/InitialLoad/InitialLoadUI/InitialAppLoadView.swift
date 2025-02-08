@@ -98,5 +98,3 @@ struct InitialAppLoadView: View {
         }
     }
 }
-
-

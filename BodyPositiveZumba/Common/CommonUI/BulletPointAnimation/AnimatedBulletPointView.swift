@@ -16,7 +16,7 @@ struct AnimatedBulletPointView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: AnimatedBulletPointViewState
     var onAction: (Action) -> Void
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
