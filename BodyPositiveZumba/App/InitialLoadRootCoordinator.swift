@@ -70,7 +70,7 @@ extension InitialLoadRootCoordinator: SideDrawerCoordinator {
     }
 
     func sideDrawer_viewAbout() {
-        routes.presentSheet(
+        routes.presentCover(
             .about
         )
     }

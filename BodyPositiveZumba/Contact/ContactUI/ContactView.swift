@@ -26,40 +26,44 @@ struct ContactView: View, ActionableView {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                CloseButton { dismiss() }
+        NavigationStack {
+            VStack {
+                VStack(spacing: 55) {
+                    ForEach(viewState.contactRows, id: \.title) { row in
+                        ContactRow(data: row) {
+                            onAction?(.handleAction(action: row.action, title: row.title))
+                        }
+                    }
+                }
+                .padding()
+                .frame(width: 333, height: 667)
+                .background(
+                    ZStack {
+                        Color.white
+                        backgroundGradient
+                    }
+                )
+                .cornerRadius(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.orange, lineWidth: 2)
+                )
+                .shadow(radius: 10)
+                .padding()
+                .padding(.bottom, 22)
+
                 Spacer()
             }
-
-            VStack(spacing: 55) {
-                ForEach(viewState.contactRows, id: \.title) { row in
-                    ContactRow(data: row) {
-                        onAction?(.handleAction(action: row.action, title: row.title))
+            .sheet(item: $viewState.webViewURL) { webView in
+                WebViewContainer(url: webView.url, title: webView.title)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    CloseButton {
+                        dismiss()
                     }
                 }
             }
-            .padding()
-            .frame(width: 333, height: 667)
-            .background(
-                ZStack {
-                    Color.white
-                    backgroundGradient
-                }
-            )
-            .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.orange, lineWidth: 2)
-            )
-            .shadow(radius: 10)
-            .padding()
-            .padding(.bottom, 22)
-
-            Spacer()
-        }
-        .sheet(item: $viewState.webViewURL) { webView in
-            WebViewContainer(url: webView.url, title: webView.title)
         }
     }
 

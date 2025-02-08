@@ -11,6 +11,19 @@ import SwiftUI
 // swiftlint:disable line_length
 struct Constants {
 
+    // MARK: About
+
+    enum About {
+
+        static let pageTitle: String = "Body Positive Dance Fitness"
+        static let pageBio: String = "The happiest workout in Maine™!"
+        static let button1Title: String = "Who are we?"
+        static let button2Title: String = "What do we do?"
+        static let button1Content: String = "We offer classes every day, multiple times per day, so that students can enjoy classes that fit their schedules and exercise routines.\n\nOf course it's not just our instructors and our class types that make Body Positive so special...  \n\nWhat truly distinguishes Body Positive is our physical space. This studio is a community hub for participants all over Maine and New England who have a place to call their own, where their style of exercise and community spirit is the central focus of the location."
+        static let button2Content: String = "At Body Positive Dance Fitness, we unite students from all over with the highest quality teachers in the Greater Portland area. Each of our instructors has a unique style that resonates with a variety of students at different fitness levels.\n\nOur dance fitness classes vary in style. Our core offering, Zumba, is the world's largest dance fitness format, with over five million daily participants. It blends instructor creativity with Latin dance, ensuring no two classes are alike while teaching fundamental steps and rhythms. We also offer formats like SHiNE (ballet, hip hop, pop), HotFlash (70s, 80s, 90s music), and others ranging from basic fitness moves to full choreography. \n\nAt BPDF, all body types and levels of experience and ability are welcome — we are here to have fun!"
+
+    }
+
     // MARK: Classes
 
     enum Classes {
@@ -352,7 +365,7 @@ struct Constants {
         static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
         static let buttonPressOpacity: CGFloat = 0.5
         static let buttonPressScale: CGFloat = 0.9
-        static let sideDrawerButtonImageSize: CGFloat = 24
+        static let sideDrawerButtonImageSize: CGFloat = 25
     }
 
     // MARK: Space Rental

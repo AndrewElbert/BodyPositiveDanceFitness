@@ -17,14 +17,14 @@ struct CloseButton: View {
                 Button(action: {
                     dismiss()
                 }) {
-                    Image(systemName: "xmark.octagon.fill")
+                    Image(systemName: "xmark")
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color.gray)
                         .padding(8)
                 }
-                .padding(.top, 3)
-                .padding(.trailing, 3)
+                .padding(.top, 5)
+                .padding(.trailing, 5)
             }
             Spacer()
         }
