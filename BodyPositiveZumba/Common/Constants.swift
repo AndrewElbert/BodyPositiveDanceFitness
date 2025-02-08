@@ -45,7 +45,7 @@ struct Constants {
         static let facebookLink: String = NSLocalizedString(
             "https://www.facebook.com/share/1BPU8L8kyF/?mibextid=wwXIfr",
             comment: "fb link")
-        
+
         static let youtubeLink: String = NSLocalizedString(
             "https://www.youtube.com/@bodypositivedancefitness",
             comment: "yt link")
@@ -94,7 +94,7 @@ struct Constants {
                 action: "http://maps.apple.com/?q=123+Main+Street"
             )
         ]
-        
+
         static let innerGradient: Color = Constants.SideDrawer.innerCircleColorRadius.opacity(0.8)
         static let outerGradient: Color = Constants.SideDrawer.outerCircleColorRadius.opacity(0.8)
         static let startRadius: CGFloat = 35
@@ -324,7 +324,7 @@ struct Constants {
             "FacebookLogo",
             comment: "Facebook logo image"
         )
-        
+
         static let youtubeLogo: String = NSLocalizedString(
             "YouTubeLogo",
             comment: "Youtube logo image"

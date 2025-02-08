@@ -82,17 +82,17 @@ struct ContactRow: View {
 
     var body: some View {
         VStack {
-            
+
             Image(systemName: data.icon)
                 .foregroundColor(.black.opacity(0.85))
                 .font(.system(size: 26))
                 .padding(.trailing, 4)
-            
+
             Text(data.title)
                 .font(.sfProBodyTextMedium(size: 33))
                 .foregroundColor(.black)
                 .padding(.bottom, 5)
-            
+
             Button(action: onAction) {
                 Text(data.text)
                     .font(.sfProRoundedTextRegular(size: 20))

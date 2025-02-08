@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpandableSection: View, ActionableView {
-    
+
     enum Action {
         case toggleExpansion
     }
@@ -16,7 +16,7 @@ struct ExpandableSection: View, ActionableView {
     @Binding var viewState: ExpandableSectionViewState
     var onAction: ((Action) -> Void)?
     @Environment(\.colorScheme) private var colorScheme
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }

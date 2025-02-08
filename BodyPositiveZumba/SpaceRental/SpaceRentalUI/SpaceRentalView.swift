@@ -36,7 +36,7 @@ struct SpaceRentalView: View, ActionableView {
             )
         }
     }
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
@@ -195,4 +195,3 @@ struct SpaceRentalView: View, ActionableView {
         .zIndex(0)
     }
 }
-

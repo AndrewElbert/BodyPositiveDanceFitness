@@ -26,7 +26,7 @@ struct FaqView: View, ActionableView {
         bottom: 20,
         trailing: 0
     )
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
@@ -85,4 +85,3 @@ struct FaqView: View, ActionableView {
         }
     }
 }
-

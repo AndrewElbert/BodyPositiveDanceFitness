@@ -8,9 +8,9 @@
 import SwiftUI
 
 extension Font {
-    
+
     // body text (smaller sizes)
-    
+
     static func sfProBodyTextRegular(size: CGFloat) -> Font {
         .system(size: size, weight: .regular, design: .default)
     }
@@ -26,7 +26,7 @@ extension Font {
     static func sfProBodyTextBold(size: CGFloat) -> Font {
         .system(size: size, weight: .bold, design: .default)
     }
-    
+
     static func sfProBodyTextThin(size: CGFloat) -> Font {
         .system(size: size, weight: .thin, design: .default)
     }
@@ -49,7 +49,7 @@ extension Font {
     }
 
     // More friendly, casual look, action items like buttons
-    
+
     static func sfProRoundedTextRegular(size: CGFloat) -> Font {
         .system(size: size, weight: .regular, design: .rounded)
     }
@@ -65,11 +65,10 @@ extension Font {
     static func sfProRoundedTextBold(size: CGFloat) -> Font {
         .system(size: size, weight: .bold, design: .rounded)
     }
-    
+
     static func sfProRoundedTextThin(size: CGFloat) -> Font {
         .system(size: size, weight: .thin, design: .rounded)
     }
-
 
     // More formal, elegant look
     static func sfProSerifRegular(size: CGFloat) -> Font {
