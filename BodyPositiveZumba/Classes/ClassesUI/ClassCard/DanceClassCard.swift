@@ -33,7 +33,7 @@ private extension DanceClassCard {
 
     var headerText: some View {
         Text(danceClass.rawValue)
-            .font(.system(size: 30, design: .serif))
+            .font(.sfProDisplayBold(size: 30))
             .fontWeight(.bold)
             .foregroundColor(.black)
             .multilineTextAlignment(.center)
@@ -43,7 +43,7 @@ private extension DanceClassCard {
     var joinNowButton: some View {
         Button(action: openJoinURL) {
             Text(Constants.Classes.joinNowButtonText)
-                .font(.system(size: 16, weight: .semibold, design: .serif))
+                .font(.sfProRoundedTextSemibold(size: 20))
                 .foregroundColor(.black)
                 .frame(width: 222, height: 44)
                 .background(Color.white.opacity(0.2))

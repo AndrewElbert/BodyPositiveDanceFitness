@@ -18,11 +18,8 @@ struct MassageView: View, ActionableView {
     @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: MassageViewState
 
-    private var adaptiveTextTitleColor: Color {
-        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
-    }
-    private var adaptiveTextBioColor: Color {
-        colorScheme == .dark ? Color.white : Color.black
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
     public init(
@@ -61,14 +58,14 @@ private extension MassageView {
     var headerSection: some View {
         VStack {
             Text(viewState.pageTitle)
-                .font(.system(size: 34, weight: .bold, design: .serif))
+                .font(.sfProDisplayBold(size: 34))
                 .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextTitleColor)
+                .foregroundColor(adaptiveTextColor)
                 .padding()
 
             Text(viewState.pageBio)
-                .font(.system(size: 16, design: .serif))
-                .foregroundColor(adaptiveTextBioColor.opacity(0.9))
+                .font(.sfProBodyTextRegular(size: 16))
+                .foregroundColor(adaptiveTextColor)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.bottom, 16)
@@ -100,7 +97,7 @@ private extension MassageView {
     var actionButton: some View {
         Button(action: { onAction?(.updateUrl) }) {
             Text(Constants.Massage.buttonText)
-                .font(.system(size: 24, weight: .bold, design: .serif))
+                .font(.sfProRoundedTextMedium(size: 24))
                 .foregroundColor(.black)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 20)
@@ -132,7 +129,7 @@ private extension MassageView {
             if viewState.showSwipeAnimation {
                 VStack(spacing: 8) {
                     Text(Constants.Massage.swipe)
-                        .font(.system(size: 16, weight: .medium, design: .serif))
+                        .font(.sfProRoundedTextMedium(size: 18))
                         .foregroundColor(.gray)
                     SwipeAnimationComponent(
                         viewModel: SwipeAnimationViewModel(

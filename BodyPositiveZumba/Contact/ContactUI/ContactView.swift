@@ -32,7 +32,7 @@ struct ContactView: View, ActionableView {
                 Spacer()
             }
 
-            VStack(spacing: 60) {
+            VStack(spacing: 55) {
                 ForEach(viewState.contactRows, id: \.title) { row in
                     ContactRow(data: row) {
                         onAction?(.handleAction(action: row.action, title: row.title))
@@ -41,11 +41,16 @@ struct ContactView: View, ActionableView {
             }
             .padding()
             .frame(width: 333, height: 667)
-            .background(backgroundGradient)
+            .background(
+                ZStack {
+                    Color.white
+                    backgroundGradient
+                }
+            )
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.orange, lineWidth: 3)
+                    .stroke(Color.orange, lineWidth: 2)
             )
             .shadow(radius: 10)
             .padding()
@@ -61,12 +66,12 @@ struct ContactView: View, ActionableView {
     private var backgroundGradient: RadialGradient {
         RadialGradient(
             gradient: Gradient(colors: [
-                Constants.Colors.neonCyan.opacity(0.03),
-                Constants.Colors.neonCyan.opacity(0.10)
+                Constants.Contact.innerGradient,
+                Constants.Contact.outerGradient
             ]),
             center: .center,
-            startRadius: 100,
-            endRadius: 300
+            startRadius: Constants.Contact.startRadius,
+            endRadius: Constants.Contact.endRadius
         )
     }
 }
@@ -77,19 +82,20 @@ struct ContactRow: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text(data.title)
-                    .font(.system(size: 33, design: .serif))
-                Image(systemName: data.icon)
-                    .foregroundColor(.orange)
-                    .font(.system(size: 29))
-                    .padding(.leading, 5)
-            }
-            .padding(.bottom, 11)
-
+            
+            Image(systemName: data.icon)
+                .foregroundColor(.black.opacity(0.85))
+                .font(.system(size: 26))
+                .padding(.trailing, 4)
+            
+            Text(data.title)
+                .font(.sfProBodyTextMedium(size: 33))
+                .foregroundColor(.black)
+                .padding(.bottom, 5)
+            
             Button(action: onAction) {
                 Text(data.text)
-                    .font(.system(size: 22, design: .serif))
+                    .font(.sfProRoundedTextRegular(size: 20))
                     .foregroundColor(.blue)
                     .underline()
             }

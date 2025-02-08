@@ -18,7 +18,7 @@ struct AnimatedBulletPointView: View {
     var onAction: (Action) -> Void
     
     private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white : Color.black
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
     var body: some View {
@@ -40,7 +40,7 @@ struct AnimatedBulletPointView: View {
                 .scaleEffect(viewState.isAnimating ? 1.2 : 0.8)
 
             Text(viewState.emoji)
-                .font(.system(size: 16))
+                .font(.system(size: 12 ))
                 .opacity(viewState.sparkleOpacity)
                 .scaleEffect(viewState.isAnimating ? 0.8 : 1.2)
         }
@@ -49,7 +49,7 @@ struct AnimatedBulletPointView: View {
 
     private var textView: some View {
         Text(viewState.text)
-            .font(.system(size: 18, design: .serif))
+            .font(.sfProBodyTextRegular(size: 18))
             .foregroundColor(adaptiveTextColor.opacity(0.8))
     }
 }

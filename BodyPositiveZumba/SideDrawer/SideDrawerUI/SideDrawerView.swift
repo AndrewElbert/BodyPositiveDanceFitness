@@ -73,25 +73,24 @@ struct SideDrawerView: View, ActionableView {
                             onAction?(.contact)
                         }) {
                             HStack(spacing: 20) {
-                                Text(Constants.SideDrawer.contactText)
-                                    .font(
-                                        .system(
-                                            size: Constants.SideDrawer.contactFontSize,
-                                            weight: .medium,
-                                            design: .serif
-                                        )
-                                    )
-                                    .foregroundColor(.black)
-
+                                
                                 Image(systemName: Constants.SideDrawer.contactImage)
                                     .foregroundColor(.black)
                                     .frame(
                                         width: Constants.SideDrawer.contactImageSize,
                                         height: Constants.SideDrawer.contactImageSize
                                     )
+                                    .padding(.bottom, 2)
+                                
+                                Text(Constants.SideDrawer.contactText)
+                                    .font(
+                                        .sfProRoundedTextSemibold(
+                                            size: Constants.SideDrawer.contactFontSize
+                                            )
+                                    )
+                                    .foregroundColor(.black)
                             }
-                            .padding(.leading, 11)
-                            .padding(.trailing, 11)
+                            .padding(.horizontal, 11)
                             .scaleEffect(viewState.contactIsPressed ? Constants.SideDrawer.buttonPressScale : 1.0)
                             .opacity(viewState.contactIsPressed ? Constants.SideDrawer.buttonPressOpacity : 1.0)
                         }
@@ -121,6 +120,15 @@ struct SideDrawerView: View, ActionableView {
                                     .frame(width: 25, height: 25)
                             }
                             Button(action: {
+                                if let url = URL(string: Constants.Common.youtubeLink) {
+                                    UIApplication.shared.open(url)
+                                }
+                            }) {
+                                Image(Constants.SideDrawer.youtubeLogo)
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                            }
+                            Button(action: {
                                 if let url = URL(string: Constants.Common.instagramLink) {
                                     UIApplication.shared.open(url)
                                 }
@@ -134,10 +142,8 @@ struct SideDrawerView: View, ActionableView {
 
                         Text(Constants.Common.companyName)
                             .font(
-                                .system(
-                                    size: Constants.SideDrawer.companyNameFontSize,
-                                    weight: .thin,
-                                    design: .serif
+                                .sfProDisplayRegular(
+                                    size: Constants.SideDrawer.companyNameFontSize
                                 )
                             )
                             .foregroundColor(.black)
