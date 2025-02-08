@@ -12,7 +12,8 @@ struct SpaceRentalView: View, ActionableView {
     }
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL  // Added to handle email link opening
+    @Environment(\.openURL) private var openURL
+    @Environment(\.colorScheme) private var colorScheme 
     @Binding private var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
 
@@ -30,6 +31,10 @@ struct SpaceRentalView: View, ActionableView {
         startRadius: 8,
         endRadius: 88
     )
+    
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white : Color.black
+    }
 
     public init(
         viewState: Binding<SpaceRentalViewState>,
@@ -109,7 +114,7 @@ struct SpaceRentalView: View, ActionableView {
             Text(Constants.SpaceRental.pageTitle)
                 .font(titleStyle)
                 .multilineTextAlignment(.center)
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.horizontal)
 
             Text(Constants.SpaceRental.pageBio)
@@ -142,7 +147,7 @@ struct SpaceRentalView: View, ActionableView {
         }) {
             Text(Constants.SpaceRental.buttonText)
                 .font(buttonTextStyle)
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
                 .frame(maxWidth: .infinity)
@@ -159,8 +164,7 @@ struct SpaceRentalView: View, ActionableView {
         VStack(spacing: 4) {
             Text(Constants.SpaceRental.inquireTodayTitleText)
                 .font(.system(size: 19, design: .serif))
-                .foregroundColor(.black.opacity(0.8))
-
+                .foregroundColor(adaptiveTextColor.opacity(0.8))
             Text(Constants.SpaceRental.contact)
                 .font(.system(size: 17, weight: .bold, design: .serif))
                 .foregroundColor(.blue)
@@ -186,3 +190,4 @@ struct SpaceRentalView: View, ActionableView {
         .zIndex(0)
     }
 }
+

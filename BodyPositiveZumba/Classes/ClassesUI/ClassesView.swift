@@ -15,6 +15,7 @@ struct ClassesView: View, ActionableView {
 
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme  // Added to detect dark vs. light mode
     @Binding var viewState: ClassesViewState
 
     public init(
@@ -23,6 +24,11 @@ struct ClassesView: View, ActionableView {
     ) {
         self._viewState = viewState
         self.onAction = onAction
+    }
+    
+    // This computed property returns black in light mode and white in dark mode.
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white : Color.black
     }
 
     var body: some View {
@@ -52,13 +58,13 @@ private extension ClassesView {
             Text(Constants.Classes.pageTitle)
                 .font(.system(size: 33, weight: .bold, design: .serif))
                 .multilineTextAlignment(.center)
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.top, 40)
                 .padding(.bottom, 8)
 
             Text(Constants.Classes.pageBio)
                 .font(.system(size: 20, weight: .semibold, design: .serif))
-                .foregroundColor(.black.opacity(0.9))
+                .foregroundColor(adaptiveTextColor.opacity(0.9))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.bottom, 25)
@@ -99,7 +105,7 @@ private extension ClassesView {
                     .font(.system(size: 16, weight: .semibold, design: .serif))
                 Image(systemName: viewState.isBioExpanded ? "chevron.right" : "chevron.down")
             }
-            .foregroundColor(.black)
+            .foregroundColor(adaptiveTextColor)
             .multilineTextAlignment(.center)
             .padding(.top, 30)
         }
@@ -108,7 +114,7 @@ private extension ClassesView {
     var bioText: some View {
         Text(viewState.currentDanceClass.description)
             .font(.system(size: 18, design: .serif))
-            .foregroundColor(.black)
+            .foregroundColor(adaptiveTextColor)
             .multilineTextAlignment(.center)
             .padding(.horizontal)
     }
@@ -117,13 +123,13 @@ private extension ClassesView {
         Button(action: openViewAllClassesURL) {
             Text(Constants.Classes.viewAllButtonText)
                 .font(.system(size: 20, weight: .bold, design: .serif))
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 20)
                 .background(viewState.currentDanceClass.color.opacity(0.1))
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 3)
+                        .stroke(adaptiveTextColor, lineWidth: 3)
                 )
                 .cornerRadius(8)
         }
@@ -166,3 +172,4 @@ struct PressableButton: ButtonStyle {
             .animation(.easeInOut(duration: 0.03), value: configuration.isPressed)
     }
 }
+

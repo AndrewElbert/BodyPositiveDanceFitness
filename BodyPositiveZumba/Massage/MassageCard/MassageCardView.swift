@@ -24,6 +24,7 @@ struct MassageCardView: View {
             Text(card.name)
                 .font(.system(size: 24, design: .serif))
                 .fontWeight(.bold)
+                .foregroundColor(.black)
                 .padding(.top, 10)
 
             Text(card.parlor)

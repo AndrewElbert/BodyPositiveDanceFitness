@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ExpandableSection: View, ActionableView {
+    
     enum Action {
         case toggleExpansion
     }
 
     @Binding var viewState: ExpandableSectionViewState
     var onAction: ((Action) -> Void)?
+    @Environment(\.colorScheme) private var colorScheme
+    
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white : Color.black
+    }
 
     init(
         viewState: Binding<ExpandableSectionViewState>,
@@ -52,7 +58,7 @@ struct ExpandableSection: View, ActionableView {
     private var titleText: some View {
         Text(viewState.title)
             .font(.system(size: 20, weight: .bold, design: .serif))
-            .foregroundColor(.black)
+            .foregroundColor(adaptiveTextColor)
     }
 
     private var expandCollapseIcon: some View {

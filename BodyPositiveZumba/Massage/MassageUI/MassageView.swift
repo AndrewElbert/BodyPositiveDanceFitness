@@ -15,7 +15,12 @@ struct MassageView: View, ActionableView {
 
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: MassageViewState
+
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white : Color.black
+    }
 
     public init(
         viewState: Binding<MassageViewState>,
@@ -55,12 +60,12 @@ private extension MassageView {
             Text(viewState.pageTitle)
                 .font(.system(size: 34, weight: .bold, design: .serif))
                 .multilineTextAlignment(.center)
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding()
 
             Text(viewState.pageBio)
                 .font(.system(size: 16, design: .serif))
-                .foregroundColor(.black.opacity(0.9))
+                .foregroundColor(adaptiveTextColor.opacity(0.9))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.bottom, 16)
@@ -93,7 +98,7 @@ private extension MassageView {
         Button(action: { onAction?(.updateUrl) }) {
             Text(Constants.Massage.buttonText)
                 .font(.system(size: 24, weight: .bold, design: .serif))
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 20)
                 .background(
@@ -145,3 +150,4 @@ private extension MassageView {
         }
     }
 }
+
