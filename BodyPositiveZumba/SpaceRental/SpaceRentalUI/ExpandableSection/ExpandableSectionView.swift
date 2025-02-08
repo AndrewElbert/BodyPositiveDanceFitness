@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ExpandableSection: View, ActionableView {
+
     enum Action {
         case toggleExpansion
     }
 
     @Binding var viewState: ExpandableSectionViewState
     var onAction: ((Action) -> Void)?
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
 
     init(
         viewState: Binding<ExpandableSectionViewState>,
@@ -51,28 +57,31 @@ struct ExpandableSection: View, ActionableView {
 
     private var titleText: some View {
         Text(viewState.title)
-            .font(.system(size: 20, weight: .bold, design: .serif))
+            .font(.sfProRoundedTextBold(size: 20))
             .foregroundColor(.black)
     }
 
     private var expandCollapseIcon: some View {
         Image(systemName: viewState.isExpanded ? "chevron.down" : "chevron.right")
-            .font(.system(size: 18, weight: .bold))
+            .font(.sfProBodyTextBold(size: 18))
             .foregroundColor(.white)
             .rotationEffect(.degrees(viewState.isExpanded ? 180 : 0))
             .animation(.easeInOut(duration: 0.4), value: viewState.isExpanded)
     }
 
     private var headerBackground: some View {
-        RadialGradient(
-            gradient: Gradient(colors: [
-                Color.orange.opacity(0.1),
-                Color.orange.opacity(0.7)
-            ]),
-            center: .center,
-            startRadius: 8,
-            endRadius: 88
-        )
+        ZStack {
+            Color.white
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Color.orange.opacity(0.1),
+                    Color.orange.opacity(0.7)
+                ]),
+                center: .center,
+                startRadius: 8,
+                endRadius: 88
+            )
+        }
     }
 
     private var headerBorder: some View {

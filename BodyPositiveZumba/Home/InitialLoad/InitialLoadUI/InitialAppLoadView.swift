@@ -27,70 +27,72 @@ struct InitialAppLoadView: View {
     }
 
     var body: some View {
-        VStack {
-            if viewState.showHomeScreen {
-                Color.clear.onAppear {
-                    onAction?(.navigateHomeScreen)
-                }
-            } else {
-                Image(Constants.Common.logoName)
-                    .resizable()
-                    .scaledToFit()
-                    .ignoresSafeArea()
-                    .scaleEffect(0.9)
-                    .padding(.top, 50)
+        ZStack {
+            Color.white.ignoresSafeArea()
 
-                VStack {
-                    ZStack(alignment: .leading) {
-                        Capsule()
-                            .stroke(viewState.barOutlineColor, lineWidth: 5)
-                            .frame(height: 20)
-
-                        Capsule()
-                            .fill(
-                                LinearGradient(
-                                    gradient: Gradient(
-                                        colors: [viewState.barColorStart, viewState.barColorEnd]
-                                    ),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .frame(
-                                width: viewState.progress * UIScreen.main.bounds.width * 0.8,
-                                height: 20
-                            )
-                            .animation(
-                                .linear(
-                                    duration: viewState.barLoadDuration
-                                ),
-                                value: viewState.progress
-                            )
+            VStack {
+                if viewState.showHomeScreen {
+                    Color.clear.onAppear {
+                        onAction?(.navigateHomeScreen)
                     }
-                    .frame(width: UIScreen.main.bounds.width * 0.8)
+                } else {
+                    Image(Constants.Common.logoName)
+                        .resizable()
+                        .scaledToFit()
+                        .ignoresSafeArea()
+                        .scaleEffect(0.9)
+                        .padding(.top, 50)
 
-                    Text(Constants.Common.tradeMarkSlogan)
-                        .font(
-                            .system(
-                                size: Constants.Home.tradeMarkSloganSize,
-                                weight: .semibold,
-                                design: .serif
-                            )
-                        )
-                        .multilineTextAlignment(.center)
-                        .padding(.top)
-                        .opacity(viewState.fadeInProgress)
-                        .foregroundColor(viewState.textColor)
-                        .onAppear {
-                            withAnimation(
-                                Animation.easeIn(duration: 0.8)
-                            ) {
-                                onAction?(.startAnimations)
-                            }
+                    VStack {
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .stroke(viewState.barOutlineColor, lineWidth: 5)
+                                .frame(height: 20)
+
+                            Capsule()
+                                .fill(
+                                    LinearGradient(
+                                        gradient: Gradient(
+                                            colors: [viewState.barColorStart, viewState.barColorEnd]
+                                        ),
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                                .frame(
+                                    width: viewState.progress * UIScreen.main.bounds.width * 0.8,
+                                    height: 20
+                                )
+                                .animation(
+                                    .linear(
+                                        duration: viewState.barLoadDuration
+                                    ),
+                                    value: viewState.progress
+                                )
                         }
-                }
-                .onAppear {
-                    onAction?(.startLoading)
+                        .frame(width: UIScreen.main.bounds.width * 0.8)
+
+                        Text(Constants.Common.tradeMarkSlogan)
+                            .font(
+                                .sfProRoundedTextBold(
+                                    size: Constants.Home.tradeMarkSloganSize
+                                    )
+                            )
+                            .multilineTextAlignment(.center)
+                            .padding(.top)
+                            .opacity(viewState.fadeInProgress)
+                            .foregroundColor(viewState.textColor)
+                            .onAppear {
+                                withAnimation(
+                                    Animation.easeIn(duration: 0.8)
+                                ) {
+                                    onAction?(.startAnimations)
+                                }
+                            }
+                    }
+                    .onAppear {
+                        onAction?(.startLoading)
+                    }
                 }
             }
         }
