@@ -58,7 +58,7 @@ struct ExpandableSection: View, ActionableView {
     private var titleText: some View {
         Text(viewState.title)
             .font(.system(size: 20, weight: .bold, design: .serif))
-            .foregroundColor(adaptiveTextColor)
+            .foregroundColor(.black)
     }
 
     private var expandCollapseIcon: some View {
@@ -70,15 +70,18 @@ struct ExpandableSection: View, ActionableView {
     }
 
     private var headerBackground: some View {
-        RadialGradient(
-            gradient: Gradient(colors: [
-                Color.orange.opacity(0.1),
-                Color.orange.opacity(0.7)
-            ]),
-            center: .center,
-            startRadius: 8,
-            endRadius: 88
-        )
+        ZStack {
+            Color.white
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Color.orange.opacity(0.1),
+                    Color.orange.opacity(0.7)
+                ]),
+                center: .center,
+                startRadius: 8,
+                endRadius: 88
+            )
+        }
     }
 
     private var headerBorder: some View {

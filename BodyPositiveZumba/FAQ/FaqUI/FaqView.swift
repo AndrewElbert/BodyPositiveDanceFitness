@@ -27,6 +27,9 @@ struct FaqView: View, ActionableView {
         trailing: 0
     )
     
+    private var adaptiveTextTitleColor: Color {
+        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
+    }
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white : Color.black
     }
@@ -59,7 +62,7 @@ struct FaqView: View, ActionableView {
     private var pageTitle: some View {
         Text(Constants.FAQ.pageTitle)
             .font(titleStyle)
-            .foregroundColor(adaptiveTextColor)
+            .foregroundColor(adaptiveTextTitleColor)
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(titlePadding)
     }

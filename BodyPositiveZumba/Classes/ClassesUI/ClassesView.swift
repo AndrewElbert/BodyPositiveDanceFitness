@@ -15,7 +15,7 @@ struct ClassesView: View, ActionableView {
 
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.colorScheme) private var colorScheme  // Added to detect dark vs. light mode
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: ClassesViewState
 
     public init(
@@ -26,7 +26,9 @@ struct ClassesView: View, ActionableView {
         self.onAction = onAction
     }
     
-    // This computed property returns black in light mode and white in dark mode.
+    private var adaptiveTextTitleColor: Color {
+        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
+    }
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white : Color.black
     }
@@ -58,9 +60,9 @@ private extension ClassesView {
             Text(Constants.Classes.pageTitle)
                 .font(.system(size: 33, weight: .bold, design: .serif))
                 .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextColor)
+                .foregroundColor(adaptiveTextTitleColor)
                 .padding(.top, 40)
-                .padding(.bottom, 8)
+                .padding(.bottom, 33)
 
             Text(Constants.Classes.pageBio)
                 .font(.system(size: 20, weight: .semibold, design: .serif))
