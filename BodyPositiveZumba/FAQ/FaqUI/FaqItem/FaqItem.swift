@@ -16,6 +16,11 @@ struct FaqItem: View {
 
     var onAction: ((Action) -> Void)?
     @Binding var viewState: FaqItemViewState
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
 
     public init(
         viewState: Binding<FaqItemViewState>,
@@ -34,8 +39,8 @@ struct FaqItem: View {
             ) {
                 HStack {
                     Text(viewState.question)
-                        .font(.system(size: 18, weight: .regular, design: .serif))
-                        .foregroundColor(viewState.isExpanded ? Constants.Colors.darkOrange : .primary)
+                        .font(.sfProRoundedTextRegular(size: 18))
+                        .foregroundColor(viewState.isExpanded ? Constants.Colors.darkOrange : .black)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .multilineTextAlignment(.leading)
                     Spacer()
@@ -53,12 +58,18 @@ struct FaqItem: View {
                         )
                 )
                 .background(
-                    RadialGradient(
-                        gradient: Gradient(colors: [Constants.Colors.neonCyan.opacity(0.1), Constants.Colors.neonCyan.opacity(0.2)]),
-                        center: .center,
-                        startRadius: 22,
-                        endRadius: 111
-                    )
+                    ZStack {
+                        Color(.white)
+                        RadialGradient(
+                            gradient: Gradient(colors: [
+                                Constants.Colors.neonCyan.opacity(0.1),
+                                Constants.Colors.neonCyan.opacity(0.3)
+                            ]),
+                            center: .center,
+                            startRadius: 22,
+                            endRadius: 122
+                        )
+                    }
                     .cornerRadius(10)
                 )
             }
@@ -66,9 +77,9 @@ struct FaqItem: View {
             ZStack {
                 if viewState.isExpanded || viewState.isClosing {
                     Text(viewState.answer)
-                        .font(.system(size: 16, weight: .regular, design: .serif))
+                        .font(.sfProBodyTextRegular(size: 18))
+                        .foregroundColor(adaptiveTextColor)
                         .padding()
-                        .background(Color.white)
                         .cornerRadius(10)
                 }
             }

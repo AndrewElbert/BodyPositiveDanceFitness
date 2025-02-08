@@ -12,24 +12,34 @@ struct SpaceRentalView: View, ActionableView {
     }
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL  // Added to handle email link opening
+    @Environment(\.openURL) private var openURL
+    @Environment(\.colorScheme) private var colorScheme
     @Binding private var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
 
-    private let titleStyle = Font.system(size: 23, weight: .bold, design: .serif)
-    private let bioStyle = Font.system(size: 16, design: .serif)
-    private let buttonTextStyle = Font.system(size: 20, weight: .bold, design: .serif)
+    private let titleStyle = Font.sfProDisplayBold(size: 23)
+    private let bioStyle = Font.sfProBodyTextRegular(size: 18)
+    private let buttonTextStyle = Font.sfProRoundedTextBold(size: 20)
     private let buttonAnimation = Animation.easeInOut(duration: 0.4)
 
-    private let buttonGradient = RadialGradient(
-        gradient: Gradient(colors: [
-            Constants.Colors.neonCyan.opacity(0.1),
-            Constants.Colors.neonCyan.opacity(0.5)
-        ]),
-        center: .center,
-        startRadius: 8,
-        endRadius: 88
-    )
+    private var buttonGradient: some View {
+        ZStack {
+            Color.white
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Constants.Colors.neonCyan.opacity(0.1),
+                    Constants.Colors.neonCyan.opacity(0.5)
+                ]),
+                center: .center,
+                startRadius: 8,
+                endRadius: 88
+            )
+        }
+    }
+
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
 
     public init(
         viewState: Binding<SpaceRentalViewState>,
@@ -109,12 +119,12 @@ struct SpaceRentalView: View, ActionableView {
             Text(Constants.SpaceRental.pageTitle)
                 .font(titleStyle)
                 .multilineTextAlignment(.center)
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding(.horizontal)
 
             Text(Constants.SpaceRental.pageBio)
                 .font(bioStyle)
-                .foregroundColor(Constants.Colors.darkOrange)
+                .foregroundColor(adaptiveTextColor)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
@@ -158,11 +168,10 @@ struct SpaceRentalView: View, ActionableView {
     private var messageContent: some View {
         VStack(spacing: 4) {
             Text(Constants.SpaceRental.inquireTodayTitleText)
-                .font(.system(size: 19, design: .serif))
-                .foregroundColor(.black.opacity(0.8))
-
+                .font(.sfProBodyTextRegular(size: 19))
+                .foregroundColor(adaptiveTextColor)
             Text(Constants.SpaceRental.contact)
-                .font(.system(size: 17, weight: .bold, design: .serif))
+                .font(.sfProBodyTextBold(size: 17))
                 .foregroundColor(.blue)
                 .underline()
                 .onTapGesture {

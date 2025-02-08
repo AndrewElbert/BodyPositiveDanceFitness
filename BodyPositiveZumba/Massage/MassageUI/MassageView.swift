@@ -15,7 +15,12 @@ struct MassageView: View, ActionableView {
 
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: MassageViewState
+
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
 
     public init(
         viewState: Binding<MassageViewState>,
@@ -53,14 +58,14 @@ private extension MassageView {
     var headerSection: some View {
         VStack {
             Text(viewState.pageTitle)
-                .font(.system(size: 34, weight: .bold, design: .serif))
+                .font(.sfProDisplayBold(size: 34))
                 .multilineTextAlignment(.center)
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .padding()
 
             Text(viewState.pageBio)
-                .font(.system(size: 16, design: .serif))
-                .foregroundColor(.black.opacity(0.9))
+                .font(.sfProBodyTextRegular(size: 16))
+                .foregroundColor(adaptiveTextColor)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.bottom, 16)
@@ -92,20 +97,23 @@ private extension MassageView {
     var actionButton: some View {
         Button(action: { onAction?(.updateUrl) }) {
             Text(Constants.Massage.buttonText)
-                .font(.system(size: 24, weight: .bold, design: .serif))
+                .font(.sfProRoundedTextMedium(size: 24))
                 .foregroundColor(.black)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 20)
                 .background(
-                    RadialGradient(
-                        gradient: Gradient(colors: [
-                            Constants.Colors.neonCyan.opacity(0.1),
-                            Constants.Colors.neonCyan.opacity(0.5)
-                        ]),
-                        center: .center,
-                        startRadius: 50,
-                        endRadius: 100
-                    )
+                    ZStack {
+                        Color.white
+                        RadialGradient(
+                            gradient: Gradient(colors: [
+                                Constants.Colors.neonCyan.opacity(0.1),
+                                Constants.Colors.neonCyan.opacity(0.5)
+                            ]),
+                            center: .center,
+                            startRadius: 50,
+                            endRadius: 100
+                        )
+                    }
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -121,7 +129,7 @@ private extension MassageView {
             if viewState.showSwipeAnimation {
                 VStack(spacing: 8) {
                     Text(Constants.Massage.swipe)
-                        .font(.system(size: 16, weight: .medium, design: .serif))
+                        .font(.sfProRoundedTextMedium(size: 18))
                         .foregroundColor(.gray)
                     SwipeAnimationComponent(
                         viewModel: SwipeAnimationViewModel(
