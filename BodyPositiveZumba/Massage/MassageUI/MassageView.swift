@@ -18,7 +18,10 @@ struct MassageView: View, ActionableView {
     @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: MassageViewState
 
-    private var adaptiveTextColor: Color {
+    private var adaptiveTextTitleColor: Color {
+        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
+    }
+    private var adaptiveTextBioColor: Color {
         colorScheme == .dark ? Color.white : Color.black
     }
 
@@ -60,12 +63,12 @@ private extension MassageView {
             Text(viewState.pageTitle)
                 .font(.system(size: 34, weight: .bold, design: .serif))
                 .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextColor)
+                .foregroundColor(adaptiveTextTitleColor)
                 .padding()
 
             Text(viewState.pageBio)
                 .font(.system(size: 16, design: .serif))
-                .foregroundColor(adaptiveTextColor.opacity(0.9))
+                .foregroundColor(adaptiveTextBioColor.opacity(0.9))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.bottom, 16)
@@ -98,19 +101,22 @@ private extension MassageView {
         Button(action: { onAction?(.updateUrl) }) {
             Text(Constants.Massage.buttonText)
                 .font(.system(size: 24, weight: .bold, design: .serif))
-                .foregroundColor(adaptiveTextColor)
+                .foregroundColor(.black)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 20)
                 .background(
-                    RadialGradient(
-                        gradient: Gradient(colors: [
-                            Constants.Colors.neonCyan.opacity(0.1),
-                            Constants.Colors.neonCyan.opacity(0.5)
-                        ]),
-                        center: .center,
-                        startRadius: 50,
-                        endRadius: 100
-                    )
+                    ZStack {
+                        Color.white
+                        RadialGradient(
+                            gradient: Gradient(colors: [
+                                Constants.Colors.neonCyan.opacity(0.1),
+                                Constants.Colors.neonCyan.opacity(0.5)
+                            ]),
+                            center: .center,
+                            startRadius: 50,
+                            endRadius: 100
+                        )
+                    }
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)

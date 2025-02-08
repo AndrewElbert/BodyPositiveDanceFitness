@@ -13,7 +13,7 @@ struct SpaceRentalView: View, ActionableView {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @Environment(\.colorScheme) private var colorScheme 
+    @Environment(\.colorScheme) private var colorScheme
     @Binding private var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
 
@@ -22,15 +22,24 @@ struct SpaceRentalView: View, ActionableView {
     private let buttonTextStyle = Font.system(size: 20, weight: .bold, design: .serif)
     private let buttonAnimation = Animation.easeInOut(duration: 0.4)
 
-    private let buttonGradient = RadialGradient(
-        gradient: Gradient(colors: [
-            Constants.Colors.neonCyan.opacity(0.1),
-            Constants.Colors.neonCyan.opacity(0.5)
-        ]),
-        center: .center,
-        startRadius: 8,
-        endRadius: 88
-    )
+    private var buttonGradient: some View {
+        ZStack {
+            Color.white
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Constants.Colors.neonCyan.opacity(0.1),
+                    Constants.Colors.neonCyan.opacity(0.5)
+                ]),
+                center: .center,
+                startRadius: 8,
+                endRadius: 88
+            )
+        }
+    }
+    
+    private var adaptiveTextTitleColor: Color {
+        colorScheme == .dark ? Constants.Colors.neonCyan : Color.black
+    }
     
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white : Color.black
@@ -114,7 +123,7 @@ struct SpaceRentalView: View, ActionableView {
             Text(Constants.SpaceRental.pageTitle)
                 .font(titleStyle)
                 .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextColor)
+                .foregroundColor(adaptiveTextTitleColor)
                 .padding(.horizontal)
 
             Text(Constants.SpaceRental.pageBio)
@@ -147,7 +156,7 @@ struct SpaceRentalView: View, ActionableView {
         }) {
             Text(Constants.SpaceRental.buttonText)
                 .font(buttonTextStyle)
-                .foregroundColor(adaptiveTextColor)
+                .foregroundColor(.black)
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
                 .frame(maxWidth: .infinity)
@@ -164,7 +173,7 @@ struct SpaceRentalView: View, ActionableView {
         VStack(spacing: 4) {
             Text(Constants.SpaceRental.inquireTodayTitleText)
                 .font(.system(size: 19, design: .serif))
-                .foregroundColor(adaptiveTextColor.opacity(0.8))
+                .foregroundColor(adaptiveTextColor)
             Text(Constants.SpaceRental.contact)
                 .font(.system(size: 17, weight: .bold, design: .serif))
                 .foregroundColor(.blue)
