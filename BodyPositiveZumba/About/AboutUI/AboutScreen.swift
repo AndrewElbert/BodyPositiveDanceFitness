@@ -7,6 +7,27 @@
 
 import SwiftUI
 
-struct AboutScreen {
+struct AboutScreen: View {
 
+    @ObservedObject private var viewModel: AboutViewModel
+
+    public init(
+        viewModel: AboutViewModel
+    ) {
+        self._viewModel = ObservedObject(wrappedValue: viewModel)
+    }
+
+    var body: some View {
+        AboutView(
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .toggleExpansion(let id):
+                    viewModel.toggleExpansion(for: id)
+                case .handleButtonTap:
+                    viewModel.handleButtonTap()
+                }
+            }
+        )
+    }
 }

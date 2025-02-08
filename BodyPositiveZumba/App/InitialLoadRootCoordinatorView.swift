@@ -30,7 +30,7 @@ struct InitialLoadRootCoordinatorView: View {
             case .faq:
                 FaqUI.faqPage()
             case .about:
-                Text("About")
+                AboutUI.aboutPage()
             case .massage:
                 MassageUI.massagePage()
             case .spaceRental:
