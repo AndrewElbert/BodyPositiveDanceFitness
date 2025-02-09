@@ -49,25 +49,6 @@ struct AboutView: View, ActionableView {
                 }
                 .padding()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: { dismiss() }) {
-                        HStack(spacing: 3) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 17, weight: .medium))
-                            Text("Back")
-                                .font(.sfProBodyTextMedium(size: 22))
-                        }
-                        .foregroundColor(.blue)
-                    }
-                }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    CloseButton {
-                        dismiss()
-                    }
-                }
-            }
         }
     }
 }

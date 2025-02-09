@@ -9,17 +9,13 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
 
-    unowned let sideDrawerCoordinator: SideDrawerCoordinator
-
     var viewState = HomeViewState()
 
     unowned let homeCoordinator: HomeCoordinator
 
     init(
-        homeCoordinator: HomeCoordinator,
-        sideDrawerCoordinator: SideDrawerCoordinator
+        homeCoordinator: HomeCoordinator
     ) {
         self.homeCoordinator = homeCoordinator
-        self.sideDrawerCoordinator = sideDrawerCoordinator
     }
 }

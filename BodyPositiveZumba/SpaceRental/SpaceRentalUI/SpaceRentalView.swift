@@ -1,3 +1,4 @@
+//
 //  SpaceRentalView.swift
 //  SpaceRentalUI
 //
@@ -7,6 +8,7 @@
 import SwiftUI
 
 struct SpaceRentalView: View, ActionableView {
+
     enum Action {
         case toggleMessage
     }
@@ -55,7 +57,10 @@ struct SpaceRentalView: View, ActionableView {
                 LazyVStack(spacing: 0) {
                     headerSection
                     messageSection
+
                     carouselSection
+                        .opacity(viewState.showCarousel ? 1 : 0)
+                        .animation(.easeIn(duration: 1.11), value: viewState.showCarousel)
 
                     VStack(spacing: 16) {
                         ExpandableSectionComponent(
@@ -105,17 +110,16 @@ struct SpaceRentalView: View, ActionableView {
                 }
                 .padding()
             }
+            .onAppear {
+                withAnimation(.easeIn.delay(0.001)) {
+                    viewState.showCarousel = true
+                }
+            }
         }
     }
 
     private var headerSection: some View {
-        Group {
-            HStack {
-                CloseButton {
-                    dismiss()
-                }
-            }
-
+        VStack {
             Text(Constants.SpaceRental.pageTitle)
                 .font(titleStyle)
                 .multilineTextAlignment(.center)
