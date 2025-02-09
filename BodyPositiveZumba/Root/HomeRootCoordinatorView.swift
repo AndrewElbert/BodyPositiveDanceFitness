@@ -14,18 +14,29 @@ struct HomeRootCoordinatorView: View {
     @ObservedObject var coordinator: HomeRootCoordinator
 
     var body: some View {
-        Router($coordinator.routes) { screen, _ in
+        Router($coordinator.routes) {
+            screen,
+            _ in
             switch screen {
             case .joinNow:
                 Text("Join Now")
             case .classes:
                 ClassesUI.classesPage()
+            case .faq:
+                FaqUI.faqPage()
             case .about:
                 AboutFlowCoordinatorView(coordinator: AboutFlowCoordinator())
-            case .sidedrawer:
-                SideDrawerFlowCoordinatorView(coordinator: SideDrawerFlowCoordinator())
+            case .massage:
+                MassageUI.massagePage()
+            case .spaceRental:
+                SpaceRentalUI.spaceRentalPage()
+            case .contact:
+                ContactUI.contactPage()
             case .root:
-                InitialUI.initialHome(homeCoordinator: coordinator)
+                InitialUI.initialHome(
+                    homeCoordinator: coordinator,
+                    sideDrawerCoordinator: coordinator
+                )
             }
         }
     }
