@@ -12,10 +12,13 @@ class HomeRootCoordinator: RootCoordinator {
     
     enum Screen {
         case root
-        case sidedrawer
         case joinNow
         case classes
         case about
+        case faq
+        case massage
+        case spaceRental
+        case contact
     }
 
     @Published var routes: Routes<Screen>
@@ -28,16 +31,8 @@ class HomeRootCoordinator: RootCoordinator {
 extension HomeRootCoordinator: HomeCoordinator {
     
     func home_viewAbout() {
-        self.routes.presentCover(
-            .about,
-            embedInNavigationView: true
-        )
-    }
-    
-    func home_viewSideDrawer() {
-        self.routes.presentCover(
-            .sidedrawer,
-            embedInNavigationView: true
+        self.routes.push(
+            .about
         )
     }
     
@@ -47,6 +42,55 @@ extension HomeRootCoordinator: HomeCoordinator {
     
     func home_viewJoinNow() {
         routes.presentSheet(.joinNow)
+    }
+}
+
+extension HomeRootCoordinator: SideDrawerCoordinator {
+    
+    func sideDrawer_dismissLastPresented() {
+        routes.dismiss()
+    }
+
+    func sideDrawer_viewJoinNow() {
+        routes.presentSheet(
+            .joinNow
+        )
+    }
+
+    func sideDrawer_viewClasses() {
+        routes.push(
+            .classes
+        )
+    }
+
+    func sideDrawer_viewFaq() {
+        routes.presentSheet(
+            .faq
+        )
+    }
+
+    func sideDrawer_viewAbout() {
+        routes.push(
+            .about
+        )
+    }
+
+    func sideDrawer_viewMassage() {
+        routes.presentSheet(
+            .massage
+        )
+    }
+
+    func sideDrawer_viewSpaceRental() {
+        routes.presentSheet(
+            .spaceRental
+        )
+    }
+
+    func sideDrawer_viewContact() {
+        routes.presentSheet(
+            .contact
+        )
     }
 }
 
