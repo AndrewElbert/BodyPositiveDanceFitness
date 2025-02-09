@@ -1,0 +1,32 @@
+//
+//  HomeRootCoordinatorView.swift
+//  BodyPositiveZumba
+//
+//  Created by Andrew Elbert on 2/8/25.
+//
+
+import FlowStacks
+import Foundation
+import SwiftUI
+
+struct HomeRootCoordinatorView: View {
+
+    @ObservedObject var coordinator: HomeRootCoordinator
+
+    var body: some View {
+        Router($coordinator.routes) { screen, _ in
+            switch screen {
+            case .joinNow:
+                Text("Join Now")
+            case .classes:
+                ClassesUI.classesPage()
+            case .about:
+                AboutFlowCoordinatorView(coordinator: AboutFlowCoordinator())
+            case .sidedrawer:
+                SideDrawerFlowCoordinatorView(coordinator: SideDrawerFlowCoordinator())
+            case .root:
+                InitialUI.initialHome(homeCoordinator: coordinator)
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  SideDrawerRootCoordinator.swift
+//  SideDrawerFlowCoordinator.swift
 //  RootCoordinators
 //
 //  Created by Andrew Elbert on 1/29/25.
@@ -8,7 +8,7 @@
 import FlowStacks
 import Foundation
 
-class SideDrawerRootCoordinator: RootCoordinator {
+class SideDrawerFlowCoordinator: FlowCoordinator {
 
     enum Screen {
         case root

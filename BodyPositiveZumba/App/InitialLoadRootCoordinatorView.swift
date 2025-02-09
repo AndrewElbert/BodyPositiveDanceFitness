@@ -19,24 +19,8 @@ struct InitialLoadRootCoordinatorView: View {
             case .root:
                 InitialUI.initialLoad(coordinator: coordinator)
             case .home:
-                InitialUI.initialHome(
-                    homeCoordinator: coordinator,
-                    sideDrawerCoordinator: coordinator
+                HomeRootCoordinatorView(coordinator: HomeRootCoordinator()
                 )
-            case .joinNow:
-                Text("Join Now")
-            case .classes:
-                ClassesUI.classesPage()
-            case .faq:
-                FaqUI.faqPage()
-            case .about:
-                AboutUI.aboutPage()
-            case .massage:
-                MassageUI.massagePage()
-            case .spaceRental:
-                SpaceRentalUI.spaceRentalPage()
-            case .contact:
-                ContactUI.contactPage()
             }
         }
     }
