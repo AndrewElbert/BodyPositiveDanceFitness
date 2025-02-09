@@ -21,13 +21,11 @@ struct InitialUI {
     }
 
     static func initialHome(
-        homeCoordinator: HomeCoordinator,
-        sideDrawerCoordinator: SideDrawerCoordinator
+        homeCoordinator: HomeRootCoordinator
     ) -> some View {
         HomeScreen(
             viewModel: HomeViewModel(
-                homeCoordinator: homeCoordinator,
-                sideDrawerCoordinator: sideDrawerCoordinator
+                homeCoordinator: homeCoordinator
             )
         )
     }

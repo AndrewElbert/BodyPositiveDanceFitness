@@ -9,5 +9,10 @@ import Foundation
 import SwiftUI
 
 protocol HomeCoordinator: ScreenCoordinator {
+    
+    func home_viewAbout()
+    func home_viewSideDrawer()
+    func home_viewClasses()
+    func home_viewJoinNow()
 
 }
