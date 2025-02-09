@@ -9,19 +9,23 @@ import FlowStacks
 import Foundation
 
 class AboutFlowCoordinator: FlowCoordinator {
-
+    
     enum Screen {
         case root
         case team
         case classes
         case partners
     }
-
+    
     @Published var routes: Routes<Screen>
-
+    
     init() {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
+    
+}
+
+extension AboutFlowCoordinator: AboutCoordinator {
 
     func about_viewPartners() {
         routes.presentSheet(
