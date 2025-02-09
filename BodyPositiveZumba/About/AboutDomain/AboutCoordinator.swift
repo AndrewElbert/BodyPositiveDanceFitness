@@ -6,7 +6,7 @@
 //
 
 protocol AboutCoordinator: ScreenCoordinator {
-    
+
     func about_viewTeam()
     func about_viewClasses()
     func about_viewPartners()

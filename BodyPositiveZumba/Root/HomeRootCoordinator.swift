@@ -9,7 +9,7 @@ import FlowStacks
 import SwiftUI
 
 class HomeRootCoordinator: RootCoordinator {
-    
+
     enum Screen {
         case root
         case joinNow
@@ -29,28 +29,28 @@ class HomeRootCoordinator: RootCoordinator {
 }
 
 extension HomeRootCoordinator: HomeCoordinator {
-    
+
     func home_viewAbout() {
         self.routes.push(
             .about
         )
     }
-    
+
     func home_viewClasses() {
         routes.presentSheet(.classes)
     }
-    
+
     func home_viewJoinNow() {
         routes.presentSheet(.joinNow)
     }
 }
 
 extension HomeRootCoordinator: SideDrawerCoordinator {
-    
+
     func sideDrawer_popToRoot() {
         routes.popToRoot()
     }
-    
+
     func sideDrawer_dismissLastPresented() {
         routes.dismiss()
     }
@@ -97,5 +97,3 @@ extension HomeRootCoordinator: SideDrawerCoordinator {
         )
     }
 }
-
-

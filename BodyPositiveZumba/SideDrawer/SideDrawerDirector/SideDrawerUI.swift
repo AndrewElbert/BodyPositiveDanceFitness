@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SideDrawerUI {
-    
+
     static func sideDrawer(
         sideDrawerCoordinator: SideDrawerCoordinator
     ) -> some View {
