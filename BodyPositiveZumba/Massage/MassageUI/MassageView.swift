@@ -5,7 +5,6 @@
 //  Created by Andrew Elbert on 1/28/25.
 //
 
-
 import SwiftUI
 
 struct MassageView: View, ActionableView {
@@ -17,7 +16,7 @@ struct MassageView: View, ActionableView {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: MassageViewState
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
