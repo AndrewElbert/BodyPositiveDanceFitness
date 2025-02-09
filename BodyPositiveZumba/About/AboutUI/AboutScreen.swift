@@ -24,10 +24,15 @@ struct AboutScreen: View {
                 switch action {
                 case .toggleExpansion(let id):
                     viewModel.toggleExpansion(for: id)
-                case .handleButtonTap:
-                    viewModel.handleButtonTap()
+                case .handleTeamButtonTap:
+                    viewModel.handleTeamButtonTap()
+                case .handleClassesButtonTap:
+                    viewModel.handleClassesButtonTap()
+                case .handlePartnersButtonTap:
+                    viewModel.handlePartnersButtonTap()
                 }
             }
         )
     }
 }
+

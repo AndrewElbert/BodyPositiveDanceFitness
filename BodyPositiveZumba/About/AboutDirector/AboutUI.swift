@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct AboutUI {
-    @MainActor static func aboutPage() -> some View {
+    @MainActor static func aboutPage(
+        aboutCoordinator: AboutCoordinator
+    ) -> some View {
         AboutScreen(
-            viewModel: AboutViewModel()
+            viewModel: AboutViewModel(
+                aboutCoordinator: aboutCoordinator
+            )
+        )
+    }
+    
+    static func teamPage() -> some View {
+        TeamScreen(
+            viewModel: TeamViewModel()
         )
     }
 }

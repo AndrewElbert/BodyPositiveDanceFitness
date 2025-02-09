@@ -7,24 +7,26 @@
 
 import SwiftUI
 
-enum Action {
-    case toggleExpansion(UUID)
-    case handleButtonTap
-}
-
 struct AboutView: View, ActionableView {
-
-    @Binding var viewState: AboutViewState
-    var onAction: ((Action) -> Void)?
-    @Environment(\.dismiss) private var dismiss
-
-    init(
-        viewState: Binding<AboutViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
+    
+    enum Action {
+        case toggleExpansion(UUID)
+        case handleTeamButtonTap
+        case handleClassesButtonTap
+        case handlePartnersButtonTap
     }
+    
+    @Binding var viewState: AboutViewState
+        var onAction: ((Action) -> Void)?
+        @Environment(\.dismiss) private var dismiss
+
+        init(
+            viewState: Binding<AboutViewState>,
+            onAction: ((Action) -> Void)? = nil
+        ) {
+            self._viewState = viewState
+            self.onAction = onAction
+        }
 
     var body: some View {
         NavigationStack {
@@ -32,18 +34,27 @@ struct AboutView: View, ActionableView {
                 LazyVStack(spacing: 22) {
                     HeaderView(header: viewState.header)
                         .layoutPriority(1)
-
+                    
                     ExpandableContentList(
                         contents: viewState.expandableContents,
                         onToggle: { id in
                             onAction?(.toggleExpansion(id))
                         }
                     )
-
+                    
                     ButtonList(
-                        sections: viewState.sections,
-                        onTap: { _ in
-                            onAction?(.handleButtonTap)
+                        sections: Array(viewState.sections.prefix(3)),
+                        onTap: { section in
+                            switch section.title {
+                            case "Meet Our Team!":
+                                onAction?(.handleTeamButtonTap)
+                            case "View Our Classes":
+                                onAction?(.handleClassesButtonTap)
+                            case "Partners":
+                                onAction?(.handlePartnersButtonTap)
+                            default:
+                                break
+                            }
                         }
                     )
                 }
