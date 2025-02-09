@@ -25,9 +25,9 @@ struct InitialUI {
         sideDrawerCoordinator: SideDrawerCoordinator
     ) -> some View {
         HomeScreen(
+            sideDrawerCoordinator: sideDrawerCoordinator,
             viewModel: HomeViewModel(
-                homeCoordinator: homeCoordinator,
-                sideDrawerCoordinator: sideDrawerCoordinator
+                homeCoordinator: homeCoordinator
             )
         )
     }

@@ -1,0 +1,30 @@
+//
+//  AboutFlowCoordinatorView.swift
+//  BodyPositiveZumba
+//
+//  Created by Andrew Elbert on 2/8/25.
+//
+
+import FlowStacks
+import Foundation
+import SwiftUI
+
+struct AboutFlowCoordinatorView: View {
+
+    @ObservedObject var coordinator: AboutFlowCoordinator
+
+    var body: some View {
+        Router($coordinator.routes) { screen, _ in
+            switch screen {
+            case .root:
+                AboutUI.aboutPage()
+            case .team:
+                Text("team")
+            case .classes:
+                ClassesUI.classesPage()
+            case .partners:
+                Text("partners")
+            }
+        }
+    }
+}

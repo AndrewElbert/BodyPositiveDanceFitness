@@ -1,21 +1,21 @@
 //
-//  SideDrawerRootCoordinator.swift
-//  RootCoordinators
+//  HomeRootCoordinator.swift
+//  BodyPositiveZumba
 //
-//  Created by Andrew Elbert on 1/29/25.
+//  Created by Andrew Elbert on 2/8/25.
 //
 
 import FlowStacks
-import Foundation
+import SwiftUI
 
-class SideDrawerRootCoordinator: RootCoordinator {
+class HomeRootCoordinator: RootCoordinator {
 
     enum Screen {
         case root
         case joinNow
         case classes
-        case faq
         case about
+        case faq
         case massage
         case spaceRental
         case contact
@@ -26,13 +26,37 @@ class SideDrawerRootCoordinator: RootCoordinator {
     init() {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
+}
+
+extension HomeRootCoordinator: HomeCoordinator {
+
+    func home_viewAbout() {
+        self.routes.push(
+            .about
+        )
+    }
+
+    func home_viewClasses() {
+        routes.presentSheet(.classes)
+    }
+
+    func home_viewJoinNow() {
+        routes.presentSheet(.joinNow)
+    }
+}
+
+extension HomeRootCoordinator: SideDrawerCoordinator {
+
+    func sideDrawer_popToRoot() {
+        routes.popToRoot()
+    }
 
     func sideDrawer_dismissLastPresented() {
         routes.dismiss()
     }
 
     func sideDrawer_viewJoinNow() {
-        routes.push(
+        routes.presentSheet(
             .joinNow
         )
     }
@@ -44,7 +68,7 @@ class SideDrawerRootCoordinator: RootCoordinator {
     }
 
     func sideDrawer_viewFaq() {
-        routes.push(
+        routes.presentSheet(
             .faq
         )
     }
@@ -61,14 +85,14 @@ class SideDrawerRootCoordinator: RootCoordinator {
         )
     }
 
-    func sideDrawer_viewspaceRental() {
+    func sideDrawer_viewSpaceRental() {
         routes.push(
             .spaceRental
         )
     }
 
     func sideDrawer_viewContact() {
-        routes.push(
+        routes.presentSheet(
             .contact
         )
     }

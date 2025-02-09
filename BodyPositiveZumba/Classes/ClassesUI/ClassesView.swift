@@ -31,18 +31,15 @@ struct ClassesView: View, ActionableView {
     }
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            ScrollView {
-                VStack(spacing: 0) {
-                    headerSection
-                    carouselSection
-                    expansionToggleButton
-                    if viewState.isBioExpanded { bioText }
-                    viewAllClassesButton
-                }
-                .padding(.bottom, 20)
+        ScrollView {
+            VStack(spacing: 0) {
+                headerSection
+                carouselSection
+                expansionToggleButton
+                if viewState.isBioExpanded { bioText }
+                viewAllClassesButton
             }
-            closeButton.padding()
+            .padding(.bottom, 20)
         }
         .sheet(item: $viewState.viewAllClassesWebView) { web in
             WebViewContainer(url: web.url, title: web.title)
@@ -58,7 +55,7 @@ private extension ClassesView {
                 .font(.sfProDisplayBold(size: 40))
                 .multilineTextAlignment(.center)
                 .foregroundColor(adaptiveTextColor)
-                .padding(.top, 40)
+                .padding(.top, 11)
                 .padding(.bottom, 33)
 
             Text(Constants.Classes.pageBio)
@@ -134,12 +131,6 @@ private extension ClassesView {
         }
         .padding(.top, 50)
         .buttonStyle(PressableButton())
-    }
-
-    var closeButton: some View {
-        CloseButton {
-            dismiss()
-        }
     }
 
     var toggleButtonText: String {
