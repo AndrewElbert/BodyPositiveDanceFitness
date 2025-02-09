@@ -55,8 +55,11 @@ struct SpaceRentalView: View, ActionableView {
                 LazyVStack(spacing: 0) {
                     headerSection
                     messageSection
+                
                     carouselSection
-
+                        .opacity(viewState.showCarousel ? 1 : 0)
+                        .animation(.easeIn(duration: 1.11), value: viewState.showCarousel)
+                    
                     VStack(spacing: 16) {
                         ExpandableSectionComponent(
                             viewModel: ExpandableSectionViewModel(
@@ -105,17 +108,16 @@ struct SpaceRentalView: View, ActionableView {
                 }
                 .padding()
             }
+            .onAppear {
+                withAnimation(.easeIn.delay(0.001)) {
+                    viewState.showCarousel = true
+                }
+            }
         }
     }
 
     private var headerSection: some View {
-        Group {
-            HStack {
-                CloseButton {
-                    dismiss()
-                }
-            }
-
+        VStack {
             Text(Constants.SpaceRental.pageTitle)
                 .font(titleStyle)
                 .multilineTextAlignment(.center)
@@ -182,7 +184,9 @@ struct SpaceRentalView: View, ActionableView {
         }
         .transition(.opacity)
     }
-
+    
+    // The carouselSection is always present with a fixed frame.
+    // Its opacity is animated based on viewState.showCarousel.
     private var carouselSection: some View {
         AnimatedCarouselComponent(
             viewModel: AnimatedCarouselViewModel(
@@ -195,3 +199,4 @@ struct SpaceRentalView: View, ActionableView {
         .zIndex(0)
     }
 }
+

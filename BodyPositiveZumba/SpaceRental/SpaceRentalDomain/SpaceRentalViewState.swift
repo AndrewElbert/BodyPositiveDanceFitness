@@ -26,6 +26,7 @@ struct SpaceRentalViewState {
 
     var animatedCarouselViewState: AnimatedCarouselViewState = AnimatedCarouselViewState()
 
+    var showCarousel: Bool = false
     var showMessage = false
     let spaceImages = Constants.SpaceRental.spaceImages
 }

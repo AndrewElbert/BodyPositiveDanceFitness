@@ -37,6 +37,7 @@ struct MassageViewState {
     var isAnimating: Bool = false
     var showSwipeAnimation = true
     var bookingURL: WebViewURL?
+    var showCarousel: Bool = false
 
     var cards: [CardModel] = [
         CardModel(

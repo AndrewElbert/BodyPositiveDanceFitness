@@ -47,6 +47,10 @@ extension HomeRootCoordinator: HomeCoordinator {
 
 extension HomeRootCoordinator: SideDrawerCoordinator {
     
+    func sideDrawer_popToRoot() {
+        routes.popToRoot()
+    }
+    
     func sideDrawer_dismissLastPresented() {
         routes.dismiss()
     }
@@ -76,13 +80,13 @@ extension HomeRootCoordinator: SideDrawerCoordinator {
     }
 
     func sideDrawer_viewMassage() {
-        routes.presentSheet(
+        routes.push(
             .massage
         )
     }
 
     func sideDrawer_viewSpaceRental() {
-        routes.presentSheet(
+        routes.push(
             .spaceRental
         )
     }
