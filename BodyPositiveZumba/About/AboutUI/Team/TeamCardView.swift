@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TeamCardView: View {
 
-    var card: CardModel
+    var card: TeamCardModel
     @State private var isExpanded: Bool = false
 
     var body: some View {
@@ -27,7 +27,7 @@ struct TeamCardView: View {
                 .foregroundColor(.black)
                 .padding(.top, 10)
 
-            Text(card.parlor)
+            Text(card.role)
                 .font(.sfProBodyTextRegular(size: 14))
                 .foregroundColor(Constants.Colors.darkOrange)
 

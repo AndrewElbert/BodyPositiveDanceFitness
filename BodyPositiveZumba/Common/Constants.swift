@@ -262,6 +262,23 @@ struct Constants {
         static let bioTap: String = "Tap for bio"
         static let swipe: String = "Swipe!"
 
+        static let cards: [MassageCardModel] = [
+            MassageCardModel(
+                id: UUID(),
+                name: Constants.HeadShots.LindseyHerseyName,
+                imageName: Constants.HeadShots.LindseyHerseyHeadShot,
+                parlor: Constants.Massage.LindseyHerseyParlor,
+                bio: Constants.Massage.LindseyHerseyBio
+            ),
+            MassageCardModel(
+                id: UUID(),
+                name: Constants.HeadShots.ShelbySwannName,
+                imageName: Constants.HeadShots.ShelbySwannHeadShot,
+                parlor: Constants.Massage.ShelbySwannParlor,
+                bio: Constants.Massage.ShelbySwannBio
+            )
+        ]
+
     }
 
     // MARK: SideDrawer
@@ -412,9 +429,9 @@ struct Constants {
         static let expandableButton2Text: String = "Private Events"
         static let expandableButton3Text: String = "General Space Rental"
     }
-    
+
     enum Team {
-        
+
         // Carson Burnham
         static let CarsonBurnhamImage: String = "CarsonBurnhamHeadShot"
         static let CarsonBurnhamName: String = "Carson Burnham"
@@ -577,6 +594,197 @@ struct Constants {
         static let BeckyWoodfordRole: String = "Instructor"
         static let BeckyWoodfordBio: String = "Becky’s dance philosophy is “There are no mistakes, only solos!” The only rules in her class are to have fun and be safe. Her goal is that every participant leaves her class with a smiling, sweaty face. You choose the intensity according to what your body wants that day!"
 
-        
+        static let cards: [TeamCardModel] = [
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.CarsonBurnhamName,
+                imageName: Constants.Team.CarsonBurnhamImage,
+                role: Constants.Team.CarsonBurnhamRole,
+                bio: Constants.Team.CarsonBurnhamBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.ErinEvansName,
+                imageName: Constants.Team.ErinEvansImage,
+                role: Constants.Team.ErinEvansRole,
+                bio: Constants.Team.ErinEvansBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.BethAbramsonName,
+                imageName: Constants.Team.BethAbramsonImage,
+                role: Constants.Team.BethAbramsonRole,
+                bio: Constants.Team.BethAbramsonBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.AmyBatesName,
+                imageName: Constants.Team.AmyBatesImage,
+                role: Constants.Team.AmyBatesRole,
+                bio: Constants.Team.AmyBatesBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.MeredithBoltonName,
+                imageName: Constants.Team.MeredithBoltonImage,
+                role: Constants.Team.MeredithBoltonRole,
+                bio: Constants.Team.MeredithBoltonBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.LoganBurnhamName,
+                imageName: Constants.Team.LoganBurnhamImage,
+                role: Constants.Team.LoganBurnhamRole,
+                bio: Constants.Team.LoganBurnhamBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.PattyCookName,
+                imageName: Constants.Team.PattyCookImage,
+                role: Constants.Team.PattyCookRole,
+                bio: Constants.Team.PattyCookBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.HilaryDeubenName,
+                imageName: Constants.Team.HilaryDeubenImage,
+                role: Constants.Team.HilaryDeubenRole,
+                bio: Constants.Team.HilaryDeubenBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.AlisonDoucetteName,
+                imageName: Constants.Team.AlisonDoucetteImage,
+                role: Constants.Team.AlisonDoucetteRole,
+                bio: Constants.Team.AlisonDoucetteBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.ChollaFooteName,
+                imageName: Constants.Team.ChollaFooteImage,
+                role: Constants.Team.ChollaFooteRole,
+                bio: Constants.Team.ChollaFooteBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.KendraName,
+                imageName: Constants.Team.KendraImage,
+                role: Constants.Team.KendraRole,
+                bio: Constants.Team.KendraBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.ErinGallagherName,
+                imageName: Constants.Team.ErinGallagherImage,
+                role: Constants.Team.ErinGallagherRole,
+                bio: Constants.Team.ErinGallagherBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.ClaudiaGetchellName,
+                imageName: Constants.Team.ClaudiaGetchellImage,
+                role: Constants.Team.ClaudiaGetchellRole,
+                bio: Constants.Team.ClaudiaGetchellBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.LizHampName,
+                imageName: Constants.Team.LizHampImage,
+                role: Constants.Team.LizHampRole,
+                bio: Constants.Team.LizHampBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.LindseyHerseyName,
+                imageName: Constants.Team.LindseyHerseyImage,
+                role: Constants.Team.LindseyHerseyRole,
+                bio: Constants.Team.LindseyHerseyBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.BarbaraKenneyName,
+                imageName: Constants.Team.BarbaraKenneyImage,
+                role: Constants.Team.BarbaraKenneyRole,
+                bio: Constants.Team.BarbaraKenneyBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.JessLamoureuxName,
+                imageName: Constants.Team.JessLamoureuxImage,
+                role: Constants.Team.JessLamoureuxRole,
+                bio: Constants.Team.JessLamoureuxBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.SharonLevineName,
+                imageName: Constants.Team.SharonLevineImage,
+                role: Constants.Team.SharonLevineRole,
+                bio: Constants.Team.SharonLevineBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.NaomiGraceMcNeillName,
+                imageName: Constants.Team.NaomiGraceMcNeillImage,
+                role: Constants.Team.NaomiGraceMcNeillRole,
+                bio: Constants.Team.NaomiGraceMcNeillBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.MalloryLordName,
+                imageName: Constants.Team.MalloryLordImage,
+                role: Constants.Team.MalloryLordRole,
+                bio: Constants.Team.MalloryLordBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.AubineNtibandetseName,
+                imageName: Constants.Team.AubineNtibandetseImage,
+                role: Constants.Team.AubineNtibandetseRole,
+                bio: Constants.Team.AubineNtibandetseBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.AndreaMeadowsName,
+                imageName: Constants.Team.AndreaMeadowsImage,
+                role: Constants.Team.AndreaMeadowsRole,
+                bio: Constants.Team.AndreaMeadowsBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.JordanPedenName,
+                imageName: Constants.Team.JordanPedenImage,
+                role: Constants.Team.JordanPedenRole,
+                bio: Constants.Team.JordanPedenBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.ShelbySwannName,
+                imageName: Constants.Team.ShelbySwannImage,
+                role: Constants.Team.ShelbySwannRole,
+                bio: Constants.Team.ShelbySwannBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.KarrieSweetName,
+                imageName: Constants.Team.KarrieSweetImage,
+                role: Constants.Team.KarrieSweetRole,
+                bio: Constants.Team.KarrieSweetBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.MeaghanWildesName,
+                imageName: Constants.Team.MeaghanWildesImage,
+                role: Constants.Team.MeaghanWildesRole,
+                bio: Constants.Team.MeaghanWildesBio
+            ),
+            TeamCardModel(
+                id: UUID(),
+                name: Constants.Team.BeckyWoodfordName,
+                imageName: Constants.Team.BeckyWoodfordImage,
+                role: Constants.Team.BeckyWoodfordRole,
+                bio: Constants.Team.BeckyWoodfordBio
+            )
+        ]
+
     }
 }

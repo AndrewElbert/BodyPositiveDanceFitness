@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AboutView: View, ActionableView {
-    
+
     enum Action {
         case toggleExpansion(UUID)
         case handleTeamButtonTap
         case handleClassesButtonTap
         case handlePartnersButtonTap
     }
-    
+
     @Binding var viewState: AboutViewState
         var onAction: ((Action) -> Void)?
         @Environment(\.dismiss) private var dismiss
@@ -34,14 +34,14 @@ struct AboutView: View, ActionableView {
                 LazyVStack(spacing: 22) {
                     HeaderView(header: viewState.header)
                         .layoutPriority(1)
-                    
+
                     ExpandableContentList(
                         contents: viewState.expandableContents,
                         onToggle: { id in
                             onAction?(.toggleExpansion(id))
                         }
                     )
-                    
+
                     ButtonList(
                         sections: Array(viewState.sections.prefix(3)),
                         onTap: { section in
