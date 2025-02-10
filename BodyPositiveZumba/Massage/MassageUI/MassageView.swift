@@ -99,7 +99,7 @@ private extension MassageView {
     }
 
     var carouselSection: some View {
-        SwipableCarouselComponent<AnyView, CardModel>(
+        SwipableCarouselComponent<AnyView, MassageCardModel>(
             viewModel: SwipableCarouselViewModel(
                 viewState: $viewState.swipableCarouselViewState
             )

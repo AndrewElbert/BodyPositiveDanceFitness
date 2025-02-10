@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TeamView: View, ActionableView {
-    
+
     enum Action {
         case updateUrl
     }
@@ -81,7 +81,7 @@ private extension TeamView {
     }
 
     var headerSection: some View {
-        
+
         Text("Meet The Team!")
             .font(.sfProDisplayBold(size: 34))
             .multilineTextAlignment(.center)
@@ -91,7 +91,7 @@ private extension TeamView {
     }
 
     var carouselSection: some View {
-        SwipableCarouselComponent<AnyView, CardModel>(
+        SwipableCarouselComponent<AnyView, TeamCardModel>(
             viewModel: SwipableCarouselViewModel(
                 viewState: $viewState.swipableCarouselViewState
             )

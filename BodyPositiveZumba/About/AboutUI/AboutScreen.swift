@@ -35,4 +35,3 @@ struct AboutScreen: View {
         )
     }
 }
-
