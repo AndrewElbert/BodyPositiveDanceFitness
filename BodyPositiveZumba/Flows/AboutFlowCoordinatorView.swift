@@ -17,9 +17,11 @@ struct AboutFlowCoordinatorView: View {
         Router($coordinator.routes) { screen, _ in
             switch screen {
             case .root:
-                AboutUI.aboutPage()
+                AboutUI.aboutPage(
+                    aboutCoordinator: coordinator
+                )
             case .team:
-                Text("team")
+                AboutUI.teamPage()
             case .classes:
                 ClassesUI.classesPage()
             case .partners:

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MassageCardView: View {
 
-    var card: CardModel
+    var card: MassageCardModel
     @State private var isExpanded: Bool = false
 
     var body: some View {
