@@ -23,6 +23,10 @@ class AboutFlowCoordinator: FlowCoordinator {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
 
+}
+
+extension AboutFlowCoordinator: AboutCoordinator {
+
     func about_viewPartners() {
         routes.presentSheet(
             .partners
