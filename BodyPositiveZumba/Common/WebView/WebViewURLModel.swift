@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WebViewURL: Identifiable {
+struct WebViewURL: Identifiable, Equatable {
     let title: String
     let id = UUID()
     let url: URL

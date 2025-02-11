@@ -39,4 +39,6 @@ struct AboutViewState: Equatable {
         ],
         sections: AboutMainSectionModel.defaultSections
     )
+
+    var mediaUrl: WebViewURL?
 }
