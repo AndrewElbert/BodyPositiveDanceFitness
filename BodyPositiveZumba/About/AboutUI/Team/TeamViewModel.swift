@@ -7,29 +7,24 @@
 
 import SwiftUI
 
+@MainActor
 class TeamViewModel: ObservableObject {
 
     @Published var currentIndex: Int = 0
     @Published var viewState: TeamViewState = TeamViewState()
 
-    func updateBookingURL() {
+    var currentBioData: TeamBioModel {
+        let count = viewState.bios.count
+        guard count > 0 else { return TeamBioModel(bio: "", firstName: "Team Member") }
 
-        let normalizedIndex = viewState.swipableCarouselViewState.currentIndex % viewState.cards.count
-        var urlString: String
-        var title: String
-        if normalizedIndex == 0 {
-            urlString = Constants.Massage.ladyLoveHolisticURL
-            title = Constants.Massage.LindseyHerseyParlor
-        } else {
-            title = Constants.Massage.ShelbySwannParlor
-            urlString = Constants.Massage.swannsHealingElementsURL
+        var index = viewState.swipableCarouselViewState.currentIndex
+        while index < 0 {
+            index += count
         }
+        return viewState.bios[index % count]
+    }
 
-        if let url = URL(string: urlString) {
-            viewState.bookingURL = WebViewURL(
-                title: title,
-                url: url
-            )
-        }
+    func toggleBioExpanded() {
+        viewState.isBioExpanded.toggle()
     }
 }
