@@ -30,34 +30,24 @@ struct MassageView: View, ActionableView {
     }
 
     var body: some View {
-        ZStack {
-            mainContent
-            swipeAnimationOverlay
-        }
-        .padding()
-        .onAppear {
-            withAnimation(.easeIn.delay(0.2)) {
-                viewState.showCarousel = true
+        NavigationView{
+            ZStack {
+                mainContent
+                swipeAnimationOverlay
             }
-            dismissSwipeAnimationAfterDelay()
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    withAnimation(.easeOut(duration: 0.005)) {
-                        viewState.showCarousel = false
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
-                        dismiss()
-                    }
-                } label: {
-                    HStack(spacing: 5) {
-                        Image(systemName: "chevron.left")
-                        Text("Back")
-                    }
-                    .foregroundColor(.blue)
-                    .font(.system(size: 17, weight: .regular))
+            .padding()
+            .onAppear {
+                withAnimation(.easeIn.delay(0.2)) {
+                    viewState.showCarousel = true
+                }
+                dismissSwipeAnimationAfterDelay()
+            }
+            .toolbar {
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
                 }
             }
         }

@@ -31,18 +31,28 @@ struct ClassesView: View, ActionableView {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                headerSection
-                carouselSection
-                expansionToggleButton
-                if viewState.isBioExpanded { bioText }
-                viewAllClassesButton
+        NavigationView{
+            ScrollView {
+                VStack(spacing: 0) {
+                    headerSection
+                    carouselSection
+                    expansionToggleButton
+                    if viewState.isBioExpanded { bioText }
+                    viewAllClassesButton
+                }
+                .padding(.bottom, 20)
             }
-            .padding(.bottom, 20)
-        }
-        .sheet(item: $viewState.viewAllClassesWebView) { web in
-            WebViewContainer(url: web.url, title: web.title)
+            .sheet(item: $viewState.viewAllClassesWebView) { web in
+                WebViewContainer(url: web.url, title: web.title)
+            }
+            .toolbar {
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
+            }
         }
     }
 }
