@@ -16,9 +16,9 @@ struct AboutView: View, ActionableView {
         case handlePartnersButtonTap
     }
 
-    @Binding var viewState: AboutViewState
-    var onAction: ((Action) -> Void)?
+    @Binding private var viewState: AboutViewState
     @Environment(\.dismiss) private var dismiss
+    var onAction: ((Action) -> Void)?
 
     init(
         viewState: Binding<AboutViewState>,
@@ -29,119 +29,108 @@ struct AboutView: View, ActionableView {
     }
 
     var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVStack(spacing: 22) {
-                    ExpandableContentList(
-                        contents: viewState.expandableContents,
-                        onToggle: { id in
-                            onAction?(.toggleExpansion(id))
-                        }
-                    )
-
-                    ButtonList(
-                        sections: Array(viewState.sections),
-                        onTap: { section in
-                            switch section.identifier {
-                            case "team":
-                                onAction?(.handleTeamButtonTap)
-                            case "classes":
-                                onAction?(.handleClassesButtonTap)
-                            case "partners":
-                                onAction?(.handlePartnersButtonTap)
-                            case "media":
-                                viewState.mediaUrl = WebViewURL(
-                                    title: Constants.About.mediaTitle,
-                                    url: URL(
-                                        string: Constants.About.mediaURL
-                                    )!
-                                )
-                            default:
-                                break
-                            }
-                        }
-                    )
+        NavigationStack {
+            contentView
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbar {
+                    ToolbarButton.backButton {
+                        dismiss()
+                    }
+                    ToolbarButton.closeButton {
+                        dismiss()
+                    }
                 }
-                .padding()
-            }
-            .toolbar {
-                ToolbarButton.backButton {
-                    dismiss()
-                }
-                ToolbarButton.closeButton {
-                    dismiss()
-                }
-            }
         }
         .sheet(item: $viewState.mediaUrl) { webView in
             WebViewContainer(url: webView.url, title: webView.title)
         }
     }
-}
 
-private struct ExpandableContentList: View {
-    let contents: [ExpandableParagraphModel]
-    let onToggle: (UUID) -> Void
+    // MARK: - Content Views
 
-    var body: some View {
-        ForEach(contents) { content in
-            ExpandableParagraph(content: content, onToggle: onToggle)
-                .equatable()
+    private var contentView: some View {
+        ScrollView {
+            VStack(spacing: 22) {
+                expandableContentSection
+                buttonSection
+            }
+            .padding()
+        }
+    }
+
+    private var expandableContentSection: some View {
+        ForEach(viewState.expandableContents) { content in
+            ExpandableParagraph(
+                content: content,
+                onToggle: { id in onAction?(.toggleExpansion(id)) }
+            )
+        }
+    }
+
+    private var buttonSection: some View {
+        ForEach(Array(viewState.sections)) { section in
+            ActionButton(section: section) { section in
+                handleButtonTap(section)
+            }
+        }
+    }
+
+    // MARK: - Helper Methods
+
+    private func handleButtonTap(_ section: AboutMainSectionModel) {
+        switch section.identifier {
+        case "team":
+            onAction?(.handleTeamButtonTap)
+        case "classes":
+            onAction?(.handleClassesButtonTap)
+        case "partners":
+            onAction?(.handlePartnersButtonTap)
+        case "media":
+            viewState.mediaUrl = WebViewURL(
+                title: Constants.About.mediaTitle,
+                url: URL(string: Constants.About.mediaURL)!
+            )
+        default:
+            break
         }
     }
 }
 
-private struct ButtonList: View {
-    let sections: [AboutMainSectionModel]
-    let onTap: (AboutMainSectionModel) -> Void
-
-    var body: some View {
-        ForEach(sections) { section in
-            ActionButton(section: section, onTap: onTap)
-                .equatable()
-        }
-    }
-}
+// MARK: - Subviews
 
 struct ExpandableParagraph: View, Equatable {
     let content: ExpandableParagraphModel
     let onToggle: (UUID) -> Void
 
-    private let headerBackground = ZStack {
-        Color.white
-        RadialGradient(
-            gradient: Gradient(colors: [
-                Color.orange.opacity(0.18),
-                Color.orange.opacity(0.4)
-            ]),
-            center: .center,
-            startRadius: 22,
-            endRadius: 122
-        )
-    }
-
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            Button {
-                withAnimation {
-                    onToggle(content.id)
-                }
-            } label: {
-                ExpandableHeader(
-                    title: content.title,
-                    isExpanded: content.isExpanded,
-                    background: headerBackground
-                )
-            }
+            expandableHeader
 
             if content.isExpanded {
-                Text(content.content)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 8)
-                    .fixedSize(horizontal: false, vertical: true)
+                expandedContent
             }
         }
+    }
+
+    private var expandableHeader: some View {
+        Button {
+            withAnimation {
+                onToggle(content.id)
+            }
+        } label: {
+            ExpandableHeaderContent(
+                title: content.title,
+                isExpanded: content.isExpanded
+            )
+        }
+    }
+
+    private var expandedContent: some View {
+        Text(content.content)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity)
+            .padding(.top, 8)
+            .fixedSize(horizontal: false, vertical: true)
     }
 
     static func == (lhs: ExpandableParagraph, rhs: ExpandableParagraph) -> Bool {
@@ -149,16 +138,9 @@ struct ExpandableParagraph: View, Equatable {
     }
 }
 
-private struct ExpandableHeader: View {
+struct ExpandableHeaderContent: View {
     let title: String
     let isExpanded: Bool
-    let background: AnyView
-
-    init(title: String, isExpanded: Bool, background: some View) {
-        self.title = title
-        self.isExpanded = isExpanded
-        self.background = AnyView(background)
-    }
 
     var body: some View {
         HStack {
@@ -170,31 +152,33 @@ private struct ExpandableHeader: View {
         .foregroundColor(.black)
         .padding()
         .frame(maxWidth: .infinity)
-        .background(background)
+        .background(headerBackground)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Constants.Colors.darkOrange, lineWidth: 3)
         )
         .cornerRadius(8)
     }
+
+    private var headerBackground: some View {
+        ZStack {
+            Color.white
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Color.orange.opacity(0.18),
+                    Color.orange.opacity(0.4)
+                ]),
+                center: .center,
+                startRadius: 22,
+                endRadius: 122
+            )
+        }
+    }
 }
 
 struct ActionButton: View, Equatable {
     let section: AboutMainSectionModel
     let onTap: (AboutMainSectionModel) -> Void
-
-    private let background = ZStack {
-        Color(.white)
-        RadialGradient(
-            gradient: Gradient(colors: [
-                Constants.Colors.neonCyan.opacity(0.1),
-                Constants.Colors.neonCyan.opacity(0.3)
-            ]),
-            center: .center,
-            startRadius: 22,
-            endRadius: 122
-        )
-    }
 
     var body: some View {
         Button {
@@ -205,12 +189,27 @@ struct ActionButton: View, Equatable {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background(background)
+                .background(buttonBackground)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Constants.Colors.darkerCyan, lineWidth: 3)
                 )
                 .cornerRadius(8)
+        }
+    }
+
+    private var buttonBackground: some View {
+        ZStack {
+            Color(.white)
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Constants.Colors.neonCyan.opacity(0.1),
+                    Constants.Colors.neonCyan.opacity(0.3)
+                ]),
+                center: .center,
+                startRadius: 22,
+                endRadius: 122
+            )
         }
     }
 

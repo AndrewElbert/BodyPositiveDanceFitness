@@ -52,18 +52,18 @@ struct SpaceRentalView: View, ActionableView {
     }
 
     var body: some View {
-        
-        NavigationView{
+
+        NavigationStack {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         headerSection
                         messageSection
-                        
+
                         carouselSection
                             .opacity(viewState.showCarousel ? 1 : 0)
                             .animation(.easeIn(duration: 1.11), value: viewState.showCarousel)
-                        
+
                         VStack(spacing: 16) {
                             ExpandableSectionComponent(
                                 viewModel: ExpandableSectionViewModel(
@@ -78,7 +78,7 @@ struct SpaceRentalView: View, ActionableView {
                                     }
                                 }
                             }
-                            
+
                             ExpandableSectionComponent(
                                 viewModel: ExpandableSectionViewModel(
                                     viewState: $viewState.privateEventsSectionState
@@ -92,7 +92,7 @@ struct SpaceRentalView: View, ActionableView {
                                     }
                                 }
                             }
-                            
+
                             ExpandableSectionComponent(
                                 viewModel: ExpandableSectionViewModel(
                                     viewState: $viewState.spaceRentalSectionState
@@ -113,11 +113,12 @@ struct SpaceRentalView: View, ActionableView {
                     .padding()
                 }
                 .onAppear {
-                    withAnimation(.easeIn.delay(0.001)) {
+                    withAnimation(.easeIn.delay(0.01)) {
                         viewState.showCarousel = true
                     }
                 }
             }
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarButton.backButton {
                     dismiss()

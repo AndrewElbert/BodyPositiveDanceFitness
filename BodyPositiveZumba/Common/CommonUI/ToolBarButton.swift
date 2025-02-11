@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct ToolbarButton: ToolbarContent {
-    
+
     @Environment(\.colorScheme) private var colorScheme
-    
+
     var icon: String
     var size: CGFloat
     var color: ButtonColor
     var placement: ToolbarItemPlacement
     var action: () -> Void
-    
-    
+
     enum ButtonColor {
         case system
         case accent
-        case destructive 
+        case destructive
         case custom(light: Color, dark: Color)
-        
+
         func color(for colorScheme: ColorScheme) -> Color {
             switch self {
             case .system:
@@ -37,7 +36,7 @@ struct ToolbarButton: ToolbarContent {
             }
         }
     }
-    
+
     init(
         icon: String = "xmark",
         size: CGFloat = 20,
@@ -51,7 +50,7 @@ struct ToolbarButton: ToolbarContent {
         self.placement = placement
         self.action = action
     }
-    
+
     var body: some ToolbarContent {
         ToolbarItem(placement: placement) {
             Button(action: action) {
@@ -74,7 +73,7 @@ extension ToolbarButton {
             action: action
         )
     }
-    
+
     static func backButton(
         action: @escaping () -> Void
     ) -> ToolbarButton {
@@ -89,7 +88,7 @@ extension ToolbarButton {
                 }
             }
         }
-    
+
     static func addButton(action: @escaping () -> Void) -> ToolbarButton {
         ToolbarButton(
             icon: "plus.circle.fill",
@@ -98,7 +97,7 @@ extension ToolbarButton {
             action: action
         )
     }
-    
+
     static func deleteButton(action: @escaping () -> Void) -> ToolbarButton {
         ToolbarButton(
             icon: "trash",
@@ -108,4 +107,3 @@ extension ToolbarButton {
         )
     }
 }
-

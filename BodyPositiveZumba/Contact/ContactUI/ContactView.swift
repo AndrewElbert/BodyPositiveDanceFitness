@@ -57,6 +57,7 @@ struct ContactView: View, ActionableView {
             .sheet(item: $viewState.webViewURL) { webView in
                 WebViewContainer(url: webView.url, title: webView.title)
             }
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarButton.closeButton {
                     dismiss()

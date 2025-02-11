@@ -31,7 +31,7 @@ struct ClassesView: View, ActionableView {
     }
 
     var body: some View {
-        NavigationView{
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
                     headerSection
@@ -45,6 +45,7 @@ struct ClassesView: View, ActionableView {
             .sheet(item: $viewState.viewAllClassesWebView) { web in
                 WebViewContainer(url: web.url, title: web.title)
             }
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarButton.backButton {
                     dismiss()
