@@ -19,13 +19,7 @@ struct FaqView: View, ActionableView {
     var onAction: ((Action) -> Void)?
 
     private let titleStyle = Font.sfProDisplayBold(size: 24)
-    private let standardSpacing: CGFloat = 16
-    private let titlePadding = EdgeInsets(
-        top: 24,
-        leading: 0,
-        bottom: 20,
-        trailing: 0
-    )
+    private let standardSpacing: CGFloat = 18
 
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
@@ -40,9 +34,19 @@ struct FaqView: View, ActionableView {
     }
 
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            scrollContent
-            closeButton
+        NavigationStack {
+            ZStack(alignment: .topLeading) {
+                scrollContent
+            }
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
+            }
         }
     }
 
@@ -61,7 +65,7 @@ struct FaqView: View, ActionableView {
             .font(titleStyle)
             .foregroundColor(adaptiveTextColor)
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding(titlePadding)
+            .padding(.bottom, 20)
     }
 
     @ViewBuilder
@@ -76,12 +80,6 @@ struct FaqView: View, ActionableView {
                 )
             )
             .transition(.opacity)
-        }
-    }
-
-    private var closeButton: some View {
-        CloseButton {
-            dismiss()
         }
     }
 }

@@ -10,32 +10,45 @@ import SwiftUI
 struct PartnersView: View {
 
     @Binding var viewState: PartnersViewState
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
 
-        VStack {
-            Text(Constants.Partners.pageTitle)
-                .font(.sfProDisplayBold(size: 40))
-                .foregroundColor(.black)
-                .padding(.top, 20)
-                .padding(.bottom, 55)
+        NavigationStack {
+            VStack {
+                Text(Constants.Partners.pageTitle)
+                    .font(.sfProDisplayBold(size: 40))
+                    .foregroundColor(.black)
+                    .padding(.top, 26)
+                    .padding(.bottom, 30)
 
-            SwipableCarouselComponent<AnyView, Partner>(
-                viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
-            ) { partner, isCurrentCard in
-                AnyView(
-                    PartnersCard(partner: partner, viewState: $viewState)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(isCurrentCard ? Color.orange : Color.clear, lineWidth: isCurrentCard ? 3 : 0)
-                        )
-                )
+                SwipableCarouselComponent<AnyView, Partner>(
+                    viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
+                ) { partner, isCurrentCard in
+                    AnyView(
+                        PartnersCard(partner: partner, viewState: $viewState)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(isCurrentCard ? Color.orange : Color.clear, lineWidth: isCurrentCard ? 3 : 0)
+                            )
+                    )
+                }
+                .frame(height: 375)
             }
-            .frame(height: 375)
+            Spacer()
+
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
+            }
         }
         .sheet(item: $viewState.displayURL) { currentCard in
             WebViewContainer(url: currentCard.url, title: currentCard.title)
         }
-        Spacer()
     }
 }
