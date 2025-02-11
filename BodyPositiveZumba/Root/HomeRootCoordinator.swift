@@ -62,31 +62,31 @@ extension HomeRootCoordinator: SideDrawerCoordinator {
     }
 
     func sideDrawer_viewClasses() {
-        routes.push(
+        routes.presentCover(
             .classes
         )
     }
 
     func sideDrawer_viewFaq() {
-        routes.presentSheet(
+        routes.presentCover(
             .faq
         )
     }
 
     func sideDrawer_viewAbout() {
-        routes.push(
+        routes.presentCover(
             .about
         )
     }
 
     func sideDrawer_viewMassage() {
-        routes.push(
+        routes.presentCover(
             .massage
         )
     }
 
     func sideDrawer_viewSpaceRental() {
-        routes.push(
+        routes.presentCover(
             .spaceRental
         )
     }

@@ -48,7 +48,7 @@ struct WebViewContainer: View {
     @State private var webView: WKWebView?
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             WebView(url: url, title: title) { createdWebView in
                 self.webView = createdWebView
             }

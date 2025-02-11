@@ -31,15 +31,26 @@ struct TeamView: View, ActionableView {
     }
 
     var body: some View {
-        ZStack {
-            ScrollView {
-                mainContent
+        NavigationStack {
+            ZStack {
+                ScrollView {
+                    mainContent
+                }
             }
-        }
-        .padding()
-        .onAppear {
-            withAnimation(.easeIn.delay(0.02)) {
-                viewState.showCarousel = true
+            .padding()
+            .onAppear {
+                withAnimation(.easeIn.delay(0.02)) {
+                    viewState.showCarousel = true
+                }
+            }
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
             }
         }
         .sheet(item: $viewState.bookingURL) { booking in
