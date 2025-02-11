@@ -12,4 +12,3 @@ struct TeamBioModel {
     var bio: String
     var firstName: String
 }
-
