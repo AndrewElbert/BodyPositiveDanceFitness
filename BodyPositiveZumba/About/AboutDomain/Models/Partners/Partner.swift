@@ -8,14 +8,14 @@
 import SwiftUI
 
 enum Partner: String, CaseIterable, Identifiable {
-    
+
     case overland = "Overland Honey"
     case beam = "Beam Skin Studio"
     case dtx = "Danse Très Xtrême"
     case llh = "Lady Love Holistics"
-    
+
     var id: String { self.rawValue }
-    
+
     var url: WebViewURL {
         switch self {
         case .overland:
@@ -42,7 +42,7 @@ enum Partner: String, CaseIterable, Identifiable {
     }
     var image: String {
         switch self {
-            
+
         case .overland:
             return "OverlandLogo"
         case .beam:

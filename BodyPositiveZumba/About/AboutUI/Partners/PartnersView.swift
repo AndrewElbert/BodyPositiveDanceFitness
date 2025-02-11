@@ -12,7 +12,7 @@ struct PartnersView: View {
     @Binding var viewState: PartnersViewState
 
     var body: some View {
-        
+
         VStack {
             Text(Constants.Partners.pageTitle)
                 .font(.sfProDisplayBold(size: 40))
@@ -39,4 +39,3 @@ struct PartnersView: View {
         Spacer()
     }
 }
-

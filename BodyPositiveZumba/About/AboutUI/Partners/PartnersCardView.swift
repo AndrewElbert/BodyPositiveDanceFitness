@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct PartnersCard: View {
-    
+
     var partner: Partner
     @Binding var viewState: PartnersViewState
-    
+
     var body: some View {
         VStack {
             logoImage
@@ -22,7 +22,7 @@ struct PartnersCard: View {
 }
 
 private extension PartnersCard {
-    
+
     var logoImage: some View {
         Image(partner.image)
             .resizable()
@@ -30,7 +30,7 @@ private extension PartnersCard {
             .frame(width: 260, height: 260)
             .padding(.top, 20)
     }
-    
+
     var websiteButton: some View {
         Button(
             action: updateURL
@@ -48,9 +48,8 @@ private extension PartnersCard {
         .padding(.top, 35)
         .padding(.bottom, 15)
     }
-    
+
     private func updateURL() {
         viewState.displayURL = partner.url
     }
 }
-
