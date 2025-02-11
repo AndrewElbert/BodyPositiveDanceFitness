@@ -17,7 +17,13 @@ struct TeamScreen: View {
 
     var body: some View {
         TeamView(
-            viewState: $viewModel.viewState
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .toggleBio:
+                    viewModel.toggleBioExpanded()
+                }
+            }
         )
     }
 }

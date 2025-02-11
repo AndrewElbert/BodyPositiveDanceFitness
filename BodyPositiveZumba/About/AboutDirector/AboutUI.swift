@@ -18,7 +18,7 @@ struct AboutUI {
         )
     }
 
-    static func teamPage() -> some View {
+    @MainActor static func teamPage() -> some View {
         TeamScreen(
             viewModel: TeamViewModel()
         )

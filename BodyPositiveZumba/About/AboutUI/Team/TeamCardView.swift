@@ -10,42 +10,25 @@ import SwiftUI
 struct TeamCardView: View {
 
     var card: TeamCardModel
-    @State private var isExpanded: Bool = false
 
     var body: some View {
         VStack {
             Image(card.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 250, height: 400)
+                .frame(width: 250, height: 333)
                 .clipped()
                 .cornerRadius(15)
 
             Text(card.name)
-                .font(.sfProRoundedTextMedium(size: 24))
-                .fontWeight(.bold)
+                .font(.sfProRoundedTextBold(size: 24))
                 .foregroundColor(.black)
                 .padding(.top, 10)
+                .padding(.bottom, 16)
 
             Text(card.role)
-                .font(.sfProBodyTextRegular(size: 14))
-                .foregroundColor(Constants.Colors.darkOrange)
-
-            if isExpanded {
-                Text(card.bio)
-                    .font(.sfProBodyTextRegular(size: 16))
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 5)
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .transition(.opacity)
-            } else {
-                Text(Constants.Massage.bioTap)
-                    .font(.sfProBodyTextRegular(size: 14))
-                    .foregroundColor(.blue)
-                    .padding(.top, 5)
-            }
+                .font(.sfProBodyTextMedium(size: 20))
+                .foregroundColor(.orange)
 
             Spacer()
         }
@@ -55,10 +38,5 @@ struct TeamCardView: View {
                 .fill(Color.white)
                 .shadow(radius: 5)
         )
-        .onTapGesture {
-            withAnimation(.easeInOut) {
-                isExpanded.toggle()
-            }
-        }
     }
 }
