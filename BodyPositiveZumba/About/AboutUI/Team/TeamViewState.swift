@@ -23,6 +23,18 @@ struct TeamViewState {
     var showSwipeAnimation = true
     var bookingURL: WebViewURL?
     var showCarousel: Bool = false
+    var isBioExpanded: Bool = false
 
     var cards: [TeamCardModel] = Constants.Team.cards
+    var bios: [TeamBioModel] = Constants.Team.bios
+
+    var normalizedIndex: Int {
+        let count = bios.count
+        guard count > 0 else {
+            return 0
+        }
+
+        let index = swipableCarouselViewState.currentIndex
+        return ((index % count) + count) % count
+    }
 }

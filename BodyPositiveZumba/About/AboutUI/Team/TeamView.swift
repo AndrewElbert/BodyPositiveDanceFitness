@@ -10,7 +10,7 @@ import SwiftUI
 struct TeamView: View, ActionableView {
 
     enum Action {
-        case updateUrl
+        case toggleBio
     }
 
     var onAction: ((Action) -> Void)?
@@ -32,34 +32,14 @@ struct TeamView: View, ActionableView {
 
     var body: some View {
         ZStack {
-            mainContent
-            swipeAnimationOverlay
+            ScrollView {
+                mainContent
+            }
         }
         .padding()
         .onAppear {
-            withAnimation(.easeIn.delay(0.2)) {
+            withAnimation(.easeIn.delay(0.02)) {
                 viewState.showCarousel = true
-            }
-            dismissSwipeAnimationAfterDelay()
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    withAnimation(.easeOut(duration: 0.005)) {
-                        viewState.showCarousel = false
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
-                        dismiss()
-                    }
-                } label: {
-                    HStack(spacing: 5) {
-                        Image(systemName: "chevron.left")
-                        Text("Back")
-                    }
-                    .foregroundColor(.blue)
-                    .font(.system(size: 17, weight: .regular))
-                }
             }
         }
         .sheet(item: $viewState.bookingURL) { booking in
@@ -75,13 +55,15 @@ private extension TeamView {
             if viewState.showCarousel {
                 carouselSection
                     .transition(.opacity)
+                    .padding(.bottom, 40)
+                bioSection
+                    .transition(.opacity)
             }
-            Spacer()
+            Spacer(minLength: 0)
         }
     }
 
     var headerSection: some View {
-
         Text("Meet The Team!")
             .font(.sfProDisplayBold(size: 34))
             .multilineTextAlignment(.center)
@@ -104,40 +86,42 @@ private extension TeamView {
                                     lineWidth: 4)
                     )
                     .shadow(
-                        color: isCurrentCard ? Constants.Colors.neonCyan.opacity(0.3) : Color.clear,
-                        radius: 40
+                        color: isCurrentCard ? Constants.Colors.neonCyan.opacity(0.4) : Color.clear,
+                        radius: 44
                     )
             )
         }
         .frame(height: 400)
+        .padding(.bottom, 16)
     }
 
-    var swipeAnimationOverlay: some View {
-        Group {
-            if viewState.showSwipeAnimation {
-                VStack(spacing: 8) {
-                    Text(Constants.Massage.swipe)
-                        .font(.sfProRoundedTextMedium(size: 18))
-                        .foregroundColor(.gray)
-                    SwipeAnimationComponent(
-                        viewModel: SwipeAnimationViewModel(
-                            viewState: viewState.swipeAnimationViewState
-                        )
-                    )
+    var bioSection: some View {
+        VStack(spacing: 4) {
+            Button(action: {
+                withAnimation(.easeInOut) {
+                    viewState.isBioExpanded.toggle()
                 }
-                .padding()
-                .offset(x: -60, y: -120)
-                .rotationEffect(.degrees(-20))
-                .zIndex(1)
-                .transition(.opacity)
-                .animation(.easeOut(duration: 1.5), value: viewState.showSwipeAnimation)
+            }) {
+                HStack(spacing: 8) {
+                    Text("Learn more about \(viewState.bios[viewState.normalizedIndex].firstName)!")
+                        .font(.sfProRoundedTextMedium(size: 16))
+                    Image(systemName: "chevron.right")
+                        .rotationEffect(.degrees(viewState.isBioExpanded ? 90 : 0))
+                }
+                .foregroundColor(adaptiveTextColor)
+                .padding(.horizontal, 20)
+                .frame(maxWidth: .infinity)
+            }
+
+            if viewState.isBioExpanded {
+                Text(viewState.bios[viewState.normalizedIndex].bio)
+                    .font(.sfProBodyTextRegular(size: 18))
+                    .foregroundColor(adaptiveTextColor)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
-    }
-
-    func dismissSwipeAnimationAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
-            withAnimation { viewState.showSwipeAnimation = false }
-        }
+        .padding(.top, 20)
     }
 }
