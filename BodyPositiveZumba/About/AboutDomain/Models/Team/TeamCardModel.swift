@@ -12,5 +12,4 @@ struct TeamCardModel: Identifiable {
     var name: String
     var imageName: String
     var role: String
-    var bio: String
 }
