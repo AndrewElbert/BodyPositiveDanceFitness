@@ -29,12 +29,9 @@ struct AboutView: View, ActionableView {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 LazyVStack(spacing: 22) {
-                    HeaderView(header: viewState.header)
-                        .layoutPriority(1)
-
                     ExpandableContentList(
                         contents: viewState.expandableContents,
                         onToggle: { id in
@@ -67,34 +64,18 @@ struct AboutView: View, ActionableView {
                 }
                 .padding()
             }
+            .toolbar {
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
+            }
         }
         .sheet(item: $viewState.mediaUrl) { webView in
             WebViewContainer(url: webView.url, title: webView.title)
         }
-    }
-}
-
-private struct HeaderView: View {
-    let header: AboutViewState.Header
-
-    var body: some View {
-        VStack(spacing: 11) {
-            Text(header.title)
-                .font(.sfProDisplayBold(size: 26))
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 10)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Text(header.subtitle)
-                .font(.sfProBodyTextMedium(size: 22))
-                .foregroundColor(.black)
-                .multilineTextAlignment(.center)
-                .italic()
-                .padding(.horizontal)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(.bottom, 22)
     }
 }
 

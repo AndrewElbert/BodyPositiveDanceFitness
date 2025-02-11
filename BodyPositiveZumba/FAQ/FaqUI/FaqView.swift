@@ -8,29 +8,23 @@
 import SwiftUI
 
 struct FaqView: View, ActionableView {
-
+    
     enum Action {
         case toggleQuestion(Int)
     }
-
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
     @Binding private var viewState: FaqViewState
     var onAction: ((Action) -> Void)?
-
+    
     private let titleStyle = Font.sfProDisplayBold(size: 24)
-    private let standardSpacing: CGFloat = 16
-    private let titlePadding = EdgeInsets(
-        top: 24,
-        leading: 0,
-        bottom: 20,
-        trailing: 0
-    )
-
+    private let standardSpacing: CGFloat = 18
+    
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
-
+    
     public init(
         viewState: Binding<FaqViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -38,14 +32,23 @@ struct FaqView: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-
+    
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            scrollContent
-            closeButton
+        NavigationView{
+            ZStack(alignment: .topLeading) {
+                scrollContent
+            }
+            .toolbar {
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
+            }
         }
     }
-
+    
     private var scrollContent: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: standardSpacing) {
@@ -55,15 +58,15 @@ struct FaqView: View, ActionableView {
             .padding()
         }
     }
-
+    
     private var pageTitle: some View {
         Text(Constants.FAQ.pageTitle)
             .font(titleStyle)
             .foregroundColor(adaptiveTextColor)
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding(titlePadding)
+            .padding(.bottom, 20)
     }
-
+    
     @ViewBuilder
     private var faqItems: some View {
         ForEach(
@@ -76,12 +79,6 @@ struct FaqView: View, ActionableView {
                 )
             )
             .transition(.opacity)
-        }
-    }
-
-    private var closeButton: some View {
-        CloseButton {
-            dismiss()
         }
     }
 }

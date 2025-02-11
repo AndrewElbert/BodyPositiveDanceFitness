@@ -58,10 +58,8 @@ struct ContactView: View, ActionableView {
                 WebViewContainer(url: webView.url, title: webView.title)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    CloseButton {
-                        dismiss()
-                    }
+                ToolbarButton.closeButton {
+                    dismiss()
                 }
             }
         }
