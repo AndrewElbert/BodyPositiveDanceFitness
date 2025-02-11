@@ -17,16 +17,16 @@ struct AboutView: View, ActionableView {
     }
 
     @Binding var viewState: AboutViewState
-        var onAction: ((Action) -> Void)?
-        @Environment(\.dismiss) private var dismiss
+    var onAction: ((Action) -> Void)?
+    @Environment(\.dismiss) private var dismiss
 
-        init(
-            viewState: Binding<AboutViewState>,
-            onAction: ((Action) -> Void)? = nil
-        ) {
-            self._viewState = viewState
-            self.onAction = onAction
-        }
+    init(
+        viewState: Binding<AboutViewState>,
+        onAction: ((Action) -> Void)? = nil
+    ) {
+        self._viewState = viewState
+        self.onAction = onAction
+    }
 
     var body: some View {
         NavigationStack {
@@ -43,15 +43,22 @@ struct AboutView: View, ActionableView {
                     )
 
                     ButtonList(
-                        sections: Array(viewState.sections.prefix(3)),
+                        sections: Array(viewState.sections),
                         onTap: { section in
-                            switch section.title {
-                            case "Meet Our Team!":
+                            switch section.identifier {
+                            case "team":
                                 onAction?(.handleTeamButtonTap)
-                            case "View Our Classes":
+                            case "classes":
                                 onAction?(.handleClassesButtonTap)
-                            case "Partners":
+                            case "partners":
                                 onAction?(.handlePartnersButtonTap)
+                            case "media":
+                                viewState.mediaUrl = WebViewURL(
+                                    title: Constants.About.mediaTitle,
+                                    url: URL(
+                                        string: Constants.About.mediaURL
+                                    )!
+                                )
                             default:
                                 break
                             }
@@ -60,6 +67,9 @@ struct AboutView: View, ActionableView {
                 }
                 .padding()
             }
+        }
+        .sheet(item: $viewState.mediaUrl) { webView in
+            WebViewContainer(url: webView.url, title: webView.title)
         }
     }
 }
