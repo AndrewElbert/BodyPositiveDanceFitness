@@ -20,6 +20,6 @@ struct PartnersViewState {
         let safeIndex = ((carouselViewState.currentIndex % count) + count) % count
         return carouselViewState.items[safeIndex]
     }
-    
+
     var displayURL: WebViewURL?
 }
