@@ -40,7 +40,7 @@ extension AboutFlowCoordinator: AboutCoordinator {
     }
 
     func about_viewClasses() {
-        routes.presentSheet(
+        routes.presentCover(
             .classes
         )
     }

@@ -30,7 +30,7 @@ struct MassageView: View, ActionableView {
     }
 
     var body: some View {
-        NavigationView{
+        NavigationStack {
             ZStack {
                 mainContent
                 swipeAnimationOverlay
@@ -42,6 +42,7 @@ struct MassageView: View, ActionableView {
                 }
                 dismissSwipeAnimationAfterDelay()
             }
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarButton.backButton {
                     dismiss()
