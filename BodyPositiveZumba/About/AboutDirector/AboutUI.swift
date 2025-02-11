@@ -23,4 +23,10 @@ struct AboutUI {
             viewModel: TeamViewModel()
         )
     }
+    
+    static func partnersPage() -> some View {
+        PartnersScreen(
+            viewModel: PartnersViewModel()
+        )
+    }
 }

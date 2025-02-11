@@ -280,6 +280,14 @@ struct Constants {
         ]
 
     }
+    
+    // MARK: Partners
+    
+    enum Partners {
+        
+        static let pageTitle: String = "Partners"
+        static let buttonText: String = "Visit Website"
+    }
 
     // MARK: SideDrawer
 

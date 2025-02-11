@@ -25,7 +25,7 @@ struct AboutFlowCoordinatorView: View {
             case .classes:
                 ClassesUI.classesPage()
             case .partners:
-                Text("partners")
+                AboutUI.partnersPage()
             }
         }
     }
