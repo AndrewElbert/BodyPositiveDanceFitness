@@ -20,8 +20,6 @@ struct AboutView: View, ActionableView {
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) private var dismiss
 
-    @State private var webViewURL: WebViewURL?
-
     init(
         viewState: Binding<AboutViewState>,
         onAction: ((Action) -> Void)? = nil
