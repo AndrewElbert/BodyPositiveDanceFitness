@@ -20,14 +20,12 @@ final class AboutViewModel: ObservableObject {
         self.aboutCoordinator = aboutCoordinator
     }
 
-    func toggleExpansion(for id: UUID) {
-        viewState.expandableContents = viewState.expandableContents.map { content in
-            var content = content
-            if content.id == id {
-                content.isExpanded.toggle()
-            }
-            return content
-        }
+    func handleWhoButtonTap() {
+        aboutCoordinator.about_viewWho()
+    }
+
+    func handleWhatButtonTap() {
+        aboutCoordinator.about_viewWhat()
     }
 
     func handleTeamButtonTap() {

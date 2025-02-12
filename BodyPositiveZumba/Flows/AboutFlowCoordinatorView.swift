@@ -26,6 +26,10 @@ struct AboutFlowCoordinatorView: View {
                 ClassesUI.classesPage()
             case .partners:
                 AboutUI.partnersPage()
+            case .who:
+                AboutUI.whoPage()
+            case .what:
+                AboutUI.whatPage()
             }
         }
     }
