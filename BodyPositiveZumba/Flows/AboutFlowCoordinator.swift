@@ -12,6 +12,8 @@ class AboutFlowCoordinator: FlowCoordinator {
 
     enum Screen {
         case root
+        case who
+        case what
         case team
         case classes
         case partners
@@ -26,6 +28,19 @@ class AboutFlowCoordinator: FlowCoordinator {
 }
 
 extension AboutFlowCoordinator: AboutCoordinator {
+    
+    func about_viewWho() {
+        routes.presentSheet(
+            .who
+        )
+    }
+    
+    func about_viewWhat() {
+        routes.presentSheet(
+            .what
+        )
+    }
+    
 
     func about_viewPartners() {
         routes.presentSheet(
@@ -34,7 +49,7 @@ extension AboutFlowCoordinator: AboutCoordinator {
     }
 
     func about_viewTeam() {
-        routes.presentSheet(
+        routes.presentCover(
             .team
         )
     }

@@ -22,14 +22,16 @@ struct AboutScreen: View {
             viewState: $viewModel.viewState,
             onAction: { action in
                 switch action {
-                case .toggleExpansion(let id):
-                    viewModel.toggleExpansion(for: id)
                 case .handleTeamButtonTap:
                     viewModel.handleTeamButtonTap()
                 case .handleClassesButtonTap:
                     viewModel.handleClassesButtonTap()
                 case .handlePartnersButtonTap:
                     viewModel.handlePartnersButtonTap()
+                case .handleWhoAreWeTap:
+                    viewModel.handleWhoButtonTap()
+                case .handleWhatWeDoTap:
+                    viewModel.handleWhatButtonTap()
                 }
             }
         )

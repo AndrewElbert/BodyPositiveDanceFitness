@@ -10,10 +10,11 @@ import SwiftUI
 struct AboutView: View, ActionableView {
 
     enum Action {
-        case toggleExpansion(UUID)
         case handleTeamButtonTap
         case handleClassesButtonTap
         case handlePartnersButtonTap
+        case handleWhoAreWeTap
+        case handleWhatWeDoTap
     }
 
     @Binding private var viewState: AboutViewState
@@ -46,24 +47,43 @@ struct AboutView: View, ActionableView {
         }
     }
 
-    // MARK: - Content Views
-
     private var contentView: some View {
         ScrollView {
             VStack(spacing: 22) {
-                expandableContentSection
+                headerTitle
+                extraButtonSection
                 buttonSection
             }
             .padding()
         }
     }
+    
+    private var headerTitle: some View {
+        
+        VStack(spacing: 0) {
+            Text("About ")
+                .font(.sfProDisplayBold(size: 22))
+                .foregroundColor(.black)
+                .italic()
+            
+            Image(Constants.Common.logoName)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 160)
+        }
+        .padding(.top, 6)
+        .padding(.bottom, 16)
+    }
 
-    private var expandableContentSection: some View {
-        ForEach(viewState.expandableContents) { content in
-            ExpandableParagraph(
-                content: content,
-                onToggle: { id in onAction?(.toggleExpansion(id)) }
-            )
+    
+    private var extraButtonSection: some View {
+        VStack(spacing: 20) {
+            RainbowButton(title: "Who are we?") {
+                onAction?(.handleWhoAreWeTap)
+            }
+            RainbowButton(title: "What do we do?") {
+                onAction?(.handleWhatWeDoTap)
+            }
         }
     }
 
@@ -74,8 +94,6 @@ struct AboutView: View, ActionableView {
             }
         }
     }
-
-    // MARK: - Helper Methods
 
     private func handleButtonTap(_ section: AboutMainSectionModel) {
         switch section.identifier {
@@ -96,82 +114,40 @@ struct AboutView: View, ActionableView {
     }
 }
 
-// MARK: - Subviews
-
-struct ExpandableParagraph: View, Equatable {
-    let content: ExpandableParagraphModel
-    let onToggle: (UUID) -> Void
-
-    var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            expandableHeader
-
-            if content.isExpanded {
-                expandedContent
-            }
-        }
-    }
-
-    private var expandableHeader: some View {
-        Button {
-            withAnimation {
-                onToggle(content.id)
-            }
-        } label: {
-            ExpandableHeaderContent(
-                title: content.title,
-                isExpanded: content.isExpanded
-            )
-        }
-    }
-
-    private var expandedContent: some View {
-        Text(content.content)
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity)
-            .padding(.top, 8)
-            .fixedSize(horizontal: false, vertical: true)
-    }
-
-    static func == (lhs: ExpandableParagraph, rhs: ExpandableParagraph) -> Bool {
-        lhs.content == rhs.content
-    }
-}
-
-struct ExpandableHeaderContent: View {
+struct RainbowButton: View {
     let title: String
-    let isExpanded: Bool
+    let onTap: () -> Void
 
     var body: some View {
-        HStack {
+        Button(action: onTap) {
             Text(title)
                 .font(.sfProRoundedTextSemibold(size: 22))
-            Spacer()
-            Image(systemName: isExpanded ? "chevron.down" : "chevron.right")
-        }
-        .foregroundColor(.black)
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(headerBackground)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Constants.Colors.darkOrange, lineWidth: 3)
-        )
-        .cornerRadius(8)
-    }
-
-    private var headerBackground: some View {
-        ZStack {
-            Color.white
-            RadialGradient(
-                gradient: Gradient(colors: [
-                    Color.orange.opacity(0.18),
-                    Color.orange.opacity(0.4)
-                ]),
-                center: .center,
-                startRadius: 22,
-                endRadius: 122
-            )
+                .frame(maxWidth: .infinity)
+                .padding()
+                .foregroundColor(.black)
+                .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(
+                            LinearGradient(
+                                gradient: Gradient(
+                                    colors: [
+                                        .red,
+                                        .orange,
+                                        .yellow,
+                                        .green,
+                                        .blue,
+                                        .indigo,
+                                        .purple
+                                    ]
+                                ),
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            ),
+                            lineWidth: 6
+                        )
+                )
+                .cornerRadius(8)
         }
     }
 }
@@ -192,7 +168,7 @@ struct ActionButton: View, Equatable {
                 .background(buttonBackground)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Constants.Colors.darkerCyan, lineWidth: 3)
+                        .stroke(Constants.Colors.darkerCyan, lineWidth: 6)
                 )
                 .cornerRadius(8)
         }
@@ -200,14 +176,14 @@ struct ActionButton: View, Equatable {
 
     private var buttonBackground: some View {
         ZStack {
-            Color(.white)
+            Color.white
             RadialGradient(
                 gradient: Gradient(colors: [
-                    Constants.Colors.neonCyan.opacity(0.1),
-                    Constants.Colors.neonCyan.opacity(0.3)
+                    Constants.Colors.neonCyan.opacity(0.05),
+                    Constants.Colors.neonCyan.opacity(0.2)
                 ]),
                 center: .center,
-                startRadius: 22,
+                startRadius: 55,
                 endRadius: 122
             )
         }
@@ -217,3 +193,4 @@ struct ActionButton: View, Equatable {
         lhs.section == rhs.section
     }
 }
+
