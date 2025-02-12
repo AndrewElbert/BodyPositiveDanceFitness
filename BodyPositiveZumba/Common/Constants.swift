@@ -40,6 +40,10 @@ struct Constants {
         static let openButtonText: String = "Learn More About "
         static let joinNowButtonText: String = "Join Now!"
         static let viewCalendarUrl: String = "https://www.bodypositivedancefitness.com/calendar"
+
+        static let bookNowWebviewTitle: String = "Book A Class"
+        static let viewAllClassesPageTitle: String = "All Classes"
+        static let bookButtonText: String = "Book!"
     }
 
     // MARK: Colors
@@ -248,6 +252,7 @@ struct Constants {
     enum JoinNow {
 
         static let joinNowUrl: String = "https://www.bodypositivedancefitness.com/join-now-1"
+        static let bookClassUrl: String = "https://bodypositive.punchpass.com/classes"
     }
 
     // MARK: Massage

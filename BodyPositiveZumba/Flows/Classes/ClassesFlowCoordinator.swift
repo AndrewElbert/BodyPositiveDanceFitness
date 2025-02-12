@@ -24,7 +24,7 @@ class ClassesFlowCoordinator: FlowCoordinator {
 }
 
 extension ClassesFlowCoordinator: ClassesCoordinator {
-    
+
     func classes_viewAll() {
         routes.presentCover(
             .viewAll

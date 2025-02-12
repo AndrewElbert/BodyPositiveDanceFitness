@@ -6,6 +6,6 @@
 //
 
 protocol ClassesCoordinator: ScreenCoordinator {
-    
+
     func classes_viewAll()
 }

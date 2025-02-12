@@ -11,7 +11,7 @@ class ClassesViewModel: ObservableObject {
 
     @Published var viewState: ClassesViewState = ClassesViewState()
     let classesCoordinator: ClassesCoordinator
-    
+
     init(
         classesCoordinator: ClassesCoordinator
     ) {
@@ -21,7 +21,7 @@ class ClassesViewModel: ObservableObject {
     func toggleExpansion() {
         viewState.isBioExpanded.toggle()
     }
-    
+
     func navigateToViewAll() {
         classesCoordinator.classes_viewAll()
     }

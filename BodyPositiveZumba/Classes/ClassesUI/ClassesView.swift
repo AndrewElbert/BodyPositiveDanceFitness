@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClassesView: View, ActionableView {
-    
+
     enum Action {
         case toggleExpansion
         case handleViewAllButtonTap
@@ -62,17 +62,17 @@ struct ClassesView: View, ActionableView {
 }
 
 private extension ClassesView {
-    
+
     private struct RainbowButton: View {
         let title: String
         let action: () -> Void
         let font: Font
         @Environment(\.colorScheme) private var colorScheme
-        
+
         private var adaptiveTextColor: Color {
             colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
         }
-        
+
         init(
             title: String,
             font: Font = .sfProRoundedTextMedium(size: 20),
@@ -82,7 +82,7 @@ private extension ClassesView {
             self.font = font
             self.action = action
         }
-        
+
         var body: some View {
             Button(action: action) {
                 Text(title)
@@ -210,7 +210,7 @@ private extension ClassesView {
                 title: Constants.Classes.viewAllButtonText,
                 action: openViewAllClasses
             )
-            
+
             RainbowButton(
                 title: Constants.Classes.viewCalendarButtonText,
                 action: openCalendar
@@ -250,7 +250,7 @@ private extension ClassesView {
     func openViewAllClasses() {
         onAction?(.handleViewAllButtonTap)
     }
-    
+
     func openCalendar() {
         guard let url = URL(string: Constants.Classes.viewCalendarUrl) else { return }
         viewState.viewCalendarWebView = WebViewURL(
