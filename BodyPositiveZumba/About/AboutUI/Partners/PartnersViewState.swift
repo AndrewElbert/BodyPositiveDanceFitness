@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PartnersViewState {
 
+    var swipeAnimationViewState = SwipeAnimationViewState()
+
     var carouselViewState = SwipableCarouselViewState(
         items: Partner.allCases,
         spacing: 10,
@@ -21,5 +23,6 @@ struct PartnersViewState {
         return carouselViewState.items[safeIndex]
     }
 
+    var showSwipeAnimation = true
     var displayURL: WebViewURL?
 }
