@@ -23,6 +23,8 @@ struct Constants {
         static let button2Content: String = "At Body Positive Dance Fitness, we unite students from all over with the highest quality teachers in the Greater Portland area. Each of our instructors has a unique style that resonates with a variety of students at different fitness levels.\n\nOur dance fitness classes vary in style. Our core offering, Zumba, is the world's largest dance fitness format, with over five million daily participants. It blends instructor creativity with Latin dance, ensuring no two classes are alike while teaching fundamental steps and rhythms. We also offer formats like SHiNE (ballet, hip hop, pop), HotFlash (70s, 80s, 90s music), and others ranging from basic fitness moves to full choreography. \n\nAt BPDF, all body types and levels of experience and ability are welcome — we are here to have fun!"
         static let mediaTitle: String = "Media!"
         static let mediaURL: String = "https://www.bodypositivedancefitness.com/media-news"
+        static let whatPageTitle: String = "What Do We Do?"
+        static let whoPageTitle: String = "Who Are We?"
 
     }
 
