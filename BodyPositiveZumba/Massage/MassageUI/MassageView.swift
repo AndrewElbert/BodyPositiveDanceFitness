@@ -144,19 +144,12 @@ private extension MassageView {
     var swipeAnimationOverlay: some View {
         Group {
             if viewState.showSwipeAnimation {
-                VStack(spacing: 8) {
-                    Text(Constants.Massage.swipe)
-                        .font(.sfProRoundedTextMedium(size: 18))
-                        .foregroundColor(.gray)
-                    SwipeAnimationComponent(
-                        viewModel: SwipeAnimationViewModel(
-                            viewState: viewState.swipeAnimationViewState
-                        )
+                SwipeAnimationComponent(
+                    viewModel: SwipeAnimationViewModel(
+                        viewState: viewState.swipeAnimationViewState
                     )
-                }
+                )
                 .padding()
-                .offset(x: -60, y: -120)
-                .rotationEffect(.degrees(-20))
                 .zIndex(1)
                 .transition(.opacity)
                 .animation(.easeOut(duration: 1.5), value: viewState.showSwipeAnimation)
@@ -165,7 +158,7 @@ private extension MassageView {
     }
 
     func dismissSwipeAnimationAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
     }

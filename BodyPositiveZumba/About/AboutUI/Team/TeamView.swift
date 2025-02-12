@@ -36,21 +36,19 @@ struct TeamView: View, ActionableView {
                 ScrollView {
                     mainContent
                 }
+                swipeAnimationOverlay
             }
             .padding()
             .onAppear {
                 withAnimation(.easeIn.delay(0.02)) {
                     viewState.showCarousel = true
                 }
+                dismissSwipeAnimationAfterDelay()
             }
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarButton.backButton {
-                    dismiss()
-                }
-                ToolbarButton.closeButton {
-                    dismiss()
-                }
+                ToolbarButton.backButton { dismiss() }
+                ToolbarButton.closeButton { dismiss() }
             }
         }
         .sheet(item: $viewState.bookingURL) { booking in
@@ -134,5 +132,27 @@ private extension TeamView {
             }
         }
         .padding(.top, 20)
+    }
+
+    var swipeAnimationOverlay: some View {
+        Group {
+            if viewState.showSwipeAnimation {
+                SwipeAnimationComponent(
+                    viewModel: SwipeAnimationViewModel(
+                        viewState: viewState.swipeAnimationViewState
+                    )
+                )
+                .padding()
+                .zIndex(1)
+                .transition(.opacity)
+                .animation(.easeOut(duration: 1.5), value: viewState.showSwipeAnimation)
+            }
+        }
+    }
+
+    func dismissSwipeAnimationAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
+            withAnimation { viewState.showSwipeAnimation = false }
+        }
     }
 }
