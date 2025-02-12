@@ -11,7 +11,7 @@ class HomeViewModel: ObservableObject {
 
     var viewState = HomeViewState()
 
-    unowned let homeCoordinator: HomeCoordinator
+    let homeCoordinator: HomeCoordinator
 
     init(
         homeCoordinator: HomeCoordinator

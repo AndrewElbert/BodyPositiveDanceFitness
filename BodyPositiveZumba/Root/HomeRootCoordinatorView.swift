@@ -21,11 +21,15 @@ struct HomeRootCoordinatorView: View {
             case .joinNow:
                 Text("Join Now")
             case .classes:
-                ClassesUI.classesPage()
+                ClassesFlowCoordinatorView(
+                    coordinator: ClassesFlowCoordinator()
+                )
             case .faq:
                 FaqUI.faqPage()
             case .about:
-                AboutFlowCoordinatorView(coordinator: AboutFlowCoordinator())
+                AboutFlowCoordinatorView(
+                    coordinator: AboutFlowCoordinator()
+                )
             case .massage:
                 MassageUI.massagePage()
             case .spaceRental:
