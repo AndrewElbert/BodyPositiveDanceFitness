@@ -158,7 +158,7 @@ private extension MassageView {
     }
 
     func dismissSwipeAnimationAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
     }
