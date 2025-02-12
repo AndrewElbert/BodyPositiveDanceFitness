@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutViewState: Equatable {
-    
+
     let sections: [AboutMainSectionModel]
 
     static let `default` = AboutViewState(

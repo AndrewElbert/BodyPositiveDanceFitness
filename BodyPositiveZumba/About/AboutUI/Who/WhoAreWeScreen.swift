@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WhoAreWeScreen: View {
-    
+
     var body: some View {
         WhoAreWeView()
     }

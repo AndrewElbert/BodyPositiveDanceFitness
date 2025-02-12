@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct WhatWeDoView: View {
-    
+
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
-        
-        NavigationStack{
-            ScrollView{
+
+        NavigationStack {
+            ScrollView {
                 VStack(spacing: 20) {
                     Text(Constants.About.whatPageTitle)
                         .padding(.top, 11)
@@ -41,12 +41,12 @@ struct WhatWeDoView: View {
                                 .font(.sfProDisplayBold(size: 32))
                                 .fontWeight(.bold)
                         )
-                    
+
                     Text(Constants.About.button2Content)
                         .font(.sfProBodyTextRegular(size: 22))
                         .multilineTextAlignment(.center)
                         .padding()
-                    
+
                     Spacer()
                 }
                 .padding()

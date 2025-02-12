@@ -57,15 +57,15 @@ struct AboutView: View, ActionableView {
             .padding()
         }
     }
-    
+
     private var headerTitle: some View {
-        
+
         VStack(spacing: 0) {
             Text("About ")
                 .font(.sfProDisplayBold(size: 22))
                 .foregroundColor(.black)
                 .italic()
-            
+
             Image(Constants.Common.logoName)
                 .resizable()
                 .scaledToFit()
@@ -75,7 +75,6 @@ struct AboutView: View, ActionableView {
         .padding(.bottom, 16)
     }
 
-    
     private var extraButtonSection: some View {
         VStack(spacing: 20) {
             RainbowButton(title: "Who are we?") {
@@ -193,4 +192,3 @@ struct ActionButton: View, Equatable {
         lhs.section == rhs.section
     }
 }
-

@@ -29,11 +29,11 @@ struct AboutUI {
             viewModel: PartnersViewModel()
         )
     }
-    
+
     static func whoPage() -> some View {
         WhoAreWeScreen()
     }
-    
+
     static func whatPage() -> some View {
         WhatWeDoScreen()
     }
