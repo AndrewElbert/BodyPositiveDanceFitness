@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 final class AboutViewModel: ObservableObject {
     @Published var viewState: AboutViewState
-    unowned let aboutCoordinator: AboutCoordinator
+    let aboutCoordinator: AboutCoordinator
 
     init(
         viewState: AboutViewState = .default,
