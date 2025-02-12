@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ClassesViewState {
 
+    var swipeAnimationViewState = SwipeAnimationViewState()
+
     var carouselViewState = SwipableCarouselViewState(
         items: DanceClass.allCases,
         spacing: 10,
@@ -21,6 +23,7 @@ struct ClassesViewState {
         return carouselViewState.items[safeIndex]
     }
 
+    var showSwipeAnimation: Bool = true
     var isBioExpanded: Bool = false
     var viewAllClassesWebView: WebViewURL?
     var joinNowURL: WebViewURL?

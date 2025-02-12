@@ -18,6 +18,10 @@ struct ClassesView: View, ActionableView {
     @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: ClassesViewState
 
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
+
     public init(
         viewState: Binding<ClassesViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -26,33 +30,31 @@ struct ClassesView: View, ActionableView {
         self.onAction = onAction
     }
 
-    private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-    }
-
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 0) {
-                    headerSection
-                    carouselSection
-                    expansionToggleButton
-                    if viewState.isBioExpanded { bioText }
-                    viewAllClassesButton
+            ZStack {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        headerSection
+                        carouselSection
+                        expansionToggleButton
+                        if viewState.isBioExpanded { bioText }
+                        viewAllClassesButton
+                    }
+                    .padding(.bottom, 20)
                 }
-                .padding(.bottom, 20)
+                swipeAnimationOverlay
             }
             .sheet(item: $viewState.viewAllClassesWebView) { web in
                 WebViewContainer(url: web.url, title: web.title)
             }
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarButton.backButton {
-                    dismiss()
-                }
-                ToolbarButton.closeButton {
-                    dismiss()
-                }
+                ToolbarButton.backButton { dismiss() }
+                ToolbarButton.closeButton { dismiss() }
+            }
+            .onAppear {
+                dismissSwipeAnimationAfterDelay()
             }
         }
     }
@@ -144,6 +146,22 @@ private extension ClassesView {
         .buttonStyle(PressableButton())
     }
 
+    var swipeAnimationOverlay: some View {
+        Group {
+            if viewState.showSwipeAnimation {
+                SwipeAnimationComponent(
+                    viewModel: SwipeAnimationViewModel(
+                        viewState: viewState.swipeAnimationViewState
+                    )
+                )
+                .padding()
+                .zIndex(1)
+                .transition(.opacity)
+                .animation(.easeOut(duration: 1.5), value: viewState.showSwipeAnimation)
+            }
+        }
+    }
+
     var toggleButtonText: String {
         viewState.isBioExpanded ?
         Constants.Classes.closeButtonText :
@@ -162,6 +180,12 @@ private extension ClassesView {
             title: Constants.Classes.viewAllButtonText,
             url: url
         )
+    }
+
+    func dismissSwipeAnimationAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
+            withAnimation { viewState.showSwipeAnimation = false }
+        }
     }
 }
 
