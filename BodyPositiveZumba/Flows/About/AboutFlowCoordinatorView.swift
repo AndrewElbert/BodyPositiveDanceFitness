@@ -1,6 +1,6 @@
 //
 //  AboutFlowCoordinatorView.swift
-//  BodyPositiveZumba
+//  Flows
 //
 //  Created by Andrew Elbert on 2/8/25.
 //
@@ -23,7 +23,9 @@ struct AboutFlowCoordinatorView: View {
             case .team:
                 AboutUI.teamPage()
             case .classes:
-                ClassesUI.classesPage()
+                ClassesFlowCoordinatorView(
+                    coordinator: ClassesFlowCoordinator()
+                )
             case .partners:
                 AboutUI.partnersPage()
             case .who:
