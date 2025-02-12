@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ClassesUI {
+
     static func classesPage(
         classesCoordinator: ClassesCoordinator
     ) -> some View {
@@ -17,4 +18,12 @@ struct ClassesUI {
             )
         )
     }
+
+    @MainActor static func viewAllClassesPage(
+    ) -> some View {
+        AllClassesScreen(
+            viewModel: AllClassesViewModel()
+        )
+    }
+
 }

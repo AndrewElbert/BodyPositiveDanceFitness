@@ -21,7 +21,7 @@ struct ClassesFlowCoordinatorView: View {
                     classesCoordinator: coordinator
                 )
             case .viewAll:
-                AllClassesView()
+                ClassesUI.viewAllClassesPage()
             }
         }
     }

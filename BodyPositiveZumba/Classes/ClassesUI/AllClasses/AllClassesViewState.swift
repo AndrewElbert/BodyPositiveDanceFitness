@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct AllClassesViewState {
-    
+
     let classes: [DanceClass]
-    let isLoading: Bool
-    
+    var showWebView: Bool = false
+
     static let current = AllClassesViewState(
-        classes: DanceClass.allCases,
-        isLoading: false
+        classes: DanceClass.allCases
     )
 }
