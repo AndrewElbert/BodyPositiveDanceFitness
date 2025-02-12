@@ -33,7 +33,7 @@ struct Constants {
     enum Classes {
 
         static let pageTitle: String = "Classes"
-        static let pageBio: String = "Explore Our Wide Range of Classes Below!"
+        static let pageBio: String = "Explore Our Below!"
         static let viewAllButtonText: String = "View All Classes"
         static let closeButtonText: String = "Show Less"
         static let openButtonText: String = "Learn More About "
