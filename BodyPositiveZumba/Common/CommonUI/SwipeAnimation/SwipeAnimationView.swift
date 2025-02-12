@@ -28,7 +28,7 @@ struct SwipeAnimationView: View {
             .opacity(opacity)
             .frame(width: 100, height: 50)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                     animateCycle()
                 }
             }
@@ -36,10 +36,10 @@ struct SwipeAnimationView: View {
     }
 
     func animateCycle() {
-        let swipeDistance: CGFloat = 111       // how far to move horizontally
-        let fadeInDuration: Double = 0.2        // duration for fading in at the center
-        let swipeDuration: Double = 1.1        // duration for the swipe (and fade-out)
-        let pauseDuration: Double = 0.5         // pause before the next swipe
+        let swipeDistance: CGFloat = 190
+        let fadeInDuration: Double = 0.2
+        let swipeDuration: Double = 1.1
+        let pauseDuration: Double = 0.5
 
         offset = 0
         withAnimation(Animation.linear(duration: fadeInDuration)) {
