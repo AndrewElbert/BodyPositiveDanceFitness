@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ClassesUI {
     static func classesPage(
+        classesCoordinator: ClassesCoordinator
     ) -> some View {
         ClassesScreen(
             viewModel: ClassesViewModel(
+                classesCoordinator: classesCoordinator
             )
         )
     }

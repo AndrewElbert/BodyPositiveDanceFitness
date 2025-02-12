@@ -11,6 +11,7 @@ struct ClassesView: View, ActionableView {
     
     enum Action {
         case toggleExpansion
+        case handleViewAllButtonTap
     }
 
     var onAction: ((Action) -> Void)?
@@ -45,7 +46,7 @@ struct ClassesView: View, ActionableView {
                 }
                 swipeAnimationOverlay
             }
-            .sheet(item: $viewState.viewAllClassesWebView) { web in
+            .sheet(item: $viewState.viewCalendarWebView) { web in
                 WebViewContainer(url: web.url, title: web.title)
             }
             .toolbarBackground(.visible, for: .navigationBar)
@@ -207,11 +208,11 @@ private extension ClassesView {
         VStack(spacing: 20) {
             RainbowButton(
                 title: Constants.Classes.viewAllButtonText,
-                action: openViewAllClassesURL
+                action: openViewAllClasses
             )
             
             RainbowButton(
-                title: "View Calendar",
+                title: Constants.Classes.viewCalendarButtonText,
                 action: openCalendar
             )
         }
@@ -246,16 +247,16 @@ private extension ClassesView {
         }
     }
 
-    func openViewAllClassesURL() {
-        guard let url = URL(string: Constants.Classes.viewAllClassesUrl) else { return }
-        viewState.viewAllClassesWebView = WebViewURL(
-            title: Constants.Classes.viewAllButtonText,
-            url: url
-        )
+    func openViewAllClasses() {
+        onAction?(.handleViewAllButtonTap)
     }
     
     func openCalendar() {
-        // TODO: Handle calendar action here
+        guard let url = URL(string: Constants.Classes.viewCalendarUrl) else { return }
+        viewState.viewCalendarWebView = WebViewURL(
+            title: Constants.Classes.viewCalendarButtonText,
+            url: url
+        )
     }
 
     func dismissSwipeAnimationAfterDelay() {

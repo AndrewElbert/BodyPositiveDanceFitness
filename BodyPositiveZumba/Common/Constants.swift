@@ -35,10 +35,11 @@ struct Constants {
         static let pageTitle: String = "Classes"
         static let pageBio: String = "Explore Our Below!"
         static let viewAllButtonText: String = "View All Classes"
+        static let viewCalendarButtonText: String = "View Calendar"
         static let closeButtonText: String = "Show Less"
         static let openButtonText: String = "Learn More About "
         static let joinNowButtonText: String = "Join Now!"
-        static let viewAllClassesUrl: String = "https://www.bodypositivedancefitness.com/calendar"
+        static let viewCalendarUrl: String = "https://www.bodypositivedancefitness.com/calendar"
     }
 
     // MARK: Colors

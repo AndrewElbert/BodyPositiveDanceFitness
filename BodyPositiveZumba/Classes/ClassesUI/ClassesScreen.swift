@@ -22,6 +22,8 @@ struct ClassesScreen: View {
             switch action {
             case .toggleExpansion:
                 viewModel.toggleExpansion()
+            case .handleViewAllButtonTap:
+                viewModel.navigateToViewAll()
             }
         }
     }
