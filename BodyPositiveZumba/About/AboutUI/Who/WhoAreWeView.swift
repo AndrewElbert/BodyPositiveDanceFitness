@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct WhoAreWeView: View {
-    
+
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
-        
-        NavigationStack{
-            ScrollView{
+
+        NavigationStack {
+            ScrollView {
                 VStack(spacing: 20) {
-                    
+
                     Text(Constants.About.whoPageTitle)
                         .padding(.top, 11)
                         .font(.largeTitle)
@@ -42,12 +42,12 @@ struct WhoAreWeView: View {
                                 .font(.sfProDisplayBold(size: 32))
                                 .fontWeight(.bold)
                         )
-                    
+
                     Text(Constants.About.button1Content)
                         .font(.sfProBodyTextRegular(size: 22))
                         .multilineTextAlignment(.center)
                         .padding()
-                    
+
                     Spacer()
                 }
                 .padding()

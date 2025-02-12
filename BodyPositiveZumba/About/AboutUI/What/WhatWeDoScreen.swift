@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WhatWeDoScreen: View {
-    
+
     var body: some View {
         WhatWeDoView()
     }

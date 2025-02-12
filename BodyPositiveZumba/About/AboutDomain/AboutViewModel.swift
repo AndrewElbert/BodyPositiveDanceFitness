@@ -19,11 +19,11 @@ final class AboutViewModel: ObservableObject {
         self.viewState = viewState
         self.aboutCoordinator = aboutCoordinator
     }
-    
+
     func handleWhoButtonTap() {
         aboutCoordinator.about_viewWho()
     }
-    
+
     func handleWhatButtonTap() {
         aboutCoordinator.about_viewWhat()
     }

@@ -28,19 +28,18 @@ class AboutFlowCoordinator: FlowCoordinator {
 }
 
 extension AboutFlowCoordinator: AboutCoordinator {
-    
+
     func about_viewWho() {
         routes.presentSheet(
             .who
         )
     }
-    
+
     func about_viewWhat() {
         routes.presentSheet(
             .what
         )
     }
-    
 
     func about_viewPartners() {
         routes.presentSheet(
