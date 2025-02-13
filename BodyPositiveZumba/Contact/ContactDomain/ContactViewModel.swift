@@ -20,7 +20,7 @@ final class ContactViewModel: ObservableObject {
 
     func handleAction(_ action: String, title: String) {
         guard let url = URL(string: action) else { return }
-        
+
         if url.scheme == "tel" || url.scheme == "mailto" {
             UIApplication.shared.open(url)
         } else {

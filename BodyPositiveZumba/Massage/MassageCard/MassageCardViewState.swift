@@ -6,6 +6,6 @@
 //
 
 struct MassageCardViewState {
-    
+
     var isExpanded: Bool = false
 }
