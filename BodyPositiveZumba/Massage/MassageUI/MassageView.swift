@@ -44,7 +44,7 @@ struct MassageView: View, ActionableView {
             }
             .padding()
             .onAppear {
-                withAnimation(.easeIn.delay(0.2)) {
+                withAnimation(.easeIn.delay(0.3)) {
                     viewState.showCarousel = true
                 }
                 dismissSwipeAnimationAfterDelay()
@@ -88,7 +88,7 @@ private extension MassageView {
                 .padding(.bottom, 16)
 
             Text(viewState.pageBio)
-                .font(.sfProBodyTextRegular(size: 16))
+                .font(.sfProBodyTextRegular(size: 15))
                 .foregroundColor(adaptiveTextColor)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -103,7 +103,11 @@ private extension MassageView {
             )
         ) { card, isCurrentCard in
             AnyView(
-                MassageCardView(card: card)
+                MassageCardView(
+                    card: card,
+                    isCurrentCard: isCurrentCard,
+                    viewState: viewState.massageCardViewState
+                )
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(isCurrentCard ? Color.orange : Color.clear,
