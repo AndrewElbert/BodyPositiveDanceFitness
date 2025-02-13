@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContactUI {
-    static func contactPage(
+    @MainActor static func contactPage(
     ) -> some View {
         ContactScreen(
             viewModel: ContactViewModel(

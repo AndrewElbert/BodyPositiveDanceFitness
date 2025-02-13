@@ -100,9 +100,9 @@ struct Constants {
     // MARK: Contact
 
     enum Contact {
-        
+
         static let contactRows: [ContactRowData] = [
-            
+
             ContactRowData(
                 title: "Message us!",
                 icon: "bubble.left.and.bubble.right.fill",
@@ -281,24 +281,28 @@ struct Constants {
         static let ShelbySwannParlor: String = "Swann's Healing Elements"
         static let LindseyHerseyBio: String = "Lindsey is an experienced massage therapist who specializes in sports massage, health coaching, and Reiki."
         static let ShelbySwannBio: String = "Shelby is a skilled massage therapist offering a range of healing techniques, including Reiki and massage therapy."
+        static let LindseyHerseyFirstName: String = "Lindsey"
+        static let ShelbySwannFirstName: String = "Shelby"
         static let ladyLoveHolisticURL: String = "https://ladyloveholistics.com/"
         static let swannsHealingElementsURL: String = "https://swanns-healing-elements.square.site/"
 
         static let buttonText: String = "Book Today!"
-        static let bioTap: String = "Tap for bio"
+        static let bioTap: String = "Tap card for bio"
         static let swipe: String = "Swipe!"
 
         static let cards: [MassageCardModel] = [
             MassageCardModel(
                 id: UUID(),
-                name: Constants.HeadShots.LindseyHerseyName,
+                fullName: Constants.HeadShots.LindseyHerseyName,
+                firstName: Constants.Massage.LindseyHerseyFirstName,
                 imageName: Constants.HeadShots.LindseyHerseyHeadShot,
                 parlor: Constants.Massage.LindseyHerseyParlor,
                 bio: Constants.Massage.LindseyHerseyBio
             ),
             MassageCardModel(
                 id: UUID(),
-                name: Constants.HeadShots.ShelbySwannName,
+                fullName: Constants.HeadShots.ShelbySwannName,
+                firstName: Constants.Massage.ShelbySwannFirstName,
                 imageName: Constants.HeadShots.ShelbySwannHeadShot,
                 parlor: Constants.Massage.ShelbySwannParlor,
                 bio: Constants.Massage.ShelbySwannBio

@@ -7,9 +7,9 @@
 
 import SwiftUI
 
+@MainActor
 class MassageViewModel: ObservableObject {
 
-    @Published var currentIndex: Int = 0
     @Published var viewState: MassageViewState = MassageViewState()
 
     func updateBookingURL() {

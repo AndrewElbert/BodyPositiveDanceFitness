@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ContactRowData {
+struct ContactRowData: Equatable {
 
     let title: String
     let icon: String

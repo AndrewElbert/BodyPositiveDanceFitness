@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 final class ContactViewModel: ObservableObject {
 
     @Published var viewState: ContactViewState
@@ -25,9 +26,5 @@ final class ContactViewModel: ObservableObject {
         } else {
             viewState.webViewURL = WebViewURL(title: title, url: url)
         }
-    }
-
-    func dismissWebView() {
-        viewState.webViewURL = nil
     }
 }
