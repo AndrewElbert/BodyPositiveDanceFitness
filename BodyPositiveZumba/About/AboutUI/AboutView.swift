@@ -77,10 +77,10 @@ struct AboutView: View, ActionableView {
 
     private var extraButtonSection: some View {
         VStack(spacing: 20) {
-            RainbowButton(title: "Who are we?") {
+            RainbowButton(title: Constants.About.whoPageTitle) {
                 onAction?(.handleWhoAreWeTap)
             }
-            RainbowButton(title: "What do we do?") {
+            RainbowButton(title: Constants.About.whatPageTitle) {
                 onAction?(.handleWhatWeDoTap)
             }
         }
@@ -130,15 +130,7 @@ struct RainbowButton: View {
                         .stroke(
                             LinearGradient(
                                 gradient: Gradient(
-                                    colors: [
-                                        .red,
-                                        .orange,
-                                        .yellow,
-                                        .green,
-                                        .blue,
-                                        .indigo,
-                                        .purple
-                                    ]
+                                    colors: Constants.Colors.rainbow
                                 ),
                                 startPoint: .leading,
                                 endPoint: .trailing
@@ -151,7 +143,7 @@ struct RainbowButton: View {
     }
 }
 
-struct ActionButton: View, Equatable {
+struct ActionButton: View {
     let section: AboutMainSectionModel
     let onTap: (AboutMainSectionModel) -> Void
 
@@ -186,9 +178,5 @@ struct ActionButton: View, Equatable {
                 endRadius: 122
             )
         }
-    }
-
-    static func == (lhs: ActionButton, rhs: ActionButton) -> Bool {
-        lhs.section == rhs.section
     }
 }

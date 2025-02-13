@@ -11,6 +11,7 @@ struct ClassesView: View, ActionableView {
 
     enum Action {
         case toggleExpansion
+        case handleViewAllButtonTap
     }
 
     var onAction: ((Action) -> Void)?
@@ -39,13 +40,13 @@ struct ClassesView: View, ActionableView {
                         carouselSection
                         expansionToggleButton
                         if viewState.isBioExpanded { bioText }
-                        viewAllClassesButton
+                        buttonsSection
                     }
                     .padding(.bottom, 20)
                 }
                 swipeAnimationOverlay
             }
-            .sheet(item: $viewState.viewAllClassesWebView) { web in
+            .sheet(item: $viewState.viewCalendarWebView) { web in
                 WebViewContainer(url: web.url, title: web.title)
             }
             .toolbarBackground(.visible, for: .navigationBar)
@@ -62,21 +63,82 @@ struct ClassesView: View, ActionableView {
 
 private extension ClassesView {
 
+    private struct RainbowButton: View {
+        let title: String
+        let action: () -> Void
+        let font: Font
+        @Environment(\.colorScheme) private var colorScheme
+
+        private var adaptiveTextColor: Color {
+            colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+        }
+
+        init(
+            title: String,
+            font: Font = .sfProRoundedTextMedium(size: 22),
+            action: @escaping () -> Void
+        ) {
+            self.title = title
+            self.font = font
+            self.action = action
+        }
+
+        var body: some View {
+            Button(action: action) {
+                Text(title)
+                    .font(font)
+                    .foregroundColor(adaptiveTextColor)
+                    .padding(.horizontal, 50)
+                    .padding(.vertical, 11)
+                    .frame(width: 280, height: 60)
+                    .background(Color.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(
+                                LinearGradient(
+                                    colors: Constants.Colors.rainbow,
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                ),
+                                lineWidth: 5
+                            )
+                    )
+                    .cornerRadius(8)
+            }
+            .buttonStyle(PressableButton())
+        }
+    }
+
     var headerSection: some View {
+
         VStack(spacing: 0) {
             Text(Constants.Classes.pageTitle)
                 .font(.sfProDisplayBold(size: 40))
                 .multilineTextAlignment(.center)
                 .foregroundColor(adaptiveTextColor)
                 .padding(.top, 11)
-                .padding(.bottom, 33)
+                .padding(.bottom, 20)
 
-            Text(Constants.Classes.pageBio)
-                .font(.sfProBodyTextMedium(size: 20))
-                .foregroundColor(adaptiveTextColor.opacity(0.9))
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-                .padding(.bottom, 25)
+            HStack(spacing: 0) {
+                Text(Constants.Classes.pageBioPt1)
+                    .font(.sfProBodyTextMedium(size: 26))
+                    .foregroundColor(adaptiveTextColor.opacity(0.9))
+                Text(Constants.Classes.pageBioPt2)
+                    .font(.sfProBodyTextMedium(size: 26))
+                    .italic()
+                    .underline()
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: Constants.Colors.rainbow,
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                Text(Constants.Classes.pageBioPt3)
+                    .font(.sfProBodyTextMedium(size: 26))
+                    .foregroundColor(adaptiveTextColor.opacity(0.9))
+            }
+            .padding(.bottom, 35)
         }
     }
 
@@ -92,15 +154,7 @@ private extension ClassesView {
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(isCurrentCard ? danceClass.color : Color.clear,
-                                lineWidth: isCurrentCard ? 3 : 0)
-                )
-                .shadow(
-                    color: isCurrentCard ? danceClass.color.opacity(0.8) : Color.clear,
-                    radius: 40, x: 0, y: 0
-                )
-                .shadow(
-                    color: isCurrentCard ? danceClass.color.opacity(0.6) : Color.clear,
-                    radius: 50, x: 0, y: 0
+                                lineWidth: isCurrentCard ? 6 : 0)
                 )
             )
         }
@@ -128,22 +182,19 @@ private extension ClassesView {
             .padding(.horizontal)
     }
 
-    var viewAllClassesButton: some View {
-        Button(action: openViewAllClassesURL) {
-            Text(Constants.Classes.viewAllButtonText)
-                .font(.sfProRoundedTextBold(size: 20))
-                .foregroundColor(adaptiveTextColor)
-                .padding(.horizontal, 50)
-                .padding(.vertical, 20)
-                .background(viewState.currentDanceClass.color.opacity(0.1))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(adaptiveTextColor, lineWidth: 3)
-                )
-                .cornerRadius(8)
+    var buttonsSection: some View {
+        VStack(spacing: 16) {
+            RainbowButton(
+                title: Constants.Classes.viewAllButtonText,
+                action: openViewAllClasses
+            )
+
+            RainbowButton(
+                title: Constants.Classes.viewCalendarButtonText,
+                action: openCalendar
+            )
         }
-        .padding(.top, 50)
-        .buttonStyle(PressableButton())
+        .padding(.top, 40)
     }
 
     var swipeAnimationOverlay: some View {
@@ -174,10 +225,14 @@ private extension ClassesView {
         }
     }
 
-    func openViewAllClassesURL() {
-        guard let url = URL(string: Constants.Classes.viewAllClassesUrl) else { return }
-        viewState.viewAllClassesWebView = WebViewURL(
-            title: Constants.Classes.viewAllButtonText,
+    func openViewAllClasses() {
+        onAction?(.handleViewAllButtonTap)
+    }
+
+    func openCalendar() {
+        guard let url = URL(string: Constants.Classes.viewCalendarUrl) else { return }
+        viewState.viewCalendarWebView = WebViewURL(
+            title: Constants.Classes.viewCalendarButtonText,
             url: url
         )
     }
