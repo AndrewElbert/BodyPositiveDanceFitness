@@ -10,7 +10,6 @@ import SwiftUI
 
 enum DanceClass: String, CaseIterable, Identifiable {
 
-    case zumbaGold = "Zumba Gold®"
     case zumba = "Zumba®"
     case africanHipHop = "African Hip Hop"
     case shineLight = "SHiNE LIGHT"
@@ -22,6 +21,7 @@ enum DanceClass: String, CaseIterable, Identifiable {
     case uplift = "Uplift"
     case dark = "Dance After Dark"
     case shineDance = "SHiNE Dance Fitness™"
+    case zumbaGold = "Zumba Gold®"
 
     var id: String { self.rawValue }
 

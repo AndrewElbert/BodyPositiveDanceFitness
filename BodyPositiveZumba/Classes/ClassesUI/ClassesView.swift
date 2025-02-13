@@ -75,7 +75,7 @@ private extension ClassesView {
 
         init(
             title: String,
-            font: Font = .sfProRoundedTextMedium(size: 20),
+            font: Font = .sfProRoundedTextMedium(size: 22),
             action: @escaping () -> Void
         ) {
             self.title = title
@@ -96,18 +96,11 @@ private extension ClassesView {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(
                                 LinearGradient(
-                                    colors: [
-                                        .red,
-                                        .orange,
-                                        .yellow,
-                                        .green,
-                                        .blue,
-                                        .purple
-                                    ],
+                                    colors: Constants.Colors.rainbow,
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 ),
-                                lineWidth: 6
+                                lineWidth: 5
                             )
                     )
                     .cornerRadius(8)
@@ -117,6 +110,7 @@ private extension ClassesView {
     }
 
     var headerSection: some View {
+
         VStack(spacing: 0) {
             Text(Constants.Classes.pageTitle)
                 .font(.sfProDisplayBold(size: 40))
@@ -126,31 +120,23 @@ private extension ClassesView {
                 .padding(.bottom, 20)
 
             HStack(spacing: 0) {
-                Text("Explore our ")
-                    .font(.sfProBodyTextMedium(size: 24))
+                Text(Constants.Classes.pageBioPt1)
+                    .font(.sfProBodyTextMedium(size: 26))
                     .foregroundColor(adaptiveTextColor.opacity(0.9))
-                Text("Colors")
-                    .font(.sfProBodyTextMedium(size: 24))
+                Text(Constants.Classes.pageBioPt2)
+                    .font(.sfProBodyTextMedium(size: 26))
                     .italic()
                     .underline()
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [
-                                .red,
-                                .orange,
-                                .yellow,
-                                .green,
-                                .blue,
-                                .purple
-                            ],
+                            colors: Constants.Colors.rainbow,
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
-                Text(" below!")
-                    .font(.sfProBodyTextMedium(size: 24))
+                Text(Constants.Classes.pageBioPt3)
+                    .font(.sfProBodyTextMedium(size: 26))
                     .foregroundColor(adaptiveTextColor.opacity(0.9))
-                    .multilineTextAlignment(.center)
             }
             .padding(.bottom, 35)
         }
@@ -168,15 +154,7 @@ private extension ClassesView {
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(isCurrentCard ? danceClass.color : Color.clear,
-                                lineWidth: isCurrentCard ? 3 : 0)
-                )
-                .shadow(
-                    color: isCurrentCard ? danceClass.color.opacity(0.8) : Color.clear,
-                    radius: 40, x: 0, y: 0
-                )
-                .shadow(
-                    color: isCurrentCard ? danceClass.color.opacity(0.6) : Color.clear,
-                    radius: 50, x: 0, y: 0
+                                lineWidth: isCurrentCard ? 6 : 0)
                 )
             )
         }
@@ -205,7 +183,7 @@ private extension ClassesView {
     }
 
     var buttonsSection: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 16) {
             RainbowButton(
                 title: Constants.Classes.viewAllButtonText,
                 action: openViewAllClasses
@@ -216,7 +194,7 @@ private extension ClassesView {
                 action: openCalendar
             )
         }
-        .padding(.top, 50)
+        .padding(.top, 40)
     }
 
     var swipeAnimationOverlay: some View {

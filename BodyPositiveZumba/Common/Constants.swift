@@ -33,7 +33,9 @@ struct Constants {
     enum Classes {
 
         static let pageTitle: String = "Classes"
-        static let pageBio: String = "Explore Our Below!"
+        static let pageBioPt1: String = "Explore our "
+        static let pageBioPt2: String = "Colors"
+        static let pageBioPt3: String = " below!"
         static let viewAllButtonText: String = "View All Classes"
         static let viewCalendarButtonText: String = "View Calendar"
         static let closeButtonText: String = "Show Less"
@@ -50,6 +52,15 @@ struct Constants {
 
     enum Colors {
 
+        static let rainbow: [Color] = [
+            .red,
+            .orange,
+            .yellow,
+            .green,
+            .blue,
+            .purple,
+            .pink
+        ]
         static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0)
         static let darkerCyan: Color = Color(red: 0.0, green: 0.88, blue: 0.88)
         static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)
