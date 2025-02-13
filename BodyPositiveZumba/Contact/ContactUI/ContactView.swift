@@ -11,13 +11,11 @@ struct ContactView: View, ActionableView {
     enum Action {
         case handleAction(action: String, title: String)
     }
-
+    
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) private var dismiss
     @Binding var viewState: ContactViewState
-    @State private var animateGradient = false
-    @State private var selectedRow: String? = nil
-
+    
     public init(
         viewState: Binding<ContactViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -25,12 +23,11 @@ struct ContactView: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                headerView
-                    .padding(.bottom, 20)
+                headerView.padding(.bottom, 20)
                 contactRowsSection
                 Spacer()
             }
@@ -46,8 +43,9 @@ struct ContactView: View, ActionableView {
     }
     
     private var headerView: some View {
-        VStack(spacing: 15) {
-            Text("Please Reach Out\nAnytime!")
+        let titleText = "Please Reach Out\nAnytime!"
+        return VStack(spacing: 15) {
+            Text(titleText)
                 .font(.sfProSerifBold(size: 35))
                 .italic()
                 .foregroundColor(.clear)
@@ -55,11 +53,11 @@ struct ContactView: View, ActionableView {
                 .overlay(
                     LinearGradient(
                         gradient: Gradient(colors: Constants.Colors.rainbow),
-                        startPoint: animateGradient ? .leading : .trailing,
-                        endPoint: animateGradient ? .trailing : .leading
+                        startPoint: viewState.animateGradient ? .leading : .trailing,
+                        endPoint: viewState.animateGradient ? .trailing : .leading
                     )
                     .mask(
-                        Text("Please Reach Out\nAnytime!")
+                        Text(titleText)
                             .font(.sfProSerifBold(size: 33))
                             .italic()
                             .multilineTextAlignment(.center)
@@ -67,7 +65,7 @@ struct ContactView: View, ActionableView {
                 )
                 .onAppear {
                     withAnimation(.linear(duration: 3).repeatForever(autoreverses: true)) {
-                        animateGradient.toggle()
+                        viewState.animateGradient.toggle()
                     }
                 }
             
@@ -80,36 +78,38 @@ struct ContactView: View, ActionableView {
     
     private var contactRowsSection: some View {
         VStack(spacing: 0) {
-            Divider()
-                .background(Color.gray)
-                .padding(.horizontal)
+            rowDivider
             
             ForEach(viewState.contactRows, id: \.title) { row in
                 ContactRowContainer(
                     data: row,
-                    isSelected: selectedRow == row.title,
+                    isSelected: viewState.selectedRow == row.title,
                     onSelect: {
                         withAnimation(.spring()) {
-                            selectedRow = row.title
+                            viewState.selectedRow = row.title
                         }
                     },
                     onAction: {
-                        onAction?(.handleAction(action: row.action, title: row.title))
+                        onAction?(.handleAction(
+                            action: row.action,
+                            title: row.title)
+                        )
                     }
                 )
                 
-                if row != viewState.contactRows.last {
-                    Divider()
-                        .background(Color.gray)
-                        .padding(.horizontal)
-                }
+                if row != viewState.contactRows.last { rowDivider }
             }
-            Divider()
-                .background(Color.gray)
-                .padding(.horizontal)
+            
+            rowDivider
         }
         .padding()
         .background(Color(UIColor.systemBackground))
+    }
+    
+    private var rowDivider: some View {
+        Divider()
+            .background(Color.gray)
+            .padding(.horizontal)
     }
 }
 
@@ -140,7 +140,7 @@ struct ContactRow: View {
     let data: ContactRowData
     let onAction: () -> Void
     @State private var iconRotation: Double = 0
-
+    
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: data.icon)
@@ -162,10 +162,10 @@ struct ContactRow: View {
                     .foregroundColor(.blue)
                     .underline()
                     .multilineTextAlignment(.center)
-                    .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
         .multilineTextAlignment(.center)
     }
 }
+
