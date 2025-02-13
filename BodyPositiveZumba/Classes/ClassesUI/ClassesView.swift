@@ -75,7 +75,7 @@ private extension ClassesView {
 
         init(
             title: String,
-            font: Font = .sfProRoundedTextMedium(size: 22),
+            font: Font = .sfProRoundedTextMedium(size: 24),
             action: @escaping () -> Void
         ) {
             self.title = title
@@ -90,7 +90,7 @@ private extension ClassesView {
                     .foregroundColor(adaptiveTextColor)
                     .padding(.horizontal, 50)
                     .padding(.vertical, 11)
-                    .frame(width: 280, height: 60)
+                    .frame(width: 333, height: 60)
                     .background(Color.white)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
