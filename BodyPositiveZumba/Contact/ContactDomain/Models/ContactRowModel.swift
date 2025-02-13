@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct ContactRowData {
 
@@ -13,4 +14,5 @@ struct ContactRowData {
     let icon: String
     let text: String
     let action: String
+    let iconColor: Color
 }
