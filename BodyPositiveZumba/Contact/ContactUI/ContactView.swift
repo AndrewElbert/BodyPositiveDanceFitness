@@ -11,11 +11,11 @@ struct ContactView: View, ActionableView {
     enum Action {
         case handleAction(action: String, title: String)
     }
-    
+
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) private var dismiss
     @Binding var viewState: ContactViewState
-    
+
     public init(
         viewState: Binding<ContactViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -23,7 +23,7 @@ struct ContactView: View, ActionableView {
         self._viewState = viewState
         self.onAction = onAction
     }
-    
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -41,7 +41,7 @@ struct ContactView: View, ActionableView {
             }
         }
     }
-    
+
     private var headerView: some View {
         let titleText = "Please Reach Out\nAnytime!"
         return VStack(spacing: 15) {
@@ -68,18 +68,18 @@ struct ContactView: View, ActionableView {
                         viewState.animateGradient.toggle()
                     }
                 }
-            
+
             Text("We're here to help and listen")
                 .font(.sfProRoundedTextRegular(size: 16))
                 .foregroundColor(.secondary)
         }
         .padding(.top, 25)
     }
-    
+
     private var contactRowsSection: some View {
         VStack(spacing: 0) {
             rowDivider
-            
+
             ForEach(viewState.contactRows, id: \.title) { row in
                 ContactRowContainer(
                     data: row,
@@ -96,16 +96,16 @@ struct ContactView: View, ActionableView {
                         )
                     }
                 )
-                
+
                 if row != viewState.contactRows.last { rowDivider }
             }
-            
+
             rowDivider
         }
         .padding()
         .background(Color(UIColor.systemBackground))
     }
-    
+
     private var rowDivider: some View {
         Divider()
             .background(Color.gray)
@@ -118,7 +118,7 @@ struct ContactRowContainer: View {
     let isSelected: Bool
     let onSelect: () -> Void
     let onAction: () -> Void
-    
+
     var body: some View {
         VStack {
             ContactRow(data: data, onAction: onAction)
@@ -140,7 +140,7 @@ struct ContactRow: View {
     let data: ContactRowData
     let onAction: () -> Void
     @State private var iconRotation: Double = 0
-    
+
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: data.icon)
@@ -155,7 +155,7 @@ struct ContactRow: View {
                         iconRotation = 360
                     }
                 }
-            
+
             Button(action: onAction) {
                 Text(data.text)
                     .font(.sfProRoundedTextRegular(size: 16))
@@ -168,4 +168,3 @@ struct ContactRow: View {
         .multilineTextAlignment(.center)
     }
 }
-

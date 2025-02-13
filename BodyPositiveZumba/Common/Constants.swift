@@ -100,9 +100,9 @@ struct Constants {
     // MARK: Contact
 
     enum Contact {
-        
+
         static let contactRows: [ContactRowData] = [
-            
+
             ContactRowData(
                 title: "Message us!",
                 icon: "bubble.left.and.bubble.right.fill",

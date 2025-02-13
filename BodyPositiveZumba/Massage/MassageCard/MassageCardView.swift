@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct MassageCardView: View {
-    
+
     var card: MassageCardModel
     var isCurrentCard: Bool
     @State var viewState: MassageCardViewState
-    
+
     var body: some View {
         VStack {
             Image(card.imageName)
@@ -61,7 +61,7 @@ struct MassageCardView: View {
                 viewState.isExpanded.toggle()
             }
         }
-        .onChange(of: isCurrentCard) { oldvalue, newValue in
+        .onChange(of: isCurrentCard) { _, newValue in
             if !newValue {
                 withAnimation(.easeOut(duration: 1.4)) {
                     viewState.isExpanded = false
