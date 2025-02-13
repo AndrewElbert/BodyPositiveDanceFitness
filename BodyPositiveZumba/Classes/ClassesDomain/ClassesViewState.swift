@@ -25,6 +25,6 @@ struct ClassesViewState {
 
     var showSwipeAnimation: Bool = true
     var isBioExpanded: Bool = false
-    var viewAllClassesWebView: WebViewURL?
+    var viewCalendarWebView: WebViewURL?
     var joinNowURL: WebViewURL?
 }

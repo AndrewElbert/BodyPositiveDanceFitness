@@ -10,7 +10,7 @@ import SwiftUI
 class SideDrawerViewModel: ObservableObject {
 
     @Published public var viewState: SideDrawerViewState = SideDrawerViewState()
-    unowned let coordinator: SideDrawerCoordinator
+    let coordinator: SideDrawerCoordinator
 
     init(coordinator: SideDrawerCoordinator) {
         self.coordinator = coordinator

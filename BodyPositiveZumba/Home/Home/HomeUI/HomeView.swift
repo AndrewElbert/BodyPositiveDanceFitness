@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
 
-    unowned let coordinator: SideDrawerCoordinator
+    let coordinator: SideDrawerCoordinator
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
 

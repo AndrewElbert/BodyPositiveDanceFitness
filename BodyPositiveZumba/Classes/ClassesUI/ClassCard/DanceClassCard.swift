@@ -21,8 +21,6 @@ struct DanceClassCard: View {
         .background(cardBackground)
         .overlay(cardOverlay)
         .cornerRadius(15)
-        .shadow(color: danceClass.color.opacity(0.8), radius: 30, x: 0, y: 0)
-        .shadow(color: danceClass.color.opacity(0.4), radius: 40, x: 0, y: 0)
         .sheet(item: $viewState.joinNowURL) { joinNow in
             WebViewContainer(url: joinNow.url, title: joinNow.title)
         }
@@ -60,18 +58,18 @@ private extension DanceClassCard {
     var cardBackground: some View {
         RadialGradient(
             gradient: Gradient(colors: [
-                danceClass.color.opacity(0.01),
-                danceClass.color.opacity(0.1)
+                danceClass.color.opacity(0.11),
+                danceClass.color.opacity(0.33)
             ]),
             center: .center,
             startRadius: 77,
-            endRadius: 111
+            endRadius: 200
         )
     }
 
     var cardOverlay: some View {
         RoundedRectangle(cornerRadius: 15)
-            .strokeBorder(danceClass.color, lineWidth: 2)
+            .strokeBorder(danceClass.color, lineWidth: 3)
     }
 
     func openJoinURL() {
