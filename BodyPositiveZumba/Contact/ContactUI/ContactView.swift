@@ -28,7 +28,28 @@ struct ContactView: View, ActionableView {
     var body: some View {
         NavigationStack {
             VStack {
-                VStack(spacing: 55) {
+                
+                Text("Please Reach Out\nAnytime!")
+                    .font(.sfProSerifBold(size: 35))
+                    .italic()
+                    .foregroundColor(.clear)
+                    .multilineTextAlignment(.center)
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: Constants.Colors.rainbow),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                        .mask(
+                            Text("Please Reach Out\nAnytime!")
+                                .font(.sfProSerifBold(size: 33))
+                                .italic()
+                                .multilineTextAlignment(.center)
+                        )
+                    )
+                    .padding(.top, 25)
+
+                VStack(spacing: 30) {
                     ForEach(viewState.contactRows, id: \.title) { row in
                         ContactRow(data: row) {
                             onAction?(.handleAction(action: row.action, title: row.title))
@@ -36,21 +57,14 @@ struct ContactView: View, ActionableView {
                     }
                 }
                 .padding()
-                .frame(width: 333, height: 667)
-                .background(
-                    ZStack {
-                        Color.white
-                        backgroundGradient
-                    }
-                )
+                .frame(width: 340, height: 480)
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.orange, lineWidth: 2)
+                        .stroke(.gray, lineWidth: 3)
                 )
                 .shadow(radius: 10)
                 .padding()
-                .padding(.bottom, 22)
 
                 Spacer()
             }
@@ -59,23 +73,10 @@ struct ContactView: View, ActionableView {
             }
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarButton.closeButton {
-                    dismiss()
-                }
+                ToolbarButton.backButton { dismiss() }
+                ToolbarButton.closeButton { dismiss() }
             }
         }
-    }
-
-    private var backgroundGradient: RadialGradient {
-        RadialGradient(
-            gradient: Gradient(colors: [
-                Constants.Contact.innerGradient,
-                Constants.Contact.outerGradient
-            ]),
-            center: .center,
-            startRadius: Constants.Contact.startRadius,
-            endRadius: Constants.Contact.endRadius
-        )
     }
 }
 
@@ -84,21 +85,13 @@ struct ContactRow: View {
     let onAction: () -> Void
 
     var body: some View {
-        VStack {
-
+        VStack(spacing: 12) {
             Image(systemName: data.icon)
-                .foregroundColor(.black.opacity(0.85))
-                .font(.system(size: 26))
-                .padding(.trailing, 4)
-
-            Text(data.title)
-                .font(.sfProBodyTextMedium(size: 33))
-                .foregroundColor(.black)
-                .padding(.bottom, 5)
-
+                .foregroundColor(data.iconColor)
+                .font(.system(size: 33))
             Button(action: onAction) {
                 Text(data.text)
-                    .font(.sfProRoundedTextRegular(size: 20))
+                    .font(.sfProRoundedTextRegular(size: 16))
                     .foregroundColor(.blue)
                     .underline()
             }
