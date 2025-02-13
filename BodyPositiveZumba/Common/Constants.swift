@@ -100,36 +100,41 @@ struct Constants {
     // MARK: Contact
 
     enum Contact {
-
+        
         static let contactRows: [ContactRowData] = [
+            
             ContactRowData(
                 title: "Message us!",
-                icon: "message.fill",
-                text: "Chat",
-                action: "https://www.bodypositivedancefitness.com/contact-1"
+                icon: "bubble.left.and.bubble.right.fill",
+                text: "Send us a message",
+                action: "https://www.bodypositivedancefitness.com/contact-1",
+                iconColor: Color.blue
             ),
             ContactRowData(
                 title: "Call us!",
                 icon: "phone.fill",
                 text: "207-536-4617",
-                action: "tel://207-536-4617"
+                action: "tel://207-536-4617",
+                iconColor: Color.green
             ),
             ContactRowData(
                 title: "Email us!",
-                icon: "envelope.fill",
+                icon: "envelope.open.fill",
                 text: "dancing@bodypositivedancefitness.com",
-                action: "mailto:dancing@bodypositivedancefitness.com"
+                action: "mailto:dancing@bodypositivedancefitness.com",
+                iconColor: Color.purple
             ),
             ContactRowData(
                 title: "Visit us!",
-                icon: "map.fill",
+                icon: "mappin.and.ellipse",
                 text: "1100 Brighton Avenue Pine Tree Shopping Center Portland, Maine",
-                action: "http://maps.apple.com/?q=123+Main+Street"
+                action: "http://maps.apple.com/?q=123+Main+Street",
+                iconColor: Color.red
             )
         ]
 
-        static let innerGradient: Color = Constants.SideDrawer.innerCircleColorRadius.opacity(0.8)
-        static let outerGradient: Color = Constants.SideDrawer.outerCircleColorRadius.opacity(0.8)
+        static let innerGradient: Color = Constants.SideDrawer.innerCircleColorRadius.opacity(0.2)
+        static let outerGradient: Color = Constants.SideDrawer.outerCircleColorRadius.opacity(0.2)
         static let startRadius: CGFloat = 35
         static let endRadius: CGFloat = 400
     }
