@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct MassageCardView: View {
-
+    
     var card: MassageCardModel
-    @State private var isExpanded: Bool = false
-
+    var isCurrentCard: Bool
+    @State var viewState: MassageCardViewState
+    
     var body: some View {
         VStack {
             Image(card.imageName)
@@ -28,12 +29,12 @@ struct MassageCardView: View {
                 .padding(.top, 10)
 
             Text(card.parlor)
-                .font(.sfProBodyTextRegular(size: 14))
+                .font(.sfProBodyTextRegular(size: 16))
                 .foregroundColor(Constants.Colors.darkOrange)
 
-            if isExpanded {
+            if viewState.isExpanded {
                 Text(card.bio)
-                    .font(.sfProBodyTextRegular(size: 16))
+                    .font(.sfProBodyTextRegular(size: 17))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -57,7 +58,14 @@ struct MassageCardView: View {
         )
         .onTapGesture {
             withAnimation(.easeInOut) {
-                isExpanded.toggle()
+                viewState.isExpanded.toggle()
+            }
+        }
+        .onChange(of: isCurrentCard) { oldvalue, newValue in
+            if !newValue {
+                withAnimation(.easeOut(duration: 1.4)) {
+                    viewState.isExpanded = false
+                }
             }
         }
     }
