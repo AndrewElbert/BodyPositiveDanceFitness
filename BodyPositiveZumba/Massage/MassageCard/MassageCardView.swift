@@ -21,7 +21,7 @@ struct MassageCardView: View {
                 .clipped()
                 .cornerRadius(15)
 
-            Text(card.name)
+            Text(card.fullName)
                 .font(.sfProRoundedTextMedium(size: 24))
                 .fontWeight(.bold)
                 .foregroundColor(.black)
