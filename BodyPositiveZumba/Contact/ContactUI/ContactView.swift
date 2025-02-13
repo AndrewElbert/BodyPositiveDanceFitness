@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContactView: View, ActionableView {
-
     enum Action {
         case handleAction(action: String, title: String)
     }
@@ -27,45 +26,9 @@ struct ContactView: View, ActionableView {
 
     var body: some View {
         NavigationStack {
-            VStack {
-                
-                Text("Please Reach Out\nAnytime!")
-                    .font(.sfProSerifBold(size: 35))
-                    .italic()
-                    .foregroundColor(.clear)
-                    .multilineTextAlignment(.center)
-                    .overlay(
-                        LinearGradient(
-                            gradient: Gradient(colors: Constants.Colors.rainbow),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                        .mask(
-                            Text("Please Reach Out\nAnytime!")
-                                .font(.sfProSerifBold(size: 33))
-                                .italic()
-                                .multilineTextAlignment(.center)
-                        )
-                    )
-                    .padding(.top, 25)
-
-                VStack(spacing: 30) {
-                    ForEach(viewState.contactRows, id: \.title) { row in
-                        ContactRow(data: row) {
-                            onAction?(.handleAction(action: row.action, title: row.title))
-                        }
-                    }
-                }
-                .padding()
-                .frame(width: 340, height: 480)
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.gray, lineWidth: 3)
-                )
-                .shadow(radius: 10)
-                .padding()
-
+            VStack(spacing: 0) {
+                headerView.padding(.bottom, 20)
+                contactRowsSection
                 Spacer()
             }
             .sheet(item: $viewState.webViewURL) { webView in
@@ -78,22 +41,128 @@ struct ContactView: View, ActionableView {
             }
         }
     }
+
+    private var headerView: some View {
+        let titleText = "Please Reach Out\nAnytime!"
+        return VStack(spacing: 15) {
+            Text(titleText)
+                .font(.sfProSerifBold(size: 35))
+                .italic()
+                .foregroundColor(.clear)
+                .multilineTextAlignment(.center)
+                .overlay(
+                    LinearGradient(
+                        gradient: Gradient(colors: Constants.Colors.rainbow),
+                        startPoint: viewState.animateGradient ? .leading : .trailing,
+                        endPoint: viewState.animateGradient ? .trailing : .leading
+                    )
+                    .mask(
+                        Text(titleText)
+                            .font(.sfProSerifBold(size: 33))
+                            .italic()
+                            .multilineTextAlignment(.center)
+                    )
+                )
+                .onAppear {
+                    withAnimation(.linear(duration: 3).repeatForever(autoreverses: true)) {
+                        viewState.animateGradient.toggle()
+                    }
+                }
+
+            Text("We're here to help and listen")
+                .font(.sfProRoundedTextRegular(size: 16))
+                .foregroundColor(.secondary)
+        }
+        .padding(.top, 25)
+    }
+
+    private var contactRowsSection: some View {
+        VStack(spacing: 0) {
+            rowDivider
+
+            ForEach(viewState.contactRows, id: \.title) { row in
+                ContactRowContainer(
+                    data: row,
+                    isSelected: viewState.selectedRow == row.title,
+                    onSelect: {
+                        withAnimation(.spring()) {
+                            viewState.selectedRow = row.title
+                        }
+                    },
+                    onAction: {
+                        onAction?(.handleAction(
+                            action: row.action,
+                            title: row.title)
+                        )
+                    }
+                )
+
+                if row != viewState.contactRows.last { rowDivider }
+            }
+
+            rowDivider
+        }
+        .padding()
+        .background(Color(UIColor.systemBackground))
+    }
+
+    private var rowDivider: some View {
+        Divider()
+            .background(Color.gray)
+            .padding(.horizontal)
+    }
+}
+
+struct ContactRowContainer: View {
+    let data: ContactRowData
+    let isSelected: Bool
+    let onSelect: () -> Void
+    let onAction: () -> Void
+
+    var body: some View {
+        VStack {
+            ContactRow(data: data, onAction: onAction)
+                .padding(.vertical, 15)
+                .contentShape(Rectangle())
+                .onTapGesture(perform: onSelect)
+        }
+        .scaleEffect(isSelected ? 1.05 : 1.0)
+        .animation(.spring(), value: isSelected)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.blue.opacity(isSelected ? 0.1 : 0))
+                .animation(.easeInOut, value: isSelected)
+        )
+    }
 }
 
 struct ContactRow: View {
     let data: ContactRowData
     let onAction: () -> Void
+    @State private var iconRotation: Double = 0
 
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: data.icon)
                 .foregroundColor(data.iconColor)
                 .font(.system(size: 33))
+                .rotationEffect(.degrees(iconRotation))
+                .onAppear {
+                    withAnimation(
+                        .spring(response: 0.5, dampingFraction: 0.5)
+                        .repeatCount(1)
+                    ) {
+                        iconRotation = 360
+                    }
+                }
+
             Button(action: onAction) {
                 Text(data.text)
                     .font(.sfProRoundedTextRegular(size: 16))
                     .foregroundColor(.blue)
                     .underline()
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .multilineTextAlignment(.center)

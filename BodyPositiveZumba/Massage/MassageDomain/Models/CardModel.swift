@@ -8,8 +8,10 @@
 import Foundation
 
 struct MassageCardModel: Identifiable {
+
     var id: UUID
-    var name: String
+    var fullName: String
+    var firstName: String
     var imageName: String
     var parlor: String
     var bio: String

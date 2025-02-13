@@ -21,6 +21,13 @@ struct MassageView: View, ActionableView {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
+    private var currentTherapistName: String {
+        let count = viewState.cards.count
+        let index = viewState.swipableCarouselViewState.currentIndex
+        let normalizedIndex = ((index % count) + count) % count
+        return viewState.cards[normalizedIndex].firstName
+    }
+
     public init(
         viewState: Binding<MassageViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -37,7 +44,7 @@ struct MassageView: View, ActionableView {
             }
             .padding()
             .onAppear {
-                withAnimation(.easeIn.delay(0.2)) {
+                withAnimation(.easeIn.delay(0.3)) {
                     viewState.showCarousel = true
                 }
                 dismissSwipeAnimationAfterDelay()
@@ -77,11 +84,11 @@ private extension MassageView {
                 .font(.sfProDisplayBold(size: 34))
                 .multilineTextAlignment(.center)
                 .foregroundColor(adaptiveTextColor)
-                .padding(.top, 0)
+                .padding(.top, 11)
                 .padding(.bottom, 16)
 
             Text(viewState.pageBio)
-                .font(.sfProBodyTextRegular(size: 16))
+                .font(.sfProBodyTextRegular(size: 15))
                 .foregroundColor(adaptiveTextColor)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -96,7 +103,11 @@ private extension MassageView {
             )
         ) { card, isCurrentCard in
             AnyView(
-                MassageCardView(card: card)
+                MassageCardView(
+                    card: card,
+                    isCurrentCard: isCurrentCard,
+                    viewState: viewState.massageCardViewState
+                )
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(isCurrentCard ? Color.orange : Color.clear,
@@ -112,29 +123,19 @@ private extension MassageView {
     }
 
     var actionButton: some View {
-        Button(action: { onAction?(.updateUrl) }) {
-            Text(Constants.Massage.buttonText)
-                .font(.sfProRoundedTextMedium(size: 24))
+        Button(
+            action: {
+                onAction?(.updateUrl)
+            }) {
+            Text("Book With \(currentTherapistName) Today!")
+                .font(.sfProRoundedTextSemibold(size: 22))
+                .frame(maxWidth: .infinity)
+                .padding()
                 .foregroundColor(.black)
-                .padding(.horizontal, 50)
-                .padding(.vertical, 20)
-                .background(
-                    ZStack {
-                        Color.white
-                        RadialGradient(
-                            gradient: Gradient(colors: [
-                                Constants.Colors.neonCyan.opacity(0.1),
-                                Constants.Colors.neonCyan.opacity(0.5)
-                            ]),
-                            center: .center,
-                            startRadius: 50,
-                            endRadius: 100
-                        )
-                    }
-                )
+                .background(buttonBackground)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.orange, lineWidth: 3)
+                        .stroke(Constants.Colors.darkerCyan, lineWidth: 6)
                 )
                 .cornerRadius(8)
         }
@@ -161,5 +162,20 @@ private extension MassageView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
+    }
+}
+
+private var buttonBackground: some View {
+    ZStack {
+        Color.white
+        RadialGradient(
+            gradient: Gradient(colors: [
+                Constants.Colors.neonCyan.opacity(0.05),
+                Constants.Colors.neonCyan.opacity(0.2)
+            ]),
+            center: .center,
+            startRadius: 55,
+            endRadius: 122
+        )
     }
 }
