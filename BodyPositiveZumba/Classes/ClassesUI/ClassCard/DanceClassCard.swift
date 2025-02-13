@@ -35,7 +35,6 @@ private extension DanceClassCard {
             .fontWeight(.bold)
             .foregroundColor(.black)
             .multilineTextAlignment(.center)
-            .padding(.top, 10)
     }
 
     var joinNowButton: some View {
@@ -43,15 +42,15 @@ private extension DanceClassCard {
             Text(Constants.Classes.joinNowButtonText)
                 .font(.sfProRoundedTextSemibold(size: 20))
                 .foregroundColor(.black)
-                .frame(width: 222, height: 44)
-                .background(Color.white.opacity(0.2))
+                .frame(width: 180, height: 44)
+                .background(Color.white.opacity(0.3))
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.black, lineWidth: 1)
                 )
         }
-        .padding(.top, 35)
+        .padding(.top, 20)
         .padding(.bottom, 15)
     }
 
