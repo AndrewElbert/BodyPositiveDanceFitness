@@ -20,10 +20,6 @@ struct AnimatedCarouselComponent: View {
             viewState: $viewModel.viewState
         ) { action in
             switch action {
-            case .dragChanged(let translation, let geomotry):
-                viewModel.handleDragChanged(translation, in: geomotry)
-            case .dragEnded(let translation, let geomotry):
-                viewModel.handleDragEnded(translation, in: geomotry)
             case .startAutoScroll:
                 viewModel.startAutoScroll()
             }
