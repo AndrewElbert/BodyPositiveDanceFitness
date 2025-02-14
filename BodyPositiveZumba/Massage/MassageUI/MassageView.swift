@@ -89,7 +89,8 @@ private extension MassageView {
 
             Text(viewState.pageBio)
                 .font(.sfProBodyTextRegular(size: 15))
-                .foregroundColor(adaptiveTextColor)
+                .italic()
+                .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.bottom, 16)

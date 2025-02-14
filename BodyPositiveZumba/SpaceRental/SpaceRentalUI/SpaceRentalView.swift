@@ -21,7 +21,7 @@ struct SpaceRentalView: View, ActionableView {
 
     private let titleStyle = Font.sfProDisplayBold(size: 23)
     private let bioStyle = Font.sfProBodyTextRegular(size: 18)
-    private let buttonTextStyle = Font.sfProRoundedTextBold(size: 20)
+    private let buttonTextStyle = Font.sfProRoundedTextSemibold(size: 20)
     private let buttonAnimation = Animation.easeInOut(duration: 0.4)
 
     private var buttonGradient: some View {
@@ -29,12 +29,12 @@ struct SpaceRentalView: View, ActionableView {
             Color.white
             RadialGradient(
                 gradient: Gradient(colors: [
-                    Constants.Colors.neonCyan.opacity(0.1),
-                    Constants.Colors.neonCyan.opacity(0.5)
+                    Constants.Colors.neonCyan.opacity(0.05),
+                    Constants.Colors.neonCyan.opacity(0.2)
                 ]),
                 center: .center,
-                startRadius: 8,
-                endRadius: 88
+                startRadius: 55,
+                endRadius: 122
             )
         }
     }
@@ -140,10 +140,12 @@ struct SpaceRentalView: View, ActionableView {
 
             Text(Constants.SpaceRental.pageBio)
                 .font(bioStyle)
-                .foregroundColor(adaptiveTextColor)
+                .italic()
+                .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
-                .padding(.top, 16)
+                .padding(.top, 12)
+                .padding(.bottom, 12)
         }
     }
 
@@ -175,7 +177,7 @@ struct SpaceRentalView: View, ActionableView {
                 .background(buttonGradient)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(.orange, lineWidth: 2)
+                        .stroke(Constants.Colors.neonCyan, lineWidth: 6)
                 )
                 .cornerRadius(10)
         }
@@ -187,7 +189,7 @@ struct SpaceRentalView: View, ActionableView {
                 .font(.sfProBodyTextRegular(size: 19))
                 .foregroundColor(adaptiveTextColor)
             Text(Constants.SpaceRental.contact)
-                .font(.sfProBodyTextBold(size: 17))
+                .font(.sfProBodyTextRegular(size: 17))
                 .foregroundColor(.blue)
                 .underline()
                 .onTapGesture {

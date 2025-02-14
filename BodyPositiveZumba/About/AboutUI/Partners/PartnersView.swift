@@ -31,12 +31,13 @@ struct PartnersView: View {
                                     .stroke(isCurrentCard ? Color.orange : Color.clear,
                                             lineWidth: isCurrentCard ? 3 : 0)
                             )
-                            .overlay(
-                                swipeAnimationOverlay,
-                                alignment: .center
-                            )
                     )
+
                 }
+                .overlay(
+                    swipeAnimationOverlay,
+                    alignment: .center
+                )
                 .frame(height: 375)
                 Spacer()
             }
