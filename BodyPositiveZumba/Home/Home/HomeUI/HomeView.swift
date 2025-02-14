@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     let coordinator: SideDrawerCoordinator
     @Binding private var viewState: HomeViewState
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
-    
+
     enum DragState {
         case inactive
         case dragging(translation: CGFloat)
@@ -24,13 +24,13 @@ struct HomeView: View {
             }
         }
     }
-    
+
     enum Action {
         case viewClasses, about, joinNow, bookClass
     }
-    
+
     var onAction: ((Action) -> Void)?
-    
+
     public init(
         coordinator: SideDrawerCoordinator,
         viewState: Binding<HomeViewState>,
@@ -39,14 +39,14 @@ struct HomeView: View {
         self.coordinator = coordinator
         self._viewState = viewState
         self.onAction = onAction
-        
+
         self._sideDrawerViewModel = StateObject(
             wrappedValue: SideDrawerViewModel(
                 coordinator: coordinator
             )
         )
     }
-    
+
     var body: some View {
         ZStack {
             mainContent
@@ -70,7 +70,7 @@ struct HomeView: View {
             )
         }
     }
-    
+
     private var mainContent: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -81,7 +81,7 @@ struct HomeView: View {
             .gesture(createSideDrawerGesture())
         }
     }
-    
+
     private var contentStack: some View {
         VStack(spacing: 0) {
             greetingView
@@ -91,7 +91,7 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
+
     private var greetingView: some View {
         VStack(spacing: 11) {
             Text(viewState.currentGreeting)
@@ -106,7 +106,7 @@ struct HomeView: View {
                 .italic()
         }
     }
-    
+
     private var logoView: some View {
         ZStack {
             Image(Constants.Common.logoName)
@@ -116,7 +116,7 @@ struct HomeView: View {
         }
         .padding(.bottom, 22)
     }
-    
+
     private var buttonStack: some View {
         VStack(spacing: 22) {
             ColoredButton(
@@ -154,7 +154,7 @@ struct HomeView: View {
         .padding(.top, 16)
         .padding(.horizontal, 24)
     }
-    
+
     private func createSideDrawerGesture() -> some Gesture {
         DragGesture(minimumDistance: 30, coordinateSpace: .local)
             .updating($dragState) { value, state, _ in
@@ -206,7 +206,6 @@ struct ColoredButton: View {
     }
 }
 
-
 struct HomeRainbowButton: View {
     let title: String
     let onTap: () -> Void
@@ -237,7 +236,3 @@ struct HomeRainbowButton: View {
         .frame(height: 55)
     }
 }
-
-
-
-

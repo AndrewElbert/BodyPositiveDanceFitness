@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    
+
     private var sideDrawerCoordinator: SideDrawerCoordinator
     @ObservedObject private var viewModel: HomeViewModel
 
@@ -19,21 +19,19 @@ struct HomeScreen: View {
         self.sideDrawerCoordinator = sideDrawerCoordinator
         self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         HomeView(
             coordinator: sideDrawerCoordinator,
             viewState: $viewModel.viewState
-        )
-            { action in
+        ) { action in
             switch action {
             case .viewClasses:
                 viewModel.navigateClasses()
             case .about:
                 viewModel.navigateAbout()
-            case .joinNow:
+                case .joinNow:
                 viewModel.toggleJoinWebView()
-                break
             case .bookClass:
                 viewModel.toggleBookClassWebView()
             }
