@@ -10,8 +10,6 @@ import SwiftUI
 struct AnimatedCarouselView: View, ActionableView {
 
     enum Action {
-        case dragChanged(CGSize, GeometryProxy)
-        case dragEnded(CGSize, GeometryProxy)
         case startAutoScroll
     }
 
@@ -29,65 +27,76 @@ struct AnimatedCarouselView: View, ActionableView {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                
                 RoundedRectangle(cornerRadius: 20)
                     .fill(
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                Color.cyan.opacity(0.7),
-                                Color.cyan.opacity(0.6)
+                                Constants.Colors.neonCyan.opacity(0.3),
+                                Constants.Colors.neonCyan.opacity(0.5)
                             ]),
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
-                    .blur(radius: 50)
+                    .blur(radius: 60)
                     .padding(-40)
 
                 GeometryReader { innerGeo in
                     HStack(spacing: 0) {
                         ForEach(0..<viewState.items.count * 8, id: \.self) { index in
-                            Image(viewState.items[index % viewState.items.count].imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: innerGeo.size.width, height: innerGeo.size.height)
-                                .clipped()
-                                .cornerRadius(20)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.cyan.opacity(0.2), lineWidth: 1)
-                                )
+                            GeometryReader { itemGeo in
+                                let midX = itemGeo.frame(in: .global).midX
+                                let screenWidth = geometry.size.width
+                                let distance = abs(screenWidth / 2 - midX)
+                                let scale = max(0.85, 1 - distance / screenWidth)
+                                let rotation = (screenWidth / 2 - midX) / 15
+                                
+                                Image(viewState.items[index % viewState.items.count].imageName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: itemGeo.size.width, height: itemGeo.size.height)
+                                    .clipped()
+                                    .cornerRadius(20)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.cyan.opacity(0.2), lineWidth: 1)
+                                    )
+                                    .scaleEffect(scale)
+                                    .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
+                                    .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
+                            }
+                            .frame(width: innerGeo.size.width, height: innerGeo.size.height)
                         }
                     }
-                    .offset(x: -innerGeo.size.width * CGFloat(viewState.currentIndex) + viewState.dragOffset)
-                    .animation(.smooth(duration: 0.5), value: viewState.currentIndex)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                onAction?(.dragChanged(value.translation, geometry))
-                            }
-                            .onEnded { value in
-                                onAction?(.dragEnded(value.translation, geometry))
-                            }
-                    )
+                    
+                    .offset(x: -innerGeo.size.width * CGFloat(viewState.currentIndex))
+                    .animation(.interactiveSpring(response: 3.3, dampingFraction: 0.8, blendDuration: 0.5), value: viewState.currentIndex)
                 }
 
+                
                 VStack {
                     Spacer()
-                    HStack(spacing: 8) {
+                    HStack(spacing: 10) {
                         ForEach(0..<viewState.items.count, id: \.self) { index in
-                            Circle()
-                                .fill(index == viewState.currentIndex % viewState.items.count ? Color.cyan : Color.gray.opacity(0.4))
-                                .frame(width: 8, height: 8)
-                                .scaleEffect(index == viewState.currentIndex % viewState.items.count ? 1.2 : 1.0)
+                            Capsule()
+                                .fill(
+                                    index == viewState.currentIndex % viewState.items.count ? Constants.Colors.neonCyan : Color.gray.opacity(0.4)
+                                )
+                                .frame(width: 10, height: 10)
+                                .animation(.easeInOut(duration: 0.3), value: viewState.currentIndex)
                         }
                     }
                     .padding(.bottom, 16)
-                    .animation(.smooth(duration: 0.3), value: viewState.currentIndex)
                 }
             }
         }
+        
         .onReceive(viewState.timer) { _ in
             onAction?(.startAutoScroll)
         }
     }
 }
+
+
+
