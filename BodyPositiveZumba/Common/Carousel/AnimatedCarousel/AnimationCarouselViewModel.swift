@@ -28,4 +28,3 @@ class AnimatedCarouselViewModel: ObservableObject {
         }
     }
 }
-

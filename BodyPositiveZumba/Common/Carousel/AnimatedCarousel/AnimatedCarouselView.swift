@@ -27,7 +27,7 @@ struct AnimatedCarouselView: View, ActionableView {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                
+
                 RoundedRectangle(cornerRadius: 20)
                     .fill(
                         LinearGradient(
@@ -51,7 +51,7 @@ struct AnimatedCarouselView: View, ActionableView {
                                 let distance = abs(screenWidth / 2 - midX)
                                 let scale = max(0.85, 1 - distance / screenWidth)
                                 let rotation = (screenWidth / 2 - midX) / 15
-                                
+
                                 Image(viewState.items[index % viewState.items.count].imageName)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -69,12 +69,11 @@ struct AnimatedCarouselView: View, ActionableView {
                             .frame(width: innerGeo.size.width, height: innerGeo.size.height)
                         }
                     }
-                    
+
                     .offset(x: -innerGeo.size.width * CGFloat(viewState.currentIndex))
                     .animation(.interactiveSpring(response: 3.3, dampingFraction: 0.8, blendDuration: 0.5), value: viewState.currentIndex)
                 }
 
-                
                 VStack {
                     Spacer()
                     HStack(spacing: 10) {
@@ -91,12 +90,9 @@ struct AnimatedCarouselView: View, ActionableView {
                 }
             }
         }
-        
+
         .onReceive(viewState.timer) { _ in
             onAction?(.startAutoScroll)
         }
     }
 }
-
-
-
