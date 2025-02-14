@@ -22,10 +22,21 @@ struct HomeScreen: View {
 
     var body: some View {
         HomeView(
-            coordinator: sideDrawerCoordinator
+            coordinator: sideDrawerCoordinator,
+            viewModel: viewModel
         ) {
             action in
             switch action {
+            case .viewClasses:
+                viewModel.navigateClasses()
+            case .about:
+                viewModel.navigateAbout()
+            case .joinNow:
+                Text("")
+            case .bookClass:
+                Text("")
+            case .photos:
+                viewModel.navigatePhotos()
             }
         }
     }
