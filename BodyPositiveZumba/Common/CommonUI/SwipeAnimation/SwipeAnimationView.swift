@@ -22,11 +22,10 @@ struct SwipeAnimationView: View {
         Image(systemName: "hand.point.up.fill")
             .resizable()
             .scaledToFit()
-            .frame(width: 60, height: 60)
+            .frame(width: 65, height: 65)
             .foregroundColor(Constants.Colors.neonCyan.opacity(0.9))
             .offset(x: offset)
             .opacity(opacity)
-            .frame(width: 100, height: 50)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                     animateCycle()
