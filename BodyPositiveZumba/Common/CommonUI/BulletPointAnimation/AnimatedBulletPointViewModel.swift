@@ -17,7 +17,7 @@ class AnimatedBulletPointViewModel: ObservableObject {
     }
 
     func startAnimation() {
-        withAnimation(.easeInOut(duration: 2.2).repeatForever(autoreverses: true)) {
+        withAnimation(.easeInOut(duration: 3.3)) {
             viewState.isAnimating.toggle()
             viewState.sparkleOpacity = 1
         }
