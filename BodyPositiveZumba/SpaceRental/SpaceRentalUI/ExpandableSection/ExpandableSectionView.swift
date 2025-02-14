@@ -57,14 +57,14 @@ struct ExpandableSection: View, ActionableView {
 
     private var titleText: some View {
         Text(viewState.title)
-            .font(.sfProRoundedTextBold(size: 20))
+            .font(.sfProRoundedTextSemibold(size: 20))
             .foregroundColor(.black)
     }
 
     private var expandCollapseIcon: some View {
         Image(systemName: viewState.isExpanded ? "chevron.down" : "chevron.right")
             .font(.sfProBodyTextBold(size: 18))
-            .foregroundColor(.white)
+            .foregroundColor(Constants.Colors.darkOrange)
             .rotationEffect(.degrees(viewState.isExpanded ? 180 : 0))
             .animation(.easeInOut(duration: 0.4), value: viewState.isExpanded)
     }
@@ -74,19 +74,19 @@ struct ExpandableSection: View, ActionableView {
             Color.white
             RadialGradient(
                 gradient: Gradient(colors: [
-                    Color.orange.opacity(0.1),
-                    Color.orange.opacity(0.7)
+                    .orange.opacity(0.05),
+                    .orange.opacity(0.2)
                 ]),
                 center: .center,
-                startRadius: 8,
-                endRadius: 88
+                startRadius: 55,
+                endRadius: 122
             )
         }
     }
 
     private var headerBorder: some View {
         RoundedRectangle(cornerRadius: 10)
-            .stroke(Color.cyan, lineWidth: 2)
+            .stroke(.orange, lineWidth: 6)
     }
 
     private var contentSection: some View {

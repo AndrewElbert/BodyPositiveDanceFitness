@@ -35,14 +35,14 @@ struct AnimatedBulletPointView: View {
     private var emojiView: some View {
         ZStack {
             Text(viewState.emoji)
-                .font(.system(size: 20))
+                .font(.system(size: 22))
                 .opacity(viewState.sparkleOpacity)
-                .scaleEffect(viewState.isAnimating ? 1.2 : 0.8)
+                .scaleEffect(viewState.isAnimating ? 1.0 : 1.0)
 
             Text(viewState.emoji)
-                .font(.system(size: 12 ))
+                .font(.system(size: 22 ))
                 .opacity(viewState.sparkleOpacity)
-                .scaleEffect(viewState.isAnimating ? 0.8 : 1.2)
+                .scaleEffect(viewState.isAnimating ? 1.0 : 1.0)
         }
         .frame(width: 40, alignment: .leading)
     }
