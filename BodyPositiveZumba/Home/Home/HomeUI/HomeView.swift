@@ -37,9 +37,14 @@ struct HomeView: View {
         onAction: ((Action) -> Void)? = nil
     ) {
         self.coordinator = coordinator
-        self._sideDrawerViewModel = StateObject(wrappedValue: SideDrawerViewModel(coordinator: coordinator))
         self._viewState = viewState
         self.onAction = onAction
+        
+        self._sideDrawerViewModel = StateObject(
+            wrappedValue: SideDrawerViewModel(
+                coordinator: coordinator
+            )
+        )
     }
     
     var body: some View {
@@ -65,8 +70,6 @@ struct HomeView: View {
             )
         }
     }
-    
-    // MARK: - Extracted Subviews for Performance
     
     private var mainContent: some View {
         ZStack {
@@ -116,10 +119,25 @@ struct HomeView: View {
     
     private var buttonStack: some View {
         VStack(spacing: 22) {
-            OrangeButton(title: "Book A Class!") { onAction?(.joinNow) }
-            CyanButton(title: "View Classes") { onAction?(.viewClasses) }
+            ColoredButton(
+                title: "Book A Class!",
+                onTap: { onAction?(.joinNow) },
+                strokeColor: Color.orange.opacity(0.8),
+                gradientColor: Color.orange
+            )
+            ColoredButton(
+                title: "View Classes",
+                onTap: { onAction?(.viewClasses) },
+                strokeColor: Constants.Colors.darkerCyan,
+                gradientColor: Constants.Colors.neonCyan
+            )
             VStack(spacing: 2) {
-                CyanButton(title: "Passes") { onAction?(.bookClass) }
+                ColoredButton(
+                    title: "Passes",
+                    onTap: { onAction?(.bookClass) },
+                    strokeColor: Constants.Colors.darkerCyan,
+                    gradientColor: Constants.Colors.neonCyan
+                )
                 Text("save money - purchase a pass!")
                     .font(.sfProDisplayRegular(size: 18))
                     .foregroundColor(.gray)
@@ -137,8 +155,6 @@ struct HomeView: View {
         .padding(.horizontal, 24)
     }
     
-    // MARK: - Helper Methods
-    
     private func createSideDrawerGesture() -> some Gesture {
         DragGesture(minimumDistance: 30, coordinateSpace: .local)
             .updating($dragState) { value, state, _ in
@@ -153,7 +169,44 @@ struct HomeView: View {
     }
 }
 
-// Rainbow Button Style (copied from AboutView and modified)
+struct ColoredButton: View {
+    let title: String
+    let onTap: () -> Void
+    let strokeColor: Color
+    let gradientColor: Color
+
+    var body: some View {
+        Button(action: onTap) {
+            Text(title)
+                .font(.sfProRoundedTextSemibold(size: 22))
+                .frame(maxWidth: .infinity)
+                .padding()
+                .foregroundColor(.black)
+                .background(
+                    ZStack {
+                        Color.white
+                        RadialGradient(
+                            gradient: Gradient(colors: [
+                                gradientColor.opacity(0.05),
+                                gradientColor.opacity(0.2)
+                            ]),
+                            center: .center,
+                            startRadius: 55,
+                            endRadius: 122
+                        )
+                    }
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(strokeColor, lineWidth: 8)
+                )
+                .cornerRadius(8)
+        }
+        .frame(height: 55)
+    }
+}
+
+
 struct HomeRainbowButton: View {
     let title: String
     let onTap: () -> Void
@@ -182,80 +235,6 @@ struct HomeRainbowButton: View {
                 .cornerRadius(8)
         }
         .frame(height: 55)
-    }
-}
-
-// Cyan Button Style (inspired by ActionButton from AboutView)
-struct CyanButton: View {
-    let title: String
-    let onTap: () -> Void
-
-    var body: some View {
-        Button(action: onTap) {
-            Text(title)
-                .font(.sfProRoundedTextSemibold(size: 22))
-                .frame(maxWidth: .infinity)
-                .padding()
-                .foregroundColor(.black)
-                .background(buttonBackground)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Constants.Colors.darkerCyan, lineWidth: 8)
-                )
-                .cornerRadius(8)
-        }
-    }
-
-    private var buttonBackground: some View {
-        ZStack {
-            Color.white
-            RadialGradient(
-                gradient: Gradient(colors: [
-                    Constants.Colors.neonCyan.opacity(0.05),
-                    Constants.Colors.neonCyan.opacity(0.2)
-                ]),
-                center: .center,
-                startRadius: 55,
-                endRadius: 122
-            )
-        }
-    }
-}
-
-// Orange Button Style (based on CyanButton but with orange colors)
-struct OrangeButton: View {
-    let title: String
-    let onTap: () -> Void
-
-    var body: some View {
-        Button(action: onTap) {
-            Text(title)
-                .font(.sfProRoundedTextSemibold(size: 22))
-                .frame(maxWidth: .infinity)
-                .padding()
-                .foregroundColor(.black)
-                .background(buttonBackground)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.orange.opacity(0.8), lineWidth: 8)
-                )
-                .cornerRadius(8)
-        }
-    }
-
-    private var buttonBackground: some View {
-        ZStack {
-            Color.white
-            RadialGradient(
-                gradient: Gradient(colors: [
-                    Color.orange.opacity(0.05),
-                    Color.orange.opacity(0.2)
-                ]),
-                center: .center,
-                startRadius: 55,
-                endRadius: 122
-            )
-        }
     }
 }
 
