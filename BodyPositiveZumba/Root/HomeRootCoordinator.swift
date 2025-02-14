@@ -31,16 +31,16 @@ class HomeRootCoordinator: RootCoordinator {
 extension HomeRootCoordinator: HomeCoordinator {
 
     func home_viewAbout() {
-        self.routes.push(
+        self.routes.presentCover(
             .about
         )
     }
 
     func home_viewClasses() {
-        routes.presentSheet(.classes)
+        routes.presentCover(.classes)
     }
 
-    func home_viewJoinNow() {
+    func home_viewPhotos() {
         routes.presentSheet(.joinNow)
     }
 }

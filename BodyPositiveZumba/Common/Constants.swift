@@ -257,7 +257,7 @@ struct Constants {
             comment: "system image name"
         )
         static let grettingMessage: String = NSLocalizedString(
-            "Welcome to Body Positive Dance Fitness",
+            "Welcome to",
             comment: "home screen greeting message"
         )
         static let tradeMarkSloganSize: CGFloat = 22
@@ -267,8 +267,8 @@ struct Constants {
 
     enum JoinNow {
 
-        static let joinNowUrl: String = "https://www.bodypositivedancefitness.com/join-now-1"
-        static let bookClassUrl: String = "https://bodypositive.punchpass.com/classes"
+        static let joinNowUrl: String = "https://bodypositive.punchpass.com/classes"
+        static let PassesUrl: String = "https://bodypositive.punchpass.com/passes"
     }
 
     // MARK: Massage

@@ -32,13 +32,7 @@ struct TopBarView: View, ActionableView {
                     .foregroundColor(.gray)
                     .padding()
             }
-
-            Spacer()
-            Image(Constants.Common.logoName)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 50)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

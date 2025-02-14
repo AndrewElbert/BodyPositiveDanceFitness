@@ -110,5 +110,5 @@ struct DanceClassRow: View {
 
 private let webViewURL = WebViewURL(
     title: Constants.Classes.bookNowWebviewTitle,
-    url: URL(string: Constants.JoinNow.bookClassUrl)!
+    url: URL(string: Constants.JoinNow.joinNowUrl)!
 )
