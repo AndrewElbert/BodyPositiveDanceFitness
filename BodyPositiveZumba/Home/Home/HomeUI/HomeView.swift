@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
     let coordinator: SideDrawerCoordinator
-    @ObservedObject var viewModel: HomeViewModel
+    @Binding private var viewState: HomeViewState
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
     
@@ -30,10 +31,14 @@ struct HomeView: View {
     
     var onAction: ((Action) -> Void)?
     
-    public init(coordinator: SideDrawerCoordinator, viewModel: HomeViewModel, onAction: ((Action) -> Void)? = nil) {
+    public init(
+        coordinator: SideDrawerCoordinator,
+        viewState: Binding<HomeViewState>,
+        onAction: ((Action) -> Void)? = nil
+    ) {
         self.coordinator = coordinator
         self._sideDrawerViewModel = StateObject(wrappedValue: SideDrawerViewModel(coordinator: coordinator))
-        self.viewModel = viewModel
+        self._viewState = viewState
         self.onAction = onAction
     }
     
@@ -47,13 +52,13 @@ struct HomeView: View {
                     }
                 }
         }
-        .sheet(isPresented: $viewModel.viewState.showJoinWebView) {
+        .sheet(isPresented: $viewState.showJoinWebView) {
             WebViewContainer(
                 url: URL(string: Constants.JoinNow.joinNowUrl)!,
                 title: "Join Us!"
             )
         }
-        .sheet(isPresented: $viewModel.viewState.showBookClassWebView) {
+        .sheet(isPresented: $viewState.showBookClassWebView) {
             WebViewContainer(
                 url: URL(string: Constants.JoinNow.PassesUrl)!,
                 title: "View Passes"
@@ -86,7 +91,7 @@ struct HomeView: View {
     
     private var greetingView: some View {
         VStack(spacing: 11) {
-            Text(viewModel.viewState.currentGreeting)
+            Text(viewState.currentGreeting)
                 .font(.sfProDisplayBold(size: 35))
                 .italic()
                 .foregroundColor(.black)

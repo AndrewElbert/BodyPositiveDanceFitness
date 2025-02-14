@@ -9,22 +9,23 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @ObservedObject private var viewModel: HomeViewModel
     private var sideDrawerCoordinator: SideDrawerCoordinator
-    
+    @ObservedObject private var viewModel: HomeViewModel
+
     public init(
         sideDrawerCoordinator: SideDrawerCoordinator,
         viewModel: HomeViewModel
     ) {
         self.sideDrawerCoordinator = sideDrawerCoordinator
-        self.viewModel = viewModel
+        self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
     
     var body: some View {
         HomeView(
             coordinator: sideDrawerCoordinator,
-            viewModel: viewModel
-        ) { action in
+            viewState: $viewModel.viewState
+        )
+            { action in
             switch action {
             case .viewClasses:
                 viewModel.navigateClasses()
