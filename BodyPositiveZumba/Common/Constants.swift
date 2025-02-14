@@ -257,7 +257,7 @@ struct Constants {
             comment: "system image name"
         )
         static let grettingMessage: String = NSLocalizedString(
-            "Welcome to Body Positive Dance Fitness",
+            "Welcome to",
             comment: "home screen greeting message"
         )
         static let tradeMarkSloganSize: CGFloat = 22
