@@ -23,7 +23,7 @@ struct SwipeAnimationView: View {
             .resizable()
             .scaledToFit()
             .frame(width: 65, height: 65)
-            .foregroundColor(Constants.Colors.neonCyan.opacity(0.9))
+            .foregroundColor(.gray.opacity(0.9))
             .offset(x: offset)
             .opacity(opacity)
             .onAppear {

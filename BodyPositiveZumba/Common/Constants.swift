@@ -267,8 +267,8 @@ struct Constants {
 
     enum JoinNow {
 
-        static let joinNowUrl: String = "https://www.bodypositivedancefitness.com/join-now-1"
-        static let bookClassUrl: String = "https://bodypositive.punchpass.com/classes"
+        static let joinNowUrl: String = "https://bodypositive.punchpass.com/classes"
+        static let PassesUrl: String = "https://bodypositive.punchpass.com/passes"
     }
 
     // MARK: Massage

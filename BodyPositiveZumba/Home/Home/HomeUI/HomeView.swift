@@ -12,6 +12,7 @@ struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
+    
     enum DragState {
         case inactive
         case dragging(translation: CGFloat)
@@ -22,78 +23,23 @@ struct HomeView: View {
             }
         }
     }
+    
     enum Action {
-        case viewClasses, about, joinNow, bookClass, photos
+        case viewClasses, about, joinNow, bookClass
     }
+    
     var onAction: ((Action) -> Void)?
+    
     public init(coordinator: SideDrawerCoordinator, viewModel: HomeViewModel, onAction: ((Action) -> Void)? = nil) {
         self.coordinator = coordinator
         self._sideDrawerViewModel = StateObject(wrappedValue: SideDrawerViewModel(coordinator: coordinator))
         self.viewModel = viewModel
         self.onAction = onAction
     }
+    
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea()
-            VStack(spacing: 0) {
-                TopBarComponent(viewModel: sideDrawerViewModel)
-                VStack(spacing: 16) {
-                    Text(viewModel.currentGreeting)
-                        .font(.sfProDisplayBold(size: 35))
-                        .italic()
-                        .foregroundColor(.black)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 2)
-                    Text("and welcome to")
-                        .font(.sfProDisplayRegular(size: 18))
-                        .foregroundColor(.gray)
-                        .italic()
-                        .padding(.bottom, 6)
-                    ZStack {
-                        Image(Constants.Common.logoName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 200)
-                            .scaleEffect(viewModel.logoScale)
-                            .opacity(viewModel.logoOpacity)
-                            .offset(y: viewModel.logoOffsetY)
-                    }
-                    .padding(.bottom, 30)
-                    VStack(spacing: 20) {
-                        OrangeButton(title: "New? Join Here!") { onAction?(.joinNow) }
-                        CyanButton(title: "View Classes") {
-                            onAction?(.viewClasses)
-                            viewModel.navigateClasses()
-                        }
-                        CyanButton(title: "Book A Class") { onAction?(.bookClass) }
-                        HStack(spacing: 16) {
-                            HomeRainbowButton(title: "About Us!") {
-                                onAction?(.about)
-                                viewModel.navigateAbout()
-                            }
-                            HomeRainbowButton(title: "Photos!") {
-                                onAction?(.photos)
-                                viewModel.navigatePhotos()
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 24)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .gesture(
-                DragGesture(minimumDistance: 30, coordinateSpace: .local)
-                    .updating($dragState) { value, state, _ in
-                        guard value.startLocation.x < 50 else { return }
-                        state = .dragging(translation: value.translation.width)
-                    }
-                    .onEnded { value in
-                        guard value.startLocation.x < 50 else { return }
-                        let threshold = Constants.SideDrawer.frameWidth * 0.3
-                        if value.translation.width > threshold { sideDrawerViewModel.openMenu() }
-                    }
-            )
+            mainContent
             SideDrawerComponent(viewModel: sideDrawerViewModel)
                 .onChange(of: dragState.translation) { _, translation in
                     if !sideDrawerViewModel.viewState.isMenuOpen {
@@ -101,6 +47,104 @@ struct HomeView: View {
                     }
                 }
         }
+        .sheet(isPresented: $viewModel.viewState.showJoinWebView) {
+            WebViewContainer(
+                url: URL(string: Constants.JoinNow.joinNowUrl)!,
+                title: "Join Us!"
+            )
+        }
+        .sheet(isPresented: $viewModel.viewState.showBookClassWebView) {
+            WebViewContainer(
+                url: URL(string: Constants.JoinNow.PassesUrl)!,
+                title: "View Passes"
+            )
+        }
+    }
+    
+    // MARK: - Extracted Subviews for Performance
+    
+    private var mainContent: some View {
+        ZStack {
+            Color.white.ignoresSafeArea()
+            VStack(spacing: 0) {
+                TopBarComponent(viewModel: sideDrawerViewModel)
+                contentStack
+            }
+            .gesture(createSideDrawerGesture())
+        }
+    }
+    
+    private var contentStack: some View {
+        VStack(spacing: 0) {
+            greetingView
+            logoView
+            buttonStack
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    private var greetingView: some View {
+        VStack(spacing: 11) {
+            Text(viewModel.viewState.currentGreeting)
+                .font(.sfProDisplayBold(size: 35))
+                .italic()
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+                .padding(.top, 0)
+            Text("and welcome to")
+                .font(.sfProDisplayRegular(size: 18))
+                .foregroundColor(.gray)
+                .italic()
+        }
+    }
+    
+    private var logoView: some View {
+        ZStack {
+            Image(Constants.Common.logoName)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 222)
+        }
+        .padding(.bottom, 22)
+    }
+    
+    private var buttonStack: some View {
+        VStack(spacing: 22) {
+            OrangeButton(title: "Book A Class!") { onAction?(.joinNow) }
+            CyanButton(title: "View Classes") { onAction?(.viewClasses) }
+            VStack(spacing: 2) {
+                CyanButton(title: "Passes") { onAction?(.bookClass) }
+                Text("save money - purchase a pass!")
+                    .font(.sfProDisplayRegular(size: 18))
+                    .foregroundColor(.gray)
+                    .italic()
+                    .padding(.top, 0)
+            }
+            HStack(spacing: 16) {
+                HomeRainbowButton(title: "About Us!") { onAction?(.about) }
+                HomeRainbowButton(title: "Explore More") {
+                    sideDrawerViewModel.openMenu()
+                }
+            }
+        }
+        .padding(.top, 16)
+        .padding(.horizontal, 24)
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func createSideDrawerGesture() -> some Gesture {
+        DragGesture(minimumDistance: 30, coordinateSpace: .local)
+            .updating($dragState) { value, state, _ in
+                guard value.startLocation.x < 50 else { return }
+                state = .dragging(translation: value.translation.width)
+            }
+            .onEnded { value in
+                guard value.startLocation.x < 50 else { return }
+                let threshold = Constants.SideDrawer.frameWidth * 0.3
+                if value.translation.width > threshold { sideDrawerViewModel.openMenu() }
+            }
     }
 }
 
@@ -207,47 +251,6 @@ struct OrangeButton: View {
                 endRadius: 122
             )
         }
-    }
-}
-struct GreetingView: View {
-    let greetingText: String
-    @State private var gradientOffset: CGFloat = -100  // Initial offset value
-
-    var body: some View {
-        // Wrap the text in a fixed frame to lock its dimensions.
-        Text(greetingText)
-            .font(.sfProDisplayBold(size: 35))
-            .italic()
-            .foregroundColor(.clear) // Hide the base text color.
-            .fixedSize(horizontal: false, vertical: true)
-            .frame(height: 80) // Fixed height to prevent layout shifts.
-            .overlay(
-                // Animate the gradient's horizontal offset.
-                LinearGradient(
-                    gradient: Gradient(colors: Constants.Colors.rainbow),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-                // Use a fixed frame for the gradient that matches (or exceeds) the text.
-                .frame(width: 300, height: 80)
-                .offset(x: gradientOffset)
-                .mask(
-                    Text(greetingText)
-                        .font(.sfProDisplayBold(size: 35))
-                        .italic()
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(height: 80)
-                )
-            )
-            .onAppear {
-                // Animate the offset back and forth without affecting the text layout.
-                withAnimation(
-                    Animation.linear(duration: 3)
-                        .repeatForever(autoreverses: true)
-                ) {
-                    gradientOffset = 100
-                }
-            }
     }
 }
 
