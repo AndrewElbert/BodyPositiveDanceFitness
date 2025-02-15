@@ -87,4 +87,8 @@ class SideDrawerViewModel: ObservableObject {
     func navigateContact() {
         coordinator.sideDrawer_viewContact()
     }
+    
+    func navigatePhotos() {
+        coordinator.sideDrawer_viewPhotos()
+    }
 }

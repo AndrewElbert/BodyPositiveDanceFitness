@@ -31,6 +31,11 @@ struct SideDrawerViewState {
             type: .faq
         ),
         DrawerButtonViewState(
+            title: Constants.SideDrawer.photoText,
+            icon: Constants.SideDrawer.photoImage,
+            type: .photos
+        ),
+        DrawerButtonViewState(
             title: Constants.SideDrawer.aboutText,
             icon: Constants.SideDrawer.aboutImage,
             type: .about

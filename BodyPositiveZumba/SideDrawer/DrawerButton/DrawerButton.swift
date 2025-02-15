@@ -29,7 +29,7 @@ struct DrawerButton: View {
                 }
                 Text(title)
                     .font(
-                        .sfProRoundedTextSemibold(
+                        .sfProRoundedTextBold(
                             size: Constants.SideDrawer.fontSize
                             )
                     )
