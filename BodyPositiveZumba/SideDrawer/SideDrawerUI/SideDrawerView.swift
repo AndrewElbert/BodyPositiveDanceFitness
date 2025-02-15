@@ -84,7 +84,7 @@ struct SideDrawerView: View, ActionableView {
 
                                 Text(Constants.SideDrawer.contactText)
                                     .font(
-                                        .sfProRoundedTextSemibold(
+                                        .sfProRoundedTextMedium(
                                             size: Constants.SideDrawer.contactFontSize
                                             )
                                     )
