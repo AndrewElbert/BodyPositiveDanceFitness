@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideDrawerView: View, ActionableView {
-
+    
     enum Action {
         case joinNow
         case classes
@@ -200,10 +200,8 @@ struct SideDrawerView: View, ActionableView {
             if let url = URL(string: Constants.JoinNow.joinNowUrl) {
                 WebViewContainer(
                     url: url,
-                    title: "Join Us!"
+                    title: Constants.JoinNow.joinNowTitle
                 )
-            } else {
-                Text("Invalid URL")
             }
         }
     }
