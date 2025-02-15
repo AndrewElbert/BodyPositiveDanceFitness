@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-@Observable
 class InitialAppLoadViewModel: ObservableObject {
 
-    var viewState = InitialAppLoadViewState()
+    @Published var viewState = InitialAppLoadViewState()
     var homeLoadDuration: Double = 0
 
     let coordinator: InitialLoadCoordinator
