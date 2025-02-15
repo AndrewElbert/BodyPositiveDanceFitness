@@ -12,7 +12,6 @@ class HomeRootCoordinator: RootCoordinator {
 
     enum Screen {
         case root
-        case joinNow
         case classes
         case about
         case faq
@@ -49,12 +48,6 @@ extension HomeRootCoordinator: SideDrawerCoordinator {
 
     func sideDrawer_dismissLastPresented() {
         routes.dismiss()
-    }
-
-    func sideDrawer_viewJoinNow() {
-        routes.presentSheet(
-            .joinNow
-        )
     }
 
     func sideDrawer_viewClasses() {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideDrawerView: View, ActionableView {
-
+    
     enum Action {
         case joinNow
         case classes
@@ -24,6 +24,8 @@ struct SideDrawerView: View, ActionableView {
 
     @Binding var viewState: SideDrawerViewState
     var onAction: ((Action) -> Void)?
+
+    @State private var showJoinNowWebView = false
 
     public init(
         viewState: Binding<SideDrawerViewState>,
@@ -59,7 +61,11 @@ struct SideDrawerView: View, ActionableView {
                             title: buttonState.title,
                             icon: buttonState.icon,
                             action: {
-                                onAction?(buttonState.type)
+                                if buttonState.title == Constants.SideDrawer.joinNowText {
+                                    showJoinNowWebView = true
+                                } else {
+                                    onAction?(buttonState.type)
+                                }
                             },
                             isPressed: $buttonState.isPressed
                         )
@@ -86,7 +92,7 @@ struct SideDrawerView: View, ActionableView {
                                     .font(
                                         .sfProRoundedTextMedium(
                                             size: Constants.SideDrawer.contactFontSize
-                                            )
+                                        )
                                     )
                                     .foregroundColor(.black)
                             }
@@ -190,6 +196,14 @@ struct SideDrawerView: View, ActionableView {
                 Spacer()
             }
         }
+        .sheet(isPresented: $showJoinNowWebView) {
+            if let url = URL(string: Constants.JoinNow.joinNowUrl) {
+                WebViewContainer(
+                    url: url,
+                    title: Constants.JoinNow.joinNowTitle
+                )
+            }
+        }
     }
 
     private func calculateDrawerOffset() -> CGFloat {
@@ -200,3 +214,4 @@ struct SideDrawerView: View, ActionableView {
         }
     }
 }
+

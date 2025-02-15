@@ -28,9 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		622150322D4703E100F89553 /* BodyPositiveZumba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyPositiveZumba.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		622150422D4703E700F89553 /* BodyPositiveZumbaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BodyPositiveZumbaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6221504C2D4703E700F89553 /* BodyPositiveZumbaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BodyPositiveZumbaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		622150322D4703E100F89553 /* BPDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPDF.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		622150422D4703E700F89553 /* BPDFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BPDFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6221504C2D4703E700F89553 /* BPDFUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BPDFUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -90,9 +90,9 @@
 		622150332D4703E100F89553 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				622150322D4703E100F89553 /* BodyPositiveZumba.app */,
-				622150422D4703E700F89553 /* BodyPositiveZumbaTests.xctest */,
-				6221504C2D4703E700F89553 /* BodyPositiveZumbaUITests.xctest */,
+				622150322D4703E100F89553 /* BPDF.app */,
+				622150422D4703E700F89553 /* BPDFTests.xctest */,
+				6221504C2D4703E700F89553 /* BPDFUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,9 +100,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		622150312D4703E100F89553 /* BodyPositiveZumba */ = {
+		622150312D4703E100F89553 /* BPDF */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 622150562D4703E700F89553 /* Build configuration list for PBXNativeTarget "BodyPositiveZumba" */;
+			buildConfigurationList = 622150562D4703E700F89553 /* Build configuration list for PBXNativeTarget "BPDF" */;
 			buildPhases = (
 				6221502E2D4703E100F89553 /* Sources */,
 				6221502F2D4703E100F89553 /* Frameworks */,
@@ -115,17 +115,17 @@
 			fileSystemSynchronizedGroups = (
 				622150342D4703E100F89553 /* BodyPositiveZumba */,
 			);
-			name = BodyPositiveZumba;
+			name = BPDF;
 			packageProductDependencies = (
 				629016DE2D4B329200E8999C /* FlowStacks */,
 			);
 			productName = BodyPositiveZumba;
-			productReference = 622150322D4703E100F89553 /* BodyPositiveZumba.app */;
+			productReference = 622150322D4703E100F89553 /* BPDF.app */;
 			productType = "com.apple.product-type.application";
 		};
-		622150412D4703E700F89553 /* BodyPositiveZumbaTests */ = {
+		622150412D4703E700F89553 /* BPDFTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 622150592D4703E700F89553 /* Build configuration list for PBXNativeTarget "BodyPositiveZumbaTests" */;
+			buildConfigurationList = 622150592D4703E700F89553 /* Build configuration list for PBXNativeTarget "BPDFTests" */;
 			buildPhases = (
 				6221503E2D4703E700F89553 /* Sources */,
 				6221503F2D4703E700F89553 /* Frameworks */,
@@ -139,16 +139,16 @@
 			fileSystemSynchronizedGroups = (
 				622150452D4703E700F89553 /* BodyPositiveZumbaTests */,
 			);
-			name = BodyPositiveZumbaTests;
+			name = BPDFTests;
 			packageProductDependencies = (
 			);
 			productName = BodyPositiveZumbaTests;
-			productReference = 622150422D4703E700F89553 /* BodyPositiveZumbaTests.xctest */;
+			productReference = 622150422D4703E700F89553 /* BPDFTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6221504B2D4703E700F89553 /* BodyPositiveZumbaUITests */ = {
+		6221504B2D4703E700F89553 /* BPDFUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6221505C2D4703E700F89553 /* Build configuration list for PBXNativeTarget "BodyPositiveZumbaUITests" */;
+			buildConfigurationList = 6221505C2D4703E700F89553 /* Build configuration list for PBXNativeTarget "BPDFUITests" */;
 			buildPhases = (
 				622150482D4703E700F89553 /* Sources */,
 				622150492D4703E700F89553 /* Frameworks */,
@@ -162,11 +162,11 @@
 			fileSystemSynchronizedGroups = (
 				6221504F2D4703E700F89553 /* BodyPositiveZumbaUITests */,
 			);
-			name = BodyPositiveZumbaUITests;
+			name = BPDFUITests;
 			packageProductDependencies = (
 			);
 			productName = BodyPositiveZumbaUITests;
-			productReference = 6221504C2D4703E700F89553 /* BodyPositiveZumbaUITests.xctest */;
+			productReference = 6221504C2D4703E700F89553 /* BPDFUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -209,9 +209,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				622150312D4703E100F89553 /* BodyPositiveZumba */,
-				622150412D4703E700F89553 /* BodyPositiveZumbaTests */,
-				6221504B2D4703E700F89553 /* BodyPositiveZumbaUITests */,
+				622150312D4703E100F89553 /* BPDF */,
+				622150412D4703E700F89553 /* BPDFTests */,
+				6221504B2D4703E700F89553 /* BPDFUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -267,12 +267,12 @@
 /* Begin PBXTargetDependency section */
 		622150442D4703E700F89553 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 622150312D4703E100F89553 /* BodyPositiveZumba */;
+			target = 622150312D4703E100F89553 /* BPDF */;
 			targetProxy = 622150432D4703E700F89553 /* PBXContainerItemProxy */;
 		};
 		6221504E2D4703E700F89553 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 622150312D4703E100F89553 /* BodyPositiveZumba */;
+			target = 622150312D4703E100F89553 /* BPDF */;
 			targetProxy = 6221504D2D4703E700F89553 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -405,19 +405,22 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BodyPositiveZumba/Preview Content\"";
+				DEVELOPMENT_TEAM = MLRJDTF46U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BPDF;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Burnham.BodyPositiveZumba;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Elbert.BodyPositiveDanceFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -433,19 +436,22 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BodyPositiveZumba/Preview Content\"";
+				DEVELOPMENT_TEAM = MLRJDTF46U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BPDF;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Burnham.BodyPositiveZumba;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Elbert.BodyPositiveDanceFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -533,7 +539,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		622150562D4703E700F89553 /* Build configuration list for PBXNativeTarget "BodyPositiveZumba" */ = {
+		622150562D4703E700F89553 /* Build configuration list for PBXNativeTarget "BPDF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				622150572D4703E700F89553 /* Debug */,
@@ -542,7 +548,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		622150592D4703E700F89553 /* Build configuration list for PBXNativeTarget "BodyPositiveZumbaTests" */ = {
+		622150592D4703E700F89553 /* Build configuration list for PBXNativeTarget "BPDFTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6221505A2D4703E700F89553 /* Debug */,
@@ -551,7 +557,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6221505C2D4703E700F89553 /* Build configuration list for PBXNativeTarget "BodyPositiveZumbaUITests" */ = {
+		6221505C2D4703E700F89553 /* Build configuration list for PBXNativeTarget "BPDFUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6221505D2D4703E700F89553 /* Debug */,

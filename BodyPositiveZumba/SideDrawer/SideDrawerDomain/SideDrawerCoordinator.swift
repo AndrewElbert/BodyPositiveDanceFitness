@@ -9,7 +9,6 @@ import Foundation
 
 protocol SideDrawerCoordinator: ScreenCoordinator {
 
-    func sideDrawer_viewJoinNow()
     func sideDrawer_viewClasses()
     func sideDrawer_viewFaq()
     func sideDrawer_viewAbout()
