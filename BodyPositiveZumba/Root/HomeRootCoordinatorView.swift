@@ -18,8 +18,6 @@ struct HomeRootCoordinatorView: View {
             screen,
             _ in
             switch screen {
-            case .joinNow:
-                Text("Join Now")
             case .classes:
                 ClassesFlowCoordinatorView(
                     coordinator: ClassesFlowCoordinator()
