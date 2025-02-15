@@ -40,8 +40,6 @@ struct SideDrawerComponent: View {
                 viewModel.closeMenu()
             case .updateDrag(let offset):
                 viewModel.updateDragOffset(offset)
-            case .photos:
-                viewModel.navigatePhotos()
             }
         }
     }

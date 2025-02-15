@@ -12,6 +12,5 @@ protocol HomeCoordinator: ScreenCoordinator {
 
     func home_viewAbout()
     func home_viewClasses()
-    func home_viewPhotos()
 
 }
