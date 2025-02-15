@@ -10,7 +10,7 @@ import SwiftUI
 struct DanceClassCard: View {
     var danceClass: DanceClass
     @Binding var viewState: ClassesViewState
-    
+
     var body: some View {
         VStack(spacing: 0) {
             cardHeader
@@ -28,9 +28,9 @@ struct DanceClassCard: View {
             WebViewContainer(url: joinNow.url, title: joinNow.title)
         }
     }
-    
+
     // MARK: - Optimized Components
-    
+
     private var cardHeader: some View {
         Rectangle()
             .fill(danceClass.color.opacity(0.8))
@@ -45,7 +45,7 @@ struct DanceClassCard: View {
                     .padding(.bottom, -15)
             )
     }
-    
+
     private var headerText: some View {
         Text(danceClass.rawValue)
             .font(.sfProDisplayBold(size: 30))
@@ -56,7 +56,7 @@ struct DanceClassCard: View {
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 15)
     }
-    
+
     private var joinNowButton: some View {
         Button(action: openJoinURL) {
             Text(Constants.Classes.joinNowButtonText)
@@ -73,7 +73,7 @@ struct DanceClassCard: View {
         .padding(.top, 20)
         .padding(.bottom, 15)
     }
-    
+
     private var cardBackground: some View {
         RadialGradient(
             gradient: Gradient(colors: [
@@ -85,12 +85,12 @@ struct DanceClassCard: View {
             endRadius: 250
         )
     }
-    
+
     private var cardBorder: some View {
         RoundedRectangle(cornerRadius: 15)
             .strokeBorder(danceClass.color, lineWidth: 1.5)
     }
-    
+
     private func openJoinURL() {
         guard let url = URL(string: Constants.JoinNow.joinNowUrl) else { return }
         viewState.joinNowURL = WebViewURL(

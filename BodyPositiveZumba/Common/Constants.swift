@@ -406,16 +406,6 @@ struct Constants {
             "envelope.badge",
             comment: "Contact button image"
         )
-        
-        static let photoText: String = NSLocalizedString(
-            "Photos!",
-            comment: "Photo Button text"
-        )
-        
-        static let photoImage: String = NSLocalizedString(
-            "camera",
-            comment: "photo button image"
-        )
 
         static let contactFontSize: CGFloat = 20
         static let companyNameFontSize: CGFloat = 12
@@ -425,12 +415,12 @@ struct Constants {
         static let backgroundOpacity: Double = 0.6
         static let animationDuration: Double = 0.33
         static let frameWidth: CGFloat = 300
-        static let buttonSpacing: CGFloat = 44
+        static let buttonSpacing: CGFloat = 53
         static let outerCircleColorRadius: Color = Color(red: 0.0, green: 0.9, blue: 0.94)
         static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
         static let buttonPressOpacity: CGFloat = 0.5
         static let buttonPressScale: CGFloat = 0.9
-        static let sideDrawerButtonImageSize: CGFloat = 27
+        static let sideDrawerButtonImageSize: CGFloat = 25
     }
 
     // MARK: Space Rental

@@ -16,7 +16,6 @@ struct SideDrawerView: View, ActionableView {
         case about
         case massage
         case spaceRental
-        case photos
         case contact
         case endDragGesture
         case closeMenu

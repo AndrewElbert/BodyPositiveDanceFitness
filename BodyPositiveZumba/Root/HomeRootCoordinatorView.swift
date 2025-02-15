@@ -34,8 +34,6 @@ struct HomeRootCoordinatorView: View {
                 MassageUI.massagePage()
             case .spaceRental:
                 SpaceRentalUI.spaceRentalPage()
-            case .photos:
-                Text("Photos")
             case .contact:
                 ContactUI.contactPage()
             case .root:

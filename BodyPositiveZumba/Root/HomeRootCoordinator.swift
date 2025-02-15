@@ -18,7 +18,6 @@ class HomeRootCoordinator: RootCoordinator {
         case faq
         case massage
         case spaceRental
-        case photos
         case contact
     }
 
@@ -39,10 +38,6 @@ extension HomeRootCoordinator: HomeCoordinator {
 
     func home_viewClasses() {
         routes.presentCover(.classes)
-    }
-
-    func home_viewPhotos() {
-        routes.presentSheet(.joinNow)
     }
 }
 
@@ -95,12 +90,6 @@ extension HomeRootCoordinator: SideDrawerCoordinator {
     func sideDrawer_viewContact() {
         routes.presentSheet(
             .contact
-        )
-    }
-    
-    func sideDrawer_viewPhotos() {
-        routes.presentSheet(
-            .photos
         )
     }
 }
