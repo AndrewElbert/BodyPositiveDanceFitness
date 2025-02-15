@@ -6,7 +6,7 @@
 //
 
 import Testing
-@testable import BodyPositiveZumba
+@testable import BPDF
 
 struct BodyPositiveZumbaTests {
 
