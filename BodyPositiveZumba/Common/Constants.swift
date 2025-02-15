@@ -335,16 +335,16 @@ struct Constants {
             comment: "Space rental button text"
         )
         static let spaceRentalImage: String = NSLocalizedString(
-            "house.fill",
+            "building.2.fill",
             comment: "Space rental button image"
         )
 
         static let joinNowText: String = NSLocalizedString(
-            "Join Now!",
+            "Join or Book!",
             comment: "join now button text"
         )
         static let joinNowImage: String = NSLocalizedString(
-            "person.crop.circle.badge.plus",
+            "calendar.badge.plus",
             comment: "Join now button image"
         )
 
@@ -415,7 +415,7 @@ struct Constants {
         static let backgroundOpacity: Double = 0.6
         static let animationDuration: Double = 0.33
         static let frameWidth: CGFloat = 300
-        static let buttonSpacing: CGFloat = 50
+        static let buttonSpacing: CGFloat = 53
         static let outerCircleColorRadius: Color = Color(red: 0.0, green: 0.9, blue: 0.94)
         static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
         static let buttonPressOpacity: CGFloat = 0.5

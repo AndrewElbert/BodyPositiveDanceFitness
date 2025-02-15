@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    enum Action {
+        case viewClasses
+        case about
+        case joinNow
+        case bookClass
+    }
 
     let coordinator: SideDrawerCoordinator
     @Binding private var viewState: HomeViewState
@@ -23,10 +30,6 @@ struct HomeView: View {
             case .dragging(let translation): return translation
             }
         }
-    }
-
-    enum Action {
-        case viewClasses, about, joinNow, bookClass
     }
 
     var onAction: ((Action) -> Void)?

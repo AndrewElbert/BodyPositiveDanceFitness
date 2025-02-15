@@ -140,7 +140,7 @@ private extension MassageView {
                 )
                 .cornerRadius(8)
         }
-        .padding(.top, 2)
+        .padding(.bottom, 11)
     }
 
     var swipeAnimationOverlay: some View {
