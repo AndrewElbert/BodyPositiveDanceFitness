@@ -16,6 +16,7 @@ struct SideDrawerView: View, ActionableView {
         case about
         case massage
         case spaceRental
+        case photos
         case contact
         case endDragGesture
         case closeMenu
@@ -84,7 +85,7 @@ struct SideDrawerView: View, ActionableView {
 
                                 Text(Constants.SideDrawer.contactText)
                                     .font(
-                                        .sfProRoundedTextSemibold(
+                                        .sfProRoundedTextMedium(
                                             size: Constants.SideDrawer.contactFontSize
                                             )
                                     )

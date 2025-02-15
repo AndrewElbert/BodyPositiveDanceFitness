@@ -71,7 +71,8 @@ struct ContactView: View, ActionableView {
 
             Text("We're here to help and listen")
                 .font(.sfProRoundedTextRegular(size: 16))
-                .foregroundColor(.secondary)
+                .foregroundColor(.gray)
+                .italic()
         }
         .padding(.top, 25)
     }
