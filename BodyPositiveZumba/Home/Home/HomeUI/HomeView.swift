@@ -49,31 +49,75 @@ struct HomeView: View {
             )
         )
     }
-
+    
     var body: some View {
         ZStack {
-            mainContent
+            ScrollViewReader { proxy in
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        mainContent
+                            .id(Constants.Home.proxy)
+                        
+                        if viewState.isCarouselExpanded {
+                            carouselSection
+                                .transition(.opacity)
+                        }
+                    }
+                }
+                .onAppear {
+                    if viewState.isCarouselExpanded {
+                        viewState.showCarousel = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            withAnimation(.easeIn(duration: 1.11)) {
+                                viewState.showCarousel = true
+                            }
+                        }
+                    }
+                }
+                .onChange(of: viewState.isCarouselExpanded) { _, newValue in
+                    if newValue {
+                        viewState.showCarousel = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            withAnimation(.easeIn(duration: 1.11)) {
+                                viewState.showCarousel = true
+                            }
+                        }
+                    } else {
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            viewState.showCarousel = false
+                        }
+                        withAnimation(.spring(duration: 1.1)) {
+                            proxy.scrollTo(Constants.Home.proxy, anchor: .top)
+                        }
+                    }
+                }
+                .onDisappear {
+                    viewState.showCarousel = false
+                }
+            }
             SideDrawerComponent(viewModel: sideDrawerViewModel)
                 .onChange(of: dragState.translation) { _, translation in
                     if !sideDrawerViewModel.viewState.isMenuOpen {
-                        sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
+                        sideDrawerViewModel.updateDragOffset(
+                            CGSize(
+                                width: max(0, translation),
+                                height: 0))
                     }
                 }
         }
         .sheet(isPresented: $viewState.showJoinWebView) {
             WebViewContainer(
                 url: URL(string: Constants.JoinNow.joinNowUrl)!,
-                title: "Join Us!"
+                title: Constants.JoinNow.joinNowTitle
             )
         }
         .sheet(isPresented: $viewState.showBookClassWebView) {
             WebViewContainer(
-                url: URL(string: Constants.JoinNow.PassesUrl)!,
-                title: "View Passes"
+                url: URL(string: Constants.JoinNow.passesUrl)!,
+                title: Constants.JoinNow.passesTitle
             )
         }
     }
-
     private var mainContent: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -90,9 +134,12 @@ struct HomeView: View {
             greetingView
             logoView
             buttonStack
-            Spacer()
+            expandablePhotoButton
+            if !viewState.isCarouselExpanded {
+                Spacer()
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: viewState.isCarouselExpanded ? nil : .infinity)
     }
 
     private var greetingView: some View {
@@ -103,7 +150,7 @@ struct HomeView: View {
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .padding(.top, 0)
-            Text("and welcome to")
+            Text(Constants.Home.pageBio)
                 .font(.sfProDisplayRegular(size: 18))
                 .foregroundColor(.gray)
                 .italic()
@@ -123,39 +170,75 @@ struct HomeView: View {
     private var buttonStack: some View {
         VStack(spacing: 22) {
             ColoredButton(
-                title: "Book A Class!",
+                title: Constants.Home.bookClassesButton,
                 onTap: { onAction?(.joinNow) },
                 strokeColor: Color.orange.opacity(0.8),
                 gradientColor: Color.orange
             )
             ColoredButton(
-                title: "View Classes",
+                title: Constants.Home.viewClassesButton,
                 onTap: { onAction?(.viewClasses) },
                 strokeColor: Constants.Colors.darkerCyan,
                 gradientColor: Constants.Colors.neonCyan
             )
             VStack(spacing: 2) {
                 ColoredButton(
-                    title: "Passes",
+                    title: Constants.Home.viewPassesButton,
                     onTap: { onAction?(.bookClass) },
                     strokeColor: Constants.Colors.darkerCyan,
                     gradientColor: Constants.Colors.neonCyan
                 )
-                Text("save money - purchase a pass!")
+                Text(Constants.Home.passesBio)
                     .font(.sfProDisplayRegular(size: 18))
                     .foregroundColor(.gray)
                     .italic()
                     .padding(.top, 0)
             }
             HStack(spacing: 16) {
-                HomeRainbowButton(title: "About Us!") { onAction?(.about) }
-                HomeRainbowButton(title: "Explore More") {
+                HomeRainbowButton(title: Constants.Home.aboutButton) {
+                    onAction?(.about)
+                }
+                HomeRainbowButton(title: Constants.Home.exploreButton) {
                     sideDrawerViewModel.openMenu()
                 }
             }
         }
         .padding(.top, 16)
         .padding(.horizontal, 24)
+    }
+
+    private var expandablePhotoButton: some View {
+        Button(action: {
+            withAnimation(.spring(duration: 0.8)) {
+                viewState.isCarouselExpanded.toggle()
+            }
+        }) {
+            HStack(spacing: 4) {
+                Text(Constants.Home.photosButton)
+                    .font(.sfProDisplayRegular(size: 18))
+                    .foregroundColor(.gray)
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.gray)
+                    .rotationEffect(.degrees(viewState.isCarouselExpanded ? 90 : 0))
+            }
+            .padding(.top, 24)
+            .padding(.bottom, 18)
+        }
+        .zIndex(1)
+    }
+    
+    private var carouselSection: some View {
+        AnimatedCarouselComponent(
+            viewModel: AnimatedCarouselViewModel(
+                viewState: $viewState.animatedCarouselViewState
+            )
+        )
+        .frame(height: 250)
+        .padding(.horizontal)
+        .padding(.vertical, 30)
+        .opacity(viewState.showCarousel ? 1 : 0)
     }
 
     private func createSideDrawerGesture() -> some Gesture {
