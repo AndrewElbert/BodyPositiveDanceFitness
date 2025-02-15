@@ -28,9 +28,7 @@ struct DanceClassCard: View {
             WebViewContainer(url: joinNow.url, title: joinNow.title)
         }
     }
-
-    // MARK: - Optimized Components
-
+    
     private var cardHeader: some View {
         Rectangle()
             .fill(danceClass.color.opacity(0.8))
