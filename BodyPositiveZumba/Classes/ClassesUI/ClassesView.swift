@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClassesView: View, ActionableView {
-
+    
     enum Action {
         case toggleExpansion
         case handleViewAllButtonTap
@@ -54,15 +54,16 @@ struct ClassesView: View, ActionableView {
                 ToolbarButton.backButton { dismiss() }
                 ToolbarButton.closeButton { dismiss() }
             }
-            .onAppear {
-                dismissSwipeAnimationAfterDelay()
+            .onChange(of: viewState.showSwipeAnimation) { _, newValue in
+                if newValue {
+                    dismissSwipeAnimationAfterDelay()
+                }
             }
         }
     }
 }
 
 private extension ClassesView {
-
     private struct RainbowButton: View {
         let title: String
         let action: () -> Void
@@ -111,7 +112,6 @@ private extension ClassesView {
     }
 
     var headerSection: some View {
-
         VStack(spacing: 0) {
             Text(Constants.Classes.pageTitle)
                 .font(.sfProDisplayBold(size: 40))
@@ -227,10 +227,12 @@ private extension ClassesView {
     }
 
     func openViewAllClasses() {
+        viewState.showSwipeAnimation = false
         onAction?(.handleViewAllButtonTap)
     }
 
     func openCalendar() {
+        viewState.showSwipeAnimation = false
         guard let url = URL(string: Constants.Classes.viewCalendarUrl) else { return }
         viewState.viewCalendarWebView = WebViewURL(
             title: Constants.Classes.viewCalendarButtonText,
