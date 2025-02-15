@@ -56,10 +56,6 @@ class SideDrawerViewModel: ObservableObject {
         }
     }
 
-    func navigateJoinNow() {
-        coordinator.sideDrawer_viewJoinNow()
-    }
-
     func navigateClasses() {
         coordinator.sideDrawer_viewClasses()
     }
