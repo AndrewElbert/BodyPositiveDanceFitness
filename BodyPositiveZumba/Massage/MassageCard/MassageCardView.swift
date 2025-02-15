@@ -18,7 +18,7 @@ struct MassageCardView: View {
             Image(card.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 250, height: 250)
+                .frame(width: 234, height: 234)
                 .clipped()
                 .cornerRadius(15)
 
@@ -34,7 +34,7 @@ struct MassageCardView: View {
 
             if viewState.isExpanded {
                 Text(card.bio)
-                    .font(.sfProBodyTextRegular(size: 17))
+                    .font(.sfProBodyTextRegular(size: 16))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -44,7 +44,7 @@ struct MassageCardView: View {
             } else {
                 Text(Constants.Massage.bioTap)
                     .font(.sfProBodyTextRegular(size: 14))
-                    .foregroundColor(.blue)
+                    .foregroundColor(Constants.Colors.darkerCyan)
                     .padding(.top, 5)
             }
 
