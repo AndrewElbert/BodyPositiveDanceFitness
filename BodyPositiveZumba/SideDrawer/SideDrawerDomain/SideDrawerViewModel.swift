@@ -16,10 +16,6 @@ class SideDrawerViewModel: ObservableObject {
         self.coordinator = coordinator
     }
 
-    func toggleMenu() {
-        viewState.isMenuOpen.toggle()
-    }
-
     func updateDragOffset(_ offset: CGSize) {
         viewState.dragOffset = offset
     }

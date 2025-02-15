@@ -19,7 +19,7 @@ struct TopBarComponent: View {
         TopBarView { action in
             switch action {
             case .toggleMenu:
-                viewModel.toggleMenu()
+                viewModel.openMenu()
             }
         }
     }
