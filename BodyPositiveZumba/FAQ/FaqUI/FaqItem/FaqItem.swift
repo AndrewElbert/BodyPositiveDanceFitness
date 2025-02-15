@@ -85,7 +85,7 @@ struct FaqItem: View {
             }
             .frame(maxHeight: viewState.isExpanded ? nil : 0)
             .clipped()
-            .animation(.smooth(duration: 0.6), value: viewState.isExpanded)
+            .animation(viewState.isExpanded ? .smooth(duration: 0.88) : .none, value: viewState.isExpanded)
             .onChange(of: viewState.showText) { _, newValue in
                 if !newValue && !viewState.isExpanded {
                     DispatchQueue.main.async {

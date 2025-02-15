@@ -128,7 +128,7 @@ struct Constants {
                 title: "Visit us!",
                 icon: "mappin.and.ellipse",
                 text: "1100 Brighton Avenue Pine Tree Shopping Center Portland, Maine",
-                action: "http://maps.apple.com/?q=123+Main+Street",
+                action: "https://www.google.com/maps/place/1100+Brighton+Ave,+Portland,+ME+04102/@43.6751784,-70.3277432,17z/data=!3m1!4b1!4m6!3m5!1s0x4cb29a4b628bb81b:0x89e493444035762a!8m2!3d43.6751784!4d-70.3251683!16s%2Fg%2F11b8v4s1lm?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D",
                 iconColor: Color.red
             )
         ]
@@ -252,6 +252,7 @@ struct Constants {
     // MARK: Home
 
     enum Home {
+        
         static let buttonImage: String = NSLocalizedString(
             "line.horizontal.3",
             comment: "system image name"
@@ -260,7 +261,25 @@ struct Constants {
             "Welcome to",
             comment: "home screen greeting message"
         )
+        static let pageBio: String = "and welcome to"
+        static let bookClassesButton: String = "Book A Class!"
+        static let viewClassesButton: String = "View Classes"
+        static let viewPassesButton: String = "View Passes"
+        static let aboutButton: String = "About Us!"
+        static let exploreButton: String = "Explore More"
+        static let photosButton: String = "View Photos"
+        static let passesBio: String = "save money - purchase a pass!"
         static let tradeMarkSloganSize: CGFloat = 22
+        static let proxy = "topContent"
+        
+        static let images: [String] = [
+            "Home1",
+            "Home2",
+            "Home3",
+            "Home4",
+            "Home5",
+            "Home6",
+        ]
     }
 
     // MARK: Join Now
@@ -268,7 +287,9 @@ struct Constants {
     enum JoinNow {
 
         static let joinNowUrl: String = "https://bodypositive.punchpass.com/classes"
-        static let PassesUrl: String = "https://bodypositive.punchpass.com/passes"
+        static let passesUrl: String = "https://bodypositive.punchpass.com/passes"
+        static let joinNowTitle: String = "Join Us!"
+        static let passesTitle: String = "View Passes"
     }
 
     // MARK: Massage

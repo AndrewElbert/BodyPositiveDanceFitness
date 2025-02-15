@@ -17,7 +17,7 @@ class SwipableCarouselViewModel<T: Identifiable>: ObservableObject {
     }
 
     func handleDragEnd(translation: CGFloat, cardWidth: CGFloat) {
-        let threshold: CGFloat = cardWidth / 2
+        let threshold: CGFloat = cardWidth / 5
         var newIndex = $viewState.wrappedValue.currentIndex
 
         if translation < -threshold {

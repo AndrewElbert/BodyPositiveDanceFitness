@@ -20,8 +20,6 @@ struct SideDrawerComponent: View {
             viewState: $viewModel.viewState
         ) { action in
             switch action {
-            case .joinNow:
-                viewModel.navigateJoinNow()
             case .classes:
                 viewModel.navigateClasses()
             case .faq:
@@ -40,6 +38,8 @@ struct SideDrawerComponent: View {
                 viewModel.closeMenu()
             case .updateDrag(let offset):
                 viewModel.updateDragOffset(offset)
+            case .joinNow:
+                break
             }
         }
     }
