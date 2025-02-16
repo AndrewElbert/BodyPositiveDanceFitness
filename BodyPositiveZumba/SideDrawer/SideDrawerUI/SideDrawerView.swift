@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideDrawerView: View, ActionableView {
-    
+
     enum Action {
         case joinNow
         case classes
@@ -214,4 +214,3 @@ struct SideDrawerView: View, ActionableView {
         }
     }
 }
-

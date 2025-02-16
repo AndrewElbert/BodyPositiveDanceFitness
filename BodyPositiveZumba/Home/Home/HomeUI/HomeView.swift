@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     enum Action {
         case viewClasses
         case about
         case joinNow
         case bookClass
+        case fetchConfig
     }
 
     let coordinator: SideDrawerCoordinator
@@ -49,75 +50,76 @@ struct HomeView: View {
             )
         )
     }
-    
+
     var body: some View {
-        ZStack {
-            ScrollViewReader { proxy in
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 0) {
-                        mainContent
-                            .id(Constants.Home.proxy)
-                        
-                        if viewState.isCarouselExpanded {
-                            carouselSection
-                                .transition(.opacity)
-                        }
-                    }
-                }
-                .onAppear {
-                    if viewState.isCarouselExpanded {
-                        viewState.showCarousel = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation(.easeIn(duration: 1.11)) {
-                                viewState.showCarousel = true
+        if viewState.deathScreenEnabled {
+            MaintenanceView()
+        } else {
+            ZStack {
+                ScrollViewReader { proxy in
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 0) {
+                            mainContent
+                                .id(Constants.Home.proxy)
+                            if viewState.isCarouselExpanded {
+                                carouselSection
+                                    .transition(.opacity)
                             }
                         }
                     }
-                }
-                .onChange(of: viewState.isCarouselExpanded) { _, newValue in
-                    if newValue {
-                        viewState.showCarousel = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation(.easeIn(duration: 1.11)) {
-                                viewState.showCarousel = true
-                            }
-                        }
-                    } else {
-                        withAnimation(.easeOut(duration: 0.3)) {
+                    .onAppear {
+                        fetchRemoteConfig()
+                    }
+                    .onChange(of: viewState.isCarouselExpanded) { _, newValue in
+                        if newValue {
                             viewState.showCarousel = false
-                        }
-                        withAnimation(.spring(duration: 1.1)) {
-                            proxy.scrollTo(Constants.Home.proxy, anchor: .top)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation(.easeIn(duration: 1.11)) {
+                                    viewState.showCarousel = true
+                                }
+                            }
+                        } else {
+                            withAnimation(.easeOut(duration: 0.3)) {
+                                viewState.showCarousel = false
+                            }
+                            withAnimation(.spring(duration: 1.1)) {
+                                proxy.scrollTo(Constants.Home.proxy, anchor: .top)
+                            }
                         }
                     }
+                    .onDisappear {
+                        viewState.showCarousel = false
+                    }
                 }
-                .onDisappear {
-                    viewState.showCarousel = false
-                }
+                SideDrawerComponent(viewModel: sideDrawerViewModel)
+                    .onChange(of: dragState.translation) { _, translation in
+                        if !sideDrawerViewModel.viewState.isMenuOpen {
+                            sideDrawerViewModel.updateDragOffset(
+                                CGSize(
+                                    width: max(0, translation),
+                                    height: 0))
+                        }
+                    }
             }
-            SideDrawerComponent(viewModel: sideDrawerViewModel)
-                .onChange(of: dragState.translation) { _, translation in
-                    if !sideDrawerViewModel.viewState.isMenuOpen {
-                        sideDrawerViewModel.updateDragOffset(
-                            CGSize(
-                                width: max(0, translation),
-                                height: 0))
-                    }
-                }
-        }
-        .sheet(isPresented: $viewState.showJoinWebView) {
-            WebViewContainer(
-                url: URL(string: Constants.JoinNow.joinNowUrl)!,
-                title: Constants.JoinNow.joinNowTitle
-            )
-        }
-        .sheet(isPresented: $viewState.showBookClassWebView) {
-            WebViewContainer(
-                url: URL(string: Constants.JoinNow.passesUrl)!,
-                title: Constants.JoinNow.passesTitle
-            )
+            .sheet(isPresented: $viewState.showJoinWebView) {
+                WebViewContainer(
+                    url: URL(string: Constants.JoinNow.joinNowUrl)!,
+                    title: Constants.JoinNow.joinNowTitle
+                )
+            }
+            .sheet(isPresented: $viewState.showBookClassWebView) {
+                WebViewContainer(
+                    url: URL(string: Constants.JoinNow.passesUrl)!,
+                    title: Constants.JoinNow.passesTitle
+                )
+            }
         }
     }
+
+    private func fetchRemoteConfig() {
+        onAction?(.fetchConfig)
+    }
+
     private var mainContent: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -217,7 +219,7 @@ struct HomeView: View {
                 Text(Constants.Home.photosButton)
                     .font(.sfProDisplayRegular(size: 18))
                     .foregroundColor(.gray)
-                
+
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
@@ -228,7 +230,7 @@ struct HomeView: View {
         }
         .zIndex(1)
     }
-    
+
     private var carouselSection: some View {
         AnimatedCarouselComponent(
             viewModel: AnimatedCarouselViewModel(

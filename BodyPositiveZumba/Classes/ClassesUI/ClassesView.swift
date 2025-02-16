@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClassesView: View, ActionableView {
-    
+
     enum Action {
         case toggleExpansion
         case handleViewAllButtonTap
@@ -210,6 +210,9 @@ private extension ClassesView {
                 .zIndex(1)
                 .transition(.opacity)
                 .animation(.easeOut(duration: 1.5), value: viewState.showSwipeAnimation)
+                .onAppear {
+                    dismissSwipeAnimationAfterDelay()
+                }
             }
         }
     }
