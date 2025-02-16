@@ -50,7 +50,7 @@ struct HomeView: View {
             )
         )
     }
-        
+
     var body: some View {
         if viewState.deathScreenEnabled {
             MaintenanceView()

@@ -54,7 +54,7 @@ class HomeViewModel: ObservableObject {
             viewState.currentGreeting = "Good Evening!"
         }
     }
-    
+
     func fetchRemoteConfig() {
         RemoteConfigManager.shared.fetchRemoteValues { success in
             if success {
