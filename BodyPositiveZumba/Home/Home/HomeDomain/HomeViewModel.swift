@@ -54,6 +54,16 @@ class HomeViewModel: ObservableObject {
             viewState.currentGreeting = "Good Evening!"
         }
     }
+    
+    func fetchRemoteConfig() {
+        RemoteConfigManager.shared.fetchRemoteValues { success in
+            if success {
+                DispatchQueue.main.async {
+                    self.viewState.deathScreenEnabled = RemoteConfigManager.shared.getDeathScreenEnabled()
+                }
+            }
+        }
+    }
 
     deinit {
         timerCancellable?.cancel()
