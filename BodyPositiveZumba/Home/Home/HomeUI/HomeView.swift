@@ -14,13 +14,13 @@ struct HomeView: View {
         case about
         case joinNow
         case bookClass
+        case fetchConfig
     }
 
     let coordinator: SideDrawerCoordinator
     @Binding private var viewState: HomeViewState
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
-    @State var deathScreenEnabled = true
 
     enum DragState {
         case inactive
@@ -49,21 +49,18 @@ struct HomeView: View {
                 coordinator: coordinator
             )
         )
-        // fetchRemoteConfig()
     }
-
+        
     var body: some View {
-        if deathScreenEnabled {
+        if viewState.deathScreenEnabled {
             MaintenanceView()
         } else {
-
             ZStack {
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 0) {
                             mainContent
                                 .id(Constants.Home.proxy)
-
                             if viewState.isCarouselExpanded {
                                 carouselSection
                                     .transition(.opacity)
@@ -71,15 +68,7 @@ struct HomeView: View {
                         }
                     }
                     .onAppear {
-
-                        if viewState.isCarouselExpanded {
-                            viewState.showCarousel = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                withAnimation(.easeIn(duration: 1.11)) {
-                                    viewState.showCarousel = true
-                                }
-                            }
-                        }
+                        fetchRemoteConfig()
                     }
                     .onChange(of: viewState.isCarouselExpanded) { _, newValue in
                         if newValue {
@@ -128,12 +117,8 @@ struct HomeView: View {
     }
 
     private func fetchRemoteConfig() {
-            RemoteConfigManager.shared.fetchRemoteValues { success in
-                if success {
-                    self.deathScreenEnabled = RemoteConfigManager.shared.getDeathScreenEnabled()
-                }
-            }
-        }
+        onAction?(.fetchConfig)
+    }
 
     private var mainContent: some View {
         ZStack {
