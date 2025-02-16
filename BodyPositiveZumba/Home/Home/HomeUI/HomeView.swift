@@ -14,7 +14,6 @@ struct HomeView: View {
         case about
         case joinNow
         case bookClass
-        case fetchConfig
     }
 
     let coordinator: SideDrawerCoordinator
@@ -67,9 +66,6 @@ struct HomeView: View {
                             }
                         }
                     }
-                    .onAppear {
-                        fetchRemoteConfig()
-                    }
                     .onChange(of: viewState.isCarouselExpanded) { _, newValue in
                         if newValue {
                             viewState.showCarousel = false
@@ -114,10 +110,6 @@ struct HomeView: View {
                 )
             }
         }
-    }
-
-    private func fetchRemoteConfig() {
-        onAction?(.fetchConfig)
     }
 
     private var mainContent: some View {

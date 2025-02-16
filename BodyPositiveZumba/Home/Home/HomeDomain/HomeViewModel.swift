@@ -12,6 +12,8 @@ class HomeViewModel: ObservableObject {
 
     private let homeCoordinator: HomeCoordinator
     private var timerCancellable: AnyCancellable?
+    private var activeNotification: AnyCancellable?
+    private var lastRemoteConfigFetchDate: Date?
 
     @Published var viewState: HomeViewState = HomeViewState()
 
@@ -19,6 +21,13 @@ class HomeViewModel: ObservableObject {
         self.homeCoordinator = homeCoordinator
         updateGreeting()
         startGreetingTimer()
+        fetchRemoteConfig()
+
+        activeNotification = NotificationCenter.default
+            .publisher(for: UIApplication.didBecomeActiveNotification)
+            .sink { [weak self] _ in
+                self?.fetchRemoteConfig()
+            }
     }
 
     func navigateAbout() {
@@ -56,16 +65,23 @@ class HomeViewModel: ObservableObject {
     }
 
     func fetchRemoteConfig() {
-        RemoteConfigManager.shared.fetchRemoteValues { success in
-            if success {
-                DispatchQueue.main.async {
-                    self.viewState.deathScreenEnabled = RemoteConfigManager.shared.getDeathScreenEnabled()
-                }
+        let now = Date()
+        if let lastFetch = lastRemoteConfigFetchDate, now.timeIntervalSince(lastFetch) < 60 * 60 {
+            return
+        }
+
+        lastRemoteConfigFetchDate = now
+
+        RemoteConfigManager.shared.fetchRemoteValues { _ in
+            DispatchQueue.main.async {
+                let newValue = RemoteConfigManager.shared.getDeathScreenEnabled()
+                self.viewState.deathScreenEnabled = newValue
             }
         }
     }
 
     deinit {
         timerCancellable?.cancel()
+        activeNotification?.cancel()
     }
 }

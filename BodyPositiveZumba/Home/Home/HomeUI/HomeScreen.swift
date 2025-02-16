@@ -34,8 +34,6 @@ struct HomeScreen: View {
                 viewModel.toggleJoinWebView()
             case .bookClass:
                 viewModel.toggleBookClassWebView()
-            case .fetchConfig:
-                viewModel.fetchRemoteConfig()
             }
         }
     }

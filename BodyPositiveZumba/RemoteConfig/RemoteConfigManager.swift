@@ -24,26 +24,24 @@ class RemoteConfigManager {
     }
 
     func fetchRemoteValues(completion: @escaping (Bool) -> Void) {
-        print("Fetching remote config...")
-        remoteConfig.fetch { [weak self] status, error in
+        print("Fetching and activating remote config...")
+
+        remoteConfig.fetchAndActivate { status, error in
             if let error = error {
-                print("Remote config fetch error: \(error.localizedDescription)")
+                print("Remote config fetchAndActivate error: \(error.localizedDescription)")
                 completion(false)
                 return
             }
 
-            if status == .success {
-                print("Remote config fetch successful")
-                self?.remoteConfig.activate { changed, error in
-                    if let error = error {
-                        print("Remote config activation error: \(error.localizedDescription)")
-                        completion(false)
-                        return
-                    }
-                    print("Remote config activated, values changed: \(changed)")
-                }
-            } else {
-                print("Remote config fetch failed with status: \(status)")
+            switch status {
+            case .successFetchedFromRemote:
+                print("Remote config fetched and activated from server.")
+                completion(true)
+            case .successUsingPreFetchedData:
+                print("Using previously fetched remote config values.")
+                completion(true)
+            default:
+                print("Remote config fetchAndActivate failed with status: \(status)")
                 completion(false)
             }
         }
