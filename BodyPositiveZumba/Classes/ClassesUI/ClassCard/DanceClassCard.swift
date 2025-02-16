@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct DanceClassCard: View {
+    
     var danceClass: DanceClass
     @Binding var viewState: ClassesViewState
+    @Environment(\.colorScheme) private var colorScheme
+    
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -48,7 +54,7 @@ struct DanceClassCard: View {
         Text(danceClass.rawValue)
             .font(.sfProDisplayBold(size: 30))
             .fontWeight(.bold)
-            .foregroundColor(.black)
+            .foregroundColor(adaptiveTextColor)
             .multilineTextAlignment(.center)
             .shadow(color: Color.white.opacity(0.5), radius: 1, x: 0, y: 1)
             .frame(maxWidth: .infinity)
@@ -59,7 +65,7 @@ struct DanceClassCard: View {
         Button(action: openJoinURL) {
             Text(Constants.Classes.joinNowButtonText)
                 .font(.sfProRoundedTextSemibold(size: 20))
-                .foregroundColor(.black)
+                .foregroundColor(adaptiveTextColor)
                 .frame(width: 180, height: 44)
                 .background(Color.white.opacity(0.3))
                 .cornerRadius(20)

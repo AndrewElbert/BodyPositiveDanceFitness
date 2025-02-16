@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View, ActionableView {
-
+    
     enum Action {
         case handleTeamButtonTap
         case handleClassesButtonTap
@@ -30,21 +30,25 @@ struct AboutView: View, ActionableView {
     }
 
     var body: some View {
-        NavigationStack {
-            contentView
-                .toolbarBackground(.visible, for: .navigationBar)
-                .toolbar {
-                    ToolbarButton.backButton {
-                        dismiss()
+        
+        ZStack {
+            NavigationStack {
+                contentView
+                    .toolbarBackground(.visible, for: .navigationBar)
+                    .toolbar {
+                        ToolbarButton.backButton {
+                            dismiss()
+                        }
+                        ToolbarButton.closeButton {
+                            dismiss()
+                        }
                     }
-                    ToolbarButton.closeButton {
-                        dismiss()
-                    }
-                }
+            }
+            .sheet(item: $viewState.mediaUrl) { webView in
+                WebViewContainer(url: webView.url, title: webView.title)
+            }
         }
-        .sheet(item: $viewState.mediaUrl) { webView in
-            WebViewContainer(url: webView.url, title: webView.title)
-        }
+        .preferredColorScheme(.light)
     }
 
     private var contentView: some View {
@@ -56,10 +60,12 @@ struct AboutView: View, ActionableView {
             }
             .padding()
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.white) // Ensure white background for scroll view
     }
 
+    // Rest of the code remains the same...
     private var headerTitle: some View {
-
         VStack(spacing: 0) {
             Text("About ")
                 .font(.sfProDisplayBold(size: 22))
@@ -180,3 +186,4 @@ struct ActionButton: View {
         }
     }
 }
+

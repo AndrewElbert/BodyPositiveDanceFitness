@@ -11,6 +11,7 @@ struct PartnersCard: View {
 
     var partner: Partner
     @Binding var viewState: PartnersViewState
+    
 
     var body: some View {
         VStack {
@@ -37,7 +38,7 @@ private extension PartnersCard {
         ) {
             Text(Constants.Partners.buttonText)
                 .font(.sfProRoundedTextSemibold(size: 20))
-                .foregroundColor(.black)
+                .foregroundColor(.orange)
                 .frame(width: 222, height: 44)
                 .cornerRadius(20)
                 .overlay(

@@ -64,15 +64,12 @@ struct ClassesView: View, ActionableView {
 }
 
 private extension ClassesView {
+    
     private struct RainbowButton: View {
         let title: String
         let action: () -> Void
         let font: Font
         @Environment(\.colorScheme) private var colorScheme
-
-        private var adaptiveTextColor: Color {
-            colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-        }
 
         init(
             title: String,
@@ -88,7 +85,7 @@ private extension ClassesView {
             Button(action: action) {
                 Text(title)
                     .font(font)
-                    .foregroundColor(adaptiveTextColor)
+                    .foregroundColor(.black)
                     .padding(.horizontal, 50)
                     .padding(.vertical, 11)
                     .frame(width: 333, height: 60)

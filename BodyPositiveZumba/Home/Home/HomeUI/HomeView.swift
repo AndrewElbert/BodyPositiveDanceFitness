@@ -109,6 +109,7 @@ struct HomeView: View {
                     title: Constants.JoinNow.passesTitle
                 )
             }
+            .preferredColorScheme(.light)
         }
     }
 
