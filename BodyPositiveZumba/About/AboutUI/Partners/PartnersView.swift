@@ -12,7 +12,7 @@ struct PartnersView: View {
     @Binding var viewState: PartnersViewState
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }

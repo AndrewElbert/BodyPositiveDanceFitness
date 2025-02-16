@@ -64,7 +64,7 @@ struct ClassesView: View, ActionableView {
 }
 
 private extension ClassesView {
-    
+
     private struct RainbowButton: View {
         let title: String
         let action: () -> Void

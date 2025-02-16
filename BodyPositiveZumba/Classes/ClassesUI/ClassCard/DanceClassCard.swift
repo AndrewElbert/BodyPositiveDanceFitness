@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DanceClassCard: View {
-    
+
     var danceClass: DanceClass
     @Binding var viewState: ClassesViewState
     @Environment(\.colorScheme) private var colorScheme
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }

@@ -11,7 +11,6 @@ struct PartnersCard: View {
 
     var partner: Partner
     @Binding var viewState: PartnersViewState
-    
 
     var body: some View {
         VStack {

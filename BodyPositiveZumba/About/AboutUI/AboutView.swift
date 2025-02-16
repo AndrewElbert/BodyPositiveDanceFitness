@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View, ActionableView {
-    
+
     enum Action {
         case handleTeamButtonTap
         case handleClassesButtonTap
@@ -30,7 +30,7 @@ struct AboutView: View, ActionableView {
     }
 
     var body: some View {
-        
+
         ZStack {
             NavigationStack {
                 contentView
@@ -186,4 +186,3 @@ struct ActionButton: View {
         }
     }
 }
-
