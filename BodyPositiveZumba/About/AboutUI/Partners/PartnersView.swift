@@ -11,13 +11,18 @@ struct PartnersView: View {
 
     @Binding var viewState: PartnersViewState
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
 
     var body: some View {
         NavigationStack {
             VStack {
                 Text(Constants.Partners.pageTitle)
                     .font(.sfProDisplayBold(size: 40))
-                    .foregroundColor(.black)
+                    .foregroundColor(adaptiveTextColor)
                     .padding(.top, 26)
                     .padding(.bottom, 30)
 

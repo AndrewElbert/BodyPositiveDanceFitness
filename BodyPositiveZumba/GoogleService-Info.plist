@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBISCYav8RUql11ruYO9PEwJg69duCOFHo</string>
+	<string>AIzaSyBFAKEFAKEFAKE1234567890FAKEFAKE12</string>
 	<key>GCM_SENDER_ID</key>
 	<string>70509271629</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.Elbert.BodyPositiveZumba</string>
+	<string>com.Elbert.BodyPositiveDanceFitness</string>
 	<key>PROJECT_ID</key>
 	<string>bodypositivedancefitness-84f62</string>
 	<key>STORAGE_BUCKET</key>
