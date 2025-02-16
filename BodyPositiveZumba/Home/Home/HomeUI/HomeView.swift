@@ -20,7 +20,8 @@ struct HomeView: View {
     @Binding private var viewState: HomeViewState
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
-
+    @State var deathScreenEnabled = true
+    
     enum DragState {
         case inactive
         case dragging(translation: CGFloat)
@@ -48,76 +49,93 @@ struct HomeView: View {
                 coordinator: coordinator
             )
         )
+        //fetchRemoteConfig()
     }
     
     var body: some View {
-        ZStack {
-            ScrollViewReader { proxy in
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 0) {
-                        mainContent
-                            .id(Constants.Home.proxy)
+        if deathScreenEnabled {
+            MaintenanceView()
+        }
+        else {
+            
+            ZStack {
+                ScrollViewReader { proxy in
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 0) {
+                            mainContent
+                                .id(Constants.Home.proxy)
+                            
+                            if viewState.isCarouselExpanded {
+                                carouselSection
+                                    .transition(.opacity)
+                            }
+                        }
+                    }
+                    .onAppear {
                         
                         if viewState.isCarouselExpanded {
-                            carouselSection
-                                .transition(.opacity)
-                        }
-                    }
-                }
-                .onAppear {
-                    if viewState.isCarouselExpanded {
-                        viewState.showCarousel = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation(.easeIn(duration: 1.11)) {
-                                viewState.showCarousel = true
-                            }
-                        }
-                    }
-                }
-                .onChange(of: viewState.isCarouselExpanded) { _, newValue in
-                    if newValue {
-                        viewState.showCarousel = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation(.easeIn(duration: 1.11)) {
-                                viewState.showCarousel = true
-                            }
-                        }
-                    } else {
-                        withAnimation(.easeOut(duration: 0.3)) {
                             viewState.showCarousel = false
-                        }
-                        withAnimation(.spring(duration: 1.1)) {
-                            proxy.scrollTo(Constants.Home.proxy, anchor: .top)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation(.easeIn(duration: 1.11)) {
+                                    viewState.showCarousel = true
+                                }
+                            }
                         }
                     }
+                    .onChange(of: viewState.isCarouselExpanded) { _, newValue in
+                        if newValue {
+                            viewState.showCarousel = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation(.easeIn(duration: 1.11)) {
+                                    viewState.showCarousel = true
+                                }
+                            }
+                        } else {
+                            withAnimation(.easeOut(duration: 0.3)) {
+                                viewState.showCarousel = false
+                            }
+                            withAnimation(.spring(duration: 1.1)) {
+                                proxy.scrollTo(Constants.Home.proxy, anchor: .top)
+                            }
+                        }
+                    }
+                    .onDisappear {
+                        viewState.showCarousel = false
+                    }
                 }
-                .onDisappear {
-                    viewState.showCarousel = false
-                }
+                SideDrawerComponent(viewModel: sideDrawerViewModel)
+                    .onChange(of: dragState.translation) { _, translation in
+                        if !sideDrawerViewModel.viewState.isMenuOpen {
+                            sideDrawerViewModel.updateDragOffset(
+                                CGSize(
+                                    width: max(0, translation),
+                                    height: 0))
+                        }
+                    }
             }
-            SideDrawerComponent(viewModel: sideDrawerViewModel)
-                .onChange(of: dragState.translation) { _, translation in
-                    if !sideDrawerViewModel.viewState.isMenuOpen {
-                        sideDrawerViewModel.updateDragOffset(
-                            CGSize(
-                                width: max(0, translation),
-                                height: 0))
-                    }
-                }
-        }
-        .sheet(isPresented: $viewState.showJoinWebView) {
-            WebViewContainer(
-                url: URL(string: Constants.JoinNow.joinNowUrl)!,
-                title: Constants.JoinNow.joinNowTitle
-            )
-        }
-        .sheet(isPresented: $viewState.showBookClassWebView) {
-            WebViewContainer(
-                url: URL(string: Constants.JoinNow.passesUrl)!,
-                title: Constants.JoinNow.passesTitle
-            )
+            .sheet(isPresented: $viewState.showJoinWebView) {
+                WebViewContainer(
+                    url: URL(string: Constants.JoinNow.joinNowUrl)!,
+                    title: Constants.JoinNow.joinNowTitle
+                )
+            }
+            .sheet(isPresented: $viewState.showBookClassWebView) {
+                WebViewContainer(
+                    url: URL(string: Constants.JoinNow.passesUrl)!,
+                    title: Constants.JoinNow.passesTitle
+                )
+            }
         }
     }
+    
+    private func fetchRemoteConfig() {
+            RemoteConfigManager.shared.fetchRemoteValues { success in
+                if success {
+                    self.deathScreenEnabled = RemoteConfigManager.shared.getDeathScreenEnabled()
+                }
+            }
+        }
+    
     private var mainContent: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -322,3 +340,4 @@ struct HomeRainbowButton: View {
         .frame(height: 55)
     }
 }
+

@@ -13,7 +13,7 @@ class RemoteConfigManager {
 
     private init() {
         let settings = RemoteConfigSettings()
-        settings.minimumFetchInterval = 0
+        settings.minimumFetchInterval = 12 * 60 * 60
         remoteConfig.configSettings = settings
     }
 
@@ -36,4 +36,8 @@ class RemoteConfigManager {
     func getBoolValue(forKey key: String) -> Bool {
         return remoteConfig.configValue(forKey: key).boolValue
     }
+    
+    func getDeathScreenEnabled() -> Bool {
+            return getBoolValue(forKey: "death_screen_enabled")
+        }
 }
