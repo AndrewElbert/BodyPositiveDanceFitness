@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeViewState {
-    
+
     var isCarouselExpanded: Bool = false
     var showCarousel: Bool = false
     var animatedCarouselViewState: AnimatedCarouselViewState = AnimatedCarouselViewState(images: Constants.Home.images)

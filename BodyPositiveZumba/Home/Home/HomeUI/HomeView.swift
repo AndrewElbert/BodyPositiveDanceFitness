@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     enum Action {
         case viewClasses
         case about
@@ -21,7 +21,7 @@ struct HomeView: View {
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
     @State var deathScreenEnabled = true
-    
+
     enum DragState {
         case inactive
         case dragging(translation: CGFloat)
@@ -49,22 +49,21 @@ struct HomeView: View {
                 coordinator: coordinator
             )
         )
-        //fetchRemoteConfig()
+        // fetchRemoteConfig()
     }
-    
+
     var body: some View {
         if deathScreenEnabled {
             MaintenanceView()
-        }
-        else {
-            
+        } else {
+
             ZStack {
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 0) {
                             mainContent
                                 .id(Constants.Home.proxy)
-                            
+
                             if viewState.isCarouselExpanded {
                                 carouselSection
                                     .transition(.opacity)
@@ -72,7 +71,7 @@ struct HomeView: View {
                         }
                     }
                     .onAppear {
-                        
+
                         if viewState.isCarouselExpanded {
                             viewState.showCarousel = false
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -127,7 +126,7 @@ struct HomeView: View {
             }
         }
     }
-    
+
     private func fetchRemoteConfig() {
             RemoteConfigManager.shared.fetchRemoteValues { success in
                 if success {
@@ -135,7 +134,7 @@ struct HomeView: View {
                 }
             }
         }
-    
+
     private var mainContent: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -235,7 +234,7 @@ struct HomeView: View {
                 Text(Constants.Home.photosButton)
                     .font(.sfProDisplayRegular(size: 18))
                     .foregroundColor(.gray)
-                
+
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
@@ -246,7 +245,7 @@ struct HomeView: View {
         }
         .zIndex(1)
     }
-    
+
     private var carouselSection: some View {
         AnimatedCarouselComponent(
             viewModel: AnimatedCarouselViewModel(
@@ -340,4 +339,3 @@ struct HomeRainbowButton: View {
         .frame(height: 55)
     }
 }
-

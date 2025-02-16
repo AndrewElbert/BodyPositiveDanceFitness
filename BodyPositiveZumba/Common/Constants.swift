@@ -94,7 +94,7 @@ struct Constants {
         static let companyName: String = NSLocalizedString(
             "© Body Positive Dance Fitness LLC 2023",
             comment: "company name")
-        
+
         static let companyAddress: String = "1100 Brighton Avenue Pine Tree Shopping Center Portland, Maine"
         static let companyPhone: String = "207-536-4617"
         static let companyEmail: String = "dancing@bodypositivedancefitness.com"
@@ -256,7 +256,7 @@ struct Constants {
     // MARK: Home
 
     enum Home {
-        
+
         static let buttonImage: String = NSLocalizedString(
             "line.horizontal.3",
             comment: "system image name"
@@ -275,14 +275,14 @@ struct Constants {
         static let passesBio: String = "save money - purchase a pass!"
         static let tradeMarkSloganSize: CGFloat = 22
         static let proxy = "topContent"
-        
+
         static let images: [String] = [
             "Home1",
             "Home2",
             "Home3",
             "Home4",
             "Home5",
-            "Home6",
+            "Home6"
         ]
     }
 
@@ -295,11 +295,11 @@ struct Constants {
         static let joinNowTitle: String = "Join Us!"
         static let passesTitle: String = "View Passes"
     }
-    
+
     // MARK: Maintenance
-    
+
     enum Maintenance {
-        
+
         static let pageTitle: String = "Hang Tight!"
         static let pageBio: String = "Big things are happening behind the scenes at BodyPositiveDanceFitness!\nWe're working hard to bring you an even more amazing experience.\nThank you for your patience!"
         static let blockTitle: String = "In the meantime, you can:"

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClassesView: View, ActionableView {
-    
+
     enum Action {
         case toggleExpansion
         case handleViewAllButtonTap
