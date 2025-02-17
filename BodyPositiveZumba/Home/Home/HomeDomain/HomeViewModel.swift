@@ -19,7 +19,7 @@ class HomeViewModel: ObservableObject {
 
     init(homeCoordinator: HomeCoordinator) {
         self.homeCoordinator = homeCoordinator
-        
+
         updateGreeting()
         startGreetingTimer()
         fetchRemoteConfig()
@@ -81,7 +81,7 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func startNotifications() {
         NotificationManager.shared.scheduleAllNotifications()
     }

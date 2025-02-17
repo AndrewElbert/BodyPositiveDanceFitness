@@ -8,11 +8,11 @@
 import UserNotifications
 
 class NotificationManager {
-    
+
     static let shared = NotificationManager()
-    
+
     public init() {}
-    
+
     func requestPermissions() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if granted {
@@ -22,7 +22,7 @@ class NotificationManager {
             }
         }
     }
-    
+
     func verifyNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             print("Notification settings:")
@@ -32,37 +32,37 @@ class NotificationManager {
             print("Badge setting: \(settings.badgeSetting.rawValue)")
         }
     }
-    
+
     func scheduleWeeklySundayNotification() {
         let content = UNMutableNotificationContent()
         content.title = "New Week, New Moves! 💃🕺"
         content.body = "A new week means a new chance to dance! Check out our upcoming classes and let's keep moving together!!"
         content.sound = .defaultCritical
-        
+
         var dateComponents = DateComponents()
         dateComponents.weekday = 1
         dateComponents.hour = 17
         dateComponents.minute = 0
         dateComponents.timeZone = TimeZone(identifier: "America/New_York")
-        
+
         let trigger = UNCalendarNotificationTrigger(
             dateMatching: dateComponents,
             repeats: true
         )
-        
+
         let request = UNNotificationRequest(
             identifier: "weekly-sunday-reminder",
             content: content,
             trigger: trigger
         )
-        
+
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Error scheduling weekly notification: \(error.localizedDescription)")
             }
         }
     }
-    
+
     func scheduleTuesdayNightNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Turn Up Your Tuesday! 🎶"
@@ -92,7 +92,7 @@ class NotificationManager {
             }
         }
     }
-    
+
     func scheduleFridayEveningNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Feel-Good Friday! 🎊"
@@ -123,7 +123,6 @@ class NotificationManager {
         }
     }
 
-    
     func scheduleAllNotifications() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             self.scheduleWeeklySundayNotification()
