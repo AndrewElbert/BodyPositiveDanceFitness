@@ -1,6 +1,6 @@
 //
 //  TeamBioModel.swift
-//  AboutDomain
+//  About
 //
 //  Created by Andrew Elbert on 2/10/25.
 //

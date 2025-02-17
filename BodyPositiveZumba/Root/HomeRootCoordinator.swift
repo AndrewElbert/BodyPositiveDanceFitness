@@ -1,6 +1,6 @@
 //
 //  HomeRootCoordinator.swift
-//  BodyPositiveZumba
+//  Root
 //
 //  Created by Andrew Elbert on 2/8/25.
 //

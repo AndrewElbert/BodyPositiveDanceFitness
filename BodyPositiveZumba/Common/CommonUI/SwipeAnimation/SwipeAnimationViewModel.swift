@@ -1,6 +1,6 @@
 //
 //  SwipeAnimationViewModel.swift
-//  CommonUI
+//  Common
 //
 //  Created by Andrew Elbert on 2/1/25.
 //

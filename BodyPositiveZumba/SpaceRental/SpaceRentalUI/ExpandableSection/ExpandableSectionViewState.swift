@@ -1,6 +1,6 @@
 //
 //  ExpandableSectionViewState.swift
-//  SpaceRentalUI
+//  SpaceRental
 //
 //  Created by Andrew Elbert on 2/2/25.
 //

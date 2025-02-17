@@ -1,6 +1,6 @@
 //
 //  MassageUI.swift
-//  MassageDirector
+//  Massage
 //
 //  Created by Andrew Elbert on 2/1/25.
 //

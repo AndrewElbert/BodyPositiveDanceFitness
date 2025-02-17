@@ -1,6 +1,6 @@
 //
-//  Animation.swift
-//  BodyPositiveZumba
+//  AnimatedBulletPointView.swift
+//  Common
 //
 //  Created by Andrew Elbert on 2/2/25.
 //

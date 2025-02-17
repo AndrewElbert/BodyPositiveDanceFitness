@@ -1,6 +1,6 @@
 //
 //  FaqView.swift
-//  FaqUI
+//  Faq
 //
 //  Created by Andrew Elbert on 1/28/25.
 //

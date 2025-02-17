@@ -1,6 +1,6 @@
 //
 //  DanceClass.swift
-//  BodyPositiveZumba
+//  Classes
 //
 //  Created by Andrew Elbert on 2/6/25.
 //

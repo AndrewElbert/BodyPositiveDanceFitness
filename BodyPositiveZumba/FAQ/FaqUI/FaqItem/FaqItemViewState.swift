@@ -1,6 +1,6 @@
 //
 //  FaqItemViewState.swift
-//  BodyPositiveZumba
+//  Faq
 //
 //  Created by Andrew Elbert on 2/1/25.
 //

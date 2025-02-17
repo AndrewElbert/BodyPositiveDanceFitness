@@ -1,6 +1,6 @@
 //
 //  AllClassesViewModel.swift
-//  BodyPositiveZumba
+//  Classes
 //
 //  Created by Andrew Elbert on 2/12/25.
 //
