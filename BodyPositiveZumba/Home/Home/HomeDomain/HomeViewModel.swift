@@ -19,9 +19,11 @@ class HomeViewModel: ObservableObject {
 
     init(homeCoordinator: HomeCoordinator) {
         self.homeCoordinator = homeCoordinator
+        
         updateGreeting()
         startGreetingTimer()
         fetchRemoteConfig()
+        startNotifications()
 
         activeNotification = NotificationCenter.default
             .publisher(for: UIApplication.didBecomeActiveNotification)
@@ -64,7 +66,7 @@ class HomeViewModel: ObservableObject {
         }
     }
 
-    func fetchRemoteConfig() {
+    private func fetchRemoteConfig() {
         let now = Date()
         if let lastFetch = lastRemoteConfigFetchDate, now.timeIntervalSince(lastFetch) < 60 * 60 {
             return
@@ -78,6 +80,10 @@ class HomeViewModel: ObservableObject {
                 self.viewState.deathScreenEnabled = newValue
             }
         }
+    }
+    
+    private func startNotifications() {
+        NotificationManager.shared.scheduleAllNotifications()
     }
 
     deinit {

@@ -21,6 +21,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct BodyPositiveZumbaApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    init() {
+            NotificationManager.shared.requestPermissions()
+    }
 
     var body: some Scene {
         WindowGroup {
