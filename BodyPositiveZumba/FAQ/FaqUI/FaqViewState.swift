@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FaqViewState {
+    
     var expandedQuestions: Set<Int> = []
     var closingIndex: Int?
 
