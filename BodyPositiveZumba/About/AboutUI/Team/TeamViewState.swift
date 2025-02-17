@@ -1,6 +1,6 @@
 //
 //  TeamViewState.swift
-//  BodyPositiveZumba
+//  About
 //
 //  Created by Andrew Elbert on 2/9/25.
 //

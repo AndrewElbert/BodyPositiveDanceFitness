@@ -1,6 +1,6 @@
 //
 //  DanceClassCard.swift
-//  ClassesUI
+//  Classes
 //
 //  Created by Andrew Elbert on 2/6/25.
 //

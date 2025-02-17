@@ -1,6 +1,6 @@
 //
 //  AnimatedCarouselItemModel.swift
-//  Animated Carousel
+//  Common
 //
 //  Created by Andrew Elbert on 2/3/25.
 //

@@ -1,6 +1,6 @@
 //
 //  ClassesDirector.swift
-//  ClassesDirector
+//  Classes
 //
 //  Created by Andrew Elbert on 2/6/25.
 //

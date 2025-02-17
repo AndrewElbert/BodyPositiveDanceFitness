@@ -1,6 +1,6 @@
 //
 //  NotificationsManager.swift
-//  BodyPositiveZumba
+//  Notifications
 //
 //  Created by Andrew Elbert on 2/16/25.
 //

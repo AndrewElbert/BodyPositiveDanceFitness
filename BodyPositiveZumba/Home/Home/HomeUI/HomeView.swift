@@ -1,6 +1,6 @@
 //
 //  HomeView.swift
-//  HomeUI
+//  Home
 //
 //  Created by Andrew Elbert on 1/26/25.
 //

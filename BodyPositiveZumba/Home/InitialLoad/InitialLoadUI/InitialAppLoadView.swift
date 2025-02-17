@@ -1,6 +1,6 @@
 //
 //  InitialAppLoadView.swift
-//  InitialLoadUI
+//  Home
 //
 //  Created by Andrew Elbert on 1/26/25.
 //
@@ -46,7 +46,7 @@ struct InitialAppLoadView: View {
                     VStack {
                         ZStack(alignment: .leading) {
                             Capsule()
-                                .stroke(viewState.barOutlineColor, lineWidth: 6)
+                                .stroke(viewState.barOutlineColor, lineWidth: 5)
                                 .frame(height: 20)
 
                             Capsule()
