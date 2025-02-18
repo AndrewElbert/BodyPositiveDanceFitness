@@ -24,15 +24,9 @@ struct WhoAreWeView: View {
                         .foregroundColor(.clear)
                         .overlay(
                             LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.red,
-                                    Color.orange,
-                                    Color.yellow,
-                                    Color.green,
-                                    Color.blue,
-                                    Color.indigo,
-                                    Color.purple
-                                ]),
+                                gradient: Gradient(
+                                    colors: Constants.Colors.rainbow
+                                ),
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -44,7 +38,7 @@ struct WhoAreWeView: View {
                         )
 
                     Text(Constants.About.button1Content)
-                        .font(.sfProBodyTextRegular(size: 22))
+                        .font(.sfProBodyTextRegular(size: 20))
                         .multilineTextAlignment(.center)
                         .padding()
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 @MainActor
 final class AboutViewModel: ObservableObject {
+
     @Published var viewState: AboutViewState
     let aboutCoordinator: AboutCoordinator
 

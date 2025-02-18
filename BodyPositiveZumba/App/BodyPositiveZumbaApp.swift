@@ -6,21 +6,23 @@
 //
 
 import SwiftUI
-import FirebaseCore
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
-}
+// MARK: firebase implementation
+// import FirebaseCore
+//
+// class AppDelegate: NSObject, UIApplicationDelegate {
+//  func application(_ application: UIApplication,
+//                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+//    FirebaseApp.configure()
+//
+//    return true
+//  }
+// }
 
 @main
 struct BodyPositiveZumbaApp: App {
 
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    // @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     init() {
             NotificationManager.shared.requestPermissions()

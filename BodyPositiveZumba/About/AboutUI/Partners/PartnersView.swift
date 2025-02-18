@@ -18,13 +18,19 @@ struct PartnersView: View {
     }
 
     var body: some View {
+
         NavigationStack {
             VStack {
                 Text(Constants.Partners.pageTitle)
                     .font(.sfProDisplayBold(size: 40))
                     .foregroundColor(adaptiveTextColor)
                     .padding(.top, 26)
-                    .padding(.bottom, 30)
+                    .padding(.bottom, 11)
+                Text(Constants.Partners.pageBio)
+                    .font(.sfProBodyTextRegular(size: 16))
+                    .foregroundStyle(.gray)
+                    .italic()
+                    .padding(.bottom, 33)
 
                 SwipableCarouselComponent<AnyView, Partner>(
                     viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
@@ -34,7 +40,7 @@ struct PartnersView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(isCurrentCard ? Color.orange : Color.clear,
-                                            lineWidth: isCurrentCard ? 3 : 0)
+                                            lineWidth: isCurrentCard ? 5 : 0)
                             )
                     )
 

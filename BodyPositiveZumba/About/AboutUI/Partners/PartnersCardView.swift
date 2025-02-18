@@ -27,25 +27,27 @@ private extension PartnersCard {
         Image(partner.image)
             .resizable()
             .scaledToFit()
-            .frame(width: 260, height: 260)
+            .frame(width: 240, height: 240)
             .padding(.top, 20)
+            .shadow(
+                color: .orange.opacity(0.5),
+                radius: 10
+            )
     }
 
     var websiteButton: some View {
+
         Button(
             action: updateURL
         ) {
             Text(Constants.Partners.buttonText)
-                .font(.sfProRoundedTextSemibold(size: 20))
+                .font(.system(size: 22))
                 .foregroundColor(.orange)
-                .frame(width: 222, height: 44)
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.orange, lineWidth: 2)
-                )
+                .underline()
+                .padding(.horizontal, 8)
         }
-        .padding(.top, 35)
+        .cornerRadius(20)
+        .padding(.top, 40)
         .padding(.bottom, 15)
     }
 

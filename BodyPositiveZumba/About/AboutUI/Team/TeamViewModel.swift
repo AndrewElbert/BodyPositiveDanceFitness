@@ -10,7 +10,6 @@ import SwiftUI
 @MainActor
 class TeamViewModel: ObservableObject {
 
-    @Published var currentIndex: Int = 0
     @Published var viewState: TeamViewState = TeamViewState()
 
     var currentBioData: TeamBioModel {

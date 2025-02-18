@@ -73,7 +73,7 @@ private extension TeamView {
     }
 
     var headerSection: some View {
-        Text("Meet The Team!")
+        Text(Constants.Team.teamPageTitle)
             .font(.sfProDisplayBold(size: 34))
             .multilineTextAlignment(.center)
             .foregroundColor(adaptiveTextColor)
