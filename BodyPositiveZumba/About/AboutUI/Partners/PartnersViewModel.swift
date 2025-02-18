@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class PartnersViewModel: ObservableObject {
 
     @Published var viewState: PartnersViewState = PartnersViewState()

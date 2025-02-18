@@ -17,17 +17,9 @@ struct AboutView: View, ActionableView {
         case handleWhatWeDoTap
     }
 
-    @Binding private var viewState: AboutViewState
+    @Binding var viewState: AboutViewState
     @Environment(\.dismiss) private var dismiss
     var onAction: ((Action) -> Void)?
-
-    init(
-        viewState: Binding<AboutViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
-    }
 
     var body: some View {
 
@@ -55,19 +47,16 @@ struct AboutView: View, ActionableView {
         ScrollView {
             VStack(spacing: 22) {
                 headerTitle
-                extraButtonSection
-                buttonSection
+                rainbowButtonSection
+                cyanButtonSection
             }
             .padding()
         }
-        .scrollContentBackground(.hidden)
-        .background(Color.white) // Ensure white background for scroll view
     }
-
-    // Rest of the code remains the same...
+    
     private var headerTitle: some View {
         VStack(spacing: 0) {
-            Text("About ")
+            Text(Constants.About.pageHeader)
                 .font(.sfProDisplayBold(size: 22))
                 .foregroundColor(.black)
                 .italic()
@@ -81,7 +70,8 @@ struct AboutView: View, ActionableView {
         .padding(.bottom, 16)
     }
 
-    private var extraButtonSection: some View {
+    private var rainbowButtonSection: some View {
+        
         VStack(spacing: 20) {
             RainbowButton(title: Constants.About.whoPageTitle) {
                 onAction?(.handleWhoAreWeTap)
@@ -92,23 +82,25 @@ struct AboutView: View, ActionableView {
         }
     }
 
-    private var buttonSection: some View {
+    private var cyanButtonSection: some View {
+        
         ForEach(Array(viewState.sections)) { section in
-            ActionButton(section: section) { section in
+            cyanButton(section: section) { section in
                 handleButtonTap(section)
             }
         }
     }
 
     private func handleButtonTap(_ section: AboutMainSectionModel) {
+        
         switch section.identifier {
-        case "team":
+        case Constants.About.actionButton1:
             onAction?(.handleTeamButtonTap)
-        case "classes":
+        case Constants.About.actionButton2:
             onAction?(.handleClassesButtonTap)
-        case "partners":
+        case Constants.About.actionButton3:
             onAction?(.handlePartnersButtonTap)
-        case "media":
+        case Constants.About.actionButton4:
             viewState.mediaUrl = WebViewURL(
                 title: Constants.About.mediaTitle,
                 url: URL(string: Constants.About.mediaURL)!
@@ -149,7 +141,8 @@ struct RainbowButton: View {
     }
 }
 
-struct ActionButton: View {
+struct cyanButton: View {
+    
     let section: AboutMainSectionModel
     let onTap: (AboutMainSectionModel) -> Void
 

@@ -24,7 +24,7 @@ struct AboutUI {
         )
     }
 
-    static func partnersPage() -> some View {
+    @MainActor static func partnersPage() -> some View {
         PartnersScreen(
             viewModel: PartnersViewModel()
         )

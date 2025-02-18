@@ -15,16 +15,22 @@ struct Constants {
 
     enum About {
 
+        static let pageHeader: String = "About "
         static let pageTitle: String = "Body Positive Dance Fitness"
         static let pageBio: String = "The happiest workout in Maine™!"
         static let button1Title: String = "Who are we?"
         static let button2Title: String = "What do we do?"
-        static let button1Content: String = "We offer classes every day, multiple times per day, so that students can enjoy classes that fit their schedules and exercise routines.\n\nOf course it's not just our instructors and our class types that make Body Positive so special...  \n\nWhat truly distinguishes Body Positive is our physical space. This studio is a community hub for participants all over Maine and New England who have a place to call their own, where their style of exercise and community spirit is the central focus of the location."
-        static let button2Content: String = "At Body Positive Dance Fitness, we unite students from all over with the highest quality teachers in the Greater Portland area. Each of our instructors has a unique style that resonates with a variety of students at different fitness levels.\n\nOur dance fitness classes vary in style. Our core offering, Zumba, is the world's largest dance fitness format, with over five million daily participants. It blends instructor creativity with Latin dance, ensuring no two classes are alike while teaching fundamental steps and rhythms. We also offer formats like SHiNE (ballet, hip hop, pop), HotFlash (70s, 80s, 90s music), and others ranging from basic fitness moves to full choreography. \n\nAt BPDF, all body types and levels of experience and ability are welcome — we are here to have fun!"
+        static let button1Content: String = "At Body Positive Dance Fitness, everyone is welcome - dance experience or a self-concept of being 'coordinated' not required. We're here to celebrate you for who you are - right now! Our goal is to have fun - together - and our only expectation is that everyone is treated with kindness, dignity and respect. \n\nWe offer classes every day, multiple times per day, so that students can enjoy classes that fit their schedules and exercise routines.\n\nOf course it's not just our instructors and our class types that make Body Positive so special...  \n\nWhat truly distinguishes Body Positive is our physical space. This studio is a community hub for participants all over Maine and New England who have a place to call their own, where their style of exercise and community spirit is the central focus of the location."
+        static let button2Content: String = " At Body Positive Dance Fitness, students of all levels revel in the experience of dancing to great music among a welcoming community that shares a joy for dancing as a way to exercise. Unlike other workouts, dance fitness is a cardiovascular workout that is distinct because it’s actually fun! The experience of dancing together unites people in a social context unlike any typical gym experience. \n\nAt BPDF, all body types and levels of experience and ability are welcome — we are here to have fun, not to train professional dancers. Students have a home base where they can exercise on their schedules at the times that work for them.  Our students even have the flexibility to attend multiple classes a day without disrupting their competing priorities.At Body Positive Dance Fitness, we unite students from all over with the highest quality teachers in the Greater Portland area. Each of our instructors has a unique style that resonates with a variety of students at different fitness levels.\n\nOur dance fitness class styles vary as well. Our core offering is Zumba, the largest most successful dance fitness format in the world with over five million participants a day. Zumba’s format allows instructors freedom and creativity to choreograph songs of their choice generally using Latin dance formats as a base. As a result, no two Zumba classes or instructors are alike, except that participants all learn the basic steps, moves and rhythms. We offer other formats as well – some based in ballet, hip hop and pop (such as SHiNE), others based in music from the 70s, 80s and 90s (such as HotFlash) and still others varying in complexity from basic fitness moves to fully developed choreography. \n\nAt BPDF, all body types and levels of experience and ability are welcome — we are here to have fun!"
         static let mediaTitle: String = "Media!"
         static let mediaURL: String = "https://www.bodypositivedancefitness.com/media-news"
         static let whatPageTitle: String = "What Do We Do?"
         static let whoPageTitle: String = "Who Are We?"
+        
+        static let actionButton1: String = "team"
+        static let actionButton2: String = "classes"
+        static let actionButton3: String = "partners"
+        static let actionButton4: String = "media"
 
     }
 
@@ -354,6 +360,7 @@ struct Constants {
 
         static let pageTitle: String = "Partners"
         static let buttonText: String = "Visit Website"
+        static let pageBio: String = "Explore our amazing partners below!"
     }
 
     // MARK: SideDrawer
@@ -506,6 +513,8 @@ struct Constants {
     }
 
     enum Team {
+        
+        static let teamPageTitle: String = "Meet The Team!"
 
         // Carson Burnham
         static let CarsonBurnhamImage: String = "CarsonBurnhamHeadShot"
