@@ -14,21 +14,13 @@ struct ClassesView: View, ActionableView {
         case handleViewAllButtonTap
     }
 
+    @Binding var viewState: ClassesViewState
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
-    @Binding var viewState: ClassesViewState
 
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-    }
-
-    public init(
-        viewState: Binding<ClassesViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
     }
 
     var body: some View {
@@ -66,25 +58,15 @@ struct ClassesView: View, ActionableView {
 private extension ClassesView {
 
     private struct RainbowButton: View {
+
         let title: String
         let action: () -> Void
-        let font: Font
         @Environment(\.colorScheme) private var colorScheme
-
-        init(
-            title: String,
-            font: Font = .sfProRoundedTextMedium(size: 24),
-            action: @escaping () -> Void
-        ) {
-            self.title = title
-            self.font = font
-            self.action = action
-        }
 
         var body: some View {
             Button(action: action) {
                 Text(title)
-                    .font(font)
+                    .font(.sfProRoundedTextMedium(size: 24))
                     .foregroundColor(.black)
                     .padding(.horizontal, 50)
                     .padding(.vertical, 11)
@@ -109,6 +91,7 @@ private extension ClassesView {
     }
 
     var headerSection: some View {
+
         VStack(spacing: 0) {
             Text(Constants.Classes.pageTitle)
                 .font(.sfProDisplayBold(size: 40))
@@ -141,6 +124,7 @@ private extension ClassesView {
     }
 
     var carouselSection: some View {
+
         SwipableCarouselComponent<AnyView, DanceClass>(
             viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
         ) { danceClass, isCurrentCard in
@@ -160,6 +144,7 @@ private extension ClassesView {
     }
 
     var expansionToggleButton: some View {
+
         Button(action: toggleExpansion) {
             HStack(spacing: 4) {
                 Text(toggleButtonText)
@@ -173,6 +158,7 @@ private extension ClassesView {
     }
 
     var bioText: some View {
+
         Text(viewState.currentDanceClass.description)
             .font(.sfProBodyTextRegular(size: 18))
             .foregroundColor(adaptiveTextColor)
@@ -181,6 +167,7 @@ private extension ClassesView {
     }
 
     var buttonsSection: some View {
+
         VStack(spacing: 16) {
             RainbowButton(
                 title: Constants.Classes.viewAllButtonText,
@@ -196,6 +183,7 @@ private extension ClassesView {
     }
 
     var swipeAnimationOverlay: some View {
+
         Group {
             if viewState.showSwipeAnimation {
                 SwipeAnimationComponent(
@@ -215,23 +203,27 @@ private extension ClassesView {
     }
 
     var toggleButtonText: String {
+
         viewState.isBioExpanded ?
         Constants.Classes.closeButtonText :
         "\(Constants.Classes.openButtonText)\(viewState.currentDanceClass.rawValue)!"
     }
 
     func toggleExpansion() {
+
         withAnimation(.easeInOut) {
             onAction?(.toggleExpansion)
         }
     }
 
     func openViewAllClasses() {
+
         viewState.showSwipeAnimation = false
         onAction?(.handleViewAllButtonTap)
     }
 
     func openCalendar() {
+
         viewState.showSwipeAnimation = false
         guard let url = URL(string: Constants.Classes.viewCalendarUrl) else { return }
         viewState.viewCalendarWebView = WebViewURL(
@@ -241,6 +233,7 @@ private extension ClassesView {
     }
 
     func dismissSwipeAnimationAfterDelay() {
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
@@ -248,6 +241,7 @@ private extension ClassesView {
 }
 
 struct PressableButton: ButtonStyle {
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)

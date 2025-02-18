@@ -17,14 +17,15 @@ struct ClassesScreen: View {
 
     var body: some View {
         ClassesView(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .toggleExpansion:
-                viewModel.toggleExpansion()
-            case .handleViewAllButtonTap:
-                viewModel.navigateToViewAll()
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .toggleExpansion:
+                    viewModel.toggleExpansion()
+                case .handleViewAllButtonTap:
+                    viewModel.navigateToViewAll()
+                }
             }
-        }
+        )
     }
 }

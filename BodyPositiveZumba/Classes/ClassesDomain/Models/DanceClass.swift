@@ -23,9 +23,12 @@ enum DanceClass: String, CaseIterable, Identifiable {
     case shineDance = "SHiNE Dance Fitness™"
     case zumbaGold = "Zumba Gold®"
 
-    var id: String { self.rawValue }
+    var id: String {
+        self.rawValue
+    }
 
     var color: Color {
+
         switch self {
         case .zumba: return Color(red: 1.0, green: 0.1, blue: 0.1)
         case .zumbaGold: return Color(red: 0.85, green: 0.65, blue: 0.13)
@@ -43,6 +46,7 @@ enum DanceClass: String, CaseIterable, Identifiable {
     }
 
     var description: String {
+
         switch self {
         case .zumba:
             return "Zumba® brings people together through group exercise classes that blend rhythmic Latin music with high-intensity cardio dance moves to make getting in shape more fun than ever. Get a full-body workout while forgetting you're even exercising by joining the Zumba® dance party!"
