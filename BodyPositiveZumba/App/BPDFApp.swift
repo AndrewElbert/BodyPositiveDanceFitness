@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: firebase implementation
+// MARK: firebase implementation, temporarily removed
 // import FirebaseCore
 //
 // class AppDelegate: NSObject, UIApplicationDelegate {
@@ -20,17 +20,18 @@ import SwiftUI
 // }
 
 @main
-struct BodyPositiveZumbaApp: App {
+struct BPDFApp: App {
 
+    // MARK: firebase implementation, temporarily removed
     // @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     init() {
-            NotificationManager.shared.requestPermissions()
+        NotificationManager.shared.requestPermissions()
     }
 
     var body: some Scene {
         WindowGroup {
-            InitialLoadRootCoordinatorView()
+            AppRootCoordinatorView()
         }
     }
 }
