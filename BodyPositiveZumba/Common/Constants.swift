@@ -26,7 +26,7 @@ struct Constants {
         static let mediaURL: String = "https://www.bodypositivedancefitness.com/media-news"
         static let whatPageTitle: String = "What Do We Do?"
         static let whoPageTitle: String = "Who Are We?"
-        
+
         static let actionButton1: String = "team"
         static let actionButton2: String = "classes"
         static let actionButton3: String = "partners"
@@ -513,7 +513,7 @@ struct Constants {
     }
 
     enum Team {
-        
+
         static let teamPageTitle: String = "Meet The Team!"
 
         // Carson Burnham

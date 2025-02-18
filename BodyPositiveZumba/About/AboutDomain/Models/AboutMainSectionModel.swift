@@ -8,7 +8,7 @@
 import Foundation
 
 struct AboutMainSectionModel: Equatable, Identifiable {
-    
+
     let id = UUID()
     let title: String
     let identifier: String

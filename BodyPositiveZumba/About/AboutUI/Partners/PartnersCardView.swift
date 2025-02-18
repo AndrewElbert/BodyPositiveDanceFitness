@@ -36,7 +36,7 @@ private extension PartnersCard {
     }
 
     var websiteButton: some View {
-        
+
         Button(
             action: updateURL
         ) {

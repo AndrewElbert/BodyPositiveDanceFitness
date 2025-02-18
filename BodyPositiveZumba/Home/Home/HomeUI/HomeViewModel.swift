@@ -23,9 +23,9 @@ class HomeViewModel: ObservableObject {
         updateGreeting()
         startGreetingTimer()
         startNotifications()
-        
+
         // MARK: Firebase Implementation
-        
+
 //        fetchRemoteConfig()
 //        activeNotification = NotificationCenter.default
 //            .publisher(for: UIApplication.didBecomeActiveNotification)
@@ -67,7 +67,7 @@ class HomeViewModel: ObservableObject {
             viewState.currentGreeting = "Good Evening!"
         }
     }
-    
+
     private func startNotifications() {
         NotificationManager.shared.scheduleAllNotifications()
     }
@@ -78,7 +78,7 @@ class HomeViewModel: ObservableObject {
     }
 
     // MARK: Firebase implementation
-    
+
 //    private func fetchRemoteConfig() {
 //        let now = Date()
 //        if let lastFetch = lastRemoteConfigFetchDate, now.timeIntervalSince(lastFetch) < 60 * 60 {

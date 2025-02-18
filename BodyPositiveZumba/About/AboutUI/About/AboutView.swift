@@ -53,7 +53,7 @@ struct AboutView: View, ActionableView {
             .padding()
         }
     }
-    
+
     private var headerTitle: some View {
         VStack(spacing: 0) {
             Text(Constants.About.pageHeader)
@@ -71,7 +71,7 @@ struct AboutView: View, ActionableView {
     }
 
     private var rainbowButtonSection: some View {
-        
+
         VStack(spacing: 20) {
             RainbowButton(title: Constants.About.whoPageTitle) {
                 onAction?(.handleWhoAreWeTap)
@@ -83,7 +83,7 @@ struct AboutView: View, ActionableView {
     }
 
     private var cyanButtonSection: some View {
-        
+
         ForEach(Array(viewState.sections)) { section in
             cyanButton(section: section) { section in
                 handleButtonTap(section)
@@ -92,7 +92,7 @@ struct AboutView: View, ActionableView {
     }
 
     private func handleButtonTap(_ section: AboutMainSectionModel) {
-        
+
         switch section.identifier {
         case Constants.About.actionButton1:
             onAction?(.handleTeamButtonTap)
@@ -142,7 +142,7 @@ struct RainbowButton: View {
 }
 
 struct cyanButton: View {
-    
+
     let section: AboutMainSectionModel
     let onTap: (AboutMainSectionModel) -> Void
 

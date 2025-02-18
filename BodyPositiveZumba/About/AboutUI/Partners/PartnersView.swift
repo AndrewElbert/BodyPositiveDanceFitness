@@ -18,7 +18,7 @@ struct PartnersView: View {
     }
 
     var body: some View {
-        
+
         NavigationStack {
             VStack {
                 Text(Constants.Partners.pageTitle)

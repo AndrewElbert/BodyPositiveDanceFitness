@@ -5,12 +5,11 @@
 //  Created by Andrew Elbert on 2/15/25.
 //
 
-
 // MARK: Firebase Implementation
 
-//import FirebaseRemoteConfig
+// import FirebaseRemoteConfig
 //
-//class RemoteConfigManager {
+// class RemoteConfigManager {
 //    static let shared = RemoteConfigManager()
 //    private let remoteConfig = RemoteConfig.remoteConfig()
 //
@@ -62,4 +61,4 @@
 //        let value = getBoolValue(forKey: "death_screen_enabled")
 //        return value
 //    }
-//}
+// }
