@@ -22,14 +22,16 @@ class HomeViewModel: ObservableObject {
 
         updateGreeting()
         startGreetingTimer()
-        fetchRemoteConfig()
         startNotifications()
-
-        activeNotification = NotificationCenter.default
-            .publisher(for: UIApplication.didBecomeActiveNotification)
-            .sink { [weak self] _ in
-                self?.fetchRemoteConfig()
-            }
+        
+        // MARK: Firebase Implementation
+        
+//        fetchRemoteConfig()
+//        activeNotification = NotificationCenter.default
+//            .publisher(for: UIApplication.didBecomeActiveNotification)
+//            .sink { [weak self] _ in
+//                self?.fetchRemoteConfig()
+//            }
     }
 
     func navigateAbout() {
@@ -65,23 +67,7 @@ class HomeViewModel: ObservableObject {
             viewState.currentGreeting = "Good Evening!"
         }
     }
-
-    private func fetchRemoteConfig() {
-        let now = Date()
-        if let lastFetch = lastRemoteConfigFetchDate, now.timeIntervalSince(lastFetch) < 60 * 60 {
-            return
-        }
-
-        lastRemoteConfigFetchDate = now
-
-        RemoteConfigManager.shared.fetchRemoteValues { _ in
-            DispatchQueue.main.async {
-                let newValue = RemoteConfigManager.shared.getDeathScreenEnabled()
-                self.viewState.deathScreenEnabled = newValue
-            }
-        }
-    }
-
+    
     private func startNotifications() {
         NotificationManager.shared.scheduleAllNotifications()
     }
@@ -90,4 +76,22 @@ class HomeViewModel: ObservableObject {
         timerCancellable?.cancel()
         activeNotification?.cancel()
     }
+
+    // MARK: Firebase implementation
+    
+//    private func fetchRemoteConfig() {
+//        let now = Date()
+//        if let lastFetch = lastRemoteConfigFetchDate, now.timeIntervalSince(lastFetch) < 60 * 60 {
+//            return
+//        }
+//
+//        lastRemoteConfigFetchDate = now
+//
+//        RemoteConfigManager.shared.fetchRemoteValues { _ in
+//            DispatchQueue.main.async {
+//                let newValue = RemoteConfigManager.shared.getDeathScreenEnabled()
+//                self.viewState.deathScreenEnabled = newValue
+//            }
+//        }
+//    }
 }
