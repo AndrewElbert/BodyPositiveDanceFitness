@@ -34,7 +34,7 @@ struct HomeView: View {
 
     var onAction: ((Action) -> Void)?
 
-    public init(
+    init(
         coordinator: SideDrawerCoordinator,
         viewState: Binding<HomeViewState>,
         onAction: ((Action) -> Void)? = nil
@@ -51,6 +51,7 @@ struct HomeView: View {
     }
 
     var body: some View {
+        
         if viewState.deathScreenEnabled {
             MaintenanceView()
         } else {
@@ -60,6 +61,7 @@ struct HomeView: View {
                         VStack(spacing: 0) {
                             mainContent
                                 .id(Constants.Home.proxy)
+                            
                             if viewState.isCarouselExpanded {
                                 carouselSection
                                     .transition(.opacity)
@@ -67,34 +69,16 @@ struct HomeView: View {
                         }
                     }
                     .onChange(of: viewState.isCarouselExpanded) { _, newValue in
-                        if newValue {
-                            viewState.showCarousel = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                withAnimation(.easeIn(duration: 1.11)) {
-                                    viewState.showCarousel = true
-                                }
-                            }
-                        } else {
-                            withAnimation(.easeOut(duration: 0.3)) {
-                                viewState.showCarousel = false
-                            }
-                            withAnimation(.spring(duration: 1.1)) {
-                                proxy.scrollTo(Constants.Home.proxy, anchor: .top)
-                            }
-                        }
+                        handleCarouselExpansionChange(newValue, proxy: proxy)
                     }
                     .onDisappear {
-                        viewState.showCarousel = false
+                        resetCarouselState()
                     }
                 }
+                
                 SideDrawerComponent(viewModel: sideDrawerViewModel)
                     .onChange(of: dragState.translation) { _, translation in
-                        if !sideDrawerViewModel.viewState.isMenuOpen {
-                            sideDrawerViewModel.updateDragOffset(
-                                CGSize(
-                                    width: max(0, translation),
-                                    height: 0))
-                        }
+                        handleSideDrawerDrag(translation)
                     }
             }
             .sheet(isPresented: $viewState.showJoinWebView) {
@@ -247,6 +231,38 @@ struct HomeView: View {
                 let threshold = Constants.SideDrawer.frameWidth * 0.3
                 if value.translation.width > threshold { sideDrawerViewModel.openMenu() }
             }
+    }
+    
+    private func handleCarouselExpansionChange(_ isExpanded: Bool, proxy: ScrollViewProxy) {
+        if isExpanded {
+            viewState.showCarousel = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.easeIn(duration: 1.11)) {
+                    viewState.showCarousel = true
+                }
+            }
+        } else {
+            collapseCarousel(proxy: proxy)
+        }
+    }
+
+    private func collapseCarousel(proxy: ScrollViewProxy) {
+        withAnimation(.easeOut(duration: 0.3)) {
+            viewState.showCarousel = false
+        }
+        withAnimation(.spring(duration: 1.1)) {
+            proxy.scrollTo(Constants.Home.proxy, anchor: .top)
+        }
+    }
+
+    private func resetCarouselState() {
+        viewState.showCarousel = false
+    }
+
+    private func handleSideDrawerDrag(_ translation: CGFloat) {
+        if !sideDrawerViewModel.viewState.isMenuOpen {
+            sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
+        }
     }
 }
 

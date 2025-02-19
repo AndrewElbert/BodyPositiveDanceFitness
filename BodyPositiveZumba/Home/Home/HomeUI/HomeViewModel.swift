@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class HomeViewModel: ObservableObject {
 
     private let homeCoordinator: HomeCoordinator
