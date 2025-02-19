@@ -19,14 +19,15 @@
 
     var body: some View {
         FaqItem(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .toggleExpanded:
-                viewModel.toggleExpanded()
-            case .handleClosingState:
-                viewModel.handleClosingState()
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .toggleExpanded:
+                    viewModel.toggleExpanded()
+                case .handleClosingState:
+                    viewModel.handleClosingState()
+                }
             }
-        }
+        )
     }
  }

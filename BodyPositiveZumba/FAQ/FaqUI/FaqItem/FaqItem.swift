@@ -8,35 +8,45 @@
 import SwiftUI
 
 struct FaqItem: View {
-
+    
     enum Action {
         case toggleExpanded
         case handleClosingState
     }
 
-    var onAction: ((Action) -> Void)?
     @Binding var viewState: FaqItemViewState
+    var onAction: ((Action) -> Void)?
     @Environment(\.colorScheme) private var colorScheme
 
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
-    public init(
-        viewState: Binding<FaqItemViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
+    private var borderColor: Color {
+        viewState.isExpanded ? Color.orange : Constants.Colors.neonCyan
+    }
+
+    private var backgroundView: some View {
+        ZStack {
+            Color(.white)
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Constants.Colors.neonCyan.opacity(0.1),
+                    Constants.Colors.neonCyan.opacity(0.3)
+                ]),
+                center: .center,
+                startRadius: 22,
+                endRadius: 122
+            )
+        }
+        .cornerRadius(10)
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            Button(
-                action: {
-                    onAction?(.toggleExpanded)
-                }
-            ) {
+            Button {
+                onAction?(.toggleExpanded)
+            } label: {
                 HStack {
                     Text(viewState.question)
                         .font(.sfProRoundedTextRegular(size: 18))
@@ -52,26 +62,9 @@ struct FaqItem: View {
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(
-                            viewState.isExpanded ? Color.orange : Constants.Colors.neonCyan,
-                            lineWidth: 2
-                        )
+                        .stroke(borderColor, lineWidth: 2)
                 )
-                .background(
-                    ZStack {
-                        Color(.white)
-                        RadialGradient(
-                            gradient: Gradient(colors: [
-                                Constants.Colors.neonCyan.opacity(0.1),
-                                Constants.Colors.neonCyan.opacity(0.3)
-                            ]),
-                            center: .center,
-                            startRadius: 22,
-                            endRadius: 122
-                        )
-                    }
-                    .cornerRadius(10)
-                )
+                .background(backgroundView)
             }
 
             ZStack {
@@ -96,3 +89,4 @@ struct FaqItem: View {
         }
     }
 }
+
