@@ -51,7 +51,7 @@ struct HomeView: View {
     }
 
     var body: some View {
-        
+
         if viewState.deathScreenEnabled {
             MaintenanceView()
         } else {
@@ -61,7 +61,7 @@ struct HomeView: View {
                         VStack(spacing: 0) {
                             mainContent
                                 .id(Constants.Home.proxy)
-                            
+
                             if viewState.isCarouselExpanded {
                                 carouselSection
                                     .transition(.opacity)
@@ -75,7 +75,7 @@ struct HomeView: View {
                         resetCarouselState()
                     }
                 }
-                
+
                 SideDrawerComponent(viewModel: sideDrawerViewModel)
                     .onChange(of: dragState.translation) { _, translation in
                         handleSideDrawerDrag(translation)
@@ -232,7 +232,7 @@ struct HomeView: View {
                 if value.translation.width > threshold { sideDrawerViewModel.openMenu() }
             }
     }
-    
+
     private func handleCarouselExpansionChange(_ isExpanded: Bool, proxy: ScrollViewProxy) {
         if isExpanded {
             viewState.showCarousel = false

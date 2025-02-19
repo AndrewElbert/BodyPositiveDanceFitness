@@ -11,9 +11,10 @@ class NotificationManager {
 
     static let shared = NotificationManager()
 
-    public init() {}
+    public init() { }
 
     func requestPermissions() {
+
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if granted {
                 print("Notification permissions granted")
@@ -23,7 +24,9 @@ class NotificationManager {
         }
     }
 
+    // for debug purposes just in case
     func verifyNotificationSettings() {
+
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             print("Notification settings:")
             print("Authorization status: \(settings.authorizationStatus.rawValue)")
@@ -34,6 +37,7 @@ class NotificationManager {
     }
 
     func scheduleWeeklySundayNotification() {
+
         let content = UNMutableNotificationContent()
         content.title = "New Week, New Moves! 💃🕺"
         content.body = "A new week means a new chance to dance! Check out our upcoming classes and let's keep moving together!!"
@@ -64,6 +68,7 @@ class NotificationManager {
     }
 
     func scheduleTuesdayNightNotification() {
+
         let content = UNMutableNotificationContent()
         content.title = "Turn Up Your Tuesday! 🎶"
         content.body = "Long week? Shake off the stress and spice up your night with a class you’ll love! 💃🔥"
@@ -94,6 +99,7 @@ class NotificationManager {
     }
 
     func scheduleFridayEveningNotification() {
+
         let content = UNMutableNotificationContent()
         content.title = "Feel-Good Friday! 🎊"
         content.body = "Kick off the weekend with some moves! 🎶 Come celebrate the end of the week — let’s dance! 💃✨"
@@ -124,7 +130,9 @@ class NotificationManager {
     }
 
     func scheduleAllNotifications() {
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.verifyNotificationSettings()
             self.scheduleWeeklySundayNotification()
             self.scheduleTuesdayNightNotification()
             self.scheduleFridayEveningNotification()

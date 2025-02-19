@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct FaqItem: View {
-    
+
     enum Action {
         case toggleExpanded
         case handleClosingState
     }
-    
+
     @Binding var viewState: FaqItemViewState
     var onAction: ((Action) -> Void)?
     @Environment(\.colorScheme) private var colorScheme
-    
+
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
-    
+
     private var borderColor: Color {
         viewState.isExpanded ? Color.orange : Constants.Colors.neonCyan
     }
-    
+
     private var backgroundView: some View {
-        
+
         ZStack {
             Color(.white)
             RadialGradient(
@@ -42,17 +42,17 @@ struct FaqItem: View {
         }
         .cornerRadius(10)
     }
-    
+
     var body: some View {
-        
+
         VStack(alignment: .leading) {
             buttonSection
             answerSection
         }
     }
-    
+
     private var buttonSection: some View {
-        
+
         Button {
             onAction?(.toggleExpanded)
         } label: {
@@ -62,9 +62,9 @@ struct FaqItem: View {
                     .foregroundColor(viewState.isExpanded ? Constants.Colors.darkOrange : .black)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
-                
+
                 Spacer()
-                
+
                 Image(systemName: Constants.FAQ.chevron)
                     .rotationEffect(.degrees(viewState.isExpanded ? 180 : 0))
                     .animation(.none, value: viewState.isExpanded)
@@ -78,9 +78,9 @@ struct FaqItem: View {
             )
         }
     }
-    
+
     private var answerSection: some View {
-        
+
         ZStack {
             if viewState.isExpanded || viewState.isClosing {
                 Text(viewState.answer)

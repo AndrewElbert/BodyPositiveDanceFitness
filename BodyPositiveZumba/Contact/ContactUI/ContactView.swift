@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContactView: View, ActionableView {
-    
+
     enum Action {
         case handleAction(
             action: String,

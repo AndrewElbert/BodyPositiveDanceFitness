@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct InitialAppLoadView: View {
+
     enum Action {
         case navigateHomeScreen
         case startLoading
         case startAnimations
     }
-    
+
     @Binding var viewState: InitialAppLoadViewState
     var onAction: ((Action) -> Void)?
-    
+
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-            
+
             if viewState.showHomeScreen {
                 Color.clear.onAppear { onAction?(.navigateHomeScreen) }
             } else {
@@ -28,7 +29,7 @@ struct InitialAppLoadView: View {
             }
         }
     }
-    
+
     private var content: some View {
         VStack {
             logo
@@ -36,7 +37,7 @@ struct InitialAppLoadView: View {
                 .onAppear { onAction?(.startLoading) }
         }
     }
-    
+
     private var logo: some View {
         Image(Constants.Common.logoName)
             .resizable()
@@ -45,14 +46,14 @@ struct InitialAppLoadView: View {
             .scaleEffect(0.9)
             .padding(.top, 50)
     }
-    
+
     private var progressBar: some View {
         VStack {
             ZStack(alignment: .leading) {
                 Capsule()
                     .stroke(viewState.barOutlineColor, lineWidth: 6)
                     .frame(height: 20)
-                
+
                 Capsule()
                     .fill(
                         LinearGradient(
@@ -65,7 +66,7 @@ struct InitialAppLoadView: View {
                     .animation(.linear(duration: viewState.barLoadDuration), value: viewState.progress)
             }
             .frame(width: UIScreen.main.bounds.width * 0.8)
-            
+
             Text(Constants.Common.tradeMarkSlogan)
                 .font(.sfProRoundedTextBold(size: Constants.Home.tradeMarkSloganSize))
                 .multilineTextAlignment(.center)
@@ -80,4 +81,3 @@ struct InitialAppLoadView: View {
         }
     }
 }
-

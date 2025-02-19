@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FaqUI {
-    
+
     @MainActor static func faqPage(
     ) -> some View {
         FaqScreen(

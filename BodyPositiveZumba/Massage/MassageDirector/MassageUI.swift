@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MassageUI {
+
     @MainActor static func massagePage(
     ) -> some View {
         MassageScreen(
