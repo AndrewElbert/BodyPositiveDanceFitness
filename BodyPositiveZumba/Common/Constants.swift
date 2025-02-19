@@ -111,6 +111,9 @@ struct Constants {
 
     enum Contact {
 
+        static let pageTitle: String = "Please Reach Out\nAnytime!"
+        static let pageBio: String = "We're here to help and listen"
+
         static let contactRows: [ContactRowData] = [
 
             ContactRowData(

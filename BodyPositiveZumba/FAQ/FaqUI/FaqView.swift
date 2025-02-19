@@ -15,7 +15,7 @@ struct FaqView: View, ActionableView {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
-    @Binding private var viewState: FaqViewState
+    @Binding var viewState: FaqViewState
     var onAction: ((Action) -> Void)?
 
     private let titleStyle = Font.sfProDisplayBold(size: 24)
@@ -23,14 +23,6 @@ struct FaqView: View, ActionableView {
 
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-    }
-
-    public init(
-        viewState: Binding<FaqViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
     }
 
     var body: some View {

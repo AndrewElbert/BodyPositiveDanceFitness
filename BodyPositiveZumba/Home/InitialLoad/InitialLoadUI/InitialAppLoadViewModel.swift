@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class InitialAppLoadViewModel: ObservableObject {
 
     @Published var viewState = InitialAppLoadViewState()
@@ -34,8 +35,8 @@ class InitialAppLoadViewModel: ObservableObject {
     func fadeToNeonCyan() {
         withAnimation(.easeIn(duration: 0.8)) {
             viewState.barColorStart = viewState.neonCyan
-            viewState.barColorEnd = Color(red: 0, green: 0, blue: 0.5)
-            viewState.textColor = Color(red: 0, green: 0, blue: 0.5)
+            viewState.barColorEnd = viewState.endColor
+            viewState.textColor = viewState.endColor
         }
         withAnimation(.easeIn(duration: 0.4)) {
             viewState.barOutlineColor = Color.orange

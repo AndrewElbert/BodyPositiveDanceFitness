@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct ContactView: View, ActionableView {
+
     enum Action {
-        case handleAction(action: String, title: String)
+        case handleAction(
+            action: String,
+            title: String
+        )
     }
 
+    @Binding var viewState: ContactViewState
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) private var dismiss
-    @Binding var viewState: ContactViewState
-
-    public init(
-        viewState: Binding<ContactViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
-    }
 
     var body: some View {
         NavigationStack {
@@ -43,7 +39,7 @@ struct ContactView: View, ActionableView {
     }
 
     private var headerView: some View {
-        let titleText = "Please Reach Out\nAnytime!"
+        let titleText = Constants.Contact.pageTitle
         return VStack(spacing: 15) {
             Text(titleText)
                 .font(.sfProSerifBold(size: 35))
@@ -69,7 +65,7 @@ struct ContactView: View, ActionableView {
                     }
                 }
 
-            Text("We're here to help and listen")
+            Text(Constants.Contact.pageBio)
                 .font(.sfProRoundedTextRegular(size: 18))
                 .foregroundColor(.gray)
         }

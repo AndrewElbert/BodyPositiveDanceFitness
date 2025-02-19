@@ -9,7 +9,7 @@ import SwiftUI
 import WebKit
 
 struct WebView: UIViewRepresentable {
-    
+
     let url: URL
     let title: String
     @Environment(\.dismiss) private var dismiss
@@ -43,7 +43,7 @@ struct WebView: UIViewRepresentable {
 }
 
 struct WebViewContainer: View {
-    
+
     let url: URL
     let title: String
     @Environment(\.dismiss) private var dismiss

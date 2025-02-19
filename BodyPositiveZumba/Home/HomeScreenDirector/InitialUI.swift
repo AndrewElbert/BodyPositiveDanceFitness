@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InitialUI {
 
-    static func initialLoad(
+    @MainActor static func initialLoad(
         coordinator: InitialLoadCoordinator
     ) -> some View {
         InitialAppLoadScreen(
@@ -20,7 +20,7 @@ struct InitialUI {
 
     }
 
-    static func initialHome(
+    @MainActor static func initialHome(
         homeCoordinator: HomeCoordinator,
         sideDrawerCoordinator: SideDrawerCoordinator
     ) -> some View {

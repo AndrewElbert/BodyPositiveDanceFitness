@@ -15,86 +15,69 @@ struct InitialAppLoadView: View {
         case startAnimations
     }
 
-    var onAction: ((Action) -> Void )?
     @Binding var viewState: InitialAppLoadViewState
-
-    public init(
-        viewState: Binding<InitialAppLoadViewState>,
-        onAction: ( (Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
-    }
+    var onAction: ((Action) -> Void)?
 
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
 
-            VStack {
-                if viewState.showHomeScreen {
-                    Color.clear.onAppear {
-                        onAction?(.navigateHomeScreen)
-                    }
-                } else {
-                    Image(Constants.Common.logoName)
-                        .resizable()
-                        .scaledToFit()
-                        .ignoresSafeArea()
-                        .scaleEffect(0.9)
-                        .padding(.top, 50)
+            if viewState.showHomeScreen {
+                Color.clear.onAppear { onAction?(.navigateHomeScreen) }
+            } else {
+                content
+            }
+        }
+    }
 
-                    VStack {
-                        ZStack(alignment: .leading) {
-                            Capsule()
-                                .stroke(viewState.barOutlineColor, lineWidth: 5)
-                                .frame(height: 20)
+    private var content: some View {
+        VStack {
+            logo
+            progressBar
+                .onAppear { onAction?(.startLoading) }
+        }
+    }
 
-                            Capsule()
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(
-                                            colors: [viewState.barColorStart, viewState.barColorEnd]
-                                        ),
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                .frame(
-                                    width: viewState.progress * UIScreen.main.bounds.width * 0.8,
-                                    height: 20
-                                )
-                                .animation(
-                                    .linear(
-                                        duration: viewState.barLoadDuration
-                                    ),
-                                    value: viewState.progress
-                                )
-                        }
-                        .frame(width: UIScreen.main.bounds.width * 0.8)
+    private var logo: some View {
+        Image(Constants.Common.logoName)
+            .resizable()
+            .scaledToFit()
+            .ignoresSafeArea()
+            .scaleEffect(0.9)
+            .padding(.top, 50)
+    }
 
-                        Text(Constants.Common.tradeMarkSlogan)
-                            .font(
-                                .sfProRoundedTextBold(
-                                    size: Constants.Home.tradeMarkSloganSize
-                                    )
-                            )
-                            .multilineTextAlignment(.center)
-                            .padding(.top)
-                            .opacity(viewState.fadeInProgress)
-                            .foregroundColor(viewState.textColor)
-                            .onAppear {
-                                withAnimation(
-                                    Animation.easeIn(duration: 0.8)
-                                ) {
-                                    onAction?(.startAnimations)
-                                }
-                            }
-                    }
-                    .onAppear {
-                        onAction?(.startLoading)
+    private var progressBar: some View {
+        VStack {
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .stroke(viewState.barOutlineColor, lineWidth: 6)
+                    .frame(height: 20)
+
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [viewState.barColorStart, viewState.barColorEnd]),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(width: viewState.progress * UIScreen.main.bounds.width * 0.8, height: 20)
+                    .animation(.linear(duration: viewState.barLoadDuration), value: viewState.progress)
+            }
+            .frame(width: UIScreen.main.bounds.width * 0.8)
+
+            Text(Constants.Common.tradeMarkSlogan)
+                .font(.sfProRoundedTextBold(size: Constants.Home.tradeMarkSloganSize))
+                .multilineTextAlignment(.center)
+                .padding(.top)
+                .opacity(viewState.fadeInProgress)
+                .foregroundColor(viewState.textColor)
+                .onAppear {
+                    withAnimation(.easeIn(duration: 0.8)) {
+                        onAction?(.startAnimations)
                     }
                 }
-            }
         }
     }
 }

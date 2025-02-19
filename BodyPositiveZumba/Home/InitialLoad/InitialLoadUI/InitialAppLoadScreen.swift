@@ -17,16 +17,17 @@ struct InitialAppLoadScreen: View {
 
     var body: some View {
         InitialAppLoadView(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .navigateHomeScreen:
-                viewModel.navigateToHomeScreen()
-            case .startLoading:
-                viewModel.startLoading()
-            case .startAnimations:
-                viewModel.startAnimations()
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .navigateHomeScreen:
+                    viewModel.navigateToHomeScreen()
+                case .startLoading:
+                    viewModel.startLoading()
+                case .startAnimations:
+                    viewModel.startAnimations()
+                }
             }
-        }
+        )
     }
 }

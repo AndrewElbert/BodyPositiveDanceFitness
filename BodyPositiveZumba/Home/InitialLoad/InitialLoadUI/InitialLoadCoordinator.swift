@@ -6,5 +6,6 @@
 //
 
 protocol InitialLoadCoordinator: ScreenCoordinator {
+
     func initialLoad_viewHome()
 }

@@ -17,12 +17,13 @@ struct ContactScreen: View {
 
     var body: some View {
         ContactView(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .handleAction(action: let action, title: let title):
-                viewModel.handleAction(action, title: title)
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .handleAction(action: let action, title: let title):
+                    viewModel.handleAction(action, title: title)
+                }
             }
-        }
+        )
     }
 }

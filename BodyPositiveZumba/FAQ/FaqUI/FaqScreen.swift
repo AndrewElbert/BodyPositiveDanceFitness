@@ -17,12 +17,13 @@ struct FaqScreen: View {
 
     var body: some View {
         FaqView(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .toggleQuestion(let index):
-                viewModel.toggleQuestion(index)
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .toggleQuestion(let index):
+                    viewModel.toggleQuestion(index)
+                }
             }
-        }
+        )
     }
 }
