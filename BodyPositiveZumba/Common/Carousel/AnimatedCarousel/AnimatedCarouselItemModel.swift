@@ -8,6 +8,7 @@
 import Foundation
 
 struct CarouselItemModel: Identifiable {
+
     let id: UUID
     let imageName: String
 }
