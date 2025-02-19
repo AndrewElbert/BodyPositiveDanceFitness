@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct AnimatedCarouselView: View, ActionableView {
-    
+
     enum Action {
         case startAutoScroll
     }
-    
+
     @Binding var viewState: AnimatedCarouselViewState
     var onAction: ((Action) -> Void)?
-    
+
     private let repetitions = 8
     private let gradientColors = [
         Constants.Colors.neonCyan.opacity(0.3),
         Constants.Colors.neonCyan.opacity(0.5)
     ]
-    
+
     private var currentItemIndex: Int {
         viewState.currentIndex % viewState.items.count
     }
@@ -31,7 +31,7 @@ struct AnimatedCarouselView: View, ActionableView {
         let size: CGSize
         let screenWidth: CGFloat
         let midX: CGFloat
-        
+
         private var transformationValues: (scale: CGFloat, rotation: CGFloat) {
             let distance = abs(screenWidth / 2 - midX)
             return (
@@ -39,7 +39,7 @@ struct AnimatedCarouselView: View, ActionableView {
                 rotation: (screenWidth / 2 - midX) / 15
             )
         }
-        
+
         var body: some View {
             Image(image)
                 .resizable()
@@ -64,7 +64,7 @@ struct AnimatedCarouselView: View, ActionableView {
                 )
         }
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -77,7 +77,7 @@ struct AnimatedCarouselView: View, ActionableView {
             onAction?(.startAutoScroll)
         }
     }
-    
+
     private var backgroundGradient: some View {
         RoundedRectangle(cornerRadius: 20)
             .fill(
@@ -90,7 +90,7 @@ struct AnimatedCarouselView: View, ActionableView {
             .blur(radius: 60)
             .padding(-40)
     }
-    
+
     private func carouselContent(in geometry: GeometryProxy) -> some View {
         GeometryReader { innerGeo in
             HStack(spacing: 0) {
@@ -120,7 +120,7 @@ struct AnimatedCarouselView: View, ActionableView {
             )
         }
     }
-    
+
     private var pageIndicators: some View {
         VStack {
             Spacer()

@@ -6,6 +6,7 @@
 //
 
 struct AnimatedBulletPointViewState {
+
     var text: String
     var emoji: String
     var isAnimating: Bool

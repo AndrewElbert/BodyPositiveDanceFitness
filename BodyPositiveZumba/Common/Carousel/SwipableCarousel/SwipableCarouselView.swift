@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct SwipableCarouselView<Content: View, T: Identifiable>: View, ActionableView {
-    
+
     enum Action {
         case dragEnded(translation: CGFloat, cardWidth: CGFloat)
         case indexChanged
     }
-    
+
     var onAction: ((Action) -> Void)?
     @Binding private var viewState: SwipableCarouselViewState<T>
     @GestureState private var dragOffset: CGFloat = 0
     private let content: (T, Bool) -> Content
-    
+
     init(
         viewState: Binding<SwipableCarouselViewState<T>>,
         onAction: ((Action) -> Void)? = nil,
@@ -28,29 +28,29 @@ struct SwipableCarouselView<Content: View, T: Identifiable>: View, ActionableVie
         self.onAction = onAction
         self.content = content
     }
-    
+
     private struct CarouselGeometry {
         let cardWidth: CGFloat
         let cardWithSpacing: CGFloat
         let displayOffset: CGFloat
-        
+
         init(containerWidth: CGFloat, sideSpacing: CGFloat, spacing: CGFloat, currentIndex: Int) {
             self.cardWidth = max(0, containerWidth - (sideSpacing * 2))
             self.cardWithSpacing = cardWidth + spacing
             self.displayOffset = sideSpacing - (CGFloat(currentIndex + 1) * cardWithSpacing)
         }
     }
-    
+
     private struct CarouselItemView: View {
         let content: Content
         let width: CGFloat
-        
+
         var body: some View {
             content
                 .frame(width: width)
         }
     }
-    
+
     var body: some View {
         GeometryReader { proxy in
             let geometry = CarouselGeometry(
@@ -59,7 +59,7 @@ struct SwipableCarouselView<Content: View, T: Identifiable>: View, ActionableVie
                 spacing: viewState.spacing,
                 currentIndex: viewState.currentIndex
             )
-            
+
             carouselContent(with: geometry)
                 .offset(x: geometry.displayOffset + dragOffset)
                 .animation(.easeInOut, value: dragOffset)
@@ -69,7 +69,7 @@ struct SwipableCarouselView<Content: View, T: Identifiable>: View, ActionableVie
                 }
         }
     }
-    
+
     @ViewBuilder
     private func carouselContent(with geometry: CarouselGeometry) -> some View {
         HStack(spacing: viewState.spacing) {
@@ -84,7 +84,7 @@ struct SwipableCarouselView<Content: View, T: Identifiable>: View, ActionableVie
             }
         }
     }
-    
+
     private func createDragGesture(cardWidth: CGFloat) -> some Gesture {
         DragGesture()
             .updating($dragOffset) { value, state, _ in

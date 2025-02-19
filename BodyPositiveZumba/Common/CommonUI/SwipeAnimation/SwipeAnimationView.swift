@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SwipeAnimationView: View {
+
     @Binding var viewState: SwipeAnimationViewState
 
     @State private var offset: CGFloat = 0
@@ -19,11 +20,11 @@ struct SwipeAnimationView: View {
     }
 
     var body: some View {
-        Image(systemName: "hand.point.up.fill")
+        Image(systemName: "hand.point.up")
             .resizable()
             .scaledToFit()
             .frame(width: 65, height: 65)
-            .foregroundColor(Constants.Colors.neonCyan.opacity(0.9))
+            .foregroundColor(Constants.Colors.neonCyan.opacity(0.8))
             .offset(x: offset)
             .opacity(opacity)
             .onAppear {

@@ -68,6 +68,7 @@ struct PartnersView: View {
 }
 
 private extension PartnersView {
+
     var swipeAnimationOverlay: some View {
         Group {
             if viewState.showSwipeAnimation {
