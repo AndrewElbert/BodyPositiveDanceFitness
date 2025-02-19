@@ -16,15 +16,8 @@ struct AnimatedCarouselView: View, ActionableView {
     @Binding var viewState: AnimatedCarouselViewState
     var onAction: ((Action) -> Void)?
 
-    init(
-        viewState: Binding<AnimatedCarouselViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
-    }
-
     var body: some View {
+        
         GeometryReader { geometry in
             ZStack {
 
@@ -55,23 +48,47 @@ struct AnimatedCarouselView: View, ActionableView {
                                 Image(viewState.items[index % viewState.items.count].imageName)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: itemGeo.size.width, height: itemGeo.size.height)
+                                    .frame(
+                                        width: itemGeo.size.width,
+                                        height: itemGeo.size.height
+                                    )
                                     .clipped()
                                     .cornerRadius(20)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.cyan.opacity(0.2), lineWidth: 1)
+                                            .stroke(
+                                                Color.cyan.opacity(0.2),
+                                                lineWidth: 1
+                                            )
                                     )
                                     .scaleEffect(scale)
-                                    .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
-                                    .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
+                                    .rotation3DEffect(
+                                        .degrees(rotation),
+                                        axis: (x: 0, y: 1, z: 0)
+                                    )
+                                    .shadow(
+                                        color: Color.black.opacity(0.3),
+                                        radius: 8,
+                                        x: 0,
+                                        y: 4
+                                    )
                             }
-                            .frame(width: innerGeo.size.width, height: innerGeo.size.height)
+                            .frame(
+                                width: innerGeo.size.width,
+                                height: innerGeo.size.height
+                            )
                         }
                     }
 
                     .offset(x: -innerGeo.size.width * CGFloat(viewState.currentIndex))
-                    .animation(.interactiveSpring(response: 3.3, dampingFraction: 0.8, blendDuration: 0.5), value: viewState.currentIndex)
+                    .animation(
+                        .interactiveSpring(
+                            response: 3.3,
+                            dampingFraction: 0.8,
+                            blendDuration: 0.5
+                        ),
+                        value: viewState.currentIndex
+                    )
                 }
 
                 VStack {
@@ -80,7 +97,8 @@ struct AnimatedCarouselView: View, ActionableView {
                         ForEach(0..<viewState.items.count, id: \.self) { index in
                             Capsule()
                                 .fill(
-                                    index == viewState.currentIndex % viewState.items.count ? Constants.Colors.neonCyan : Color.gray.opacity(0.4)
+                                    index == viewState.currentIndex % viewState.items.count ?
+                                    Constants.Colors.neonCyan : Color.gray.opacity(0.4)
                                 )
                                 .frame(width: 10, height: 10)
                                 .animation(.easeInOut(duration: 0.3), value: viewState.currentIndex)
@@ -90,7 +108,6 @@ struct AnimatedCarouselView: View, ActionableView {
                 }
             }
         }
-
         .onReceive(viewState.timer) { _ in
             onAction?(.startAutoScroll)
         }
