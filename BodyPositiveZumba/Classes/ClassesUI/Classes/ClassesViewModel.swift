@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class ClassesViewModel: ObservableObject {
 
     @Published var viewState: ClassesViewState = ClassesViewState()

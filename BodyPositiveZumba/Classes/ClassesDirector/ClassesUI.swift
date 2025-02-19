@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ClassesUI {
 
-    static func classesPage(
+    @MainActor static func classesPage(
         classesCoordinator: ClassesCoordinator
     ) -> some View {
         ClassesScreen(

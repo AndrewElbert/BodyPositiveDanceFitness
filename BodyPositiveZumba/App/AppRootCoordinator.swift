@@ -1,5 +1,5 @@
 //
-//  InitialLoadRootCoordinator.swift
+//  AppRootCoordinator.swift
 //  App
 //
 //  Created by Andrew Elbert on 1/30/25.
@@ -8,7 +8,7 @@
 import FlowStacks
 import Foundation
 
-class InitialLoadRootCoordinator: RootCoordinator {
+class AppRootCoordinator: RootCoordinator {
 
     enum Screen {
         case root
@@ -22,7 +22,7 @@ class InitialLoadRootCoordinator: RootCoordinator {
     }
 }
 
-extension InitialLoadRootCoordinator: InitialLoadCoordinator {
+extension AppRootCoordinator: InitialLoadCoordinator {
     func initialLoad_viewHome() {
         routes.presentCover(.home)
     }
