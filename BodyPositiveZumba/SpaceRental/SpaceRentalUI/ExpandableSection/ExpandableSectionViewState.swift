@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpandableSectionViewState {
-    
+
     var animatedBulletPointViewStates: [AnimatedBulletPointViewState]
     var title: String
     var items: [(String, String)]

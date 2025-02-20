@@ -20,7 +20,7 @@ class ClassesFlowCoordinator: FlowCoordinator {
     init() {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
-    
+
     func popToRoot() {
         routes.popToRoot()
     }

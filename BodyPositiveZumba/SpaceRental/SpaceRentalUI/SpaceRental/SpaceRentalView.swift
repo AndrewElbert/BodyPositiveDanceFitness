@@ -25,7 +25,7 @@ struct SpaceRentalView: View, ActionableView {
     private let buttonAnimation = Animation.easeInOut(duration: 0.4)
 
     private var buttonGradient: some View {
-        
+
         ZStack {
             Color.white
             RadialGradient(

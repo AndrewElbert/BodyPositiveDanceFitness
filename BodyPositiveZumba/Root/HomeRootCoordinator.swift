@@ -25,7 +25,7 @@ class HomeRootCoordinator: RootCoordinator {
     init() {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
-    
+
     func popToRoot() {
         routes.popToRoot()
     }
@@ -33,7 +33,7 @@ class HomeRootCoordinator: RootCoordinator {
     func dismissLastPresented() {
         routes.dismiss()
     }
-    
+
 }
 
 extension HomeRootCoordinator: HomeCoordinator {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MassageView: View, ActionableView {
-    
+
     enum Action {
         case updateUrl
     }

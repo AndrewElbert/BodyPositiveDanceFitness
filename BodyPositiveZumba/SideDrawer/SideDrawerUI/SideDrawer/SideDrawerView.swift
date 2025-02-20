@@ -26,7 +26,7 @@ struct SideDrawerView: View, ActionableView {
     var onAction: ((Action) -> Void)?
 
     var body: some View {
-        
+
         ZStack {
             backgroundOverlay
             drawerContent
@@ -39,7 +39,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private var backgroundOverlay: some View {
-        
+
         Color.black
             .opacity(viewState.isMenuOpen ? Constants.SideDrawer.backgroundOpacity : 0)
             .ignoresSafeArea()
@@ -49,7 +49,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private var drawerContent: some View {
-        
+
         HStack {
             VStack(alignment: .leading, spacing: Constants.SideDrawer.buttonSpacing) {
                 Spacer()
@@ -88,7 +88,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private var drawerButtons: some View {
-        
+
         ForEach($viewState.drawerButtons) { $buttonState in
             DrawerButton(
                 title: buttonState.title,
@@ -106,7 +106,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private var contactSection: some View {
-        
+
         VStack(spacing: 16) {
             contactButton
             socialButtons
@@ -116,7 +116,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private var contactButton: some View {
-        
+
         Button(action: { onAction?(.contact) }) {
             HStack(spacing: 20) {
                 Image(systemName: Constants.SideDrawer.contactImage)
@@ -149,7 +149,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private var socialButtons: some View {
-        
+
         HStack(spacing: 16) {
             socialButton(image: Constants.SideDrawer.facebookLogo, url: Constants.Common.facebookLink)
             socialButton(image: Constants.SideDrawer.youtubeLogo, url: Constants.Common.youtubeLink)
@@ -159,7 +159,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private func socialButton(image: String, url: String) -> some View {
-        
+
         Button(action: {
             if let url = URL(string: url) {
                 UIApplication.shared.open(url)
@@ -172,7 +172,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private var companyName: some View {
-        
+
         Text(Constants.Common.companyName)
             .font(.sfProDisplayRegular(size: Constants.SideDrawer.companyNameFontSize))
             .foregroundColor(.black)
@@ -182,7 +182,7 @@ struct SideDrawerView: View, ActionableView {
     }
 
     private func calculateDrawerOffset() -> CGFloat {
-        
+
         if viewState.isMenuOpen {
             return max(-Constants.SideDrawer.frameWidth,
                        min(0, viewState.dragOffset.width))
@@ -192,4 +192,3 @@ struct SideDrawerView: View, ActionableView {
         }
     }
 }
-

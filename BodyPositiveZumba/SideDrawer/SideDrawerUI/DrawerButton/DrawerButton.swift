@@ -15,10 +15,10 @@ struct DrawerButton: View {
     @Binding var isPressed: Bool
 
     var body: some View {
-        
+
         Button(action: action) {
             HStack(spacing: icon == nil ? 0 : 11) {
-                
+
                 if let icon = icon {
                     Image(systemName: icon)
                         .resizable()
