@@ -21,14 +21,6 @@ struct ExpandableSection: View, ActionableView {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
-    init(
-        viewState: Binding<ExpandableSectionViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
-    }
-
     var body: some View {
         VStack(spacing: 12) {
             headerButton
@@ -65,8 +57,6 @@ struct ExpandableSection: View, ActionableView {
         Image(systemName: viewState.isExpanded ? "chevron.down" : "chevron.right")
             .font(.sfProBodyTextBold(size: 18))
             .foregroundColor(Constants.Colors.darkOrange)
-            .rotationEffect(.degrees(viewState.isExpanded ? 180 : 0))
-            .animation(.easeInOut(duration: 0.4), value: viewState.isExpanded)
     }
 
     private var headerBackground: some View {

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SpaceRentalUI {
-    static func spaceRentalPage(
+
+    @MainActor static func spaceRentalPage(
     ) -> some View {
         SpaceRentalScreen(viewModel: SpaceRentalViewModel())
     }

@@ -107,7 +107,7 @@ class NotificationManager {
 
         var dateComponents = DateComponents()
         dateComponents.weekday = 6
-        dateComponents.hour = 17
+        dateComponents.hour = 8
         dateComponents.minute = 0
         dateComponents.timeZone = TimeZone(identifier: "America/New_York")
 
@@ -132,7 +132,6 @@ class NotificationManager {
     func scheduleAllNotifications() {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            self.verifyNotificationSettings()
             self.scheduleWeeklySundayNotification()
             self.scheduleTuesdayNightNotification()
             self.scheduleFridayEveningNotification()

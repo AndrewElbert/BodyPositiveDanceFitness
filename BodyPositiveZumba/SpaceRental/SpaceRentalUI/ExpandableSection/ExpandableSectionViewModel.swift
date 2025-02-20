@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class ExpandableSectionViewModel: ObservableObject {
 
     @Binding var viewState: ExpandableSectionViewState

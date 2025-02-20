@@ -21,6 +21,13 @@ class ClassesFlowCoordinator: FlowCoordinator {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
 
+    func popToRoot() {
+        routes.popToRoot()
+    }
+
+    func dismissLastPresented() {
+        routes.dismiss()
+    }
 }
 
 extension ClassesFlowCoordinator: ClassesCoordinator {

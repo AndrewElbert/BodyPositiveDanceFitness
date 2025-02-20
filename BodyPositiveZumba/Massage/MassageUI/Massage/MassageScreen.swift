@@ -17,12 +17,13 @@ struct MassageScreen: View {
 
     var body: some View {
         MassageView(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .updateUrl:
-                viewModel.updateBookingURL()
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .updateUrl:
+                    viewModel.updateBookingURL()
+                }
             }
-        }
+        )
     }
 }

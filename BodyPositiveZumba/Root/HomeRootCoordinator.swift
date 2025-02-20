@@ -25,6 +25,15 @@ class HomeRootCoordinator: RootCoordinator {
     init() {
         self.routes = [.root(.root, embedInNavigationView: true)]
     }
+
+    func popToRoot() {
+        routes.popToRoot()
+    }
+
+    func dismissLastPresented() {
+        routes.dismiss()
+    }
+
 }
 
 extension HomeRootCoordinator: HomeCoordinator {
@@ -41,14 +50,6 @@ extension HomeRootCoordinator: HomeCoordinator {
 }
 
 extension HomeRootCoordinator: SideDrawerCoordinator {
-
-    func sideDrawer_popToRoot() {
-        routes.popToRoot()
-    }
-
-    func sideDrawer_dismissLastPresented() {
-        routes.dismiss()
-    }
 
     func sideDrawer_viewClasses() {
         routes.presentCover(

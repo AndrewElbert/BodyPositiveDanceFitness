@@ -26,4 +26,15 @@ struct MassageViewState {
     var showCarousel: Bool = false
 
     var cards: [MassageCardModel] = Constants.Massage.cards
+
+    var normalizedIndex: Int {
+        let count = cards.count
+        let index = swipableCarouselViewState.currentIndex
+        let normalizedIndex = ((index % count) + count) % count
+        return normalizedIndex
+    }
+
+    var currentTherapistName: String {
+        return cards[normalizedIndex].firstName
+    }
 }
