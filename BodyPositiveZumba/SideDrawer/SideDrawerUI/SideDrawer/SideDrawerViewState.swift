@@ -13,6 +13,7 @@ struct SideDrawerViewState {
     var showDimBackground: Bool = false
     var dragOffset: CGSize = .zero
     var contactIsPressed: Bool = false
+    var showJoinNowWebView = false
 
     var drawerButtons: [DrawerButtonViewState] = [
         DrawerButtonViewState(

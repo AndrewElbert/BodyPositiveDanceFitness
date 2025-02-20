@@ -39,6 +39,7 @@ struct SideDrawerComponent: View {
             case .updateDrag(let offset):
                 viewModel.updateDragOffset(offset)
             case .joinNow:
+                //intentionally blank
                 break
             }
         }
