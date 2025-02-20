@@ -8,32 +8,18 @@
 import SwiftUI
 
 struct MassageView: View, ActionableView {
+    
     enum Action {
         case updateUrl
     }
 
+    @Binding var viewState: MassageViewState
     var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) private var colorScheme
-    @Binding var viewState: MassageViewState
 
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-    }
-
-    private var currentTherapistName: String {
-        let count = viewState.cards.count
-        let index = viewState.swipableCarouselViewState.currentIndex
-        let normalizedIndex = ((index % count) + count) % count
-        return viewState.cards[normalizedIndex].firstName
-    }
-
-    public init(
-        viewState: Binding<MassageViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
     }
 
     var body: some View {
@@ -44,9 +30,7 @@ struct MassageView: View, ActionableView {
             }
             .padding()
             .onAppear {
-                withAnimation(.easeIn.delay(0.3)) {
-                    viewState.showCarousel = true
-                }
+                viewState.showCarousel = true
                 dismissSwipeAnimationAfterDelay()
             }
             .toolbarBackground(.visible, for: .navigationBar)
@@ -74,7 +58,7 @@ private extension MassageView {
                     .transition(.opacity)
             }
             Spacer()
-            actionButton
+            bookMassageButton
         }
     }
 
@@ -123,12 +107,12 @@ private extension MassageView {
         .frame(height: 400)
     }
 
-    var actionButton: some View {
+    var bookMassageButton: some View {
         Button(
             action: {
                 onAction?(.updateUrl)
             }) {
-            Text("Book With \(currentTherapistName) Today!")
+                Text("Book With \(viewState.currentTherapistName) Today!")
                 .font(.sfProRoundedTextSemibold(size: 22))
                 .frame(maxWidth: .infinity)
                 .padding()
