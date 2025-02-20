@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class SideDrawerViewModel: ObservableObject {
 
     @Published public var viewState: SideDrawerViewState = SideDrawerViewState()

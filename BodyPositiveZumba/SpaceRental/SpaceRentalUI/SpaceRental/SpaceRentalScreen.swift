@@ -17,12 +17,13 @@ struct SpaceRentalScreen: View {
 
     var body: some View {
         SpaceRentalView(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .toggleMessage:
-                viewModel.toggleMessage()
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .toggleMessage:
+                    viewModel.toggleMessage()
+                }
             }
-        }
+        )
     }
 }

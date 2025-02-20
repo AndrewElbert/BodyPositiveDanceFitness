@@ -17,12 +17,13 @@ struct ExpandableSectionComponent: View {
 
     var body: some View {
         ExpandableSection(
-            viewState: $viewModel.viewState
-        ) { action in
-            switch action {
-            case .toggleExpansion:
-                viewModel.toggleExpansion()
+            viewState: $viewModel.viewState,
+            onAction: { action in
+                switch action {
+                case .toggleExpansion:
+                    viewModel.toggleExpansion()
+                }
             }
-        }
+        )
     }
 }

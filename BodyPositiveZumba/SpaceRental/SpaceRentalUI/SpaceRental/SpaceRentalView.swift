@@ -16,7 +16,7 @@ struct SpaceRentalView: View, ActionableView {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @Environment(\.colorScheme) private var colorScheme
-    @Binding private var viewState: SpaceRentalViewState
+    @Binding var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
 
     private let titleStyle = Font.sfProDisplayBold(size: 23)
@@ -25,6 +25,7 @@ struct SpaceRentalView: View, ActionableView {
     private let buttonAnimation = Animation.easeInOut(duration: 0.4)
 
     private var buttonGradient: some View {
+        
         ZStack {
             Color.white
             RadialGradient(
@@ -43,14 +44,6 @@ struct SpaceRentalView: View, ActionableView {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
-    public init(
-        viewState: Binding<SpaceRentalViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
-    }
-
     var body: some View {
 
         NavigationStack {
@@ -58,7 +51,7 @@ struct SpaceRentalView: View, ActionableView {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         headerSection
-                        messageSection
+                        inquireSection
 
                         carouselSection
                             .opacity(viewState.showCarousel ? 1 : 0)
@@ -149,12 +142,12 @@ struct SpaceRentalView: View, ActionableView {
         }
     }
 
-    private var messageSection: some View {
+    private var inquireSection: some View {
         VStack(spacing: 24) {
-            actionButton
+            inquireButton
 
             if viewState.showMessage {
-                messageContent
+                inquireContent
             }
         }
         .padding(.horizontal)
@@ -162,7 +155,7 @@ struct SpaceRentalView: View, ActionableView {
         .zIndex(1)
     }
 
-    private var actionButton: some View {
+    private var inquireButton: some View {
         Button(action: {
             withAnimation(buttonAnimation) {
                 onAction?(.toggleMessage)
@@ -183,7 +176,7 @@ struct SpaceRentalView: View, ActionableView {
         }
     }
 
-    private var messageContent: some View {
+    private var inquireContent: some View {
         VStack(spacing: 4) {
             Text(Constants.SpaceRental.inquireTodayTitleText)
                 .font(.sfProBodyTextRegular(size: 19))
