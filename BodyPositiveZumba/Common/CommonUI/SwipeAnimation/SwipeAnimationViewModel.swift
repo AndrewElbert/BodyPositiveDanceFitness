@@ -10,12 +10,12 @@ import SwiftUI
 @MainActor
 class SwipeAnimationViewModel: ObservableObject {
 
-    @Published var viewState: SwipeAnimationViewState
+    @Binding var viewState: SwipeAnimationViewState
 
     init(
-        viewState: SwipeAnimationViewState
+        viewState: Binding<SwipeAnimationViewState>
     ) {
-        self.viewState = viewState
+        self._viewState = viewState
     }
 
 }

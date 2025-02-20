@@ -11,22 +11,14 @@ struct SwipeAnimationView: View {
 
     @Binding var viewState: SwipeAnimationViewState
 
-    @State private var offset: CGFloat = 0
-    @State private var opacity: Double = 0.0
-    @State private var swipeDirection: SwipeDirection = .right
-
-    private enum SwipeDirection {
-        case right, left
-    }
-
     var body: some View {
         Image(systemName: "hand.point.up")
             .resizable()
             .scaledToFit()
             .frame(width: 65, height: 65)
             .foregroundColor(Constants.Colors.neonCyan.opacity(0.8))
-            .offset(x: offset)
-            .opacity(opacity)
+            .offset(x: viewState.offset)
+            .opacity(viewState.opacity)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                     animateCycle()
@@ -41,19 +33,19 @@ struct SwipeAnimationView: View {
         let swipeDuration: Double = 1.1
         let pauseDuration: Double = 0.5
 
-        offset = 0
+        viewState.offset = 0
         withAnimation(Animation.linear(duration: fadeInDuration)) {
-            opacity = 1.0
+            viewState.opacity = 1.0
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + fadeInDuration) {
             withAnimation(Animation.linear(duration: swipeDuration)) {
-                offset = (swipeDirection == .right) ? swipeDistance : -swipeDistance
-                opacity = 0.0
+                viewState.offset = (viewState.swipeDirection == .right) ? swipeDistance : -swipeDistance
+                viewState.opacity = 0.0
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + swipeDuration + pauseDuration) {
-                swipeDirection = (swipeDirection == .right) ? .left : .right
+                viewState.swipeDirection = (viewState.swipeDirection == .right) ? .left : .right
                 animateCycle()
             }
         }

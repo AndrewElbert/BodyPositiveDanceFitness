@@ -74,7 +74,7 @@ private extension PartnersView {
             if viewState.showSwipeAnimation {
                 SwipeAnimationComponent(
                     viewModel: SwipeAnimationViewModel(
-                        viewState: viewState.swipeAnimationViewState
+                        viewState: $viewState.swipeAnimationViewState
                     )
                 )
                 .padding()
