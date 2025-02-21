@@ -57,7 +57,7 @@ private extension TeamView {
             if viewState.showCarousel {
                 carouselSection
                     .transition(.opacity)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 100)
                 bioSection
                     .transition(.opacity)
             }

@@ -39,7 +39,7 @@ struct ColoredButton: View {
                             .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                gradientColor.opacity(0.01),
+                                gradientColor.opacity(0.001),
                                 gradientColor.opacity(0.33)
                             ]),
                             startPoint: .top,

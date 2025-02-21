@@ -16,7 +16,7 @@ struct TeamCardView: View {
             Image(card.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 250, height: 333)
+                .frame(width: 230, height: 380)
                 .clipped()
                 .cornerRadius(15)
 
@@ -28,7 +28,11 @@ struct TeamCardView: View {
 
             Text(card.role)
                 .font(.sfProBodyTextMedium(size: 20))
+                .multilineTextAlignment(.center)
                 .foregroundColor(.orange)
+                .padding(.horizontal)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true) 
 
             Spacer()
         }
