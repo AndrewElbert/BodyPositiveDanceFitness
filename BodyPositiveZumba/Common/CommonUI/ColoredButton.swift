@@ -28,7 +28,7 @@ struct ColoredButton: View {
             }
         }) {
             Text(title)
-                .font(.sfProRoundedTextMedium(size: 22))
+                .font(.sfProRoundedTextSemibold(size: 22))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
@@ -40,13 +40,13 @@ struct ColoredButton: View {
                         LinearGradient(
                             gradient: Gradient(colors: [
                                 gradientColor.opacity(0.01),
-                                gradientColor.opacity(0.95)
+                                gradientColor.opacity(0.33)
                             ]),
                             startPoint: .top,
                             endPoint: .bottom
                         )
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(strokeColor, lineWidth: 6)
+                            .stroke(strokeColor, lineWidth: 8)
                     }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))

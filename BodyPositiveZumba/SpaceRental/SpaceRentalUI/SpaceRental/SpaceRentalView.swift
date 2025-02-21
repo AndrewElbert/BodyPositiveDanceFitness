@@ -33,13 +33,13 @@ struct SpaceRentalView: View, ActionableView {
             LinearGradient(
                 gradient: Gradient(colors: [
                     Constants.Colors.neonCyan.opacity(0.01),
-                    Constants.Colors.neonCyan.opacity(0.99)
+                    Constants.Colors.neonCyan.opacity(0.33)
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
             )
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .stroke(Constants.Colors.neonCyan, lineWidth: 2)
+                .stroke(Constants.Colors.neonCyan, lineWidth: 8)
         }
     }
 

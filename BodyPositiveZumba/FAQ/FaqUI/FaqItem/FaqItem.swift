@@ -66,7 +66,7 @@ struct FaqItem: View {
                 Spacer()
 
                 Image(systemName: Constants.FAQ.chevron)
-                    .rotationEffect(.degrees(viewState.isExpanded ? 180 : 0))
+                    .rotationEffect(.degrees(viewState.isExpanded ? 90 : 0))
                     .animation(.none, value: viewState.isExpanded)
                     .foregroundColor(.gray)
             }
@@ -74,7 +74,7 @@ struct FaqItem: View {
             .background(backgroundView)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(borderColor, lineWidth: 2)
+                    .stroke(borderColor, lineWidth: 4)
             )
         }
     }

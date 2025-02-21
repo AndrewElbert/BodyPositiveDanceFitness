@@ -273,7 +273,7 @@ struct HomeRainbowButton: View {
     var body: some View {
         Button(action: onTap) {
             Text(title)
-                .font(.sfProRoundedTextMedium(size: 18))
+                .font(.sfProRoundedTextSemibold(size: 18))
                 .frame(maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.black)

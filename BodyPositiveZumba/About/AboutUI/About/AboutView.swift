@@ -134,7 +134,7 @@ struct RainbowButton: View {
     var body: some View {
         Button(action: onTap) {
             Text(title)
-                .font(.sfProRoundedTextMedium(size: 22))
+                .font(.sfProRoundedTextSemibold(size: 22))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .foregroundColor(.black)

@@ -155,7 +155,7 @@ private var buttonBackground: some View {
         LinearGradient(
             gradient: Gradient(colors: [
                 Constants.Colors.neonCyan.opacity(0.01),
-                Constants.Colors.neonCyan.opacity(0.95)
+                Constants.Colors.neonCyan.opacity(0.33)
             ]),
             startPoint: .top,
             endPoint: .bottom

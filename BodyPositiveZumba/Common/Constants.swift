@@ -233,7 +233,7 @@ struct Constants {
         ]
 
         static let pageTitle = "Frequently Asked Questions"
-        static let chevron = "chevron.down"
+        static let chevron = "chevron.right"
     }
 
     // MARK: Headshots
