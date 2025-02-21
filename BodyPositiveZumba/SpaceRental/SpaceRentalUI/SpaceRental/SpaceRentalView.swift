@@ -123,6 +123,7 @@ struct SpaceRentalView: View, ActionableView {
                     dismiss()
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 
