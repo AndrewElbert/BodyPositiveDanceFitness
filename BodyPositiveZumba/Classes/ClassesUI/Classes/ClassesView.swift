@@ -51,6 +51,7 @@ struct ClassesView: View, ActionableView {
                     dismissSwipeAnimationAfterDelay()
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 }

@@ -64,6 +64,7 @@ struct PartnersView: View {
         .onAppear {
             dismissSwipeAnimationAfterDelay()
         }
+        .preferredColorScheme(.light)
     }
 }
 

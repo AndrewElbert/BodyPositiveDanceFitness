@@ -39,6 +39,7 @@ struct FaqView: View, ActionableView {
                     dismiss()
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 

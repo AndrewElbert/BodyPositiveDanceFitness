@@ -46,6 +46,7 @@ struct MassageView: View, ActionableView {
         .sheet(item: $viewState.bookingURL) { booking in
             WebViewContainer(url: booking.url, title: booking.title)
         }
+        .preferredColorScheme(.light)
     }
 }
 

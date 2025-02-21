@@ -50,6 +50,7 @@ struct WhatWeDoView: View {
                         dismiss()
                     }
                 }
+                .preferredColorScheme(.light)
             }
         }
     }
