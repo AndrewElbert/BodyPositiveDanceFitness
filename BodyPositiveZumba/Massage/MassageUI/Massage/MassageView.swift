@@ -148,7 +148,7 @@ private extension MassageView {
 }
 
 private var buttonBackground: some View {
-    
+
     ZStack {
         RoundedRectangle(cornerRadius: 16, style: .continuous)
             .fill(.white)

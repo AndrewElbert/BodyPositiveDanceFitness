@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View, ActionableView {
-    
+
     enum Action {
         case handleTeamButtonTap
         case handleClassesButtonTap
@@ -43,7 +43,7 @@ struct AboutView: View, ActionableView {
     }
 
     private var contentView: some View {
-        
+
         ScrollView {
             VStack(spacing: 22) {
                 headerTitle
@@ -55,7 +55,7 @@ struct AboutView: View, ActionableView {
     }
 
     private var headerTitle: some View {
-        
+
         VStack(spacing: 0) {
             Text(Constants.About.pageHeader)
                 .font(.sfProDisplayBold(size: 22))
@@ -72,7 +72,7 @@ struct AboutView: View, ActionableView {
     }
 
     private var rainbowButtonSection: some View {
-        
+
         VStack(spacing: 20) {
             RainbowButton(title: Constants.About.whoPageTitle) {
                 onAction?(.handleWhoAreWeTap)
@@ -84,7 +84,7 @@ struct AboutView: View, ActionableView {
     }
 
     private var coloredButtonSection: some View {
-        
+
         VStack(spacing: 20) {
             ForEach(Array(viewState.sections.prefix(2))) { section in
                 ColoredButton(
@@ -94,7 +94,7 @@ struct AboutView: View, ActionableView {
                     gradientColor: Constants.Colors.neonCyan
                 )
             }
-        
+
             ForEach(Array(viewState.sections.suffix(2))) { section in
                 ColoredButton(
                     title: section.title,
@@ -107,7 +107,7 @@ struct AboutView: View, ActionableView {
     }
 
     private func handleButtonTap(_ section: AboutMainSectionModel) {
-        
+
         switch section.identifier {
         case Constants.About.actionButton1:
             onAction?(.handleTeamButtonTap)
@@ -127,7 +127,7 @@ struct AboutView: View, ActionableView {
 }
 
 struct RainbowButton: View {
-    
+
     let title: String
     let onTap: () -> Void
 
@@ -152,7 +152,7 @@ struct RainbowButton: View {
                             lineWidth: 8
                         )
                 )
-                .cornerRadius(16) 
+                .cornerRadius(16)
         }
         .frame(height: 60)
     }

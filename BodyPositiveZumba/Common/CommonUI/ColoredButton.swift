@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct ColoredButton: View {
-    
+
     let title: String
     let action: () -> Void
     let strokeColor: Color
     let gradientColor: Color
-    
+
     @Environment(\.colorScheme) private var colorScheme
     @State private var isPressed = false
-    
+
     var body: some View {
         Button(action: {
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {

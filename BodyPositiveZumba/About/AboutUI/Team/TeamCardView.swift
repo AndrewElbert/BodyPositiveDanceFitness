@@ -32,7 +32,7 @@ struct TeamCardView: View {
                 .foregroundColor(.orange)
                 .padding(.horizontal)
                 .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true) 
+                .fixedSize(horizontal: false, vertical: true)
 
             Spacer()
         }
