@@ -118,11 +118,7 @@ private extension MassageView {
                 .padding()
                 .foregroundColor(.black)
                 .background(buttonBackground)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Constants.Colors.darkerCyan, lineWidth: 6)
-                )
-                .cornerRadius(8)
+                .cornerRadius(16)
         }
         .padding(.bottom, 11)
     }
@@ -151,16 +147,20 @@ private extension MassageView {
 }
 
 private var buttonBackground: some View {
+    
     ZStack {
-        Color.white
-        RadialGradient(
+        RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .fill(.white)
+            .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
+        LinearGradient(
             gradient: Gradient(colors: [
-                Constants.Colors.neonCyan.opacity(0.05),
-                Constants.Colors.neonCyan.opacity(0.2)
+                Constants.Colors.neonCyan.opacity(0.01),
+                Constants.Colors.neonCyan.opacity(0.95)
             ]),
-            center: .center,
-            startRadius: 55,
-            endRadius: 122
+            startPoint: .top,
+            endPoint: .bottom
         )
+        RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .stroke(Constants.Colors.darkerCyan, lineWidth: 8)
     }
 }

@@ -279,7 +279,7 @@ struct Constants {
         static let viewClassesButton: String = "View Classes"
         static let viewPassesButton: String = "View Passes"
         static let aboutButton: String = "About Us!"
-        static let exploreButton: String = "Explore More"
+        static let exploreButton: String = "Explore More!"
         static let photosButton: String = "View Photos"
         static let passesBio: String = "save money - purchase a pass!"
         static let tradeMarkSloganSize: CGFloat = 22

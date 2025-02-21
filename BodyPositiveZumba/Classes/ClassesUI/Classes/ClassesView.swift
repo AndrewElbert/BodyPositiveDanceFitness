@@ -80,11 +80,11 @@ private extension ClassesView {
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 ),
-                                lineWidth: 5
+                                lineWidth: 8
                             )
                     )
                     .cornerRadius(8)
-                    .shadow(radius: 7)
+                    .shadow(radius: 4)
             }
             .buttonStyle(PressableButton())
         }
