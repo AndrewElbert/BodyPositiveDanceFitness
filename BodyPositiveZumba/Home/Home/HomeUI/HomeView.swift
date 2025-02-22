@@ -147,23 +147,23 @@ struct HomeView: View {
     }
 
     private var buttonStack: some View {
-        VStack(spacing: 22) {
+        VStack(spacing: 20) {
             ColoredButton(
                 title: Constants.Home.bookClassesButton,
-                onTap: { onAction?(.joinNow) },
-                strokeColor: Color.orange.opacity(0.8),
+                action: { onAction?(.joinNow) },
+                strokeColor: Color.orange,
                 gradientColor: Color.orange
             )
             ColoredButton(
                 title: Constants.Home.viewClassesButton,
-                onTap: { onAction?(.viewClasses) },
+                action: { onAction?(.viewClasses) },
                 strokeColor: Constants.Colors.darkerCyan,
                 gradientColor: Constants.Colors.neonCyan
             )
             VStack(spacing: 2) {
                 ColoredButton(
                     title: Constants.Home.viewPassesButton,
-                    onTap: { onAction?(.bookClass) },
+                    action: { onAction?(.bookClass) },
                     strokeColor: Constants.Colors.darkerCyan,
                     gradientColor: Constants.Colors.neonCyan
                 )
@@ -171,7 +171,7 @@ struct HomeView: View {
                     .font(.sfProDisplayRegular(size: 18))
                     .foregroundColor(.gray)
                     .italic()
-                    .padding(.top, 0)
+                    .padding(.top, 4)
             }
             HStack(spacing: 16) {
                 HomeRainbowButton(title: Constants.Home.aboutButton) {
@@ -263,43 +263,6 @@ struct HomeView: View {
         if !sideDrawerViewModel.viewState.isMenuOpen {
             sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
         }
-    }
-}
-
-struct ColoredButton: View {
-    let title: String
-    let onTap: () -> Void
-    let strokeColor: Color
-    let gradientColor: Color
-
-    var body: some View {
-        Button(action: onTap) {
-            Text(title)
-                .font(.sfProRoundedTextSemibold(size: 22))
-                .frame(maxWidth: .infinity)
-                .padding()
-                .foregroundColor(.black)
-                .background(
-                    ZStack {
-                        Color.white
-                        RadialGradient(
-                            gradient: Gradient(colors: [
-                                gradientColor.opacity(0.05),
-                                gradientColor.opacity(0.2)
-                            ]),
-                            center: .center,
-                            startRadius: 55,
-                            endRadius: 122
-                        )
-                    }
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(strokeColor, lineWidth: 8)
-                )
-                .cornerRadius(8)
-        }
-        .frame(height: 55)
     }
 }
 

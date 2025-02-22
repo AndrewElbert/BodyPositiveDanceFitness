@@ -22,7 +22,6 @@ struct AboutView: View, ActionableView {
     var onAction: ((Action) -> Void)?
 
     var body: some View {
-
         ZStack {
             NavigationStack {
                 contentView
@@ -44,17 +43,19 @@ struct AboutView: View, ActionableView {
     }
 
     private var contentView: some View {
+
         ScrollView {
             VStack(spacing: 22) {
                 headerTitle
                 rainbowButtonSection
-                cyanButtonSection
+                coloredButtonSection
             }
             .padding()
         }
     }
 
     private var headerTitle: some View {
+
         VStack(spacing: 0) {
             Text(Constants.About.pageHeader)
                 .font(.sfProDisplayBold(size: 22))
@@ -82,11 +83,25 @@ struct AboutView: View, ActionableView {
         }
     }
 
-    private var cyanButtonSection: some View {
+    private var coloredButtonSection: some View {
 
-        ForEach(Array(viewState.sections)) { section in
-            cyanButton(section: section) { section in
-                handleButtonTap(section)
+        VStack(spacing: 20) {
+            ForEach(Array(viewState.sections.prefix(2))) { section in
+                ColoredButton(
+                    title: section.title,
+                    action: { handleButtonTap(section) },
+                    strokeColor: Constants.Colors.darkerCyan,
+                    gradientColor: Constants.Colors.neonCyan
+                )
+            }
+
+            ForEach(Array(viewState.sections.suffix(2))) { section in
+                ColoredButton(
+                    title: section.title,
+                    action: { handleButtonTap(section) },
+                    strokeColor: .orange,
+                    gradientColor: .orange
+                )
             }
         }
     }
@@ -112,6 +127,7 @@ struct AboutView: View, ActionableView {
 }
 
 struct RainbowButton: View {
+
     let title: String
     let onTap: () -> Void
 
@@ -120,11 +136,11 @@ struct RainbowButton: View {
             Text(title)
                 .font(.sfProRoundedTextSemibold(size: 22))
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(.vertical, 16)
                 .foregroundColor(.black)
                 .background(Color.white)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
                         .stroke(
                             LinearGradient(
                                 gradient: Gradient(
@@ -133,49 +149,11 @@ struct RainbowButton: View {
                                 startPoint: .leading,
                                 endPoint: .trailing
                             ),
-                            lineWidth: 6
+                            lineWidth: 8
                         )
                 )
-                .cornerRadius(8)
+                .cornerRadius(16)
         }
-    }
-}
-
-struct cyanButton: View {
-
-    let section: AboutMainSectionModel
-    let onTap: (AboutMainSectionModel) -> Void
-
-    var body: some View {
-        Button {
-            onTap(section)
-        } label: {
-            Text(section.title)
-                .font(.sfProRoundedTextSemibold(size: 22))
-                .frame(maxWidth: .infinity)
-                .padding()
-                .foregroundColor(.black)
-                .background(buttonBackground)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Constants.Colors.darkerCyan, lineWidth: 6)
-                )
-                .cornerRadius(8)
-        }
-    }
-
-    private var buttonBackground: some View {
-        ZStack {
-            Color.white
-            RadialGradient(
-                gradient: Gradient(colors: [
-                    Constants.Colors.neonCyan.opacity(0.05),
-                    Constants.Colors.neonCyan.opacity(0.2)
-                ]),
-                center: .center,
-                startRadius: 55,
-                endRadius: 122
-            )
-        }
+        .frame(height: 60)
     }
 }

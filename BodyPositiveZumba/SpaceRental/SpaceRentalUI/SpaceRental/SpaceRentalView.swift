@@ -27,16 +27,19 @@ struct SpaceRentalView: View, ActionableView {
     private var buttonGradient: some View {
 
         ZStack {
-            Color.white
-            RadialGradient(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(.white)
+                .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
+            LinearGradient(
                 gradient: Gradient(colors: [
-                    Constants.Colors.neonCyan.opacity(0.05),
-                    Constants.Colors.neonCyan.opacity(0.2)
+                    Constants.Colors.neonCyan.opacity(0.01),
+                    Constants.Colors.neonCyan.opacity(0.33)
                 ]),
-                center: .center,
-                startRadius: 55,
-                endRadius: 122
+                startPoint: .top,
+                endPoint: .bottom
             )
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(Constants.Colors.neonCyan, lineWidth: 8)
         }
     }
 
@@ -120,6 +123,7 @@ struct SpaceRentalView: View, ActionableView {
                     dismiss()
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 
@@ -168,11 +172,7 @@ struct SpaceRentalView: View, ActionableView {
                 .padding(.vertical, 12)
                 .frame(maxWidth: .infinity)
                 .background(buttonGradient)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Constants.Colors.neonCyan, lineWidth: 6)
-                )
-                .cornerRadius(10)
+                .cornerRadius(16)
         }
     }
 

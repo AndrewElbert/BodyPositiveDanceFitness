@@ -35,6 +35,7 @@ struct ContactView: View, ActionableView {
                 ToolbarButton.backButton { dismiss() }
                 ToolbarButton.closeButton { dismiss() }
             }
+            .preferredColorScheme(.light)
         }
     }
 

@@ -13,21 +13,13 @@ struct TeamView: View, ActionableView {
         case toggleBio
     }
 
-    var onAction: ((Action) -> Void)?
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) private var colorScheme
     @Binding var viewState: TeamViewState
+    var onAction: ((Action) -> Void)?
 
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-    }
-
-    public init(
-        viewState: Binding<TeamViewState>,
-        onAction: ((Action) -> Void)? = nil
-    ) {
-        self._viewState = viewState
-        self.onAction = onAction
     }
 
     var body: some View {
@@ -54,6 +46,7 @@ struct TeamView: View, ActionableView {
         .sheet(item: $viewState.bookingURL) { booking in
             WebViewContainer(url: booking.url, title: booking.title)
         }
+        .preferredColorScheme(.light)
     }
 }
 
@@ -64,7 +57,7 @@ private extension TeamView {
             if viewState.showCarousel {
                 carouselSection
                     .transition(.opacity)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 100)
                 bioSection
                     .transition(.opacity)
             }

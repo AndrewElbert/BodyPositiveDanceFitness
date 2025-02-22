@@ -51,6 +51,7 @@ struct ClassesView: View, ActionableView {
                     dismissSwipeAnimationAfterDelay()
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 }
@@ -80,11 +81,11 @@ private extension ClassesView {
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 ),
-                                lineWidth: 5
+                                lineWidth: 8
                             )
                     )
                     .cornerRadius(8)
-                    .shadow(radius: 7)
+                    .shadow(radius: 2)
             }
             .buttonStyle(PressableButton())
         }

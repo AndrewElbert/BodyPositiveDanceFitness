@@ -51,6 +51,7 @@ struct WhoAreWeView: View {
                         dismiss()
                     }
                 }
+                .preferredColorScheme(.light)
             }
         }
     }

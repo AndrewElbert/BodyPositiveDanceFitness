@@ -49,6 +49,7 @@ struct AllClassesView: View {
                     dismiss()
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 }
