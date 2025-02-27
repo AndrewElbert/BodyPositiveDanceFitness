@@ -158,22 +158,18 @@ struct HomeView: View {
             ColoredButton(
                 title: Constants.Home.viewClassesButton,
                 action: { onAction?(.viewClasses) },
-                strokeColor: Color.yellow,
-                gradientColor: Color.yellow
+                strokeColor: .orange,
+                gradientColor: .orange
             )
             VStack(spacing: 2) {
-                ColoredButton(
-                    title: Constants.Home.viewPassesButton,
-                    action: { onAction?(.bookClass) },
-                    strokeColor: Color(red: 1.0, green: 0.6, blue: 0.0),
-                    gradientColor: Color(red: 1.0, green: 0.35, blue: 0.0)
-
-                )
+                ModernPassesButton {
+                    onAction?(.bookClass)
+                }
                 Text(Constants.Home.passesBio)
                     .font(.sfProDisplayRegular(size: 18))
                     .foregroundColor(.gray)
                     .italic()
-                    .padding(.top, 4)
+                    .padding(.top, 6)
             }
             HStack(spacing: 16) {
                 HomeRainbowButton(title: Constants.Home.aboutButton) {
@@ -190,7 +186,9 @@ struct HomeView: View {
 
     private var expandablePhotoButton: some View {
         Button(action: {
-            viewState.isCarouselExpanded.toggle()
+            withAnimation(.spring(duration: 0.8)) {
+                viewState.isCarouselExpanded.toggle()
+            }
         }) {
             HStack(spacing: 4) {
                 Text(Constants.Home.photosButton)
@@ -271,6 +269,111 @@ struct HomeView: View {
         }
     }
 }
+
+struct ModernPassesButton: View {
+    @State private var isPressed = false
+    @State private var isAnimating = false
+    let action: () -> Void
+    
+    // Create vibrant gradient colors for text and icons
+    private var textGradient: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color(red: 0.98, green: 0.36, blue: 0.83), // Pink
+                Color(red: 0.55, green: 0.31, blue: 0.95), // Purple
+                Color(red: 0.2, green: 0.5, blue: 1.0)     // Blue
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+    
+    // Matching icon gradient that stays consistent with text
+    private var iconGradient: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color(red: 0.98, green: 0.36, blue: 0.83), // Pink
+                Color(red: 0.55, green: 0.31, blue: 0.95), // Purple
+                Color(red: 0.2, green: 0.5, blue: 1.0)     // Blue
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+    
+    var body: some View {
+        Button(action: {
+            // Button press animations
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                isPressed = true
+            }
+            
+            // Reset press state and trigger action
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    isPressed = false
+                }
+                action()
+            }
+            
+            // Add haptic feedback
+            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+            impactFeedback.impactOccurred()
+        }) {
+            HStack(spacing: 20) {
+                // Ticket icon with rotation animation
+                Image(systemName: "ticket.fill")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundStyle(iconGradient)
+                    .rotationEffect(.degrees(isAnimating ? 5 : -5))
+                    .animation(
+                        Animation.easeInOut(duration: 1.0)
+                            .repeatForever(autoreverses: true),
+                        value: isAnimating
+                    )
+                    .scaleEffect(isPressed ? 0.9 : 1)
+                
+                // Text with gradient
+                Text("Explore Passes")
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .foregroundStyle(textGradient)
+                    .scaleEffect(isPressed ? 0.95 : 1)
+                    .overlay(
+                        // Add subtle glow effect when pressed
+                        Text("Explore Passes")
+                            .font(.system(size: 24, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white)
+                            .blur(radius: 4)
+                            .opacity(isPressed ? 0.7 : 0)
+                    )
+                
+                // Sparkles icon with vertical animation and matching gradient
+                Image(systemName: "sparkles")
+                    .font(.system(size: 20))
+                    .foregroundStyle(iconGradient)
+                    .offset(y: isAnimating ? -1 : 1)
+                    .animation(
+                        Animation.easeInOut(duration: 0.8)
+                            .repeatForever(autoreverses: true),
+                        value: isAnimating
+                    )
+                    .scaleEffect(isPressed ? 0.9 : 1)
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .contentShape(Rectangle())
+            .scaleEffect(isPressed ? 0.97 : 1)
+            // Add subtle drop shadow to the entire text
+            .shadow(color: Color(red: 0.6, green: 0.2, blue: 0.9).opacity(0.5), radius: 10, x: 0, y: 4)
+        }
+        .buttonStyle(PlainButtonStyle()) // Important to remove default button styling
+        .onAppear {
+            isAnimating = true
+        }
+    }
+}
+
+
 
 struct HomeRainbowButton: View {
     let title: String

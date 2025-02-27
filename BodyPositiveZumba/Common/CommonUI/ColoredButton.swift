@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ColoredButton: View {
-
     let title: String
     let action: () -> Void
     let strokeColor: Color
@@ -28,29 +27,38 @@ struct ColoredButton: View {
             }
         }) {
             Text(title)
-                .font(.sfProRoundedTextSemibold(size: 22))
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
                 .background {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(colorScheme == .dark ? .black : .white)
-                            .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
+                        // The animated background with a rotating gradient and animated dots.
+                        CoolAnimatedBackground()
+                            .cornerRadius(36)
+                        
+                        // Semi-transparent base layer for a blended look.
+                        RoundedRectangle(cornerRadius: 36, style: .continuous)
+                            .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.4))
+                        
+                        // An overlay gradient for extra depth.
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                gradientColor.opacity(0.001),
-                                gradientColor.opacity(0.33)
+                                gradientColor.opacity(0.1),
+                                gradientColor.opacity(0.3)
                             ]),
-                            startPoint: .top,
-                            endPoint: .bottom
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
                         )
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(strokeColor, lineWidth: 8)
+                        .cornerRadius(36)
+                        
+                        // A border stroke.
+                        RoundedRectangle(cornerRadius: 36, style: .continuous)
+                            .stroke(strokeColor, lineWidth: 3)
                     }
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
+                .contentShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
         }
         .buttonStyle(ScaleButtonStyle())
         .frame(height: 60)
@@ -65,3 +73,46 @@ struct ScaleButtonStyle: ButtonStyle {
             .animation(.spring(response: 0.2, dampingFraction: 0.7), value: configuration.isPressed)
     }
 }
+
+// MARK: - Cool Animated Background
+
+struct CoolAnimatedBackground: View {
+    @State private var rotation: Double = 0
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                // Rotating angular gradient for a vibrant, shifting background.
+                AngularGradient(
+                    gradient: Gradient(colors: [
+                                            .red,
+                                            Constants.Colors.darkOrange,
+                                            .orange,
+                                            .yellow,
+                                            .green,
+                                            .mint,
+                                            Constants.Colors.neonCyan,
+                                            .teal,
+                                            .blue,
+                                            .indigo,
+                                            .purple,
+                                            .pink,
+                                            .red // Loop back to red for continuity
+                                        ]),
+                    center: .center,
+                    angle: .degrees(rotation)
+                )
+                .animation(Animation.linear(duration: 30).repeatForever(autoreverses: false), value: rotation)
+                .onAppear {
+                    rotation = 360
+                }
+                
+                // Overlay of animated, pulsating dots.
+
+            }
+            .clipped()
+        }
+    }
+}
+
+
