@@ -277,7 +277,7 @@ struct Constants {
         static let pageBio: String = "and welcome to"
         static let bookClassesButton: String = "Book A Class!"
         static let viewClassesButton: String = "View Classes"
-        static let viewPassesButton: String = "View Passes"
+        static let viewPassesButton: String = "Explore Passes"
         static let aboutButton: String = "About Us!"
         static let exploreButton: String = "Explore More!"
         static let photosButton: String = "View Photos"

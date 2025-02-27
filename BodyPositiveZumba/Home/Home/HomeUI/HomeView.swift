@@ -64,6 +64,7 @@ struct HomeView: View {
 
                             if viewState.isCarouselExpanded {
                                 carouselSection
+                                    .id("carouselSection")
                                     .transition(.opacity)
                             }
                         }
@@ -151,21 +152,22 @@ struct HomeView: View {
             ColoredButton(
                 title: Constants.Home.bookClassesButton,
                 action: { onAction?(.joinNow) },
-                strokeColor: Color.orange,
-                gradientColor: Color.orange
+                strokeColor: Constants.Colors.darkerCyan,
+                gradientColor: Constants.Colors.neonCyan
             )
             ColoredButton(
                 title: Constants.Home.viewClassesButton,
                 action: { onAction?(.viewClasses) },
-                strokeColor: Constants.Colors.darkerCyan,
-                gradientColor: Constants.Colors.neonCyan
+                strokeColor: Color.yellow,
+                gradientColor: Color.yellow
             )
             VStack(spacing: 2) {
                 ColoredButton(
                     title: Constants.Home.viewPassesButton,
                     action: { onAction?(.bookClass) },
-                    strokeColor: Constants.Colors.darkerCyan,
-                    gradientColor: Constants.Colors.neonCyan
+                    strokeColor: Color(red: 1.0, green: 0.6, blue: 0.0),
+                    gradientColor: Color(red: 1.0, green: 0.35, blue: 0.0)
+
                 )
                 Text(Constants.Home.passesBio)
                     .font(.sfProDisplayRegular(size: 18))
@@ -188,9 +190,7 @@ struct HomeView: View {
 
     private var expandablePhotoButton: some View {
         Button(action: {
-            withAnimation(.spring(duration: 0.8)) {
-                viewState.isCarouselExpanded.toggle()
-            }
+            viewState.isCarouselExpanded.toggle()
         }) {
             HStack(spacing: 4) {
                 Text(Constants.Home.photosButton)
@@ -239,6 +239,12 @@ struct HomeView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 withAnimation(.easeIn(duration: 1.11)) {
                     viewState.showCarousel = true
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.spring(duration: 0.8)) {
+                        proxy.scrollTo("carouselSection", anchor: .top)
+                    }
                 }
             }
         } else {
