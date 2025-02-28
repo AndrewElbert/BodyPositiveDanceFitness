@@ -36,10 +36,10 @@ struct ColoredButton: View {
                         gradientColor.opacity(0.65)
                         StaticGradientBackground()
                             .cornerRadius(36)
-                        
+
                         RoundedRectangle(cornerRadius: 36, style: .continuous)
                             .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.4))
-                        
+
                         RoundedRectangle(cornerRadius: 36, style: .continuous)
                             .stroke(strokeColor, lineWidth: 8)
                     }
@@ -83,5 +83,3 @@ struct StaticGradientBackground: View {
         )
     }
 }
-
-

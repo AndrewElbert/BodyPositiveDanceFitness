@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View, ActionableView {
-    
+
     enum Action {
         case handleTeamButtonTap
         case handleClassesButtonTap
@@ -16,11 +16,11 @@ struct AboutView: View, ActionableView {
         case handleWhoAreWeTap
         case handleWhatWeDoTap
     }
-    
+
     @Binding var viewState: AboutViewState
     @Environment(\.dismiss) private var dismiss
     var onAction: ((Action) -> Void)?
-    
+
     var body: some View {
         ZStack {
             NavigationStack {
@@ -41,7 +41,7 @@ struct AboutView: View, ActionableView {
         }
         .preferredColorScheme(.light)
     }
-    
+
     private var contentView: some View {
         ScrollView {
             VStack(spacing: 18) {
@@ -52,7 +52,7 @@ struct AboutView: View, ActionableView {
             .padding()
         }
     }
-    
+
     private var headerTitle: some View {
         VStack(spacing: 0) {
             Text(Constants.About.pageHeader)
@@ -64,7 +64,7 @@ struct AboutView: View, ActionableView {
         .padding(.top, 6)
         .padding(.bottom, 16)
     }
-    
+
     private var rainbowButtonSection: some View {
         VStack(spacing: 20) {
             RainbowButton(title: Constants.About.whoPageTitle) {
@@ -75,7 +75,7 @@ struct AboutView: View, ActionableView {
             }
         }
     }
-    
+
     private var coloredButtonSection: some View {
         VStack(spacing: 20) {
             ForEach(Array(viewState.sections.prefix(2))) { section in
@@ -96,7 +96,7 @@ struct AboutView: View, ActionableView {
             }
         }
     }
-    
+
     private func handleButtonTap(_ section: AboutMainSectionModel) {
         switch section.identifier {
         case Constants.About.actionButton1:
@@ -119,7 +119,7 @@ struct AboutView: View, ActionableView {
 struct RainbowButton: View {
     let title: String
     let onTap: () -> Void
-    
+
     var body: some View {
         Button(action: onTap) {
             Text(title)

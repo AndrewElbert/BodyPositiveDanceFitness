@@ -11,12 +11,12 @@ struct HomeView: View {
     enum Action {
         case viewClasses, about, joinNow, bookClass
     }
-    
+
     let coordinator: SideDrawerCoordinator
     @Binding private var viewState: HomeViewState
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
     @GestureState private var dragState = DragState.inactive
-    
+
     enum DragState {
         case inactive
         case dragging(translation: CGFloat)
@@ -29,16 +29,16 @@ struct HomeView: View {
             }
         }
     }
-    
+
     var onAction: ((Action) -> Void)?
-    
+
     init(coordinator: SideDrawerCoordinator, viewState: Binding<HomeViewState>, onAction: ((Action) -> Void)? = nil) {
         self.coordinator = coordinator
         self._viewState = viewState
         self.onAction = onAction
         self._sideDrawerViewModel = StateObject(wrappedValue: SideDrawerViewModel(coordinator: coordinator))
     }
-    
+
     var body: some View {
         if viewState.deathScreenEnabled {
             MaintenanceView()
@@ -74,7 +74,7 @@ struct HomeView: View {
             .preferredColorScheme(.light)
         }
     }
-    
+
     private var mainContent: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -85,7 +85,7 @@ struct HomeView: View {
             .gesture(createSideDrawerGesture())
         }
     }
-    
+
     private var contentStack: some View {
         VStack(spacing: 0) {
             greetingView
@@ -98,7 +98,7 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: viewState.isCarouselExpanded ? nil : .infinity)
     }
-    
+
     private var greetingView: some View {
         VStack(spacing: 11) {
             Text(viewState.currentGreeting)
@@ -113,11 +113,11 @@ struct HomeView: View {
                 .italic()
         }
     }
-    
+
     private var logoView: some View {
         AnimatedLogoView().padding(.bottom, 22)
     }
-    
+
     private var buttonStack: some View {
         VStack(spacing: 20) {
             ColoredButton(title: Constants.Home.viewClassesButton, action: { onAction?(.viewClasses) }, strokeColor: Constants.Colors.darkerCyan, gradientColor: Constants.Colors.neonCyan)
@@ -144,7 +144,7 @@ struct HomeView: View {
         .padding(.top, 16)
         .padding(.horizontal, 24)
     }
-    
+
     private var expandablePhotoButton: some View {
         Button(action: {
             withAnimation(.spring(duration: 0.8)) {
@@ -165,7 +165,7 @@ struct HomeView: View {
         }
         .zIndex(1)
     }
-    
+
     private var carouselSection: some View {
         AnimatedCarouselComponent(viewModel: AnimatedCarouselViewModel(viewState: $viewState.animatedCarouselViewState))
             .frame(height: 250)
@@ -173,7 +173,7 @@ struct HomeView: View {
             .padding(.vertical, 30)
             .opacity(viewState.showCarousel ? 1 : 0)
     }
-    
+
     private func createSideDrawerGesture() -> some Gesture {
         DragGesture(minimumDistance: 30, coordinateSpace: .local)
             .updating($dragState) { value, state, _ in
@@ -186,7 +186,7 @@ struct HomeView: View {
                 if value.translation.width > threshold { sideDrawerViewModel.openMenu() }
             }
     }
-    
+
     private func handleCarouselExpansionChange(_ isExpanded: Bool, proxy: ScrollViewProxy) {
         if isExpanded {
             viewState.showCarousel = false
@@ -204,7 +204,7 @@ struct HomeView: View {
             collapseCarousel(proxy: proxy)
         }
     }
-    
+
     private func collapseCarousel(proxy: ScrollViewProxy) {
         withAnimation(.easeOut(duration: 0.3)) {
             viewState.showCarousel = false
@@ -213,11 +213,11 @@ struct HomeView: View {
             proxy.scrollTo(Constants.Home.proxy, anchor: .top)
         }
     }
-    
+
     private func resetCarouselState() {
         viewState.showCarousel = false
     }
-    
+
     private func handleSideDrawerDrag(_ translation: CGFloat) {
         if !sideDrawerViewModel.viewState.isMenuOpen {
             sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
@@ -226,7 +226,7 @@ struct HomeView: View {
 }
 
 struct AnimatedLogoView: View {
-    
+
     var height: CGFloat = 222
     @State private var animateLogo = false
 
@@ -251,15 +251,15 @@ struct ModernPassesButton: View {
     @State private var isPressed = false
     @State private var isAnimating = false
     let action: () -> Void
-    
+
     private var textGradient: LinearGradient {
         LinearGradient(gradient: Gradient(colors: [Color(red: 0.98, green: 0.36, blue: 0.83), Color(red: 0.55, green: 0.31, blue: 0.95), Color(red: 0.2, green: 0.5, blue: 1.0)]), startPoint: .topLeading, endPoint: .bottomTrailing)
     }
-    
+
     private var iconGradient: LinearGradient {
         LinearGradient(gradient: Gradient(colors: [Color(red: 0.98, green: 0.36, blue: 0.83), Color(red: 0.55, green: 0.31, blue: 0.95), Color(red: 0.2, green: 0.5, blue: 1.0)]), startPoint: .topLeading, endPoint: .bottomTrailing)
     }
-    
+
     var body: some View {
         Button(action: {
             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
@@ -314,7 +314,7 @@ struct ModernPassesButton: View {
 struct HomeRainbowButton: View {
     let title: String
     let onTap: () -> Void
-    
+
     var body: some View {
         Button(action: onTap) {
             Text(title)
@@ -339,4 +339,3 @@ struct HomeRainbowButton: View {
         .frame(height: 55)
     }
 }
-
