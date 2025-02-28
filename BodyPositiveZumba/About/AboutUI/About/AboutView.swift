@@ -82,7 +82,7 @@ struct AboutView: View, ActionableView {
                 ColoredButton(
                     title: section.title,
                     action: { handleButtonTap(section) },
-                    strokeColor: Constants.Colors.darkerCyan,
+                    strokeColor: Constants.Colors.navy,
                     gradientColor: Constants.Colors.neonCyan
                 )
             }
@@ -90,7 +90,7 @@ struct AboutView: View, ActionableView {
                 ColoredButton(
                     title: section.title,
                     action: { handleButtonTap(section) },
-                    strokeColor: .orange,
+                    strokeColor: Constants.Colors.navy,
                     gradientColor: .orange
                 )
             }

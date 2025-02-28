@@ -67,6 +67,8 @@ struct Constants {
             .purple,
             .pink
         ]
+        
+        static let navy = Color(red: 0.0, green: 0.0, blue: 128.0/255.0)
         static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0)
         static let darkerCyan: Color = Color(red: 0.0, green: 0.94, blue: 0.94)
         static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)

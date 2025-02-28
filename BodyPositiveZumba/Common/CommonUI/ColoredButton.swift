@@ -33,7 +33,6 @@ struct ColoredButton: View {
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
                 .background {
                     ZStack {
-                        gradientColor.opacity(0.65)
                         StaticGradientBackground()
                             .cornerRadius(36)
 
@@ -41,7 +40,7 @@ struct ColoredButton: View {
                             .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.4))
 
                         RoundedRectangle(cornerRadius: 36, style: .continuous)
-                            .stroke(strokeColor, lineWidth: 8)
+                            .stroke(strokeColor, lineWidth: 5)
                     }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
@@ -65,7 +64,6 @@ struct StaticGradientBackground: View {
     var body: some View {
         LinearGradient(
             gradient: Gradient(colors: [
-                .red.opacity(0.5),
                 Constants.Colors.darkOrange.opacity(0.5),
                 .orange.opacity(0.5),
                 .yellow.opacity(0.5),
@@ -76,7 +74,8 @@ struct StaticGradientBackground: View {
                 .blue.opacity(0.5),
                 .indigo.opacity(0.5),
                 .purple.opacity(0.5),
-                .pink.opacity(0.5)
+                .pink.opacity(0.5),
+                .red.opacity(0.5)
             ]),
             startPoint: .leading,
             endPoint: .trailing

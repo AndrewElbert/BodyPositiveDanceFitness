@@ -120,8 +120,20 @@ struct HomeView: View {
 
     private var buttonStack: some View {
         VStack(spacing: 20) {
-            ColoredButton(title: Constants.Home.viewClassesButton, action: { onAction?(.viewClasses) }, strokeColor: Constants.Colors.darkerCyan, gradientColor: Constants.Colors.neonCyan)
-            ColoredButton(title: Constants.Home.viewClassesButton, action: { onAction?(.viewClasses) }, strokeColor: .orange, gradientColor: .orange)
+            ColoredButton(
+                title: Constants.Home.viewClassesButton,
+                action: {
+                    onAction?(.viewClasses)
+                },
+                strokeColor: Constants.Colors.navy,
+                gradientColor: Constants.Colors.neonCyan)
+            ColoredButton(
+                title: Constants.Home.viewClassesButton,
+                action: {
+                    onAction?(.viewClasses)
+                },
+                strokeColor: Constants.Colors.navy,
+                gradientColor: Constants.Colors.neonCyan)
             VStack(spacing: 2) {
                 ModernPassesButton {
                     onAction?(.bookClass)
