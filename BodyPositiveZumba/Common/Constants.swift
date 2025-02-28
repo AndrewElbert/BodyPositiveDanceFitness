@@ -68,7 +68,7 @@ struct Constants {
             .pink
         ]
         static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0)
-        static let darkerCyan: Color = Color(red: 0.0, green: 0.88, blue: 0.88)
+        static let darkerCyan: Color = Color(red: 0.0, green: 0.94, blue: 0.94)
         static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)
 
     }
@@ -279,7 +279,7 @@ struct Constants {
         static let viewClassesButton: String = "View Classes"
         static let viewPassesButton: String = "Explore Passes"
         static let aboutButton: String = "About Us!"
-        static let exploreButton: String = "Explore More!"
+        static let exploreButton: String = "Discover More!"
         static let photosButton: String = "View Photos"
         static let passesBio: String = "save money - purchase a pass!"
         static let tradeMarkSloganSize: CGFloat = 22

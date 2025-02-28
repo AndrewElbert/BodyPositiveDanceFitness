@@ -33,28 +33,15 @@ struct ColoredButton: View {
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
                 .background {
                     ZStack {
-                        // The animated background with a rotating gradient and animated dots.
-                        CoolAnimatedBackground()
+                        gradientColor.opacity(0.65)
+                        StaticGradientBackground()
                             .cornerRadius(36)
                         
-                        // Semi-transparent base layer for a blended look.
                         RoundedRectangle(cornerRadius: 36, style: .continuous)
                             .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.4))
                         
-                        // An overlay gradient for extra depth.
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                gradientColor.opacity(0.1),
-                                gradientColor.opacity(0.3)
-                            ]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                        .cornerRadius(36)
-                        
-                        // A border stroke.
                         RoundedRectangle(cornerRadius: 36, style: .continuous)
-                            .stroke(strokeColor, lineWidth: 3)
+                            .stroke(strokeColor, lineWidth: 8)
                     }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
@@ -74,44 +61,26 @@ struct ScaleButtonStyle: ButtonStyle {
     }
 }
 
-// MARK: - Cool Animated Background
-
-struct CoolAnimatedBackground: View {
-    @State private var rotation: Double = 0
-
+struct StaticGradientBackground: View {
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                // Rotating angular gradient for a vibrant, shifting background.
-                AngularGradient(
-                    gradient: Gradient(colors: [
-                                            .red,
-                                            Constants.Colors.darkOrange,
-                                            .orange,
-                                            .yellow,
-                                            .green,
-                                            .mint,
-                                            Constants.Colors.neonCyan,
-                                            .teal,
-                                            .blue,
-                                            .indigo,
-                                            .purple,
-                                            .pink,
-                                            .red // Loop back to red for continuity
-                                        ]),
-                    center: .center,
-                    angle: .degrees(rotation)
-                )
-                .animation(Animation.linear(duration: 30).repeatForever(autoreverses: false), value: rotation)
-                .onAppear {
-                    rotation = 360
-                }
-                
-                // Overlay of animated, pulsating dots.
-
-            }
-            .clipped()
-        }
+        LinearGradient(
+            gradient: Gradient(colors: [
+                .red.opacity(0.5),
+                Constants.Colors.darkOrange.opacity(0.5),
+                .orange.opacity(0.5),
+                .yellow.opacity(0.5),
+                .green.opacity(0.5),
+                .mint.opacity(0.5),
+                Constants.Colors.neonCyan.opacity(0.5),
+                .teal.opacity(0.5),
+                .blue.opacity(0.5),
+                .indigo.opacity(0.5),
+                .purple.opacity(0.5),
+                .pink.opacity(0.5)
+            ]),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
     }
 }
 
