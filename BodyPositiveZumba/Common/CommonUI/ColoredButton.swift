@@ -64,18 +64,18 @@ struct StaticGradientBackground: View {
     var body: some View {
         LinearGradient(
             gradient: Gradient(colors: [
-                Constants.Colors.darkOrange.opacity(0.5),
-                .orange.opacity(0.5),
-                .yellow.opacity(0.5),
-                .green.opacity(0.5),
-                .mint.opacity(0.5),
-                Constants.Colors.neonCyan.opacity(0.5),
-                .teal.opacity(0.5),
-                .blue.opacity(0.5),
-                .indigo.opacity(0.5),
-                .purple.opacity(0.5),
-                .pink.opacity(0.5),
-                .red.opacity(0.5)
+                Constants.Colors.darkOrange.opacity(0.3),
+                .orange.opacity(0.3),
+                .yellow.opacity(0.3),
+                .green.opacity(0.3),
+                .mint.opacity(0.3),
+                Constants.Colors.neonCyan.opacity(0.3),
+                .teal.opacity(0.3),
+                .blue.opacity(0.3),
+                .indigo.opacity(0.3),
+                .purple.opacity(0.3),
+                .pink.opacity(0.3),
+                .red.opacity(0.3)
             ]),
             startPoint: .leading,
             endPoint: .trailing

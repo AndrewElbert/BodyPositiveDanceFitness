@@ -121,9 +121,9 @@ struct HomeView: View {
     private var buttonStack: some View {
         VStack(spacing: 20) {
             ColoredButton(
-                title: Constants.Home.viewClassesButton,
+                title: Constants.Home.bookClassesButton,
                 action: {
-                    onAction?(.viewClasses)
+                    onAction?(.joinNow)
                 },
                 strokeColor: Constants.Colors.navy,
                 gradientColor: Constants.Colors.neonCyan)
@@ -143,6 +143,7 @@ struct HomeView: View {
                     .foregroundColor(.gray)
                     .italic()
                     .padding(.top, 6)
+                    .padding(.bottom, 6)
             }
             HStack(spacing: 16) {
                 HomeRainbowButton(title: Constants.Home.aboutButton) {
@@ -290,7 +291,7 @@ struct ModernPassesButton: View {
                 Image(systemName: "ticket.fill")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(iconGradient)
-                    .rotationEffect(.degrees(isAnimating ? 5 : -5))
+                    .rotationEffect(.degrees(isAnimating ? 15 : -15))
                     .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
                     .scaleEffect(isPressed ? 0.9 : 1)
                 Text("Explore Passes")
@@ -304,12 +305,13 @@ struct ModernPassesButton: View {
                             .blur(radius: 4)
                             .opacity(isPressed ? 0.7 : 0)
                     )
-                Image(systemName: "sparkles")
-                    .font(.system(size: 20))
+                Image(systemName: "music.note.list")
+                    .font(.system(size: 24))
                     .foregroundStyle(iconGradient)
-                    .offset(y: isAnimating ? -1 : 1)
-                    .animation(Animation.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: isAnimating)
+                    .rotationEffect(.degrees(isAnimating ? 15 : -15))
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
                     .scaleEffect(isPressed ? 0.9 : 1)
+
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
