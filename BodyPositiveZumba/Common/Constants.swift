@@ -363,9 +363,9 @@ struct Constants {
 
     enum Partners {
 
-        static let pageTitle: String = "Partners"
+        static let pageTitle: String = "BPDF Partners"
         static let buttonText: String = "Visit Website"
-        static let pageBio: String = "Explore our amazing partners below!"
+        static let pageBio: String = "Discover our incredible partners below!"
     }
 
     // MARK: SideDrawer

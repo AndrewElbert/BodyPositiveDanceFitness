@@ -57,7 +57,7 @@ private extension TeamView {
             if viewState.showCarousel {
                 carouselSection
                     .transition(.opacity)
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 20)
                 bioSection
                     .transition(.opacity)
             }
@@ -106,7 +106,8 @@ private extension TeamView {
             }) {
                 HStack(spacing: 8) {
                     Text("Learn more about \(viewState.bios[viewState.normalizedIndex].firstName)!")
-                        .font(.sfProRoundedTextMedium(size: 16))
+                        .font(.system(size: 18, weight: .medium))
+                        .italic()
                     Image(systemName: "chevron.right")
                         .rotationEffect(.degrees(viewState.isBioExpanded ? 90 : 0))
                 }

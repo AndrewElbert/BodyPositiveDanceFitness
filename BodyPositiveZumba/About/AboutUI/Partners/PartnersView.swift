@@ -14,7 +14,7 @@ struct PartnersView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var titleOpacity: Double = 0
     @State private var bioOpacity: Double = 0
-    @State private var carouselScale: CGFloat = 0.95
+    @State private var carouselScale: CGFloat = 0.5
     
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
@@ -22,23 +22,38 @@ struct PartnersView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 0) {
                 Text(Constants.Partners.pageTitle)
-                    .font(.sfProDisplayBold(size: 40))
-                    .foregroundColor(adaptiveTextColor)
+                    .font(.sfProDisplayBold(size: 45))
+                    .foregroundColor(.clear)
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: Constants.Colors.rainbow),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                        .mask(
+                            Text(Constants.Partners.pageTitle)
+                                .font(.sfProDisplayBold(size: 45))
+                        )
+                    )
                     .padding(.top, 26)
-                    .padding(.bottom, 11)
+                    .padding(.bottom, 18)
                     .opacity(titleOpacity)
                     .blur(radius: 1.0 - titleOpacity)
-                    .shadow(color: .orange.opacity(0.3), radius: 2, x: 0, y: 1)
+
                 
                 Text(Constants.Partners.pageBio)
-                    .font(.sfProBodyTextRegular(size: 16))
+                    .font(.sfProBodyTextRegular(size: 18))
                     .foregroundStyle(.gray)
                     .italic()
                     .padding(.bottom, 33)
                     .opacity(bioOpacity)
                     .blur(radius: 1.0 - bioOpacity)
+                
+                Divider()
+                    .background(Color.gray)
+                    .padding(.bottom, 30)
                 
                 SwipableCarouselComponent<AnyView, Partner>(
                     viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
@@ -47,10 +62,10 @@ struct PartnersView: View {
                         PartnersCard(partner: partner, viewState: $viewState)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(isCurrentCard ? Color.orange : Color.clear,
-                                            lineWidth: isCurrentCard ? 5 : 0)
+                                    .stroke(isCurrentCard ? Constants.Colors.neonCyan : Color.clear,
+                                            lineWidth: isCurrentCard ? 0.75 : 0)
                             )
-                            .shadow(color: isCurrentCard ? .orange.opacity(0.3) : .black.opacity(0.1),
+                            .shadow(color: isCurrentCard ? Constants.Colors.neonCyan.opacity(0.3) : .black.opacity(0.1),
                                     radius: isCurrentCard ? 12 : 5,
                                     x: 0,
                                     y: isCurrentCard ? 6 : 3)
@@ -64,6 +79,9 @@ struct PartnersView: View {
                 .scaleEffect(carouselScale)
                 
                 Spacer()
+                Divider()
+                    .background(.gray)
+                    .padding(.bottom, 30)
             }
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {

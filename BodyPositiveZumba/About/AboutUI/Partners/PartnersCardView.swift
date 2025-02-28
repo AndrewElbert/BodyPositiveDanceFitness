@@ -27,7 +27,7 @@ private extension PartnersCard {
             .scaledToFit()
             .frame(width: 240, height: 240)
             .padding(.top, 20)
-            .shadow(color: .orange.opacity(0.5), radius: 10)
+            .shadow(color: Constants.Colors.neonCyan.opacity(0.5), radius: 11)
     }
     
     var websiteButton: some View {
@@ -45,11 +45,18 @@ struct AnimatedGradientButton: View {
     @State private var isAnimating = false
     
     private var gradient: LinearGradient {
-        LinearGradient(gradient: Gradient(colors: [
-            Color.orange,
-            Color.yellow,
-            Color(red: 1.0, green: 0.84, blue: 0.0)
-        ]), startPoint: .topLeading, endPoint: .bottomTrailing)
+        LinearGradient(
+            gradient: Gradient(colors: [
+                    Color(red: 0.0, green: 0.65, blue: 0.75),
+                    Color(red: 0.0, green: 0.75, blue: 0.85),
+                    Color(red: 0.0, green: 0.85, blue: 0.95),
+                    Color(red: 0.0, green: 0.95, blue: 1.0),
+                    Color(red: 0.0, green: 1.0, blue: 1.0)
+                ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+
     }
     
     var body: some View {

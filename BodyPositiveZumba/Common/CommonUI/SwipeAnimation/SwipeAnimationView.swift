@@ -12,7 +12,7 @@ struct SwipeAnimationView: View {
     @Binding var viewState: SwipeAnimationViewState
 
     var body: some View {
-        Image(systemName: "hand.point.up")
+        Image(systemName: "hand.point.up.fill")
             .resizable()
             .scaledToFit()
             .frame(width: 65, height: 65)
