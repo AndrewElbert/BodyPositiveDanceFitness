@@ -14,6 +14,9 @@ struct PartnersCard: View {
     var body: some View {
         VStack {
             logoImage
+            Divider()
+                .padding(.top, 26)
+                .padding(.horizontal, 26)
             websiteButton
         }
         .frame(width: 275, height: 450)
@@ -27,7 +30,7 @@ private extension PartnersCard {
             .scaledToFit()
             .frame(width: 240, height: 240)
             .padding(.top, 20)
-            .shadow(color: Constants.Colors.neonCyan.opacity(0.5), radius: 11)
+            //.shadow(color: Constants.Colors.neonCyan.opacity(0.4), radius: 11)
     }
     
     var websiteButton: some View {
@@ -46,13 +49,7 @@ struct AnimatedGradientButton: View {
     
     private var gradient: LinearGradient {
         LinearGradient(
-            gradient: Gradient(colors: [
-                    Color(red: 0.0, green: 0.65, blue: 0.75),
-                    Color(red: 0.0, green: 0.75, blue: 0.85),
-                    Color(red: 0.0, green: 0.85, blue: 0.95),
-                    Color(red: 0.0, green: 0.95, blue: 1.0),
-                    Color(red: 0.0, green: 1.0, blue: 1.0)
-                ]),
+            gradient: Gradient(colors: Constants.Colors.rainbow),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
@@ -71,25 +68,31 @@ struct AnimatedGradientButton: View {
         }) {
             HStack(spacing: 10) {
                 Image(systemName: "globe")
-                    .font(.system(size: 26, weight: .bold))
+                    .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(gradient)
-                    .rotationEffect(.degrees(isAnimating ? 180 : -180))
-                    .animation(Animation.easeInOut(duration: 3.0).repeatForever(autoreverses: true), value: isAnimating)
+                    .rotationEffect(.degrees(isAnimating ? 15 : -15))
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
                     .scaleEffect(isPressed ? 0.9 : 1)
                 Text(Constants.Partners.buttonText)
-                    .font(.sfProRoundedTextBold(size: 30))
+                    .font(.sfProRoundedTextBold(size: 26))
                     .foregroundStyle(gradient)
                     .scaleEffect(isPressed ? 0.95 : 1)
                     .overlay(
                         Text(Constants.Partners.buttonText)
-                            .font(.sfProRoundedTextBold(size: 30))
+                            .font(.sfProRoundedTextBold(size: 24))
                             .foregroundColor(.white)
                             .blur(radius: 4)
                             .opacity(isPressed ? 0.7 : 0)
                     )
+                    .underline()
+                Image(systemName:  "antenna.radiowaves.left.and.right")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundStyle(gradient)
+                    .rotationEffect(.degrees(isAnimating ? 15 : -15))
+                    .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
+                    .scaleEffect(isPressed ? 0.9 : 1)
             }
             .padding(.vertical, 44)
-            .padding(.horizontal, 22)
             .contentShape(Rectangle())
             .scaleEffect(isPressed ? 0.97 : 1)
         }

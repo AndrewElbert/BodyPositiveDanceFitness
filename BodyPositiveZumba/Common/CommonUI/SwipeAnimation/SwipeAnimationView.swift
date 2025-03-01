@@ -16,7 +16,14 @@ struct SwipeAnimationView: View {
             .resizable()
             .scaledToFit()
             .frame(width: 65, height: 65)
-            .foregroundColor(Constants.Colors.neonCyan.opacity(0.8))
+            .foregroundColor(Constants.Colors.neonCyan)
+            .overlay(
+                Image(systemName: "hand.point.up")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 70)
+                    .foregroundColor(.black)
+            )
             .offset(x: viewState.offset)
             .opacity(viewState.opacity)
             .onAppear {
@@ -24,6 +31,7 @@ struct SwipeAnimationView: View {
                     animateCycle()
                 }
             }
+
 
     }
 

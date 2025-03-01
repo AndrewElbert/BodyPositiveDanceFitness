@@ -12,9 +12,6 @@ struct PartnersView: View {
     @Binding var viewState: PartnersViewState
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
-    @State private var titleOpacity: Double = 0
-    @State private var bioOpacity: Double = 0
-    @State private var carouselScale: CGFloat = 0.5
     
     private var adaptiveTextColor: Color {
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
@@ -24,23 +21,22 @@ struct PartnersView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 Text(Constants.Partners.pageTitle)
-                    .font(.sfProDisplayBold(size: 45))
-                    .foregroundColor(.clear)
-                    .overlay(
-                        LinearGradient(
-                            gradient: Gradient(colors: Constants.Colors.rainbow),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                        .mask(
-                            Text(Constants.Partners.pageTitle)
-                                .font(.sfProDisplayBold(size: 45))
-                        )
-                    )
+                    .font(.sfProDisplayBold(size: 40))
+                    .foregroundColor(.black)
+ //                   .shadow(color: Constants.Colors.neonCyan.opacity(0.4), radius: 2, x: 0, y: 2)
+//                    .overlay(
+//                        LinearGradient(
+//                            gradient: Gradient(colors: Constants.Colors.rainbow),
+//                            startPoint: .leading,
+//                            endPoint: .trailing
+//                        )
+//                        .mask(
+//                            Text(Constants.Partners.pageTitle)
+//                                .font(.sfProDisplayBold(size: 40))
+//                        )
+//                    )
                     .padding(.top, 26)
                     .padding(.bottom, 18)
-                    .opacity(titleOpacity)
-                    .blur(radius: 1.0 - titleOpacity)
 
                 
                 Text(Constants.Partners.pageBio)
@@ -48,8 +44,6 @@ struct PartnersView: View {
                     .foregroundStyle(.gray)
                     .italic()
                     .padding(.bottom, 33)
-                    .opacity(bioOpacity)
-                    .blur(radius: 1.0 - bioOpacity)
                 
                 Divider()
                     .background(Color.gray)
@@ -62,13 +56,15 @@ struct PartnersView: View {
                         PartnersCard(partner: partner, viewState: $viewState)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(isCurrentCard ? Constants.Colors.neonCyan : Color.clear,
-                                            lineWidth: isCurrentCard ? 0.75 : 0)
+                                    .strokeBorder(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: Constants.Colors.rainbow),
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        ),
+                                        lineWidth: isCurrentCard ? 3 : 0
+                                    )
                             )
-                            .shadow(color: isCurrentCard ? Constants.Colors.neonCyan.opacity(0.3) : .black.opacity(0.1),
-                                    radius: isCurrentCard ? 12 : 5,
-                                    x: 0,
-                                    y: isCurrentCard ? 6 : 3)
                     )
                 }
                 .overlay(
@@ -76,7 +72,6 @@ struct PartnersView: View {
                     alignment: .center
                 )
                 .frame(height: 375)
-                .scaleEffect(carouselScale)
                 
                 Spacer()
                 Divider()
@@ -94,21 +89,8 @@ struct PartnersView: View {
         }
         .onAppear {
             dismissSwipeAnimationAfterDelay()
-            animateEntrance()
         }
         .preferredColorScheme(.light)
-    }
-    
-    private func animateEntrance() {
-        withAnimation(.easeOut(duration: 1.5)) {
-            titleOpacity = 1.0
-        }
-        withAnimation(.easeOut(duration: 1.5).delay(0.5)) {
-            bioOpacity = 1.0
-        }
-        withAnimation(.spring(response: 1.0, dampingFraction: 0.8).delay(0.7)) {
-            carouselScale = 1.0
-        }
     }
 }
 
