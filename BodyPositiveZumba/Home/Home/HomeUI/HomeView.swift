@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    
     enum Action {
         case viewClasses, about, joinNow, bookClass
     }
@@ -15,9 +16,9 @@ struct HomeView: View {
     let coordinator: SideDrawerCoordinator
     @Binding private var viewState: HomeViewState
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
-    @GestureState private var dragState = DragState.inactive
+    @GestureState private var dragState = HomeDragState.inactive
 
-    enum DragState {
+    enum HomeDragState {
         case inactive
         case dragging(translation: CGFloat)
         var translation: CGFloat {
@@ -125,15 +126,15 @@ struct HomeView: View {
                 action: {
                     onAction?(.joinNow)
                 },
-                strokeColor: Constants.Colors.navy,
-                gradientColor: Constants.Colors.neonCyan)
+                strokeColor: Constants.Colors.navy
+               )
             ColoredButton(
                 title: Constants.Home.viewClassesButton,
                 action: {
                     onAction?(.viewClasses)
                 },
-                strokeColor: Constants.Colors.navy,
-                gradientColor: Constants.Colors.neonCyan)
+                strokeColor: Constants.Colors.navy
+                )
             VStack(spacing: 2) {
                 ModernPassesButton {
                     onAction?(.bookClass)
@@ -236,28 +237,6 @@ struct HomeView: View {
         if !sideDrawerViewModel.viewState.isMenuOpen {
             sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
         }
-    }
-}
-
-struct AnimatedLogoView: View {
-
-    var height: CGFloat = 222
-    @State private var animateLogo = false
-
-    var body: some View {
-        Image(Constants.Common.logoName)
-            .resizable()
-            .scaledToFit()
-            .frame(height: height)
-            .scaleEffect(animateLogo ? 1 : 0.5)
-            .rotationEffect(.degrees(animateLogo ? 0 : -90))
-            .opacity(animateLogo ? 1 : 0)
-            .shadow(color: .gray.opacity(animateLogo ? 0.5 : 0), radius: animateLogo ? 10 : 0, x: 0, y: animateLogo ? 10 : 0)
-            .onAppear {
-                withAnimation(Animation.interpolatingSpring(stiffness: 70, damping: 8).delay(0.3)) {
-                    animateLogo = true
-                }
-            }
     }
 }
 

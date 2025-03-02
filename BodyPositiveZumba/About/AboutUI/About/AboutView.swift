@@ -82,16 +82,14 @@ struct AboutView: View, ActionableView {
                 ColoredButton(
                     title: section.title,
                     action: { handleButtonTap(section) },
-                    strokeColor: Constants.Colors.navy,
-                    gradientColor: Constants.Colors.neonCyan
+                    strokeColor: Constants.Colors.navy
                 )
             }
             ForEach(Array(viewState.sections.suffix(2))) { section in
                 ColoredButton(
                     title: section.title,
                     action: { handleButtonTap(section) },
-                    strokeColor: Constants.Colors.navy,
-                    gradientColor: .orange
+                    strokeColor: Constants.Colors.navy
                 )
             }
         }

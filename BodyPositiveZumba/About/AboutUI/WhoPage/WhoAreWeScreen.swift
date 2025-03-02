@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct WhoAreWeScreen: View {
+    
+    @ObservedObject private var viewModel: WhoAreWeViewModel
+
+    public init(viewModel: WhoAreWeViewModel) {
+        self._viewModel = ObservedObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
-        WhoAreWeView()
+        WhoAreWeView(
+            viewState: viewModel.viewState
+        )
     }
 }

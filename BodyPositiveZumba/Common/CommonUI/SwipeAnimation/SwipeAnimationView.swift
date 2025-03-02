@@ -17,7 +17,7 @@ struct SwipeAnimationView: View {
             .scaledToFit()
             .frame(width: 65, height: 65)
             .overlay(
-                Constants.Colors.logoColorLinearGradient
+                Constants.Colors.swipeGradient
                     .mask(
                         Image(systemName: "hand.point.up.fill")
                             .resizable()

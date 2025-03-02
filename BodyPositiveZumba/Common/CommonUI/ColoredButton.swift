@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ColoredButton: View {
+    
     let title: String
     let action: () -> Void
     let strokeColor: Color
-    let gradientColor: Color
 
     @Environment(\.colorScheme) private var colorScheme
     @State private var isPressed = false
@@ -63,20 +63,7 @@ struct ScaleButtonStyle: ButtonStyle {
 struct StaticGradientBackground: View {
     var body: some View {
         LinearGradient(
-            gradient: Gradient(colors: [
-                Constants.Colors.darkOrange.opacity(0.3),
-                .orange.opacity(0.3),
-                .yellow.opacity(0.3),
-                .green.opacity(0.3),
-                .mint.opacity(0.3),
-                Constants.Colors.neonCyan.opacity(0.3),
-                .teal.opacity(0.3),
-                .blue.opacity(0.3),
-                .indigo.opacity(0.3),
-                .purple.opacity(0.3),
-                .pink.opacity(0.3),
-                .red.opacity(0.3)
-            ]),
+            gradient: Gradient(colors: Constants.Colors.coloredButtonGradient),
             startPoint: .leading,
             endPoint: .trailing
         )

@@ -30,11 +30,15 @@ struct AboutUI {
         )
     }
 
-    static func whoPage() -> some View {
-        WhoAreWeScreen()
+    @MainActor static func whoPage() -> some View {
+        WhoAreWeScreen(
+            viewModel: WhoAreWeViewModel()
+        )
     }
 
-    static func whatPage() -> some View {
-        WhatWeDoScreen()
+    @MainActor static func whatPage() -> some View {
+        WhatWeDoScreen(
+            viewModel: WhatWeDoViewModel()
+        )
     }
 }
