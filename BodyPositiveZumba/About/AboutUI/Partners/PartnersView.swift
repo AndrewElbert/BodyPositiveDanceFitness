@@ -11,77 +11,34 @@ struct PartnersView: View {
     
     @Binding var viewState: PartnersViewState
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.colorScheme) private var colorScheme
-    
-    private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-    }
     
     var body: some View {
+        
         NavigationStack {
-            VStack(spacing: 0) {
-                Text(Constants.Partners.pageTitle)
-                    .font(.sfProDisplayBold(size: 40))
-                    .foregroundColor(.black)
- //                   .shadow(color: Constants.Colors.neonCyan.opacity(0.4), radius: 2, x: 0, y: 2)
-//                    .overlay(
-//                        LinearGradient(
-//                            gradient: Gradient(colors: Constants.Colors.rainbow),
-//                            startPoint: .leading,
-//                            endPoint: .trailing
-//                        )
-//                        .mask(
-//                            Text(Constants.Partners.pageTitle)
-//                                .font(.sfProDisplayBold(size: 40))
-//                        )
-//                    )
-                    .padding(.top, 26)
-                    .padding(.bottom, 18)
-
+            ZStack {
+                Color.white.ignoresSafeArea()
                 
-                Text(Constants.Partners.pageBio)
-                    .font(.sfProBodyTextRegular(size: 18))
-                    .foregroundStyle(.gray)
-                    .italic()
-                    .padding(.bottom, 33)
-                
-                Divider()
-                    .background(Color.gray)
-                    .padding(.bottom, 30)
-                
-                SwipableCarouselComponent<AnyView, Partner>(
-                    viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
-                ) { partner, isCurrentCard in
-                    AnyView(
-                        PartnersCard(partner: partner, viewState: $viewState)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 15)
-                                    .strokeBorder(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: Constants.Colors.rainbow),
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        ),
-                                        lineWidth: isCurrentCard ? 3 : 0
-                                    )
-                            )
-                    )
+                VStack(spacing: 0) {
+                    header
+                    
+                    descriptionText
+                    
+                    divider
+                    
+                    carouselView
+                    
+                    Spacer()
                 }
-                .overlay(
-                    swipeAnimationOverlay,
-                    alignment: .center
-                )
-                .frame(height: 375)
-                
-                Spacer()
-                Divider()
-                    .background(.gray)
-                    .padding(.bottom, 30)
-            }
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbar {
-                ToolbarButton.backButton { dismiss() }
-                ToolbarButton.closeButton { dismiss() }
+                .padding(.horizontal)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbar {
+                    ToolbarButton.backButton {
+                        dismiss()
+                    }
+                    ToolbarButton.closeButton {
+                        dismiss()
+                    }
+                }
             }
         }
         .sheet(item: $viewState.displayURL) { currentCard in
@@ -92,10 +49,71 @@ struct PartnersView: View {
         }
         .preferredColorScheme(.light)
     }
-}
-
-private extension PartnersView {
-    var swipeAnimationOverlay: some View {
+    
+    private var header: some View {
+        
+        HStack(spacing: 13) {
+            Image(Constants.Common.logoName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 121, height: 121)
+                .clipped()
+                .padding(.top, 0)
+            
+            Text(Constants.Partners.pageTitle)
+                .font(.sfProDisplayBold(size: 38))
+                .foregroundStyle(.black)
+                .padding(.top, 17)
+                .padding(.bottom, 12)
+        }
+    }
+    
+    private var descriptionText: some View {
+        
+        Text(Constants.Partners.pageBio)
+            .font(.sfProBodyTextRegular(size: 16))
+            .foregroundColor(.gray)
+            .italic()
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 30)
+            .padding(.bottom, 11)
+    }
+    
+    private var divider: some View {
+        
+        Divider()
+            .frame(
+                width: UIScreen.main.bounds.width - 60,
+                height: 1.5
+            )
+            .background(
+                LinearGradient(
+                    colors: Constants.Colors.logoColorGradient,
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .padding(.bottom, 11)
+    }
+    
+    private var carouselView: some View {
+        
+        SwipableCarouselComponent<AnyView, Partner>(
+            viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
+        ) { partner, isCurrentCard in
+            AnyView(
+                PartnersCard(partner: partner, viewState: $viewState, isCurrentCard: isCurrentCard)
+            )
+        }
+        .overlay(
+            swipeAnimationOverlay,
+            alignment: .center
+        )
+        .frame(height: 400)
+    }
+    
+    private var swipeAnimationOverlay: some View {
+        
         Group {
             if viewState.showSwipeAnimation {
                 SwipeAnimationComponent(
@@ -111,7 +129,8 @@ private extension PartnersView {
         }
     }
     
-    func dismissSwipeAnimationAfterDelay() {
+    private func dismissSwipeAnimationAfterDelay() {
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }

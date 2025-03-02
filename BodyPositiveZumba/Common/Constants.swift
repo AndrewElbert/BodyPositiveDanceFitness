@@ -68,9 +68,21 @@ struct Constants {
             .pink
         ]
         
+        static let logoColorGradient: [Color] = [
+            Constants.Colors.neonCyan,
+            .yellow,
+            .orange
+        ]
+        
+        static let logoColorGradientLight: [Color] = [
+            Constants.Colors.neonCyan.opacity(0.2),
+            .yellow.opacity(0.2),
+            .orange.opacity(0.2)
+        ]
+        
         static let navy = Color(red: 0.0, green: 0.0, blue: 128.0/255.0)
         static let neonCyan: Color = Color(red: 0.0, green: 1.0, blue: 1.0)
-        static let darkerCyan: Color = Color(red: 0.0, green: 0.94, blue: 0.94)
+        static let darkerCyan: Color = Color(red: 0.0, green: 0.85, blue: 0.85)
         static let darkOrange = Color(red: 0.8, green: 0.3, blue: 0.1)
 
     }
@@ -363,7 +375,7 @@ struct Constants {
 
     enum Partners {
 
-        static let pageTitle: String = "BPDF Partners"
+        static let pageTitle: String = "Partners"
         static let buttonText: String = "Visit Website"
         static let pageBio: String = "Discover our incredible partners below!"
     }

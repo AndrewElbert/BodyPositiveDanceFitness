@@ -13,11 +13,11 @@ struct PartnersViewState {
 
     var carouselViewState = SwipableCarouselViewState(
         items: Partner.allCases,
-        spacing: 10,
+        spacing: 80,
         sideSpacing: 60
     )
 
-    var currentDanceClass: Partner {
+    var currentPartner: Partner {
         let count = carouselViewState.items.count
         let safeIndex = ((carouselViewState.currentIndex % count) + count) % count
         return carouselViewState.items[safeIndex]
@@ -25,4 +25,5 @@ struct PartnersViewState {
 
     var showSwipeAnimation = true
     var displayURL: WebViewURL?
+    var showBorder: Bool = false
 }
