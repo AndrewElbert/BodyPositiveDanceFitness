@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct PartnersView: View {
-    
+
     @Binding var viewState: PartnersViewState
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
-        
+
         NavigationStack {
             ZStack {
                 Color.white.ignoresSafeArea()
-                
+
                 VStack(spacing: 0) {
                     header
-                    
+
                     descriptionText
-                    
+
                     divider
-                    
+
                     carouselView
-                    
+
                     Spacer()
                 }
                 .padding(.horizontal)
@@ -49,9 +49,9 @@ struct PartnersView: View {
         }
         .preferredColorScheme(.light)
     }
-    
+
     private var header: some View {
-        
+
         HStack(spacing: 13) {
             Image(Constants.Common.logoName)
                 .resizable()
@@ -59,7 +59,7 @@ struct PartnersView: View {
                 .frame(width: 121, height: 121)
                 .clipped()
                 .padding(.top, 0)
-            
+
             Text(Constants.Partners.pageTitle)
                 .font(.sfProDisplayBold(size: 38))
                 .foregroundStyle(.black)
@@ -67,9 +67,9 @@ struct PartnersView: View {
                 .padding(.bottom, 12)
         }
     }
-    
+
     private var descriptionText: some View {
-        
+
         Text(Constants.Partners.pageBio)
             .font(.sfProBodyTextRegular(size: 16))
             .foregroundColor(.gray)
@@ -78,9 +78,9 @@ struct PartnersView: View {
             .padding(.horizontal, 30)
             .padding(.bottom, 11)
     }
-    
+
     private var divider: some View {
-        
+
         Divider()
             .frame(
                 width: UIScreen.main.bounds.width - 60,
@@ -95,9 +95,9 @@ struct PartnersView: View {
             )
             .padding(.bottom, 11)
     }
-    
+
     private var carouselView: some View {
-        
+
         SwipableCarouselComponent<AnyView, Partner>(
             viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
         ) { partner, isCurrentCard in
@@ -111,9 +111,9 @@ struct PartnersView: View {
         )
         .frame(height: 400)
     }
-    
+
     private var swipeAnimationOverlay: some View {
-        
+
         Group {
             if viewState.showSwipeAnimation {
                 SwipeAnimationComponent(
@@ -128,12 +128,11 @@ struct PartnersView: View {
             }
         }
     }
-    
+
     private func dismissSwipeAnimationAfterDelay() {
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
     }
 }
-

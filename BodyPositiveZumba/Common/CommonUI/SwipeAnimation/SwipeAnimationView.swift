@@ -32,7 +32,6 @@ struct SwipeAnimationView: View {
                 }
             }
 
-
     }
 
     func animateCycle() {
