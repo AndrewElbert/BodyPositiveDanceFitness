@@ -109,7 +109,7 @@ struct HomeView: View {
                 .padding(.top, 0)
             Text(Constants.Home.pageBio)
                 .font(.sfProDisplayRegular(size: 18))
-                .foregroundColor(.gray)
+                .foregroundColor(Constants.Colors.navy)
                 .italic()
         }
     }
@@ -140,7 +140,7 @@ struct HomeView: View {
                 }
                 Text(Constants.Home.passesBio)
                     .font(.sfProDisplayRegular(size: 18))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Constants.Colors.navy)
                     .italic()
                     .padding(.top, 6)
                     .padding(.bottom, 6)
@@ -167,7 +167,8 @@ struct HomeView: View {
             HStack(spacing: 4) {
                 Text(Constants.Home.photosButton)
                     .font(.sfProDisplayRegular(size: 18))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Constants.Colors.navy
+                    )
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.gray)
@@ -291,7 +292,7 @@ struct ModernPassesButton: View {
                 Image(systemName: "ticket.fill")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(iconGradient)
-                    .rotationEffect(.degrees(isAnimating ? 15 : -15))
+                    .rotationEffect(.degrees(isAnimating ? 20 : -20))
                     .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
                     .scaleEffect(isPressed ? 0.9 : 1)
                 Text("Explore Passes")
@@ -305,10 +306,11 @@ struct ModernPassesButton: View {
                             .blur(radius: 4)
                             .opacity(isPressed ? 0.7 : 0)
                     )
+
                 Image(systemName: "music.note.list")
                     .font(.system(size: 24))
                     .foregroundStyle(iconGradient)
-                    .rotationEffect(.degrees(isAnimating ? 15 : -15))
+                    .rotationEffect(.degrees(isAnimating ? 20 : -20))
                     .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
                     .scaleEffect(isPressed ? 0.9 : 1)
 
@@ -322,6 +324,13 @@ struct ModernPassesButton: View {
         .onAppear {
             isAnimating = true
         }
+        Rectangle()
+                .fill(textGradient)
+                .frame(height: 2)
+                .offset(y: -1)
+                .padding(.leading, 92)
+                .padding(.trailing, 85)
+                .scaleEffect(isPressed ? 0.95 : 1, anchor: .center)
     }
 }
 

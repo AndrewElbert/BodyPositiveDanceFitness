@@ -16,13 +16,21 @@ struct SwipeAnimationView: View {
             .resizable()
             .scaledToFit()
             .frame(width: 65, height: 65)
-            .foregroundColor(Constants.Colors.neonCyan)
+            .overlay(
+                Constants.Colors.logoColorLinearGradient
+                    .mask(
+                        Image(systemName: "hand.point.up.fill")
+                            .resizable()
+                            .scaledToFit()
+                    )
+            )
+            .foregroundColor(.clear)
             .overlay(
                 Image(systemName: "hand.point.up")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 70, height: 70)
-                    .foregroundColor(.black)
+                    .foregroundColor(.black.opacity(0.7))
             )
             .offset(x: viewState.offset)
             .opacity(viewState.opacity)
@@ -35,10 +43,10 @@ struct SwipeAnimationView: View {
     }
 
     func animateCycle() {
-        let swipeDistance: CGFloat = 190
+        let swipeDistance: CGFloat = 206
         let fadeInDuration: Double = 0.2
-        let swipeDuration: Double = 1.1
-        let pauseDuration: Double = 0.5
+        let swipeDuration: Double = 0.55
+        let pauseDuration: Double = 0.44
 
         viewState.offset = 0
         withAnimation(Animation.linear(duration: fadeInDuration)) {

@@ -56,14 +56,14 @@ struct PartnersView: View {
             Image(Constants.Common.logoName)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 121, height: 121)
+                .frame(width: 130, height: 130)
                 .clipped()
                 .padding(.top, 0)
 
             Text(Constants.Partners.pageTitle)
-                .font(.sfProDisplayBold(size: 38))
+                .font(.sfProDisplayBold(size: 44))
                 .foregroundStyle(.black)
-                .padding(.top, 17)
+                .padding(.top, 15)
                 .padding(.bottom, 12)
         }
     }
@@ -131,7 +131,7 @@ struct PartnersView: View {
 
     private func dismissSwipeAnimationAfterDelay() {
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
     }

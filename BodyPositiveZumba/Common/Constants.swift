@@ -73,6 +73,22 @@ struct Constants {
             .yellow,
             .orange
         ]
+        
+        static let logoColorLinearGradient = LinearGradient(
+                gradient: Gradient(
+                    colors: [
+                        Constants.Colors.neonCyan,
+                        Constants.Colors.neonCyan,
+                        Constants.Colors.neonCyan,
+                        Constants.Colors.darkerCyan,
+                        .yellow,
+                        .orange,
+                        Constants.Colors.darkOrange
+                    ]
+                ),
+                startPoint: .top,
+                endPoint: .bottom
+            )
 
         static let logoColorGradientLight: [Color] = [
             Constants.Colors.neonCyan.opacity(0.2),
@@ -293,7 +309,7 @@ struct Constants {
         static let viewClassesButton: String = "View Classes"
         static let viewPassesButton: String = "Explore Passes"
         static let aboutButton: String = "About Us!"
-        static let exploreButton: String = "Discover More!"
+        static let exploreButton: String = "Explore More!"
         static let photosButton: String = "View Photos"
         static let passesBio: String = "save money - purchase a pass!"
         static let tradeMarkSloganSize: CGFloat = 22
