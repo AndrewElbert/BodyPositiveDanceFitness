@@ -73,7 +73,7 @@ struct Constants {
             .yellow,
             .orange
         ]
-        
+
         static let animateLogoColorGradient: [Color] = [
             .orange,
             .yellow,

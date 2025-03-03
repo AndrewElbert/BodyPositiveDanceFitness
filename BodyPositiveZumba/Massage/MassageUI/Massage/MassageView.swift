@@ -71,7 +71,7 @@ private extension MassageView {
                 .foregroundColor(adaptiveTextColor)
                 .padding(.top, 0)
                 .padding(.bottom, 8)
-            
+
             Divider()
 
             Text(viewState.pageBio)
