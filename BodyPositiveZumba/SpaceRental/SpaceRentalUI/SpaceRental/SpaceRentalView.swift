@@ -19,7 +19,7 @@ struct SpaceRentalView: View, ActionableView {
     @Binding var viewState: SpaceRentalViewState
     var onAction: ((Action) -> Void)?
 
-    private let titleStyle = Font.sfProDisplayBold(size: 23)
+    private let titleStyle = Font.sfProDisplayBold(size: 22)
     private let bioStyle = Font.sfProBodyTextRegular(size: 18)
     private let buttonTextStyle = Font.sfProRoundedTextSemibold(size: 20)
     private let buttonAnimation = Animation.easeInOut(duration: 0.4)

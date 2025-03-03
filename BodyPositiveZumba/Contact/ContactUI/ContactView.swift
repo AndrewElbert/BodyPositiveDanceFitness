@@ -49,7 +49,7 @@ struct ContactView: View, ActionableView {
                 .multilineTextAlignment(.center)
                 .overlay(
                     LinearGradient(
-                        gradient: Gradient(colors: Constants.Colors.rainbow),
+                        gradient: Gradient(colors: Constants.Colors.animateLogoColorGradient),
                         startPoint: viewState.animateGradient ? .leading : .trailing,
                         endPoint: viewState.animateGradient ? .trailing : .leading
                     )

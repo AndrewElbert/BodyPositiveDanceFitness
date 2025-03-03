@@ -33,7 +33,7 @@ struct FaqItem: View {
             RadialGradient(
                 gradient: Gradient(colors: [
                     Constants.Colors.neonCyan.opacity(0.1),
-                    Constants.Colors.neonCyan.opacity(0.3)
+                    Constants.Colors.neonCyan.opacity(0.2)
                 ]),
                 center: .center,
                 startRadius: 22,

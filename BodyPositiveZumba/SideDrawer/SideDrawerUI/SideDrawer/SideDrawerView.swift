@@ -125,7 +125,7 @@ struct SideDrawerView: View, ActionableView {
                            height: Constants.SideDrawer.contactImageSize)
                     .padding(.bottom, 2)
                 Text(Constants.SideDrawer.contactText)
-                    .font(.sfProRoundedTextMedium(size: Constants.SideDrawer.contactFontSize))
+                    .font(.sfProSerifMedium(size: Constants.SideDrawer.contactFontSize))
                     .foregroundColor(.black)
             }
             .padding(.horizontal, 11)
