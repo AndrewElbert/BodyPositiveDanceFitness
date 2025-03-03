@@ -68,7 +68,7 @@ struct PartnersCard: View {
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 ),
-                lineWidth: 3.5
+                lineWidth: 4.5
             )
             .opacity(showBorder ? 1 : 0)
     }

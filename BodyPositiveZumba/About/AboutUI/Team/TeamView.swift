@@ -50,6 +50,7 @@ struct TeamView: View, ActionableView {
 }
 
 private extension TeamView {
+    
     var mainContent: some View {
         VStack(spacing: 0) {
             headerSection

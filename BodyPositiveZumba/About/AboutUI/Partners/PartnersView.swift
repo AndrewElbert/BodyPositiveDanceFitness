@@ -71,11 +71,11 @@ struct PartnersView: View {
     private var descriptionText: some View {
 
         Text(Constants.Partners.pageBio)
-            .font(.sfProBodyTextRegular(size: 16))
+            .font(.sfProBodyTextRegular(size: 17))
             .foregroundColor(.gray)
             .italic()
             .multilineTextAlignment(.center)
-            .padding(.horizontal, 30)
+            .padding(.horizontal, 0)
             .padding(.bottom, 11)
     }
 
@@ -84,7 +84,7 @@ struct PartnersView: View {
         Divider()
             .frame(
                 width: UIScreen.main.bounds.width - 60,
-                height: 1.5
+                height: 2.5
             )
             .background(
                 LinearGradient(

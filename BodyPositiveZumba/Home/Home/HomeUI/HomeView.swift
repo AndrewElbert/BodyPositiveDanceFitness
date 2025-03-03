@@ -140,7 +140,7 @@ struct HomeView: View {
                     onAction?(.bookClass)
                 }
                 Text(Constants.Home.passesBio)
-                    .font(.sfProDisplayRegular(size: 18))
+                    .font(.sfProDisplayRegular(size: 19))
                     .foregroundColor(Constants.Colors.navy)
                     .italic()
                     .padding(.top, 6)
@@ -172,7 +172,7 @@ struct HomeView: View {
                     )
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Constants.Colors.navy)
                     .rotationEffect(.degrees(viewState.isCarouselExpanded ? 90 : 0))
             }
             .padding(.top, 24)
@@ -271,7 +271,7 @@ struct ModernPassesButton: View {
                 Image(systemName: "ticket.fill")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(iconGradient)
-                    .rotationEffect(.degrees(isAnimating ? 20 : -20))
+                    .rotationEffect(.degrees(isAnimating ? 22 : -22))
                     .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
                     .scaleEffect(isPressed ? 0.9 : 1)
                 Text("Explore Passes")
@@ -306,9 +306,8 @@ struct ModernPassesButton: View {
         Rectangle()
                 .fill(textGradient)
                 .frame(height: 2)
-                .offset(y: -1)
-                .padding(.leading, 92)
-                .padding(.trailing, 85)
+                .padding(.leading, 79)
+                .padding(.trailing, 73)
                 .scaleEffect(isPressed ? 0.95 : 1, anchor: .center)
     }
 }
