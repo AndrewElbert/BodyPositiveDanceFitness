@@ -74,6 +74,16 @@ struct Constants {
             .orange
         ]
 
+        static let animateLogoColorGradient: [Color] = [
+            .orange,
+            .yellow,
+            Constants.Colors.darkerCyan,
+            Constants.Colors.neonCyan,
+            Constants.Colors.darkerCyan,
+            .yellow,
+            .orange
+        ]
+
         static let coloredButtonGradient: [Color] = [
             Constants.Colors.darkOrange.opacity(0.3),
             .orange.opacity(0.3),

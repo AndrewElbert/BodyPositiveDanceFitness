@@ -30,7 +30,7 @@ struct MassageCardView: View {
 
             Text(card.parlor)
                 .font(.sfProBodyTextRegular(size: 16))
-                .foregroundColor(Constants.Colors.darkOrange)
+                .foregroundColor(.orange)
 
             if viewState.isExpanded {
                 Text(card.bio)

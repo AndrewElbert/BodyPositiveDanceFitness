@@ -69,15 +69,18 @@ private extension MassageView {
                 .font(.sfProDisplayBold(size: 34))
                 .multilineTextAlignment(.center)
                 .foregroundColor(adaptiveTextColor)
-                .padding(.top, 11)
-                .padding(.bottom, 16)
+                .padding(.top, 0)
+                .padding(.bottom, 8)
+
+            Divider()
 
             Text(viewState.pageBio)
-                .font(.sfProBodyTextRegular(size: 15))
+                .font(.sfProBodyTextRegular(size: 16))
                 .italic()
-                .foregroundColor(.gray)
+                .foregroundColor(.black.opacity(0.65))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+                .padding(.top, 8)
                 .padding(.bottom, 16)
         }
     }
@@ -94,13 +97,22 @@ private extension MassageView {
                     isCurrentCard: isCurrentCard,
                     viewState: viewState.massageCardViewState
                 )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(isCurrentCard ? Color.orange : Color.clear,
-                                    lineWidth: 4)
-                    )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(isCurrentCard ?
+                            LinearGradient(
+                                gradient: Gradient(colors: Constants.Colors.logoColorGradient),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ) : LinearGradient(
+                                gradient: Gradient(colors: [.clear]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 5)
+                )
                     .shadow(
-                        color: isCurrentCard ? Color.orange.opacity(0.3) : Color.clear,
+                        color: isCurrentCard ? Color.orange.opacity(0.2) : Color.clear,
                         radius: 40
                     )
             )
@@ -118,8 +130,17 @@ private extension MassageView {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background(buttonBackground)
-                .cornerRadius(16)
+                .background {
+                    ZStack {
+                        StaticGradientBackground()
+                            .cornerRadius(36)
+
+                        RoundedRectangle(cornerRadius: 36, style: .continuous)
+                            .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.33))
+
+                    }
+                }
+                .cornerRadius(36)
         }
         .padding(.bottom, 11)
     }
@@ -144,24 +165,5 @@ private extension MassageView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
-    }
-}
-
-private var buttonBackground: some View {
-
-    ZStack {
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(.white)
-            .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
-        LinearGradient(
-            gradient: Gradient(colors: [
-                Constants.Colors.neonCyan.opacity(0.01),
-                Constants.Colors.neonCyan.opacity(0.33)
-            ]),
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .stroke(Constants.Colors.darkerCyan, lineWidth: 8)
     }
 }

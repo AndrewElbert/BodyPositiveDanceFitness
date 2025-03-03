@@ -180,8 +180,8 @@ struct HomeView: View {
                     .font(.sfProDisplayRegular(size: 19))
                     .foregroundColor(Constants.Colors.navy)
                     .italic()
-                    .padding(.top, 6)
-                    .padding(.bottom, 6)
+                    .padding(.top, 9)
+                    .padding(.bottom, 9)
             }
 
             HStack(spacing: 16) {
