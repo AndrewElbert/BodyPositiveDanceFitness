@@ -77,7 +77,7 @@ private extension MassageView {
             Text(viewState.pageBio)
                 .font(.sfProBodyTextRegular(size: 16))
                 .italic()
-                .foregroundColor(Constants.Colors.navy)
+                .foregroundColor(.black.opacity(0.65))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -109,7 +109,7 @@ private extension MassageView {
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
-                            lineWidth: 4)
+                            lineWidth: 5)
                 )
                     .shadow(
                         color: isCurrentCard ? Color.orange.opacity(0.2) : Color.clear,
@@ -136,16 +136,11 @@ private extension MassageView {
                             .cornerRadius(36)
 
                         RoundedRectangle(cornerRadius: 36, style: .continuous)
-                            .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.4))
+                            .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.33))
 
                     }
                 }
                 .cornerRadius(36)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 36)
-                        .stroke(Constants.Colors.navy,
-                                lineWidth: 3)
-                )
         }
         .padding(.bottom, 11)
     }
