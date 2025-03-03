@@ -21,4 +21,5 @@ struct InitialAppLoadViewState {
     var barOutlineColor: Color = .clear
     var neonCyan: Color = Constants.Colors.neonCyan
     var endColor: Color = Color(red: 0, green: 0, blue: 0.5)
+    var logoShadowOpacity: Double = 0.0
 }

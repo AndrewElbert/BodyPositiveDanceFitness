@@ -37,6 +37,7 @@ class InitialAppLoadViewModel: ObservableObject {
             viewState.barColorStart = viewState.neonCyan
             viewState.barColorEnd = viewState.endColor
             viewState.textColor = viewState.endColor
+            viewState.logoShadowOpacity = 0.77
         }
         withAnimation(.easeIn(duration: 0.4)) {
             viewState.barOutlineColor = Color.orange

@@ -11,51 +11,34 @@ struct PartnersView: View {
 
     @Binding var viewState: PartnersViewState
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.colorScheme) private var colorScheme
-
-    private var adaptiveTextColor: Color {
-        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
-    }
 
     var body: some View {
 
         NavigationStack {
-            VStack {
-                Text(Constants.Partners.pageTitle)
-                    .font(.sfProDisplayBold(size: 40))
-                    .foregroundColor(adaptiveTextColor)
-                    .padding(.top, 26)
-                    .padding(.bottom, 11)
-                Text(Constants.Partners.pageBio)
-                    .font(.sfProBodyTextRegular(size: 16))
-                    .foregroundStyle(.gray)
-                    .italic()
-                    .padding(.bottom, 33)
+            ZStack {
+                Color.white.ignoresSafeArea()
 
-                SwipableCarouselComponent<AnyView, Partner>(
-                    viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
-                ) { partner, isCurrentCard in
-                    AnyView(
-                        PartnersCard(partner: partner, viewState: $viewState)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 15)
-                                    .stroke(isCurrentCard ? Color.orange : Color.clear,
-                                            lineWidth: isCurrentCard ? 5 : 0)
-                            )
-                    )
+                VStack(spacing: 0) {
+                    header
 
+                    descriptionText
+
+                    divider
+
+                    carouselView
+
+                    Spacer()
                 }
-                .overlay(
-                    swipeAnimationOverlay,
-                    alignment: .center
-                )
-                .frame(height: 375)
-                Spacer()
-            }
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbar {
-                ToolbarButton.backButton { dismiss() }
-                ToolbarButton.closeButton { dismiss() }
+                .padding(.horizontal)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbar {
+                    ToolbarButton.backButton {
+                        dismiss()
+                    }
+                    ToolbarButton.closeButton {
+                        dismiss()
+                    }
+                }
             }
         }
         .sheet(item: $viewState.displayURL) { currentCard in
@@ -66,11 +49,71 @@ struct PartnersView: View {
         }
         .preferredColorScheme(.light)
     }
-}
 
-private extension PartnersView {
+    private var header: some View {
 
-    var swipeAnimationOverlay: some View {
+        HStack(spacing: 13) {
+            Image(Constants.Common.logoName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 130, height: 130)
+                .clipped()
+                .padding(.top, 0)
+
+            Text(Constants.Partners.pageTitle)
+                .font(.sfProDisplayBold(size: 44))
+                .foregroundStyle(.black)
+                .padding(.top, 15)
+                .padding(.bottom, 12)
+        }
+    }
+
+    private var descriptionText: some View {
+
+        Text(Constants.Partners.pageBio)
+            .font(.sfProBodyTextRegular(size: 17))
+            .foregroundColor(.gray)
+            .italic()
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 0)
+            .padding(.bottom, 11)
+    }
+
+    private var divider: some View {
+
+        Divider()
+            .frame(
+                width: UIScreen.main.bounds.width - 60,
+                height: 2.5
+            )
+            .background(
+                LinearGradient(
+                    colors: Constants.Colors.logoColorGradient,
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .padding(.bottom, 11)
+    }
+
+    private var carouselView: some View {
+
+        SwipableCarouselComponent<AnyView, Partner>(
+            viewModel: SwipableCarouselViewModel(viewState: $viewState.carouselViewState)
+        ) { partner, isCurrentCard in
+            AnyView(
+                PartnersCard(partner: partner, viewState: $viewState, isCurrentCard: isCurrentCard)
+            )
+        }
+        .overlay(
+            swipeAnimationOverlay,
+            alignment: .center
+        )
+        .frame(height: 400)
+    }
+
+    private var swipeAnimationOverlay: some View {
+
         Group {
             if viewState.showSwipeAnimation {
                 SwipeAnimationComponent(
@@ -80,14 +123,15 @@ private extension PartnersView {
                 )
                 .padding()
                 .zIndex(1)
-                .transition(.opacity)
+                .transition(.scale(scale: 0.8).combined(with: .opacity))
                 .animation(.easeOut(duration: 1.5), value: viewState.showSwipeAnimation)
             }
         }
     }
 
-    func dismissSwipeAnimationAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+    private func dismissSwipeAnimationAfterDelay() {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
     }

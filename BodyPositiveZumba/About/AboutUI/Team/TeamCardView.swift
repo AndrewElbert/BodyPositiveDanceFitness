@@ -16,7 +16,7 @@ struct TeamCardView: View {
             Image(card.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 230, height: 380)
+                .frame(width: 260, height: 260)
                 .clipped()
                 .cornerRadius(15)
 

@@ -49,7 +49,7 @@ extension AboutFlowCoordinator: AboutCoordinator {
     }
 
     func about_viewPartners() {
-        routes.presentSheet(
+        routes.presentCover(
             .partners
         )
     }

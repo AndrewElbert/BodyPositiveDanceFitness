@@ -40,9 +40,9 @@ enum Partner: String, CaseIterable, Identifiable {
             )
         }
     }
+
     var image: String {
         switch self {
-
         case .overland:
             return "OverlandLogo"
         case .beam:
@@ -51,6 +51,23 @@ enum Partner: String, CaseIterable, Identifiable {
             return "DtxLogo"
         case .llh:
             return "LadyLoveHolisticsLogo"
+        }
+    }
+
+    var name: String {
+        return self.rawValue
+    }
+
+    var description: String? {
+        switch self {
+        case .overland:
+            return "Local honey producers with sustainable practices."
+        case .beam:
+            return "Premium skincare and beauty treatments."
+        case .dtx:
+            return "Dance studio specializing in extreme and dynamic styles."
+        case .llh:
+            return "Natural holistic wellness and healing products."
         }
     }
 }

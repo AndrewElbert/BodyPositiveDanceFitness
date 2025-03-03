@@ -9,7 +9,15 @@ import SwiftUI
 
 struct WhatWeDoScreen: View {
 
+    @ObservedObject private var viewModel: WhatWeDoViewModel
+
+    public init(viewModel: WhatWeDoViewModel) {
+        self._viewModel = ObservedObject(wrappedValue: viewModel)
+    }
+
     var body: some View {
-        WhatWeDoView()
+        WhatWeDoView(
+            viewState: viewModel.viewState
+        )
     }
 }

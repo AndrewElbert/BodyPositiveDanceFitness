@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
 
     enum Action {
+
         case viewClasses
         case about
         case joinNow
@@ -17,13 +18,16 @@ struct HomeView: View {
     }
 
     let coordinator: SideDrawerCoordinator
+    var onAction: ((Action) -> Void)?
     @Binding private var viewState: HomeViewState
     @StateObject private var sideDrawerViewModel: SideDrawerViewModel
-    @GestureState private var dragState = DragState.inactive
+    @GestureState private var dragState = HomeDragState.inactive
 
-    enum DragState {
+    enum HomeDragState {
+
         case inactive
         case dragging(translation: CGFloat)
+
         var translation: CGFloat {
             switch self {
             case .inactive: return 0
@@ -31,8 +35,6 @@ struct HomeView: View {
             }
         }
     }
-
-    var onAction: ((Action) -> Void)?
 
     init(
         coordinator: SideDrawerCoordinator,
@@ -55,49 +57,58 @@ struct HomeView: View {
         if viewState.deathScreenEnabled {
             MaintenanceView()
         } else {
-            ZStack {
-                ScrollViewReader { proxy in
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 0) {
-                            mainContent
-                                .id(Constants.Home.proxy)
+            mainView
+                .sheet(isPresented: $viewState.showJoinWebView) {
+                    WebViewContainer(
+                        url: URL(string: Constants.JoinNow.joinNowUrl)!,
+                        title: Constants.JoinNow.joinNowTitle
+                    )
+                }
+                .sheet(isPresented: $viewState.showBookClassWebView) {
+                    WebViewContainer(
+                        url: URL(string: Constants.JoinNow.passesUrl)!,
+                        title: Constants.JoinNow.passesTitle
+                    )
+                }
+                .preferredColorScheme(.light)
+        }
+    }
 
-                            if viewState.isCarouselExpanded {
-                                carouselSection
-                                    .transition(.opacity)
-                            }
-                        }
-                    }
-                    .onChange(of: viewState.isCarouselExpanded) { _, newValue in
-                        handleCarouselExpansionChange(newValue, proxy: proxy)
-                    }
-                    .onDisappear {
-                        resetCarouselState()
+    private var mainView: some View {
+
+        ZStack {
+            scrollContent
+            SideDrawerComponent(viewModel: sideDrawerViewModel)
+                .onChange(of: dragState.translation) { _, translation in
+                    handleSideDrawerDrag(translation)
+                }
+        }
+    }
+
+    private var scrollContent: some View {
+
+        ScrollViewReader { proxy in
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    mainContent.id(Constants.Home.proxy)
+                    if viewState.isCarouselExpanded {
+                        carouselSection
+                            .id("carouselSection")
+                            .transition(.opacity)
                     }
                 }
-
-                SideDrawerComponent(viewModel: sideDrawerViewModel)
-                    .onChange(of: dragState.translation) { _, translation in
-                        handleSideDrawerDrag(translation)
-                    }
             }
-            .sheet(isPresented: $viewState.showJoinWebView) {
-                WebViewContainer(
-                    url: URL(string: Constants.JoinNow.joinNowUrl)!,
-                    title: Constants.JoinNow.joinNowTitle
-                )
+            .onChange(of: viewState.isCarouselExpanded) { _, newValue in
+                handleCarouselExpansionChange(newValue, proxy: proxy)
             }
-            .sheet(isPresented: $viewState.showBookClassWebView) {
-                WebViewContainer(
-                    url: URL(string: Constants.JoinNow.passesUrl)!,
-                    title: Constants.JoinNow.passesTitle
-                )
+            .onDisappear {
+                viewState.showCarousel = false
             }
-            .preferredColorScheme(.light)
         }
     }
 
     private var mainContent: some View {
+
         ZStack {
             Color.white.ignoresSafeArea()
             VStack(spacing: 0) {
@@ -109,6 +120,7 @@ struct HomeView: View {
     }
 
     private var contentStack: some View {
+
         VStack(spacing: 0) {
             greetingView
             logoView
@@ -118,10 +130,14 @@ struct HomeView: View {
                 Spacer()
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: viewState.isCarouselExpanded ? nil : .infinity)
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: viewState.isCarouselExpanded ? nil : .infinity
+        )
     }
 
     private var greetingView: some View {
+
         VStack(spacing: 11) {
             Text(viewState.currentGreeting)
                 .font(.sfProDisplayBold(size: 35))
@@ -131,48 +147,43 @@ struct HomeView: View {
                 .padding(.top, 0)
             Text(Constants.Home.pageBio)
                 .font(.sfProDisplayRegular(size: 18))
-                .foregroundColor(.gray)
+                .foregroundColor(Constants.Colors.navy)
                 .italic()
         }
     }
 
     private var logoView: some View {
-        ZStack {
-            Image(Constants.Common.logoName)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 222)
-        }
-        .padding(.bottom, 22)
+
+        AnimatedLogoView().padding(.bottom, 22)
     }
 
     private var buttonStack: some View {
+
         VStack(spacing: 20) {
             ColoredButton(
                 title: Constants.Home.bookClassesButton,
                 action: { onAction?(.joinNow) },
-                strokeColor: Color.orange,
-                gradientColor: Color.orange
+                strokeColor: Constants.Colors.navy
             )
+
             ColoredButton(
                 title: Constants.Home.viewClassesButton,
                 action: { onAction?(.viewClasses) },
-                strokeColor: Constants.Colors.darkerCyan,
-                gradientColor: Constants.Colors.neonCyan
+                strokeColor: Constants.Colors.navy
             )
+
             VStack(spacing: 2) {
-                ColoredButton(
-                    title: Constants.Home.viewPassesButton,
-                    action: { onAction?(.bookClass) },
-                    strokeColor: Constants.Colors.darkerCyan,
-                    gradientColor: Constants.Colors.neonCyan
-                )
+                ModernPassesButton {
+                    onAction?(.bookClass)
+                }
                 Text(Constants.Home.passesBio)
-                    .font(.sfProDisplayRegular(size: 18))
-                    .foregroundColor(.gray)
+                    .font(.sfProDisplayRegular(size: 19))
+                    .foregroundColor(Constants.Colors.navy)
                     .italic()
-                    .padding(.top, 4)
+                    .padding(.top, 6)
+                    .padding(.bottom, 6)
             }
+
             HStack(spacing: 16) {
                 HomeRainbowButton(title: Constants.Home.aboutButton) {
                     onAction?(.about)
@@ -187,19 +198,16 @@ struct HomeView: View {
     }
 
     private var expandablePhotoButton: some View {
-        Button(action: {
-            withAnimation(.spring(duration: 0.8)) {
-                viewState.isCarouselExpanded.toggle()
-            }
-        }) {
+
+        Button(action: toggleCarousel) {
             HStack(spacing: 4) {
                 Text(Constants.Home.photosButton)
                     .font(.sfProDisplayRegular(size: 18))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Constants.Colors.navy)
 
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Constants.Colors.navy)
                     .rotationEffect(.degrees(viewState.isCarouselExpanded ? 90 : 0))
             }
             .padding(.top, 24)
@@ -209,6 +217,7 @@ struct HomeView: View {
     }
 
     private var carouselSection: some View {
+
         AnimatedCarouselComponent(
             viewModel: AnimatedCarouselViewModel(
                 viewState: $viewState.animatedCarouselViewState
@@ -220,7 +229,15 @@ struct HomeView: View {
         .opacity(viewState.showCarousel ? 1 : 0)
     }
 
+    private func toggleCarousel() {
+
+        withAnimation(.spring(duration: 0.8)) {
+            viewState.isCarouselExpanded.toggle()
+        }
+    }
+
     private func createSideDrawerGesture() -> some Gesture {
+
         DragGesture(minimumDistance: 30, coordinateSpace: .local)
             .updating($dragState) { value, state, _ in
                 guard value.startLocation.x < 50 else { return }
@@ -229,44 +246,141 @@ struct HomeView: View {
             .onEnded { value in
                 guard value.startLocation.x < 50 else { return }
                 let threshold = Constants.SideDrawer.frameWidth * 0.3
-                if value.translation.width > threshold { sideDrawerViewModel.openMenu() }
+                if value.translation.width > threshold {
+                    sideDrawerViewModel.openMenu()
+                }
             }
     }
 
     private func handleCarouselExpansionChange(_ isExpanded: Bool, proxy: ScrollViewProxy) {
+
         if isExpanded {
-            viewState.showCarousel = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.easeIn(duration: 1.11)) {
-                    viewState.showCarousel = true
-                }
-            }
+            expandCarousel(proxy: proxy)
         } else {
             collapseCarousel(proxy: proxy)
         }
     }
 
+    private func expandCarousel(proxy: ScrollViewProxy) {
+
+        viewState.showCarousel = false
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.easeIn(duration: 1.1)) {
+                viewState.showCarousel = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.spring(duration: 0.8)) {
+                    proxy.scrollTo("carouselSection", anchor: .top)
+                }
+            }
+        }
+    }
+
     private func collapseCarousel(proxy: ScrollViewProxy) {
+
         withAnimation(.easeOut(duration: 0.3)) {
             viewState.showCarousel = false
         }
+
         withAnimation(.spring(duration: 1.1)) {
+
             proxy.scrollTo(Constants.Home.proxy, anchor: .top)
         }
     }
 
-    private func resetCarouselState() {
-        viewState.showCarousel = false
-    }
-
     private func handleSideDrawerDrag(_ translation: CGFloat) {
+
         if !sideDrawerViewModel.viewState.isMenuOpen {
             sideDrawerViewModel.updateDragOffset(CGSize(width: max(0, translation), height: 0))
         }
     }
 }
 
+struct ModernPassesButton: View {
+
+    @State private var isPressed = false
+    @State private var isAnimating = false
+    let action: () -> Void
+
+    private let textGradient = LinearGradient(
+        gradient: Gradient(colors: [
+            Color(red: 0.98, green: 0.36, blue: 0.83),
+            Color(red: 0.55, green: 0.31, blue: 0.95),
+            Color(red: 0.2, green: 0.5, blue: 1.0)
+        ]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    var body: some View {
+
+        Button(action: handleButtonPress) {
+            HStack(spacing: 20) {
+                gradientIcon(systemName: "ticket.fill", leftRotation: true)
+
+                Text("Explore Passes")
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .foregroundStyle(textGradient)
+                    .scaleEffect(isPressed ? 0.95 : 1)
+                    .overlay(
+                        Text("Explore Passes")
+                            .font(.system(size: 24, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white)
+                            .blur(radius: 4)
+                            .opacity(isPressed ? 0.7 : 0)
+                    )
+
+                gradientIcon(systemName: "music.note.list", leftRotation: false)
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .contentShape(Rectangle())
+            .scaleEffect(isPressed ? 0.97 : 1)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .onAppear { isAnimating = true }
+
+        Rectangle()
+            .fill(textGradient)
+            .frame(height: 2)
+            .padding(.leading, 79)
+            .padding(.trailing, 73)
+            .scaleEffect(isPressed ? 0.95 : 1, anchor: .center)
+    }
+
+    private func gradientIcon(systemName: String, leftRotation: Bool) -> some View {
+
+        Image(systemName: systemName)
+            .font(.system(size: 24, weight: .bold))
+            .foregroundStyle(textGradient)
+            .rotationEffect(.degrees(isAnimating ? (leftRotation ? 22 : 20) : (leftRotation ? -22 : -20)))
+            .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
+            .scaleEffect(isPressed ? 0.9 : 1)
+    }
+
+    private func handleButtonPress() {
+
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            isPressed = true
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                isPressed = false
+            }
+            action()
+        }
+
+        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+        impactFeedback.impactOccurred()
+    }
+}
+
 struct HomeRainbowButton: View {
+
     let title: String
     let onTap: () -> Void
 
@@ -282,9 +396,7 @@ struct HomeRainbowButton: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(
                             LinearGradient(
-                                gradient: Gradient(
-                                    colors: Constants.Colors.rainbow
-                                ),
+                                gradient: Gradient(colors: Constants.Colors.rainbow),
                                 startPoint: .leading,
                                 endPoint: .trailing
                             ),

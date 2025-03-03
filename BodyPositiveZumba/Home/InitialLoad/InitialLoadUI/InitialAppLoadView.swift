@@ -42,6 +42,14 @@ struct InitialAppLoadView: View {
         Image(Constants.Common.logoName)
             .resizable()
             .scaledToFit()
+            .shadow(
+                color: .gray.opacity(
+                    viewState.logoShadowOpacity
+                ),
+                radius: 11,
+                x: 0,
+                y: 5
+            )
             .ignoresSafeArea()
             .scaleEffect(0.9)
             .padding(.top, 50)

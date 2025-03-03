@@ -30,7 +30,6 @@ struct TeamView: View, ActionableView {
                 }
                 swipeAnimationOverlay
             }
-            .padding()
             .onAppear {
                 withAnimation(.easeIn.delay(0.02)) {
                     viewState.showCarousel = true
@@ -51,27 +50,37 @@ struct TeamView: View, ActionableView {
 }
 
 private extension TeamView {
+
     var mainContent: some View {
-        VStack {
+        VStack(spacing: 0) {
             headerSection
             if viewState.showCarousel {
                 carouselSection
                     .transition(.opacity)
-                    .padding(.bottom, 100)
                 bioSection
                     .transition(.opacity)
             }
-            Spacer(minLength: 0)
         }
     }
 
     var headerSection: some View {
-        Text(Constants.Team.teamPageTitle)
-            .font(.sfProDisplayBold(size: 34))
-            .multilineTextAlignment(.center)
-            .foregroundColor(adaptiveTextColor)
-            .padding(.top, 0)
-            .padding(.bottom, 16)
+
+        HStack {
+            Text("The ")
+                .font(.sfProDisplayBold(size: 34))
+                .multilineTextAlignment(.center)
+                .foregroundColor(adaptiveTextColor)
+            Image(Constants.Common.logoName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 133, height: 133)
+            Text(" Team!")
+                .font(.sfProDisplayBold(size: 34))
+                .multilineTextAlignment(.center)
+                .foregroundColor(adaptiveTextColor)
+        }
+        .padding(.top, 0)
+        .padding(.bottom, 0)
     }
 
     var carouselSection: some View {
@@ -94,7 +103,6 @@ private extension TeamView {
             )
         }
         .frame(height: 400)
-        .padding(.bottom, 16)
     }
 
     var bioSection: some View {
@@ -106,12 +114,28 @@ private extension TeamView {
             }) {
                 HStack(spacing: 8) {
                     Text("Learn more about \(viewState.bios[viewState.normalizedIndex].firstName)!")
-                        .font(.sfProRoundedTextMedium(size: 16))
+                        .font(.system(size: 22, weight: .medium))
+                        .italic()
                     Image(systemName: "chevron.right")
+                        .font(.system(size: 15, weight: .medium))
                         .rotationEffect(.degrees(viewState.isBioExpanded ? 90 : 0))
                 }
-                .foregroundColor(adaptiveTextColor)
-                .padding(.horizontal, 20)
+                .overlay(
+                    Constants.Colors.learnMoreGradient
+                        .mask(
+                            HStack(spacing: 8) {
+                                Text("Learn more about \(viewState.bios[viewState.normalizedIndex].firstName)!")
+                                    .font(.system(size: 22, weight: .medium))
+                                    .italic()
+                                    .underline()
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .rotationEffect(.degrees(viewState.isBioExpanded ? 90 : 0))
+                            }
+                        )
+                )
+                .foregroundColor(.clear)
+                .padding(.horizontal, 2)
                 .frame(maxWidth: .infinity)
             }
 
@@ -124,7 +148,7 @@ private extension TeamView {
                     .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
-        .padding(.top, 20)
+        .padding(.top, 18)
     }
 
     var swipeAnimationOverlay: some View {
@@ -144,7 +168,7 @@ private extension TeamView {
     }
 
     func dismissSwipeAnimationAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             withAnimation { viewState.showSwipeAnimation = false }
         }
     }

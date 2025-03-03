@@ -12,7 +12,6 @@ struct ColoredButton: View {
     let title: String
     let action: () -> Void
     let strokeColor: Color
-    let gradientColor: Color
 
     @Environment(\.colorScheme) private var colorScheme
     @State private var isPressed = false
@@ -28,29 +27,24 @@ struct ColoredButton: View {
             }
         }) {
             Text(title)
-                .font(.sfProRoundedTextSemibold(size: 22))
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
                 .background {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(colorScheme == .dark ? .black : .white)
-                            .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                gradientColor.opacity(0.001),
-                                gradientColor.opacity(0.33)
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(strokeColor, lineWidth: 8)
+                        StaticGradientBackground()
+                            .cornerRadius(36)
+
+                        RoundedRectangle(cornerRadius: 36, style: .continuous)
+                            .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.4))
+
+                        RoundedRectangle(cornerRadius: 36, style: .continuous)
+                            .stroke(strokeColor, lineWidth: 5)
                     }
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
+                .contentShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
         }
         .buttonStyle(ScaleButtonStyle())
         .frame(height: 60)
@@ -63,5 +57,15 @@ struct ScaleButtonStyle: ButtonStyle {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.97 : 1)
             .animation(.spring(response: 0.2, dampingFraction: 0.7), value: configuration.isPressed)
+    }
+}
+
+struct StaticGradientBackground: View {
+    var body: some View {
+        LinearGradient(
+            gradient: Gradient(colors: Constants.Colors.coloredButtonGradient),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
     }
 }
