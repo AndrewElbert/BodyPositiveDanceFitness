@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ColoredButton: View {
-    
+
     let title: String
     let action: () -> Void
     let strokeColor: Color

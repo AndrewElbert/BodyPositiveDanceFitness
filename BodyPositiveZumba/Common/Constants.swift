@@ -73,7 +73,7 @@ struct Constants {
             .yellow,
             .orange
         ]
-        
+
         static let coloredButtonGradient: [Color] = [
             Constants.Colors.darkOrange.opacity(0.3),
             .orange.opacity(0.3),
@@ -88,7 +88,7 @@ struct Constants {
             .pink.opacity(0.3),
             .red.opacity(0.3)
         ]
-        
+
         static let swipeGradient = LinearGradient(
                 gradient: Gradient(
                     colors: [
@@ -104,7 +104,7 @@ struct Constants {
                 startPoint: .top,
                 endPoint: .bottom
             )
-        
+
         static let learnMoreGradient = LinearGradient(
                 gradient: Gradient(
                     colors: [

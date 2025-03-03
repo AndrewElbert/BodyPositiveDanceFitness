@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WhoAreWeScreen: View {
-    
+
     @ObservedObject private var viewModel: WhoAreWeViewModel
 
     public init(viewModel: WhoAreWeViewModel) {

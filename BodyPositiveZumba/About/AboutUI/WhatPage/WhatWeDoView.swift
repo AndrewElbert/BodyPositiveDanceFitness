@@ -13,7 +13,7 @@ struct WhatWeDoView: View {
     @State var viewState: WhatWeDoViewState
 
     var body: some View {
-        
+
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
@@ -36,11 +36,11 @@ struct WhatWeDoView: View {
                                 .underline()
                                 .fontWeight(.bold)
                         )
-                    
+
                     AnimatedLogoView(height: 155)
-                    
+
                     Divider()
-                    
+
                     Text(Constants.About.button2Content)
                         .font(.sfProBodyTextRegular(size: 20))
                         .multilineTextAlignment(.leading)
@@ -50,7 +50,7 @@ struct WhatWeDoView: View {
                         .onAppear {
                             viewState.showContent = true
                         }
-                    
+
                     Spacer()
                 }
                 .padding()
@@ -65,4 +65,3 @@ struct WhatWeDoView: View {
         }
     }
 }
-

@@ -8,6 +8,6 @@
 import SwiftUI
 
 struct WhatWeDoViewState {
-    
+
     var showContent = false
 }
