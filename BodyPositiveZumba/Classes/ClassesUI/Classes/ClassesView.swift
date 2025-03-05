@@ -71,7 +71,7 @@ private extension ClassesView {
                     .frame(width: 333, height: 60)
                     .background(Color.white)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 8)
+                        RoundedRectangle(cornerRadius: 55)
                             .stroke(
                                 LinearGradient(
                                     colors: Constants.Colors.rainbow,
@@ -81,7 +81,7 @@ private extension ClassesView {
                                 lineWidth: 8
                             )
                     )
-                    .cornerRadius(8)
+                    .cornerRadius(55)
                     .shadow(radius: 2)
             }
             .buttonStyle(PressableButton())

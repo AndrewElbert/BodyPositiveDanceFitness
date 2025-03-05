@@ -8,81 +8,34 @@
 import SwiftUI
 
 struct DanceClassCard: View {
+    
     var danceClass: DanceClass
     @Binding var viewState: ClassesViewState
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
-    @State private var showingInfo: Bool = false
-    @State private var isDancing: Bool = false  // state for rotation animation
+    @State private var showingInfo = false
+    @State private var isDancing = false
 
     private var adaptiveTextColor: Color {
+        
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
-    
+
     var body: some View {
+        
         VStack(spacing: 0) {
             cardHeader
             
-            HStack {
-                Image(systemName: "figure.dance")
-                    .font(.system(size: 45))
-                    .foregroundColor(danceClass.color)
-                    .opacity(0.5)
-                    .shadow(color: danceClass.color.opacity(0.5), radius: 3, x: 0, y: 2)
-                    .padding(.vertical, 11)
-                    .rotationEffect(.degrees(isDancing ? 8 : -4))
-                    .animation(Animation.easeInOut(duration: 1.1).repeatForever(autoreverses: true), value: isDancing)
-                    .onAppear {
-                        isDancing = true
-                    }
-                Image(systemName: "figure.dance")
-                    .font(.system(size: 65))
-                    .foregroundColor(danceClass.color)
-                    .opacity(0.5)
-                    .shadow(color: danceClass.color.opacity(0.5), radius: 3, x: 0, y: 2)
-                    .padding(.vertical, 11)
-                    .rotationEffect(.degrees(isDancing ? 8 : -4))
-                    .animation(Animation.easeInOut(duration: 1.1).repeatForever(autoreverses: true), value: isDancing)
-                Image(systemName: "figure.dance")
-                    .font(.system(size: 45))
-                    .foregroundColor(danceClass.color)
-                    .opacity(0.5)
-                    .shadow(color: danceClass.color.opacity(0.5), radius: 3, x: 0, y: 2)
-                    .padding(.vertical, 11)
-                    .rotationEffect(.degrees(isDancing ? 8 : -4))
-                    .animation(Animation.easeInOut(duration: 1.1).repeatForever(autoreverses: true), value: isDancing)
-            }
+            dancerIcons
+                .padding(.vertical, 11)
             
             headerText
                 .offset(y: -10)
+            
             Spacer()
             
-            VStack(spacing: 10) { // increased spacing between buttons
-                // "Learn More" button with creative gradient look and black text
-                Button(action: { showingInfo = true }) {
-                    HStack {
-                        Text("Learn More")
-                            .font(.sfProRoundedTextSemibold(size: 18))
-                        Image(systemName: "wand.and.stars")
-                            .font(.system(size: 20))
-                            .bold()
-                    }
-                }
-                .buttonStyle(CoolGradientButtonStyle(color: danceClass.color, textColor: .black))
-                
-                Button(action: openJoinURL) {
-                    HStack {
-                        Text(Constants.Classes.joinNowButtonText)
-                            .font(.sfProRoundedTextSemibold(size: 18))
-                        Image(systemName: "flame.fill")
-                            .foregroundColor(danceClass.color)
-                            .bold()
-                            .shadow(color: danceClass.color.opacity(0.5), radius: 3, x: 0, y: 2)
-                    }
-                }
-                .buttonStyle(CoolOutlineButtonStyle(color: danceClass.color, adaptiveTextColor: adaptiveTextColor))
-            }
-            .padding(.bottom, 15)
+            buttonControls
+                .padding(.bottom, 15)
         }
         .frame(width: 260, height: 400)
         .background(cardBackground)
@@ -97,7 +50,57 @@ struct DanceClassCard: View {
         }
     }
     
+    private var dancerIcons: some View {
+        
+        HStack {
+            dancerIcon(size: 50, index: 0)
+            dancerIcon(size: 70, index: 1)
+            dancerIcon(size: 50, index: 2)
+        }
+    }
+    
+    private func dancerIcon(size: CGFloat, index: Int) -> some View {
+        
+        Image(systemName: "figure.dance")
+            .font(.system(size: size))
+            .foregroundColor(danceClass.color)
+            .opacity(0.5)
+            .shadow(color: danceClass.color.opacity(0.5), radius: 3, x: 0, y: 2)
+            .rotationEffect(.degrees(isDancing ? 9 : -4))
+            .animation(Animation.easeInOut(duration: 1.1).repeatForever(autoreverses: true), value: isDancing)
+            .onAppear(perform: index == 0 ? { isDancing = true } : {})
+    }
+    
+    private var buttonControls: some View {
+        
+        VStack(spacing: 10) {
+            Button(action: { showingInfo = true }) {
+                HStack {
+                    Text(Constants.Classes.learnMoreButtonText)
+                        .font(.sfProRoundedTextSemibold(size: 18))
+                    Image(systemName: "wand.and.stars")
+                        .font(.system(size: 20))
+                        .bold()
+                }
+            }
+            .buttonStyle(learnMoreButton(color: danceClass.color, textColor: .black))
+
+            Button(action: openJoinURL) {
+                HStack {
+                    Text(Constants.Classes.joinNowButtonText)
+                        .font(.sfProRoundedTextSemibold(size: 18))
+                    Image(systemName: "flame.fill")
+                        .foregroundColor(danceClass.color)
+                        .bold()
+                        .shadow(color: danceClass.color.opacity(0.5), radius: 3, x: 0, y: 2)
+                }
+            }
+            .buttonStyle(joinNowButton(color: danceClass.color, adaptiveTextColor: adaptiveTextColor))
+        }
+    }
+
     private var cardHeader: some View {
+        
         Rectangle()
             .fill(danceClass.color.opacity(0.65))
             .frame(height: 70)
@@ -111,8 +114,9 @@ struct DanceClassCard: View {
                     .padding(.bottom, -15)
             )
     }
-    
+
     private var headerText: some View {
+        
         Text(danceClass.rawValue)
             .font(.sfProDisplayBold(size: 26))
             .fontWeight(.bold)
@@ -122,8 +126,9 @@ struct DanceClassCard: View {
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 15)
     }
-    
+
     private var cardBackground: some View {
+        
         RadialGradient(
             gradient: Gradient(colors: [
                 danceClass.color.opacity(0.05),
@@ -134,12 +139,13 @@ struct DanceClassCard: View {
             endRadius: 250
         )
     }
-    
+
     private var cardBorder: some View {
+        
         RoundedRectangle(cornerRadius: 15)
             .strokeBorder(danceClass.color, lineWidth: 2.2)
     }
-    
+
     private var infoSheet: some View {
         
         ZStack {
@@ -149,89 +155,109 @@ struct DanceClassCard: View {
                 endPoint: .bottom
             )
             .edgesIgnoringSafeArea(.all)
-            
+
             VStack(spacing: 20) {
-                VStack(spacing: 10) {
-                    Image(systemName: "music.quarternote.3")
-                        .font(.system(size: 40))
-                        .foregroundColor(danceClass.color)
-                        .padding(.top, 15)
-                    
-                    Text(danceClass.rawValue)
-                        .font(.sfProDisplayBold(size: 32))
-                        .foregroundColor(danceClass.color)
-                }
+                infoHeader
                 
-                Rectangle()
-                    .fill(danceClass.color)
-                    .frame(height: 3)
-                    .frame(width: 344)
-                    .cornerRadius(1.5)
+                divider
                 
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 15) {
-                        Text("About This Class")
-                            .font(.sfProRoundedTextSemibold(size: 20))
-                            .foregroundColor(danceClass.color)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .underline()
-                        
-                        Text(danceClass.description)
-                            .font(.sfProBodyTextRegular(size: 18))
-                            .foregroundColor(adaptiveTextColor)
-                            .lineSpacing(5)
-                            .padding(.horizontal)
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .background(
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.white.opacity(0.7))
-                        .shadow(color: Color.black.opacity(0.3), radius: 15, x: 0, y: 2)
-                )
-                .padding(.horizontal, 20)
+                infoContent
                 
                 Spacer()
                 
-                HStack(spacing: 15) {
-                    Button(action: {
-                        showingInfo = false
-                    }) {
-                        Text("Close")
-                            .font(.sfProRoundedTextSemibold(size: 18))
-                            .foregroundColor(.white)
-                            .frame(height: 50)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                Capsule()
-                                    .fill(Color.gray)
-                            )
-                    }
-                    
-                    Button(action: {
-                        showingInfo = false
-                        openJoinURL()
-                    }) {
-                        Text("Join Now")
-                            .font(.sfProRoundedTextSemibold(size: 18))
-                            .foregroundColor(.white)
-                            .frame(height: 50)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                Capsule()
-                                    .fill(danceClass.color)
-                            )
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 30)
+                infoButtons
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 30)
+            }
+        }
+    }
+    
+    private var infoHeader: some View {
+        
+        VStack(spacing: 10) {
+            Image(systemName: "music.quarternote.3")
+                .font(.system(size: 40))
+                .foregroundColor(danceClass.color)
+                .padding(.top, 15)
+
+            Text(danceClass.rawValue)
+                .font(.sfProDisplayBold(size: 32))
+                .foregroundColor(danceClass.color)
+        }
+    }
+    
+    private var divider: some View {
+        Rectangle()
+            .fill(danceClass.color)
+            .frame(width: 344,
+                   height: 3
+            )
+            .cornerRadius(1.5)
+    }
+    
+    private var infoContent: some View {
+        
+        ScrollView {
+            VStack(alignment: .leading, spacing: 15) {
+                Text(Constants.Classes.descriptionTitle)
+                    .font(.sfProDisplaySemibold(size: 26))
+                    .foregroundColor(danceClass.color)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .underline()
+                    .padding(.bottom, 16)
+
+                Text(danceClass.description)
+                    .font(.sfProBodyTextRegular(size: 18))
+                    .foregroundColor(adaptiveTextColor)
+                    .lineSpacing(5)
+                    .padding(.horizontal)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color.white.opacity(0.9))
+                .shadow(color: Color.black.opacity(0.3), radius: 15, x: 0, y: 2)
+        )
+        .padding(.horizontal, 20)
+    }
+    
+    private var infoButtons: some View {
+        
+        HStack(spacing: 15) {
+            Button(action: { showingInfo = false }) {
+                Text(Constants.Classes.closeButton)
+                    .font(.sfProRoundedTextSemibold(size: 18))
+                    .foregroundColor(.white)
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        Capsule()
+                            .fill(Color.gray)
+                    )
+            }
+
+            Button(action: {
+                showingInfo = false
+                openJoinURL()
+            }) {
+                Text(Constants.Classes.joinNowButtonText)
+                    .font(.sfProRoundedTextSemibold(size: 18))
+                    .foregroundColor(.white)
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        Capsule()
+                            .fill(danceClass.color)
+                    )
             }
         }
     }
     
     private func openJoinURL() {
+        
         guard let url = URL(string: Constants.JoinNow.joinNowUrl) else { return }
         viewState.joinNowURL = WebViewURL(
             title: Constants.Classes.joinNowButtonText,
@@ -240,15 +266,14 @@ struct DanceClassCard: View {
     }
 }
 
-// MARK: - Custom Button Styles
-
-struct CoolGradientButtonStyle: ButtonStyle {
+struct learnMoreButton: ButtonStyle {
+    
     var color: Color
-    var textColor: Color = .white  // default text color is white, overridable
+    var textColor: Color = .white
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(width: 222, height: 44)  // bigger button
+            .frame(width: 222, height: 44)
             .foregroundColor(textColor)
             .background(
                 LinearGradient(
@@ -268,15 +293,16 @@ struct CoolGradientButtonStyle: ButtonStyle {
     }
 }
 
-struct CoolOutlineButtonStyle: ButtonStyle {
+struct joinNowButton: ButtonStyle {
+    
     var color: Color
     var adaptiveTextColor: Color
-    
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(width: 222, height: 44)  // bigger button
+            .frame(width: 222, height: 44)
             .foregroundColor(adaptiveTextColor)
-            .background(.ultraThinMaterial) // frosted glass effect
+            .background(.ultraThinMaterial)
             .cornerRadius(25)
             .overlay(
                 RoundedRectangle(cornerRadius: 55)
@@ -290,6 +316,3 @@ struct CoolOutlineButtonStyle: ButtonStyle {
             .animation(.spring(), value: configuration.isPressed)
     }
 }
-
-
-

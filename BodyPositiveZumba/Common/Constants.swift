@@ -48,6 +48,9 @@ struct Constants {
         static let openButtonText: String = "Learn More About "
         static let joinNowButtonText: String = "Join Now!"
         static let viewCalendarUrl: String = "https://www.bodypositivedancefitness.com/calendar"
+        static let learnMoreButtonText: String = "Learn More"
+        static let descriptionTitle: String = "About This Class"
+        static let closeButton: String = "Close"
 
         static let bookNowWebviewTitle: String = "Book A Class"
         static let viewAllClassesPageTitle: String = "All Classes"
