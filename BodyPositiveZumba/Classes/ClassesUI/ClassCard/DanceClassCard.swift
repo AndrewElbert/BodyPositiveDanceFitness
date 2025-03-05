@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DanceClassCard: View {
-    
+
     var danceClass: DanceClass
     @Binding var viewState: ClassesViewState
     @Environment(\.colorScheme) private var colorScheme
@@ -17,23 +17,23 @@ struct DanceClassCard: View {
     @State private var isDancing = false
 
     private var adaptiveTextColor: Color {
-        
+
         colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
     }
 
     var body: some View {
-        
+
         VStack(spacing: 0) {
             cardHeader
-            
+
             dancerIcons
                 .padding(.vertical, 11)
-            
+
             headerText
                 .offset(y: -10)
-            
+
             Spacer()
-            
+
             buttonControls
                 .padding(.bottom, 15)
         }
@@ -49,18 +49,18 @@ struct DanceClassCard: View {
             infoSheet
         }
     }
-    
+
     private var dancerIcons: some View {
-        
+
         HStack {
             dancerIcon(size: 50, index: 0)
             dancerIcon(size: 70, index: 1)
             dancerIcon(size: 50, index: 2)
         }
     }
-    
+
     private func dancerIcon(size: CGFloat, index: Int) -> some View {
-        
+
         Image(systemName: "figure.dance")
             .font(.system(size: size))
             .foregroundColor(danceClass.color)
@@ -70,9 +70,9 @@ struct DanceClassCard: View {
             .animation(Animation.easeInOut(duration: 1.1).repeatForever(autoreverses: true), value: isDancing)
             .onAppear(perform: index == 0 ? { isDancing = true } : {})
     }
-    
+
     private var buttonControls: some View {
-        
+
         VStack(spacing: 10) {
             Button(action: { showingInfo = true }) {
                 HStack {
@@ -100,7 +100,7 @@ struct DanceClassCard: View {
     }
 
     private var cardHeader: some View {
-        
+
         Rectangle()
             .fill(danceClass.color.opacity(0.65))
             .frame(height: 70)
@@ -116,7 +116,7 @@ struct DanceClassCard: View {
     }
 
     private var headerText: some View {
-        
+
         Text(danceClass.rawValue)
             .font(.sfProDisplayBold(size: 26))
             .fontWeight(.bold)
@@ -128,7 +128,7 @@ struct DanceClassCard: View {
     }
 
     private var cardBackground: some View {
-        
+
         RadialGradient(
             gradient: Gradient(colors: [
                 danceClass.color.opacity(0.05),
@@ -141,13 +141,13 @@ struct DanceClassCard: View {
     }
 
     private var cardBorder: some View {
-        
+
         RoundedRectangle(cornerRadius: 15)
             .strokeBorder(danceClass.color, lineWidth: 2.2)
     }
 
     private var infoSheet: some View {
-        
+
         ZStack {
             LinearGradient(
                 gradient: Gradient(colors: [danceClass.color.opacity(0.01), danceClass.color.opacity(0.28)]),
@@ -158,22 +158,22 @@ struct DanceClassCard: View {
 
             VStack(spacing: 20) {
                 infoHeader
-                
+
                 divider
-                
+
                 infoContent
-                
+
                 Spacer()
-                
+
                 infoButtons
                     .padding(.horizontal, 20)
                     .padding(.bottom, 30)
             }
         }
     }
-    
+
     private var infoHeader: some View {
-        
+
         VStack(spacing: 10) {
             Image(systemName: "music.quarternote.3")
                 .font(.system(size: 40))
@@ -185,7 +185,7 @@ struct DanceClassCard: View {
                 .foregroundColor(danceClass.color)
         }
     }
-    
+
     private var divider: some View {
         Rectangle()
             .fill(danceClass.color)
@@ -194,9 +194,9 @@ struct DanceClassCard: View {
             )
             .cornerRadius(1.5)
     }
-    
+
     private var infoContent: some View {
-        
+
         ScrollView {
             VStack(alignment: .leading, spacing: 15) {
                 Text(Constants.Classes.descriptionTitle)
@@ -223,9 +223,9 @@ struct DanceClassCard: View {
         )
         .padding(.horizontal, 20)
     }
-    
+
     private var infoButtons: some View {
-        
+
         HStack(spacing: 15) {
             Button(action: { showingInfo = false }) {
                 Text(Constants.Classes.closeButton)
@@ -255,9 +255,9 @@ struct DanceClassCard: View {
             }
         }
     }
-    
+
     private func openJoinURL() {
-        
+
         guard let url = URL(string: Constants.JoinNow.joinNowUrl) else { return }
         viewState.joinNowURL = WebViewURL(
             title: Constants.Classes.joinNowButtonText,
@@ -267,10 +267,10 @@ struct DanceClassCard: View {
 }
 
 struct learnMoreButton: ButtonStyle {
-    
+
     var color: Color
     var textColor: Color = .white
-    
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: 222, height: 44)
@@ -294,7 +294,7 @@ struct learnMoreButton: ButtonStyle {
 }
 
 struct joinNowButton: ButtonStyle {
-    
+
     var color: Color
     var adaptiveTextColor: Color
 
