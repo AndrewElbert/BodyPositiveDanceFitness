@@ -41,7 +41,7 @@ enum DanceClass: String, CaseIterable, Identifiable {
         case .oula: return Color(red: 0.90, green: 0.72, blue: 0.78)
         case .uplift: return Color(red: 0.63, green: 0.91, blue: 0.90)
         case .dark: return Color(red: 0.7, green: 0.1, blue: 1.0)
-        case .shineLight: return Color(red: 1.0, green: 1.0, blue: 0.0)
+        case .shineLight: return .yellow
         }
     }
 

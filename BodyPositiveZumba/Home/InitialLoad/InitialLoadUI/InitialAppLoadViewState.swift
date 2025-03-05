@@ -12,7 +12,7 @@ struct InitialAppLoadViewState {
     var showHomeScreen: Bool = false
     var progress: CGFloat = 0
     var fadeInProgress: Double = 0
-    let barLoadDuration: Double = Double.random(in: 0.67...1.33)
+    let barLoadDuration: Double = Double.random(in: 1.33...1.55)
     let barLoadPause: Double = 3.3
     let colorChangeDelay: Double = 0.3
     var textColor: Color = .blue
