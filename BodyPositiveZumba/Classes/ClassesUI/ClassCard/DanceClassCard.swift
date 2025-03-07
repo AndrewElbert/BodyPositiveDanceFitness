@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct DanceClassCard: View {
-    
 
     var danceClass: DanceClass
     @Binding var viewState: ClassesViewState

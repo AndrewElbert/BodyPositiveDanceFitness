@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct classInfoSheet: View {
-    
+
     let danceClass: DanceClass
     let adaptiveTextColor: Color
     let joinNowAction: () -> Void
     @Binding var showingInfo: Bool
     @Environment(\.dismiss) private var dismiss
-    
+
     @State private var particles: [Particle] = {
-        
+
         let symbols = ["♪", "♫", "✨", "💫", "🎵", "🌟", "⭐", "🎶"]
         return (0..<20).map { _ in
             Particle(
@@ -40,9 +40,9 @@ struct classInfoSheet: View {
     @State private var scale: CGFloat = 0.8
     @State private var rotation: Double = -5
     @State private var animationsStarted = false
-    
+
     struct Particle: Identifiable {
-        
+
         let id = UUID()
         let position: CGPoint
         let size: CGFloat
@@ -55,9 +55,9 @@ struct classInfoSheet: View {
         let additionalRotation: Double
         let delay: Double
     }
-    
+
     var body: some View {
-        
+
         ZStack {
             RadialGradient(
                 gradient: Gradient(colors: [danceClass.color, Color.black]),
@@ -66,19 +66,19 @@ struct classInfoSheet: View {
                 endRadius: 600
             )
             .edgesIgnoringSafeArea(.all)
-            
+
             ForEach(particles) { particle in
                 ParticleView(particle: particle, animationsStarted: animationsStarted)
             }
-            
+
             VStack(spacing: 20) {
-              
+
                 VStack(spacing: 10) {
                     Image(systemName: "music.quarternote.3")
                         .font(.system(size: 40))
                         .foregroundColor(danceClass.color)
                         .padding(.top, 15)
-                    
+
                     Text(danceClass.rawValue)
                         .font(.sfProDisplayBold(size: 32))
                         .foregroundStyle(
@@ -91,12 +91,12 @@ struct classInfoSheet: View {
                         .rotationEffect(.degrees(rotation))
                         .scaleEffect(scale)
                 }
-                
+
                 Rectangle()
                     .fill(danceClass.color)
                     .frame(width: 344, height: 3)
                     .cornerRadius(1.5)
-                
+
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
                         Text(Constants.Classes.descriptionTitle)
@@ -106,7 +106,7 @@ struct classInfoSheet: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .underline()
                             .padding(.bottom, 16)
-                        
+
                         Text(danceClass.description)
                             .font(.sfProBodyTextRegular(size: 18))
                             .foregroundColor(adaptiveTextColor)
@@ -123,11 +123,11 @@ struct classInfoSheet: View {
                         .shadow(color: Color.black.opacity(0.3), radius: 15, x: 0, y: 2)
                 )
                 .padding(.horizontal, 20)
-                
+
                 Spacer()
-                
+
                 HStack(spacing: 15) {
-                    
+
                     Button(action: { showingInfo = false }) {
                         Text(Constants.Classes.closeButton)
                             .font(.sfProRoundedTextSemibold(size: 18))
@@ -139,7 +139,7 @@ struct classInfoSheet: View {
                                     .fill(Color.gray)
                             )
                     }
-                    
+
                     Button(action: {
                         showingInfo = false
                         joinNowAction()
@@ -170,14 +170,14 @@ struct classInfoSheet: View {
 }
 
 struct ParticleView: View {
-    
+
     let particle: classInfoSheet.Particle
     let animationsStarted: Bool
-    
+
     @State private var position: CGPoint
     @State private var rotation: Double
     @State private var opacity: Double
-    
+
     init(particle: classInfoSheet.Particle, animationsStarted: Bool) {
         self.particle = particle
         self.animationsStarted = animationsStarted
@@ -185,7 +185,7 @@ struct ParticleView: View {
         _rotation = State(initialValue: particle.rotation)
         _opacity = State(initialValue: particle.opacity)
     }
-    
+
     var body: some View {
         Text(particle.symbol)
             .font(.system(size: particle.size))
@@ -194,7 +194,7 @@ struct ParticleView: View {
             .rotationEffect(.degrees(rotation))
             .onAppear {
                 guard animationsStarted else { return }
-                
+
                 withAnimation(
                     Animation.easeInOut(duration: particle.animationDuration)
                         .repeatForever(autoreverses: true)
@@ -203,10 +203,10 @@ struct ParticleView: View {
                     position.y += particle.offsetY
                     position.x += particle.offsetX
                     rotation += particle.additionalRotation
-                    opacity = Double.random(in: 0.1...0.5)
+                    opacity = Double.random(in: 0.4...0.8)
                 }
             }
-            .onChange(of: animationsStarted) {_,  newValue in
+            .onChange(of: animationsStarted) {_, newValue in
                 if newValue {
                     withAnimation(
                         Animation.easeInOut(duration: particle.animationDuration)
@@ -216,7 +216,7 @@ struct ParticleView: View {
                         position.y += particle.offsetY
                         position.x += particle.offsetX
                         rotation += particle.additionalRotation
-                        opacity = Double.random(in: 0.1...0.5)
+                        opacity = Double.random(in: 0.4...0.8)
                     }
                 }
             }
