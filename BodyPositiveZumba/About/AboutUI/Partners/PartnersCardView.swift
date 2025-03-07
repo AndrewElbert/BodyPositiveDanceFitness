@@ -26,7 +26,7 @@ struct PartnersCard: View {
                 divider
                 partnerDescription
                 Spacer()
-                actionButton
+                websiteButton
             }
         }
         .padding()
@@ -119,7 +119,7 @@ struct PartnersCard: View {
         }
     }
 
-    private var actionButton: some View {
+    private var websiteButton: some View {
 
         Button(action: {
             viewState.displayURL = partner.url

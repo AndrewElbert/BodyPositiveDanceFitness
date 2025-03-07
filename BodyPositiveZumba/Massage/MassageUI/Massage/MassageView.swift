@@ -109,11 +109,11 @@ private extension MassageView {
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
-                            lineWidth: 5)
+                                lineWidth: 4.4)
                 )
                     .shadow(
-                        color: isCurrentCard ? Color.orange.opacity(0.2) : Color.clear,
-                        radius: 40
+                        color: isCurrentCard ? Color.orange.opacity(0.22) : Color.clear,
+                        radius: 44
                     )
             )
         }
@@ -130,16 +130,24 @@ private extension MassageView {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background {
-                    ZStack {
-                        StaticGradientBackground()
-                            .cornerRadius(36)
-
-                        RoundedRectangle(cornerRadius: 36, style: .continuous)
-                            .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.33))
-
-                    }
-                }
+                .background(
+                    LinearGradient(
+                        colors: Constants.Colors.logoColorGradientLight,
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 36)
+                        .stroke(
+                            LinearGradient(
+                                gradient: Gradient(colors: Constants.Colors.logoColorGradient),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                    )
                 .cornerRadius(36)
         }
         .padding(.bottom, 11)

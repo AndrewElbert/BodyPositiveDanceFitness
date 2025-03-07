@@ -344,9 +344,9 @@ struct ModernPassesButton: View {
 
         Rectangle()
             .fill(textGradient)
-            .frame(height: 2)
-            .padding(.leading, 79)
-            .padding(.trailing, 73)
+            .frame(height: 2.2)
+            .padding(.leading, 80)
+            .padding(.trailing, 74)
             .scaleEffect(isPressed ? 0.95 : 1, anchor: .center)
     }
 
