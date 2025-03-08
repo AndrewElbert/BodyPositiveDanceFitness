@@ -139,27 +139,13 @@ struct HomeView: View {
     private var greetingView: some View {
 
         VStack(spacing: 11) {
-            ZStack {
-                Text(viewState.currentGreeting)
-                    .font(.sfProDisplayBold(size: 35))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: Constants.Colors.massageTitleGradient,
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .italic()
-                    .multilineTextAlignment(.center)
-                    .blur(radius: 1.1)
-
-                Text(viewState.currentGreeting)
-                    .font(.sfProDisplayBold(size: 35))
-                    .italic()
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 0)
-            }
+            
+            Text(viewState.currentGreeting)
+                .font(.sfProDisplayBold(size: 35))
+                .italic()
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+                .padding(.top, 0)
             Text(Constants.Home.pageBio)
                 .font(.sfProDisplayRegular(size: 18))
                 .foregroundColor(Constants.Colors.navy)
@@ -195,8 +181,8 @@ struct HomeView: View {
                     .font(.sfProDisplayRegular(size: 19))
                     .foregroundColor(Constants.Colors.navy)
                     .italic()
-                    .padding(.top, 9)
-                    .padding(.bottom, 9)
+                    .padding(.top, 8)
+                    .padding(.bottom, 4)
             }
 
             HStack(spacing: 16) {
@@ -320,11 +306,7 @@ struct ModernPassesButton: View {
     let action: () -> Void
 
     private let textGradient = LinearGradient(
-        gradient: Gradient(colors: [
-            Color(red: 0.98, green: 0.36, blue: 0.83),
-            Color(red: 0.55, green: 0.31, blue: 0.95),
-            Color(red: 0.2, green: 0.5, blue: 1.0)
-        ]),
+        gradient: Gradient(colors: Constants.Colors.homeExploreGradient),
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
@@ -335,12 +317,12 @@ struct ModernPassesButton: View {
             HStack(spacing: 20) {
                 gradientIcon(systemName: "ticket.fill", leftRotation: true)
 
-                Text("Explore Passes")
+                Text(Constants.Home.viewPassesButton)
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundStyle(textGradient)
                     .scaleEffect(isPressed ? 0.95 : 1)
                     .overlay(
-                        Text("Explore Passes")
+                        Text(Constants.Home.viewPassesButton)
                             .font(.system(size: 24, weight: .semibold, design: .rounded))
                             .foregroundColor(.white)
                             .blur(radius: 4)
@@ -355,14 +337,9 @@ struct ModernPassesButton: View {
             .scaleEffect(isPressed ? 0.97 : 1)
         }
         .buttonStyle(PlainButtonStyle())
-        .onAppear { isAnimating = true }
+        .onAppear { isAnimating = true
+        }
 
-        Rectangle()
-            .fill(textGradient)
-            .frame(height: 2.2)
-            .padding(.leading, 80)
-            .padding(.trailing, 74)
-            .scaleEffect(isPressed ? 0.95 : 1, anchor: .center)
     }
 
     private func gradientIcon(systemName: String, leftRotation: Bool) -> some View {

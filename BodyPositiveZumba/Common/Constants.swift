@@ -77,17 +77,6 @@ struct Constants {
             .orange
         ]
         
-        static let massageTitleGradient: [Color] = [
-            Constants.Colors.neonCyan,
-            .yellow,
-            .orange
-        ]
-        
-        static let partnersTitleGradient: [Color] = [
-            Constants.Colors.neonCyan,
-            .orange
-        ]
-
         static let animateLogoColorGradient: [Color] = [
             .orange,
             .yellow,
@@ -148,6 +137,12 @@ struct Constants {
             Constants.Colors.neonCyan.opacity(0.2),
             .yellow.opacity(0.2),
             .orange.opacity(0.2)
+        ]
+        
+        static let homeExploreGradient: [Color] = [
+            Color(red: 0.98, green: 0.36, blue: 0.83),
+            Color(red: 0.55, green: 0.31, blue: 0.95),
+            Color(red: 0.2, green: 0.5, blue: 1.0)
         ]
 
         static let navy = Color(red: 0.0, green: 0.0, blue: 128.0/255.0)

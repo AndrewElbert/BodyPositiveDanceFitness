@@ -23,6 +23,7 @@ struct MassageView: View, ActionableView {
     }
 
     var body: some View {
+        
         NavigationStack {
             ZStack {
                 mainContent
@@ -51,6 +52,7 @@ struct MassageView: View, ActionableView {
 }
 
 private extension MassageView {
+    
     var mainContent: some View {
         VStack {
             headerSection
@@ -71,13 +73,14 @@ private extension MassageView {
                     .font(.sfProDisplayBold(size: 34))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: Constants.Colors.massageTitleGradient,
+                            colors: Constants.Colors.logoColorGradient,
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
                     .multilineTextAlignment(.center)
-                    .blur(radius: 1.1)
+                    .blur(radius: 0.8888)
+                    .offset(y : 0.8888)
 
                 Text(viewState.pageTitle)
                     .font(.sfProDisplayBold(size: 34))
@@ -100,6 +103,7 @@ private extension MassageView {
     }
 
     var carouselSection: some View {
+        
         SwipableCarouselComponent<AnyView, MassageCardModel>(
             viewModel: SwipableCarouselViewModel(
                 viewState: $viewState.swipableCarouselViewState
@@ -127,7 +131,7 @@ private extension MassageView {
                 )
                     .shadow(
                         color: isCurrentCard ? Color.orange.opacity(0.22) : Color.clear,
-                        radius: 44
+                        radius: 33
                     )
             )
         }
@@ -151,17 +155,6 @@ private extension MassageView {
                         endPoint: .trailing
                     )
                 )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 36)
-                        .stroke(
-                            LinearGradient(
-                                gradient: Gradient(colors: Constants.Colors.logoColorGradient),
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 1
-                        )
-                    )
                 .cornerRadius(36)
         }
         .padding(.bottom, 11)

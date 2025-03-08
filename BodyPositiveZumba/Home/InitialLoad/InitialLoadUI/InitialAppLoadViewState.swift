@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct InitialAppLoadViewState {
 
     var showHomeScreen: Bool = false
@@ -22,4 +24,5 @@ struct InitialAppLoadViewState {
     var neonCyan: Color = Constants.Colors.neonCyan
     var endColor: Color = Color(red: 0, green: 0, blue: 0.5)
     var logoShadowOpacity: Double = 0.0
+    var showShootingStar: Bool = false
 }

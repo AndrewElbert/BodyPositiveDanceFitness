@@ -59,23 +59,11 @@ struct PartnersView: View {
                 .frame(width: 130, height: 130)
                 .clipped()
                 .padding(.top, 0)
-            
-            ZStack {
-                Text(Constants.Partners.pageTitle)
-                    .font(.sfProDisplayBold(size: 42))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: Constants.Colors.partnersTitleGradient,
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .blur(radius: 1.1)
                 
-                Text(Constants.Partners.pageTitle)
-                    .font(.sfProDisplayBold(size: 42))
-                    .foregroundStyle(.black)
-            }
+            Text(Constants.Partners.pageTitle)
+                .font(.sfProDisplayBold(size: 38))
+                .foregroundStyle(.black)
+            
             .padding(.top, 15)
             .padding(.bottom, 12)
         }
