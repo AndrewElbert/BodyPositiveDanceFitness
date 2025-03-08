@@ -76,6 +76,17 @@ struct Constants {
             .yellow,
             .orange
         ]
+        
+        static let massageTitleGradient: [Color] = [
+            Constants.Colors.neonCyan,
+            .yellow,
+            .orange
+        ]
+        
+        static let partnersTitleGradient: [Color] = [
+            Constants.Colors.neonCyan,
+            .orange
+        ]
 
         static let animateLogoColorGradient: [Color] = [
             .orange,
@@ -434,9 +445,9 @@ struct Constants {
 
     enum Partners {
 
-        static let pageTitle: String = "Partners"
-        static let buttonText: String = "Visit Website"
-        static let pageBio: String = "Discover our incredible partners below!"
+        static let pageTitle: String = "- Partners!"
+        static let buttonText: String = "Website"
+        static let pageBio: String = "Discover our incredible partners below"
     }
 
     // MARK: SideDrawer

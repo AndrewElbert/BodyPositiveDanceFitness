@@ -52,27 +52,40 @@ struct PartnersView: View {
 
     private var header: some View {
 
-        HStack(spacing: 13) {
+        HStack(spacing: 11) {
             Image(Constants.Common.logoName)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 130, height: 130)
                 .clipped()
                 .padding(.top, 0)
-
-            Text(Constants.Partners.pageTitle)
-                .font(.sfProDisplayBold(size: 44))
-                .foregroundStyle(.black)
-                .padding(.top, 15)
-                .padding(.bottom, 12)
+            
+            ZStack {
+                Text(Constants.Partners.pageTitle)
+                    .font(.sfProDisplayBold(size: 42))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: Constants.Colors.partnersTitleGradient,
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .blur(radius: 1.1)
+                
+                Text(Constants.Partners.pageTitle)
+                    .font(.sfProDisplayBold(size: 42))
+                    .foregroundStyle(.black)
+            }
+            .padding(.top, 15)
+            .padding(.bottom, 12)
         }
     }
 
     private var descriptionText: some View {
 
         Text(Constants.Partners.pageBio)
-            .font(.sfProBodyTextRegular(size: 17))
-            .foregroundColor(.gray)
+            .font(.sfProBodyTextRegular(size: 19))
+            .foregroundColor(.black.opacity(0.7))
             .italic()
             .multilineTextAlignment(.center)
             .padding(.horizontal, 0)

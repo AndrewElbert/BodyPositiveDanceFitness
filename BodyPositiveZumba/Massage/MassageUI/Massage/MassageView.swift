@@ -64,20 +64,34 @@ private extension MassageView {
     }
 
     var headerSection: some View {
+        
         VStack(spacing: 0) {
-            Text(viewState.pageTitle)
-                .font(.sfProDisplayBold(size: 34))
-                .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextColor)
-                .padding(.top, 0)
-                .padding(.bottom, 8)
+            ZStack {
+                Text(viewState.pageTitle)
+                    .font(.sfProDisplayBold(size: 34))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: Constants.Colors.massageTitleGradient,
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .multilineTextAlignment(.center)
+                    .blur(radius: 1.1)
+
+                Text(viewState.pageTitle)
+                    .font(.sfProDisplayBold(size: 34))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.top, 0)
+            .padding(.bottom, 8)
 
             Divider()
 
             Text(viewState.pageBio)
                 .font(.sfProBodyTextRegular(size: 16))
                 .italic()
-                .foregroundColor(.black.opacity(0.65))
+                .foregroundColor(.black.opacity(0.77))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.top, 8)

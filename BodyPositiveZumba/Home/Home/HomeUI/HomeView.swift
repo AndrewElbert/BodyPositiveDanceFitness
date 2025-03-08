@@ -139,12 +139,27 @@ struct HomeView: View {
     private var greetingView: some View {
 
         VStack(spacing: 11) {
-            Text(viewState.currentGreeting)
-                .font(.sfProDisplayBold(size: 35))
-                .italic()
-                .foregroundColor(.black)
-                .multilineTextAlignment(.center)
-                .padding(.top, 0)
+            ZStack {
+                Text(viewState.currentGreeting)
+                    .font(.sfProDisplayBold(size: 35))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: Constants.Colors.massageTitleGradient,
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .italic()
+                    .multilineTextAlignment(.center)
+                    .blur(radius: 1.1)
+
+                Text(viewState.currentGreeting)
+                    .font(.sfProDisplayBold(size: 35))
+                    .italic()
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 0)
+            }
             Text(Constants.Home.pageBio)
                 .font(.sfProDisplayRegular(size: 18))
                 .foregroundColor(Constants.Colors.navy)
