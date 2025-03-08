@@ -10,7 +10,6 @@ import SwiftUI
 struct ClassesView: View, ActionableView {
 
     enum Action {
-        case toggleExpansion
         case handleViewAllButtonTap
     }
 
@@ -30,8 +29,6 @@ struct ClassesView: View, ActionableView {
                     VStack(spacing: 0) {
                         headerSection
                         carouselSection
-                        expansionToggleButton
-                        if viewState.isBioExpanded { bioText }
                         buttonsSection
                     }
                     .padding(.bottom, 20)
@@ -74,7 +71,7 @@ private extension ClassesView {
                     .frame(width: 333, height: 60)
                     .background(Color.white)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 8)
+                        RoundedRectangle(cornerRadius: 55)
                             .stroke(
                                 LinearGradient(
                                     colors: Constants.Colors.rainbow,
@@ -84,7 +81,7 @@ private extension ClassesView {
                                 lineWidth: 8
                             )
                     )
-                    .cornerRadius(8)
+                    .cornerRadius(55)
                     .shadow(radius: 2)
             }
             .buttonStyle(PressableButton())
@@ -144,29 +141,6 @@ private extension ClassesView {
         .frame(height: 333)
     }
 
-    var expansionToggleButton: some View {
-
-        Button(action: toggleExpansion) {
-            HStack(spacing: 4) {
-                Text(toggleButtonText)
-                    .font(.sfProRoundedTextSemibold(size: 16))
-                Image(systemName: viewState.isBioExpanded ? "chevron.up" : "chevron.right")
-            }
-            .foregroundColor(adaptiveTextColor)
-            .multilineTextAlignment(.center)
-            .padding(.top, 30)
-        }
-    }
-
-    var bioText: some View {
-
-        Text(viewState.currentDanceClass.description)
-            .font(.sfProBodyTextRegular(size: 18))
-            .foregroundColor(adaptiveTextColor)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal)
-    }
-
     var buttonsSection: some View {
 
         VStack(spacing: 16) {
@@ -180,7 +154,7 @@ private extension ClassesView {
                 action: openCalendar
             )
         }
-        .padding(.top, 40)
+        .padding(.top, 100)
     }
 
     var swipeAnimationOverlay: some View {
@@ -200,20 +174,6 @@ private extension ClassesView {
                     dismissSwipeAnimationAfterDelay()
                 }
             }
-        }
-    }
-
-    var toggleButtonText: String {
-
-        viewState.isBioExpanded ?
-        Constants.Classes.closeButtonText :
-        "\(Constants.Classes.openButtonText)\(viewState.currentDanceClass.rawValue)!"
-    }
-
-    func toggleExpansion() {
-
-        withAnimation(.easeInOut) {
-            onAction?(.toggleExpansion)
         }
     }
 

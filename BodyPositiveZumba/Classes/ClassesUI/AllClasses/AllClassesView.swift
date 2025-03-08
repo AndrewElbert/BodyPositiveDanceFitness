@@ -11,6 +11,12 @@ struct AllClassesView: View {
 
     @State var viewState: AllClassesViewState
     @Environment(\.dismiss) private var dismiss
+    @State private var selectedClass: DanceClass?
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var adaptiveTextColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.9) : Color.black
+    }
 
     var body: some View {
 
@@ -27,7 +33,10 @@ struct AllClassesView: View {
                         ForEach(viewState.classes) { danceClass in
                             DanceClassRow(
                                 danceClass: danceClass,
-                                onBook: { viewState.showWebView = true }
+                                onBook: { viewState.showWebView = true },
+                                onInfoTap: {
+                                    selectedClass = danceClass
+                                }
                             )
                             .padding(.horizontal)
                         }
@@ -38,6 +47,17 @@ struct AllClassesView: View {
                 WebViewContainer(
                     url: webViewURL.url,
                     title: webViewURL.title
+                )
+            }
+            .sheet(item: $selectedClass) { danceClass in
+                classInfoSheet(
+                    danceClass: danceClass,
+                    adaptiveTextColor: adaptiveTextColor,
+                    joinNowAction: { viewState.showWebView = true },
+                    showingInfo: Binding(
+                        get: { selectedClass != nil },
+                        set: { if !$0 { selectedClass = nil } }
+                    )
                 )
             }
             .toolbarBackground(.visible, for: .navigationBar)
@@ -55,18 +75,18 @@ struct AllClassesView: View {
 }
 
 struct BookButton: View {
-
+    // Unchanged
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
             Text(Constants.Classes.bookButtonText)
-                .font(.sfProRoundedTextRegular(size: 16))
+                .font(.sfProRoundedTextRegular(size: 15))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 4)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(.white.opacity(0.5))
+                        .fill(.white.opacity(0.4))
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.black, lineWidth: 1)
@@ -78,20 +98,35 @@ struct BookButton: View {
 }
 
 struct DanceClassRow: View {
-
+    // Unchanged
     let danceClass: DanceClass
     let onBook: () -> Void
+    let onInfoTap: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Text(danceClass.rawValue)
-                    .font(.sfProBodyTextMedium(size: 18))
+                    .font(.sfProBodyTextMedium(size: 16))
                     .foregroundColor(.black)
                     .padding(.vertical, 8)
                     .padding(.leading, 16)
 
                 Spacer()
+
+                Button(action: onInfoTap) {
+                    ZStack {
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 36, height: 36)
+                            .foregroundStyle(.white.opacity(0.4))
+
+                        Image(systemName: "questionmark.circle.fill")
+                            .resizable()
+                            .frame(width: 22, height: 22)
+                            .foregroundStyle(danceClass.color.opacity(0.9))
+                    }
+                }
 
                 BookButton(action: onBook)
                     .padding(.trailing, 8)

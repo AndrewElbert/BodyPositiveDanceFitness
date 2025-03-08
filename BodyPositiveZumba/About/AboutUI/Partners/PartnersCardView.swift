@@ -26,7 +26,7 @@ struct PartnersCard: View {
                 divider
                 partnerDescription
                 Spacer()
-                actionButton
+                websiteButton
             }
         }
         .padding()
@@ -119,7 +119,7 @@ struct PartnersCard: View {
         }
     }
 
-    private var actionButton: some View {
+    private var websiteButton: some View {
 
         Button(action: {
             viewState.displayURL = partner.url
@@ -131,7 +131,7 @@ struct PartnersCard: View {
                     .font(.system(size: 18, weight: .semibold))
 
                 Text(Constants.Partners.buttonText)
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.sfProRoundedTextMedium(size: 20))
 
                 Image(systemName: "antenna.radiowaves.left.and.right")
                     .font(.system(size: 18, weight: .semibold))
@@ -146,12 +146,6 @@ struct PartnersCard: View {
                 )
             )
             .cornerRadius(22)
-            .shadow(
-                color: .gray.opacity(0.5),
-                radius: 5,
-                x: 0,
-                y: 3
-            )
         }
         .buttonStyle(PlainButtonStyle())
         .padding(.bottom, 30)

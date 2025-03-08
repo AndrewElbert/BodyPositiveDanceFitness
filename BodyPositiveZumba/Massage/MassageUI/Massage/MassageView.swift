@@ -23,6 +23,7 @@ struct MassageView: View, ActionableView {
     }
 
     var body: some View {
+
         NavigationStack {
             ZStack {
                 mainContent
@@ -51,6 +52,7 @@ struct MassageView: View, ActionableView {
 }
 
 private extension MassageView {
+
     var mainContent: some View {
         VStack {
             headerSection
@@ -64,20 +66,35 @@ private extension MassageView {
     }
 
     var headerSection: some View {
+
         VStack(spacing: 0) {
-            Text(viewState.pageTitle)
-                .font(.sfProDisplayBold(size: 34))
-                .multilineTextAlignment(.center)
-                .foregroundColor(adaptiveTextColor)
-                .padding(.top, 0)
-                .padding(.bottom, 8)
+            ZStack {
+                Text(viewState.pageTitle)
+                    .font(.sfProDisplayBold(size: 34))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: Constants.Colors.logoColorGradient,
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .multilineTextAlignment(.center)
+                    .blur(radius: 0.8888)
+                    .offset(y: 0.8888)
+
+                Text(viewState.pageTitle)
+                    .font(.sfProDisplayBold(size: 34))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.top, 0)
+            .padding(.bottom, 8)
 
             Divider()
 
             Text(viewState.pageBio)
                 .font(.sfProBodyTextRegular(size: 16))
                 .italic()
-                .foregroundColor(.black.opacity(0.65))
+                .foregroundColor(.black.opacity(0.77))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -86,6 +103,7 @@ private extension MassageView {
     }
 
     var carouselSection: some View {
+
         SwipableCarouselComponent<AnyView, MassageCardModel>(
             viewModel: SwipableCarouselViewModel(
                 viewState: $viewState.swipableCarouselViewState
@@ -109,11 +127,11 @@ private extension MassageView {
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
-                            lineWidth: 5)
+                                lineWidth: 4.4)
                 )
                     .shadow(
-                        color: isCurrentCard ? Color.orange.opacity(0.2) : Color.clear,
-                        radius: 40
+                        color: isCurrentCard ? Color.orange.opacity(0.22) : Color.clear,
+                        radius: 33
                     )
             )
         }
@@ -130,16 +148,13 @@ private extension MassageView {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background {
-                    ZStack {
-                        StaticGradientBackground()
-                            .cornerRadius(36)
-
-                        RoundedRectangle(cornerRadius: 36, style: .continuous)
-                            .fill((colorScheme == .dark ? Color.black : Color.white).opacity(0.33))
-
-                    }
-                }
+                .background(
+                    LinearGradient(
+                        colors: Constants.Colors.logoColorGradientLight,
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
                 .cornerRadius(36)
         }
         .padding(.bottom, 11)

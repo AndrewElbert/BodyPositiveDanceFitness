@@ -48,6 +48,9 @@ struct Constants {
         static let openButtonText: String = "Learn More About "
         static let joinNowButtonText: String = "Join Now!"
         static let viewCalendarUrl: String = "https://www.bodypositivedancefitness.com/calendar"
+        static let learnMoreButtonText: String = "Learn More"
+        static let descriptionTitle: String = "About This Class"
+        static let closeButton: String = "Close"
 
         static let bookNowWebviewTitle: String = "Book A Class"
         static let viewAllClassesPageTitle: String = "All Classes"
@@ -134,6 +137,12 @@ struct Constants {
             Constants.Colors.neonCyan.opacity(0.2),
             .yellow.opacity(0.2),
             .orange.opacity(0.2)
+        ]
+
+        static let homeExploreGradient: [Color] = [
+            Color(red: 0.98, green: 0.36, blue: 0.83),
+            Color(red: 0.55, green: 0.31, blue: 0.95),
+            Color(red: 0.2, green: 0.5, blue: 1.0)
         ]
 
         static let navy = Color(red: 0.0, green: 0.0, blue: 128.0/255.0)
@@ -431,9 +440,9 @@ struct Constants {
 
     enum Partners {
 
-        static let pageTitle: String = "Partners"
-        static let buttonText: String = "Visit Website"
-        static let pageBio: String = "Discover our incredible partners below!"
+        static let pageTitle: String = "- Partners!"
+        static let buttonText: String = "Website"
+        static let pageBio: String = "Discover our incredible partners below"
     }
 
     // MARK: SideDrawer

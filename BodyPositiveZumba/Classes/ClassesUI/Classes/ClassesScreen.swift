@@ -20,8 +20,6 @@ struct ClassesScreen: View {
             viewState: $viewModel.viewState,
             onAction: { action in
                 switch action {
-                case .toggleExpansion:
-                    viewModel.toggleExpansion()
                 case .handleViewAllButtonTap:
                     viewModel.navigateToViewAll()
                 }

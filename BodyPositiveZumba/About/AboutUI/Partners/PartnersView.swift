@@ -52,7 +52,7 @@ struct PartnersView: View {
 
     private var header: some View {
 
-        HStack(spacing: 13) {
+        HStack(spacing: 11) {
             Image(Constants.Common.logoName)
                 .resizable()
                 .scaledToFit()
@@ -61,18 +61,19 @@ struct PartnersView: View {
                 .padding(.top, 0)
 
             Text(Constants.Partners.pageTitle)
-                .font(.sfProDisplayBold(size: 44))
+                .font(.sfProDisplayBold(size: 38))
                 .foregroundStyle(.black)
-                .padding(.top, 15)
-                .padding(.bottom, 12)
+
+            .padding(.top, 15)
+            .padding(.bottom, 12)
         }
     }
 
     private var descriptionText: some View {
 
         Text(Constants.Partners.pageBio)
-            .font(.sfProBodyTextRegular(size: 17))
-            .foregroundColor(.gray)
+            .font(.sfProBodyTextRegular(size: 19))
+            .foregroundColor(.black.opacity(0.7))
             .italic()
             .multilineTextAlignment(.center)
             .padding(.horizontal, 0)
