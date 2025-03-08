@@ -17,7 +17,7 @@ class AnimatedCarouselViewModel: ObservableObject {
         viewState: Binding<AnimatedCarouselViewState>
     ) {
         self._viewState = viewState
-        
+
     }
 
     func startAutoScroll() {
