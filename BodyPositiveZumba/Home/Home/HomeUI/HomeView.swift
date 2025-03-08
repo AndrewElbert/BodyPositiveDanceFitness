@@ -139,7 +139,7 @@ struct HomeView: View {
     private var greetingView: some View {
 
         VStack(spacing: 11) {
-            
+
             Text(viewState.currentGreeting)
                 .font(.sfProDisplayBold(size: 35))
                 .italic()

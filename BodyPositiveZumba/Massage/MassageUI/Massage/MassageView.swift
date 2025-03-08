@@ -23,7 +23,7 @@ struct MassageView: View, ActionableView {
     }
 
     var body: some View {
-        
+
         NavigationStack {
             ZStack {
                 mainContent
@@ -52,7 +52,7 @@ struct MassageView: View, ActionableView {
 }
 
 private extension MassageView {
-    
+
     var mainContent: some View {
         VStack {
             headerSection
@@ -66,7 +66,7 @@ private extension MassageView {
     }
 
     var headerSection: some View {
-        
+
         VStack(spacing: 0) {
             ZStack {
                 Text(viewState.pageTitle)
@@ -80,7 +80,7 @@ private extension MassageView {
                     )
                     .multilineTextAlignment(.center)
                     .blur(radius: 0.8888)
-                    .offset(y : 0.8888)
+                    .offset(y: 0.8888)
 
                 Text(viewState.pageTitle)
                     .font(.sfProDisplayBold(size: 34))
@@ -103,7 +103,7 @@ private extension MassageView {
     }
 
     var carouselSection: some View {
-        
+
         SwipableCarouselComponent<AnyView, MassageCardModel>(
             viewModel: SwipableCarouselViewModel(
                 viewState: $viewState.swipableCarouselViewState

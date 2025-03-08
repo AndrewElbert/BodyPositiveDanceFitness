@@ -73,7 +73,7 @@ struct AnimatedCarouselView: View, ActionableView {
                 pageIndicators
             }
         }
-        .onAppear() {
+        .onAppear {
             onAction?(.startAutoScroll)
         }
         .onReceive(viewState.timer) { _ in

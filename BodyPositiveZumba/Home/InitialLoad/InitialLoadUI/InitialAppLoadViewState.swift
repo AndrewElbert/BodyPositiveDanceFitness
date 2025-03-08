@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct InitialAppLoadViewState {
 
     var showHomeScreen: Bool = false

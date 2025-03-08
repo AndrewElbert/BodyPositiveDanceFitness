@@ -59,11 +59,11 @@ struct PartnersView: View {
                 .frame(width: 130, height: 130)
                 .clipped()
                 .padding(.top, 0)
-                
+
             Text(Constants.Partners.pageTitle)
                 .font(.sfProDisplayBold(size: 38))
                 .foregroundStyle(.black)
-            
+
             .padding(.top, 15)
             .padding(.bottom, 12)
         }
