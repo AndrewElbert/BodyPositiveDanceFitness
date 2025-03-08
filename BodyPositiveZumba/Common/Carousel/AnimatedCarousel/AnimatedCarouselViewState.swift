@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct AnimatedCarouselViewState {
 
-    var timer = Timer.publish(every: 2.6, on: .main, in: .common).autoconnect()
+    var timer = PreciseSequenceTimer(baseInterval: 2.6)
     var images: [String]
     var items: [CarouselItemModel]
     var currentIndex: Int = 0
@@ -26,5 +27,6 @@ struct AnimatedCarouselViewState {
                 imageName: $0
             )
         }
+        timer.start()
     }
 }
