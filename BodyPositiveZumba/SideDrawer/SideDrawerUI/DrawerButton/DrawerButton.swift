@@ -16,7 +16,10 @@ struct DrawerButton: View {
 
     var body: some View {
 
-        Button(action: action) {
+        Button(action: {
+            buttonVibration()
+            action()
+        }) {
             HStack(spacing: icon == nil ? 0 : 11) {
 
                 if let icon = icon {
