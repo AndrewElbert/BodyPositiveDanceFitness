@@ -188,9 +188,11 @@ struct HomeView: View {
             HStack(spacing: 16) {
                 HomeRainbowButton(title: Constants.Home.aboutButton) {
                     onAction?(.about)
+                    buttonVibration()
                 }
                 HomeRainbowButton(title: Constants.Home.exploreButton) {
                     sideDrawerViewModel.openMenu()
+                    buttonVibration()
                 }
             }
         }
@@ -232,6 +234,7 @@ struct HomeView: View {
 
     private func toggleCarousel() {
 
+        buttonVibration()
         withAnimation(.spring(duration: 0.8)) {
             viewState.isCarouselExpanded.toggle()
         }
@@ -366,8 +369,7 @@ struct ModernPassesButton: View {
             action()
         }
 
-        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedback.impactOccurred()
+        buttonVibration()
     }
 }
 

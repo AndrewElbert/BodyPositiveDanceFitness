@@ -18,8 +18,9 @@ struct ColoredButton: View {
 
     var body: some View {
         Button(action: {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                 isPressed = true
+                buttonVibration()
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 isPressed = false

@@ -24,6 +24,7 @@ struct TopBarView: View, ActionableView {
     var body: some View {
         HStack {
             Button(action: {
+                buttonVibration()
                 onAction?(.toggleMenu)
             }) {
                 Image(systemName: Constants.Home.buttonImage)
