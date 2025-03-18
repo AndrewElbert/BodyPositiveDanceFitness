@@ -33,7 +33,11 @@ class InitialAppLoadViewModel: ObservableObject {
     func fadeToNeonCyan() {
 
         withAnimation(.easeIn(duration: 0.8)) {
-            viewState.showShootingStar = true
+            
+            startShootingStar()
+            
+            startVibration()
+            
             viewState.barColorStart = viewState.neonCyan
             viewState.barColorEnd = viewState.endColor
             viewState.textColor = viewState.endColor
@@ -61,6 +65,20 @@ class InitialAppLoadViewModel: ObservableObject {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + homeLoadDuration) {
             self.viewState.showHomeScreen = true
+        }
+    }
+    
+    private func startShootingStar() {
+        
+        viewState.showShootingStar = true
+    }
+    
+    private func startVibration() {
+      
+        DispatchQueue.global(qos: .default).async {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            generator.notificationOccurred(.success)
         }
     }
 }
