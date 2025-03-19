@@ -58,6 +58,7 @@ struct WebViewContainer: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
+                        buttonVibration()
                         webView?.reload()
                     }) {
                         Image(systemName: "arrow.clockwise")
@@ -71,6 +72,7 @@ struct WebViewContainer: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        buttonVibration()
                         dismiss()
                     }) {
                         Image(systemName: "xmark")
