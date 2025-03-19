@@ -75,11 +75,16 @@ struct AllClassesView: View {
 }
 
 struct BookButton: View {
-    // Unchanged
+    
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button(
+            action: {
+                buttonVibration()
+                action()
+            }
+        ) {
             Text(Constants.Classes.bookButtonText)
                 .font(.sfProRoundedTextRegular(size: 15))
                 .padding(.horizontal, 16)
@@ -98,7 +103,7 @@ struct BookButton: View {
 }
 
 struct DanceClassRow: View {
-    // Unchanged
+
     let danceClass: DanceClass
     let onBook: () -> Void
     let onInfoTap: () -> Void
@@ -114,7 +119,12 @@ struct DanceClassRow: View {
 
                 Spacer()
 
-                Button(action: onInfoTap) {
+                Button(
+                    action: {
+                        buttonVibration()
+                        onInfoTap()
+                    }
+                ) {
                     ZStack {
                         Image(systemName: "circle.fill")
                             .resizable()

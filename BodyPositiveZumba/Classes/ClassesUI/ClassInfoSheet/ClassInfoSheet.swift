@@ -128,7 +128,12 @@ struct classInfoSheet: View {
 
                 HStack(spacing: 15) {
 
-                    Button(action: { showingInfo = false }) {
+                    Button(
+                        action: {
+                            buttonVibration()
+                            showingInfo = false
+                        }
+                    ) {
                         Text(Constants.Classes.closeButton)
                             .font(.sfProRoundedTextSemibold(size: 18))
                             .foregroundColor(.white)
@@ -140,10 +145,13 @@ struct classInfoSheet: View {
                             )
                     }
 
-                    Button(action: {
-                        showingInfo = false
-                        joinNowAction()
-                    }) {
+                    Button(
+                        action: {
+                            buttonVibration()
+                            showingInfo = false
+                            joinNowAction()
+                        }
+                    ) {
                         Text(Constants.Classes.joinNowButtonText)
                             .font(.sfProRoundedTextSemibold(size: 18))
                             .foregroundColor(.white)
@@ -166,6 +174,7 @@ struct classInfoSheet: View {
             }
             animationsStarted = true
         }
+        .preferredColorScheme(.light)
     }
 }
 

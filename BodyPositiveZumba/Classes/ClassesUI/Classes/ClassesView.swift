@@ -40,8 +40,12 @@ struct ClassesView: View, ActionableView {
             }
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarButton.backButton { dismiss() }
-                ToolbarButton.closeButton { dismiss() }
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
             }
             .onChange(of: viewState.showSwipeAnimation) { _, newValue in
                 if newValue {
@@ -62,7 +66,10 @@ private extension ClassesView {
         @Environment(\.colorScheme) private var colorScheme
 
         var body: some View {
-            Button(action: action) {
+            Button(action: {
+                buttonVibration()
+                action()
+            }) {
                 Text(title)
                     .font(.sfProRoundedTextMedium(size: 24))
                     .foregroundColor(.black)
