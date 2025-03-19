@@ -117,7 +117,12 @@ struct SideDrawerView: View, ActionableView {
 
     private var contactButton: some View {
 
-        Button(action: { onAction?(.contact) }) {
+        Button(
+            action: {
+                buttonVibration()
+                onAction?(.contact)
+            }
+        ) {
             HStack(spacing: 20) {
                 Image(systemName: Constants.SideDrawer.contactImage)
                     .foregroundColor(.black)

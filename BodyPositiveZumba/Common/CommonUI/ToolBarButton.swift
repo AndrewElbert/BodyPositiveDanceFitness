@@ -53,7 +53,10 @@ struct ToolbarButton: ToolbarContent {
 
     var body: some ToolbarContent {
         ToolbarItem(placement: placement) {
-            Button(action: action) {
+            Button(action: {
+                buttonVibration()
+                action()
+            }) {
                 Image(systemName: icon)
                     .resizable()
                     .scaledToFit()

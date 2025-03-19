@@ -188,11 +188,9 @@ struct HomeView: View {
             HStack(spacing: 16) {
                 HomeRainbowButton(title: Constants.Home.aboutButton) {
                     onAction?(.about)
-                    buttonVibration()
                 }
                 HomeRainbowButton(title: Constants.Home.exploreButton) {
                     sideDrawerViewModel.openMenu()
-                    buttonVibration()
                 }
             }
         }
@@ -379,7 +377,10 @@ struct HomeRainbowButton: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
+        Button(action: {
+            buttonVibration()
+            onTap()
+        }) {
             Text(title)
                 .font(.sfProRoundedTextSemibold(size: 18))
                 .frame(maxWidth: .infinity)
