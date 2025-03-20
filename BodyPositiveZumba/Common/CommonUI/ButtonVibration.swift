@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 func buttonVibration() {
-    
+
     DispatchQueue.global(qos: .default).async {
-        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
         impactFeedback.prepare()
         impactFeedback.impactOccurred()
     }
