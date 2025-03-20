@@ -43,7 +43,11 @@ struct InitialAppLoadView: View {
         VStack {
             logo
             progressBar
-                .onAppear { onAction?(.startLoading) }
+                .onAppear {
+                    onAction?(
+                        .startLoading
+                    )
+                }
         }
     }
 
@@ -58,8 +62,8 @@ struct InitialAppLoadView: View {
                 x: 0,
                 y: 5
             )
+            .scaleEffect(0.95)
             .ignoresSafeArea()
-            .scaleEffect(0.9)
             .padding(.top, 50)
     }
 
@@ -95,6 +99,7 @@ struct InitialAppLoadView: View {
                     }
                 }
         }
+        .padding(.top, 18)
     }
 }
 

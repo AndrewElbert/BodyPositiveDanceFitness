@@ -79,8 +79,8 @@ private extension MassageView {
                         )
                     )
                     .multilineTextAlignment(.center)
-                    .blur(radius: 0.8888)
-                    .offset(y: 0.8888)
+                    .blur(radius: 0.55555)
+                    .offset(y: 0.55555)
 
                 Text(viewState.pageTitle)
                     .font(.sfProDisplayBold(size: 34))
