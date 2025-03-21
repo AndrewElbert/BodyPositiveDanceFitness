@@ -32,7 +32,12 @@ struct InitialAppLoadView: View {
             }
 
             if viewState.showHomeScreen {
-                Color.clear.onAppear { onAction?(.navigateHomeScreen) }
+                Color.clear.onAppear {
+                    viewState.showFireWork = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) {
+                        onAction?(.navigateHomeScreen)
+                    }
+                }
             } else {
                 content
                     .zIndex(1)

@@ -127,7 +127,7 @@ struct PartnersCard: View {
             impactFeedback.impactOccurred()
         }) {
             HStack(spacing: 10) {
-                Image(systemName: "globe")
+                Image(systemName: "globe.europe.africa")
                     .font(.system(size: 18, weight: .semibold))
 
                 Text(Constants.Partners.buttonText)

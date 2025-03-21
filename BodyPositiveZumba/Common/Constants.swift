@@ -146,9 +146,11 @@ struct Constants {
         ]
 
         static let homeExploreGradient: [Color] = [
+            Color(red: 0.985, green: 0.52, blue: 0.87),
             Color(red: 0.98, green: 0.36, blue: 0.83),
             Color(red: 0.55, green: 0.31, blue: 0.95),
-            Color(red: 0.2, green: 0.5, blue: 1.0)
+            Color(red: 0.2, green: 0.5, blue: 1.0),
+            Constants.Colors.navy
         ]
 
         static let navy = Color(red: 0.0, green: 0.0, blue: 128.0/255.0)
@@ -203,21 +205,21 @@ struct Constants {
 
             ContactRowData(
                 title: "Message us!",
-                icon: "bubble.left.and.bubble.right.fill",
+                icon: "bubble.left.and.exclamationmark.bubble.right.fill",
                 text: "Send us a message",
                 action: "https://www.bodypositivedancefitness.com/contact-1",
                 iconColor: Color.blue
             ),
             ContactRowData(
                 title: "Call us!",
-                icon: "phone.fill",
+                icon: "phone.badge.waveform.fill",
                 text: "207-536-4617",
                 action: "tel://207-536-4617",
                 iconColor: Color.green
             ),
             ContactRowData(
                 title: "Email us!",
-                icon: "envelope.open.fill",
+                icon: "envelope.badge.person.crop.fill",
                 text: "dancing@bodypositivedancefitness.com",
                 action: "mailto:dancing@bodypositivedancefitness.com",
                 iconColor: Color.purple
@@ -406,7 +408,7 @@ struct Constants {
 
     enum Massage {
         static let pageTitle: String = "Massage Services"
-        static let pageBio: String = "Partnering with Lindsey (Lady Love Holistics) and Shelby (Swann's Healing Elements), we now offer sports massage, therapy, health coaching, and Reiki for our members and community!"
+        static let pageBio: String = "Partnering with Lindsey and Shelby, we now offer sports massage, therapy, health coaching, and Reiki for our members and community!"
 
         static let LindseyHerseyParlor: String = "Lady Love Holistics"
         static let ShelbySwannParlor: String = "Swann's Healing Elements"
@@ -467,7 +469,7 @@ struct Constants {
             comment: "Space rental button text"
         )
         static let spaceRentalImage: String = NSLocalizedString(
-            "building.2.fill",
+            "house.badge.wifi",
             comment: "Space rental button image"
         )
 
@@ -476,7 +478,7 @@ struct Constants {
             comment: "join now button text"
         )
         static let joinNowImage: String = NSLocalizedString(
-            "calendar.badge.plus",
+            "party.popper",
             comment: "Join now button image"
         )
 
@@ -485,7 +487,7 @@ struct Constants {
             comment: "about button text"
         )
         static let aboutImage: String = NSLocalizedString(
-            "info.circle",
+            "fireworks",
             comment: "About button image"
         )
 
@@ -494,7 +496,7 @@ struct Constants {
             comment: "faq button text"
         )
         static let faqImage: String = NSLocalizedString(
-            "questionmark.circle",
+            "figure.wave",
             comment: "FAQ button image"
         )
 
@@ -503,7 +505,7 @@ struct Constants {
             comment: "classes button text"
         )
         static let classesImage: String = NSLocalizedString(
-            "calendar",
+            "calendar.and.person",
             comment: "Classes button image"
         )
 
@@ -535,13 +537,13 @@ struct Constants {
             comment: "Contact text"
         )
         static let contactImage: String = NSLocalizedString(
-            "envelope.badge",
+            "figure.2",
             comment: "Contact button image"
         )
 
         static let contactFontSize: CGFloat = 20
         static let companyNameFontSize: CGFloat = 12
-        static let contactImageSize: CGFloat = 4
+        static let contactImageSize: CGFloat = 6
         static let startRadius: CGFloat = 40
         static let endRadius: CGFloat = 400
         static let backgroundOpacity: Double = 0.6
@@ -552,7 +554,7 @@ struct Constants {
         static let innerCircleColorRadius: Color = Color(red: 0.967, green: 0.698, blue: 0.243)
         static let buttonPressOpacity: CGFloat = 0.5
         static let buttonPressScale: CGFloat = 0.9
-        static let sideDrawerButtonImageSize: CGFloat = 25
+        static let sideDrawerButtonImageSize: CGFloat = 29
     }
 
     // MARK: Space Rental

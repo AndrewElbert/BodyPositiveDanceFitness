@@ -39,14 +39,19 @@ struct DanceClassCard: View {
                 )
 
             HStack {
-
                 ForEach(0..<3) { index in
-                    Image(systemName: "figure.dance")
+                    Image(systemName: index == 1 ? "figure.socialdance" : "figure.dance")
                         .font(.system(size: index == 1 ? 70 : 50))
                         .foregroundColor(danceClass.color)
                         .shadow(color: danceClass.color.opacity(0.3), radius: 3, x: 0, y: 2)
-                        .rotationEffect(.degrees(isDancing ? 9 : -4))
-                        .animation(Animation.easeInOut(duration: 1.1).repeatForever(autoreverses: true), value: isDancing)
+                        .rotationEffect(
+                            .degrees(isDancing ? 16 : -8),
+                            anchor: .bottom
+                        )
+                        .animation(
+                            Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true),
+                            value: isDancing
+                        )
                         .onAppear(perform: index == 0 ? { isDancing = true } : {})
                 }
             }
@@ -60,7 +65,6 @@ struct DanceClassCard: View {
                 .shadow(color: Color.white.opacity(0.5), radius: 1, x: 0, y: 1)
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 15)
-                .offset(y: -10)
 
             Spacer()
 

@@ -31,6 +31,7 @@ struct DrawerButton: View {
                             height: Constants.SideDrawer.sideDrawerButtonImageSize
                         )
                         .foregroundColor(.black)
+                        .bold()
                 }
                 Text(title)
                     .font(

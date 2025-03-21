@@ -181,7 +181,7 @@ struct HomeView: View {
                 ModernPassesButton {
                     onAction?(.bookClass)
                 }
-                .padding(.top, 4)
+                .padding(.top, 0)
             }
 
             HStack(spacing: 16) {
@@ -200,7 +200,10 @@ struct HomeView: View {
     private var expandablePhotoButton: some View {
 
         Button(action: toggleCarousel) {
-            HStack(spacing: 4) {
+            HStack(spacing: 6) {
+                Image(systemName: "camera.fill")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(Constants.Colors.navy)
                 Text(Constants.Home.photosButton)
                     .font(.sfProDisplayRegular(size: 18))
                     .foregroundColor(Constants.Colors.navy)
@@ -323,13 +326,13 @@ struct ModernPassesButton: View {
                     .scaleEffect(isPressed ? 0.95 : 1)
                     .overlay(
                         Text(Constants.Home.viewPassesButton)
-                            .font(.system(size: 26, weight: .semibold, design: .rounded))
+                            .font(.system(size: 26, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                             .blur(radius: 4)
                             .opacity(isPressed ? 0.7 : 0)
                     )
 
-                gradientIcon(systemName: "music.note.list", leftRotation: false)
+                gradientIcon(systemName: "figure.socialdance", leftRotation: false)
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
