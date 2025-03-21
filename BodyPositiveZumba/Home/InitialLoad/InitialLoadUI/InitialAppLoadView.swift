@@ -72,8 +72,8 @@ struct InitialAppLoadView: View {
         VStack {
             ZStack(alignment: .leading) {
                 Capsule()
-                    .stroke(viewState.barOutlineColor, lineWidth: 5)
-                    .frame(height: 20)
+                    .stroke(viewState.barOutlineColor, lineWidth: 5.5)
+                    .frame(height: 22)
                 Capsule()
                     .fill(
                         LinearGradient(
@@ -82,7 +82,7 @@ struct InitialAppLoadView: View {
                             endPoint: .trailing
                         )
                     )
-                    .frame(width: viewState.progress * UIScreen.main.bounds.width * 0.8, height: 20)
+                    .frame(width: viewState.progress * UIScreen.main.bounds.width * 0.8, height: 22)
                     .animation(.linear(duration: viewState.barLoadDuration), value: viewState.progress)
             }
             .frame(width: UIScreen.main.bounds.width * 0.8)
@@ -99,13 +99,14 @@ struct InitialAppLoadView: View {
                     }
                 }
         }
-        .padding(.top, 18)
+        .padding(.top, 26)
     }
 }
 
 struct ShootingStarView: View {
 
     @State private var animate: Bool = false
+    @State private var rotation: Double = 0
 
     var body: some View {
 
@@ -113,6 +114,7 @@ struct ShootingStarView: View {
             Text("✨")
                 .font(.system(size: 38))
                 .shadow(color: .yellow, radius: 10, x: 0, y: 0)
+                .rotationEffect(.degrees(rotation))
                 .offset(
                     x: animate ? geometry.size.width * 1.2 : -110,
                     y: animate ? geometry.size.height * 0.35 : -260
@@ -123,6 +125,9 @@ struct ShootingStarView: View {
                 )
                 .onAppear {
                     animate = true
+                    withAnimation(Animation.linear(duration: 0.9).repeatForever(autoreverses: false)) {
+                        rotation = 360
+                    }
                 }
         }
         .ignoresSafeArea()
