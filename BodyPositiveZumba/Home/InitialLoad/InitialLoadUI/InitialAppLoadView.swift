@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EffectsLibrary
 
 struct InitialAppLoadView: View {
 
@@ -21,19 +22,20 @@ struct InitialAppLoadView: View {
     var body: some View {
 
         ZStack {
+            
             Color.white.ignoresSafeArea()
+            
+            if viewState.showFireWork {
+                FireWorksView()
+                    .ignoresSafeArea()
+                    .zIndex(0)
+            }
 
             if viewState.showHomeScreen {
                 Color.clear.onAppear { onAction?(.navigateHomeScreen) }
             } else {
                 content
-                    .overlay(
-                        Group {
-                            if viewState.showShootingStar {
-                                ShootingStarView()
-                            }
-                        }
-                    )
+                    .zIndex(1)
             }
         }
     }
@@ -103,33 +105,20 @@ struct InitialAppLoadView: View {
     }
 }
 
-struct ShootingStarView: View {
-
-    @State private var animate: Bool = false
-    @State private var rotation: Double = 0
-
+struct FireWorksView: View {
+    
     var body: some View {
-
-        GeometryReader { geometry in
-            Text("✨")
-                .font(.system(size: 38))
-                .shadow(color: .yellow, radius: 10, x: 0, y: 0)
-                .rotationEffect(.degrees(rotation))
-                .offset(
-                    x: animate ? geometry.size.width * 1.2 : -110,
-                    y: animate ? geometry.size.height * 0.35 : -260
-                )
-                .animation(
-                    Animation.linear(duration: 1.8),
-                    value: animate
-                )
-                .onAppear {
-                    animate = true
-                    withAnimation(Animation.linear(duration: 0.9).repeatForever(autoreverses: false)) {
-                        rotation = 360
-                    }
-                }
-        }
+        FireworksView(
+            config: FireworksConfig(
+                intensity: .medium,
+                lifetime: .long,
+                initialVelocity: .fast,
+                fadeOut: .slow,
+                spreadRadius: .high
+            )
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
+        .allowsHitTesting(false)
     }
 }

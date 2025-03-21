@@ -39,7 +39,7 @@ class InitialAppLoadViewModel: ObservableObject {
 
         withAnimation(.easeIn(duration: 0.8)) {
 
-            startShootingStar()
+            startFireWork()
 
             viewState.barColorStart = viewState.neonCyan
             viewState.barColorEnd = viewState.endColor
@@ -70,9 +70,9 @@ class InitialAppLoadViewModel: ObservableObject {
         }
     }
 
-    private func startShootingStar() {
+    private func startFireWork() {
 
-        viewState.showShootingStar = true
+        viewState.showFireWork = true
     }
 
     private func startVibration() {

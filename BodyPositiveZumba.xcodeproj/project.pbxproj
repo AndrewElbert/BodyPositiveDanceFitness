@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		624F82802D8DFEAB00F961F8 /* EffectsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 624F827F2D8DFEAB00F961F8 /* EffectsLibrary */; };
 		629016DF2D4B329200E8999C /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 629016DE2D4B329200E8999C /* FlowStacks */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				629016DF2D4B329200E8999C /* FlowStacks in Frameworks */,
+				624F82802D8DFEAB00F961F8 /* EffectsLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +122,7 @@
 			name = BPDF;
 			packageProductDependencies = (
 				629016DE2D4B329200E8999C /* FlowStacks */,
+				624F827F2D8DFEAB00F961F8 /* EffectsLibrary */,
 			);
 			productName = BodyPositiveZumba;
 			productReference = 622150322D4703E100F89553 /* BPDF.app */;
@@ -205,6 +208,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				62DBD2EA2D4B2CE700D6BBC3 /* XCRemoteSwiftPackageReference "FlowStacks" */,
+				624F827E2D8DFEAB00F961F8 /* XCRemoteSwiftPackageReference "effects-library" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 622150332D4703E100F89553 /* Products */;
@@ -575,6 +579,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		624F827E2D8DFEAB00F961F8 /* XCRemoteSwiftPackageReference "effects-library" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GetStream/effects-library";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		62DBD2EA2D4B2CE700D6BBC3 /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks";
@@ -586,6 +598,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		624F827F2D8DFEAB00F961F8 /* EffectsLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 624F827E2D8DFEAB00F961F8 /* XCRemoteSwiftPackageReference "effects-library" */;
+			productName = EffectsLibrary;
+		};
 		629016DE2D4B329200E8999C /* FlowStacks */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 62DBD2EA2D4B2CE700D6BBC3 /* XCRemoteSwiftPackageReference "FlowStacks" */;

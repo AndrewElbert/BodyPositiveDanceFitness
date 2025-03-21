@@ -1,6 +1,15 @@
 {
-  "originHash" : "df1aa9ba65c03a86030dee9a31c3b07641bafa19f07d8c86e1085c3b31b0f38f",
+  "originHash" : "d42ae441435b1b2ff327b193ffda564aa7331418219809c1e8be1276554c5da1",
   "pins" : [
+    {
+      "identity" : "effects-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GetStream/effects-library",
+      "state" : {
+        "revision" : "09ebd8e7536aa6dd70a48042244524e895ccd2aa",
+        "version" : "1.0.0"
+      }
+    },
     {
       "identity" : "flowstacks",
       "kind" : "remoteSourceControl",
