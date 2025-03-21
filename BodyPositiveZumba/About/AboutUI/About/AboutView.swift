@@ -119,7 +119,12 @@ struct RainbowButton: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
+        Button(
+            action: {
+                buttonVibration()
+                onTap()
+            }
+        ) {
             Text(title)
                 .font(.sfProRoundedTextSemibold(size: 22))
                 .frame(maxWidth: .infinity)

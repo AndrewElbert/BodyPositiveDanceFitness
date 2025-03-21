@@ -32,7 +32,13 @@ struct ExpandableSection: View, ActionableView {
     }
 
     private var headerButton: some View {
-        Button(action: { onAction?(.toggleExpansion) }) {
+        Button(
+            action:
+                {
+                    buttonVibration()
+                    onAction?(.toggleExpansion)
+                }
+        ) {
             HStack {
                 titleText
                 Spacer()

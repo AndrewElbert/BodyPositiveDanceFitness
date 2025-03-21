@@ -160,11 +160,14 @@ struct SpaceRentalView: View, ActionableView {
     }
 
     private var inquireButton: some View {
-        Button(action: {
-            withAnimation(buttonAnimation) {
-                onAction?(.toggleMessage)
+        Button(
+            action: {
+                buttonVibration()
+                withAnimation(buttonAnimation) {
+                    onAction?(.toggleMessage)
+                }
             }
-        }) {
+        ) {
             Text(Constants.SpaceRental.buttonText)
                 .font(buttonTextStyle)
                 .foregroundColor(.black)

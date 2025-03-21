@@ -68,29 +68,15 @@ private extension MassageView {
     var headerSection: some View {
 
         VStack(spacing: 0) {
-            ZStack {
-                Text(viewState.pageTitle)
-                    .font(.sfProDisplayBold(size: 34))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: Constants.Colors.logoColorGradient,
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .multilineTextAlignment(.center)
-                    .blur(radius: 0.55555)
-                    .offset(y: 0.55555)
-
-                Text(viewState.pageTitle)
-                    .font(.sfProDisplayBold(size: 34))
-                    .multilineTextAlignment(.center)
-            }
-            .padding(.top, 0)
-            .padding(.bottom, 8)
-
+            
+            Text(viewState.pageTitle)
+                .font(.sfProDisplayBold(size: 34))
+                .multilineTextAlignment(.center)
+                .padding(.top, 0)
+                .padding(.bottom, 8)
+            
             Divider()
-
+            
             Text(viewState.pageBio)
                 .font(.sfProBodyTextRegular(size: 16))
                 .italic()
@@ -141,6 +127,7 @@ private extension MassageView {
     var bookMassageButton: some View {
         Button(
             action: {
+                buttonVibration()
                 onAction?(.updateUrl)
             }) {
                 Text("Book With \(viewState.currentTherapistName) Today!")

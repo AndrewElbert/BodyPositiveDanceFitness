@@ -108,6 +108,7 @@ private extension TeamView {
     var bioSection: some View {
         VStack(spacing: 4) {
             Button(action: {
+                buttonVibration()
                 withAnimation(.easeInOut) {
                     viewState.isBioExpanded.toggle()
                 }
