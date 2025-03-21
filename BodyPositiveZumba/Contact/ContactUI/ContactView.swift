@@ -32,8 +32,12 @@ struct ContactView: View, ActionableView {
             }
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarButton.backButton { dismiss() }
-                ToolbarButton.closeButton { dismiss() }
+                ToolbarButton.backButton {
+                    dismiss()
+                }
+                ToolbarButton.closeButton {
+                    dismiss()
+                }
             }
             .preferredColorScheme(.light)
         }
@@ -111,6 +115,7 @@ struct ContactView: View, ActionableView {
 }
 
 struct ContactRowContainer: View {
+
     let data: ContactRowData
     let isSelected: Bool
     let onSelect: () -> Void
@@ -153,7 +158,12 @@ struct ContactRow: View {
                     }
                 }
 
-            Button(action: onAction) {
+            Button(
+                action: {
+                    buttonVibration()
+                    onAction()
+                }
+            ) {
                 Text(data.text)
                     .font(.sfProRoundedTextRegular(size: 16))
                     .foregroundColor(.blue)

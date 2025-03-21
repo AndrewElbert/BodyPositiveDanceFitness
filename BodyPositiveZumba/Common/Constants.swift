@@ -78,13 +78,19 @@ struct Constants {
         ]
 
         static let animateLogoColorGradient: [Color] = [
+            .red,
+            Constants.Colors.darkOrange,
             .orange,
             .yellow,
-            Constants.Colors.darkerCyan,
+            .green,
+            .mint,
             Constants.Colors.neonCyan,
-            Constants.Colors.darkerCyan,
-            .yellow,
-            .orange
+            .teal,
+            .blue,
+            .indigo,
+            .purple,
+            .pink,
+            .red
         ]
 
         static let coloredButtonGradient: [Color] = [

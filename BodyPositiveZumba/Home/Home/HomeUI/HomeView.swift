@@ -232,6 +232,7 @@ struct HomeView: View {
 
     private func toggleCarousel() {
 
+        buttonVibration()
         withAnimation(.spring(duration: 0.8)) {
             viewState.isCarouselExpanded.toggle()
         }
@@ -366,8 +367,7 @@ struct ModernPassesButton: View {
             action()
         }
 
-        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedback.impactOccurred()
+        buttonVibration()
     }
 }
 
@@ -377,7 +377,10 @@ struct HomeRainbowButton: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
+        Button(action: {
+            buttonVibration()
+            onTap()
+        }) {
             Text(title)
                 .font(.sfProRoundedTextSemibold(size: 18))
                 .frame(maxWidth: .infinity)

@@ -66,7 +66,12 @@ struct DanceClassCard: View {
 
             VStack(spacing: 10) {
 
-                Button(action: { showingInfo = true }) {
+                Button(
+                    action: {
+                        buttonVibration()
+                        showingInfo = true
+                    }
+                ) {
                     HStack {
                         Text(Constants.Classes.learnMoreButtonText)
                             .font(.sfProRoundedTextSemibold(size: 18))
@@ -121,10 +126,12 @@ struct DanceClassCard: View {
                 showingInfo: $showingInfo
             )
         }
+        .preferredColorScheme(.light)
     }
 
     private func openJoinURL() {
 
+        buttonVibration()
         guard let url = URL(string: Constants.JoinNow.joinNowUrl) else { return }
         viewState.joinNowURL = WebViewURL(
             title: Constants.Classes.joinNowButtonText,
