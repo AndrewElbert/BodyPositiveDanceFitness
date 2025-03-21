@@ -142,7 +142,6 @@ struct HomeView: View {
 
             Text(viewState.currentGreeting)
                 .font(.sfProDisplayBold(size: 35))
-                .italic()
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .padding(.top, 0)
@@ -174,15 +173,15 @@ struct HomeView: View {
             )
 
             VStack(spacing: 2) {
-                ModernPassesButton {
-                    onAction?(.bookClass)
-                }
                 Text(Constants.Home.passesBio)
                     .font(.sfProDisplayRegular(size: 19))
                     .foregroundColor(Constants.Colors.navy)
                     .italic()
-                    .padding(.top, 8)
-                    .padding(.bottom, 4)
+                
+                ModernPassesButton {
+                    onAction?(.bookClass)
+                }
+                .padding(.top, 4)
             }
 
             HStack(spacing: 16) {
@@ -319,12 +318,12 @@ struct ModernPassesButton: View {
                 gradientIcon(systemName: "ticket.fill", leftRotation: true)
 
                 Text(Constants.Home.viewPassesButton)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.system(size: 26, weight: .bold, design: .rounded))
                     .foregroundStyle(textGradient)
                     .scaleEffect(isPressed ? 0.95 : 1)
                     .overlay(
                         Text(Constants.Home.viewPassesButton)
-                            .font(.system(size: 24, weight: .semibold, design: .rounded))
+                            .font(.system(size: 26, weight: .semibold, design: .rounded))
                             .foregroundColor(.white)
                             .blur(radius: 4)
                             .opacity(isPressed ? 0.7 : 0)
@@ -346,7 +345,7 @@ struct ModernPassesButton: View {
     private func gradientIcon(systemName: String, leftRotation: Bool) -> some View {
 
         Image(systemName: systemName)
-            .font(.system(size: 24, weight: .bold))
+            .font(.system(size: 30, weight: .bold))
             .foregroundStyle(textGradient)
             .rotationEffect(.degrees(isAnimating ? (leftRotation ? 22 : 20) : (leftRotation ? -22 : -20)))
             .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
@@ -382,7 +381,7 @@ struct HomeRainbowButton: View {
             onTap()
         }) {
             Text(title)
-                .font(.sfProRoundedTextSemibold(size: 18))
+                .font(.sfProRoundedTextSemibold(size: 20))
                 .frame(maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.black)

@@ -61,11 +61,11 @@ class HomeViewModel: ObservableObject {
         let hour = Calendar.current.component(.hour, from: Date())
 
         if hour >= 5 && hour < 12 {
-            viewState.currentGreeting = "Good Morning!"
+            viewState.currentGreeting = "Good Morning 😊"
         } else if hour >= 12 && hour < 17 {
-            viewState.currentGreeting = "Good Afternoon!"
+            viewState.currentGreeting = "Good Afternoon 😊"
         } else {
-            viewState.currentGreeting = "Good Evening!"
+            viewState.currentGreeting = "Good Evening 😊"
         }
     }
 
