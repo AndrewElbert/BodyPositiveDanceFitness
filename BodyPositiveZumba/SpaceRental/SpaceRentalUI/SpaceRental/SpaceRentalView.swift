@@ -138,7 +138,7 @@ struct SpaceRentalView: View, ActionableView {
             Text(Constants.SpaceRental.pageBio)
                 .font(bioStyle)
                 .italic()
-                .foregroundColor(.gray)
+                .foregroundColor(.black.opacity(0.7))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.top, 12)

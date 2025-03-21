@@ -18,7 +18,7 @@ struct AnimatedLogoView: View {
             .scaledToFit()
             .frame(height: height)
             .scaleEffect(animateLogo ? 1 : 0.5)
-            .rotationEffect(.degrees(animateLogo ? 0 : -90))
+            .rotationEffect(.degrees(animateLogo ? 0 : -222))
             .opacity(animateLogo ? 1 : 0)
             .shadow(color: .gray.opacity(animateLogo ? 0.5 : 0), radius: animateLogo ? 10 : 0, x: 0, y: animateLogo ? 10 : 0)
             .onAppear {
