@@ -22,9 +22,9 @@ struct InitialAppLoadView: View {
     var body: some View {
 
         ZStack {
-            
+
             Color.white.ignoresSafeArea()
-            
+
             if viewState.showFireWork {
                 FireWorksView()
                     .ignoresSafeArea()
@@ -106,7 +106,7 @@ struct InitialAppLoadView: View {
 }
 
 struct FireWorksView: View {
-    
+
     var body: some View {
         FireworksView(
             config: FireworksConfig(

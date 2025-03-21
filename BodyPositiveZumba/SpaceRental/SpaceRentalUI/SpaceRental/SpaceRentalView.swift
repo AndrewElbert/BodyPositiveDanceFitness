@@ -136,7 +136,7 @@ struct SpaceRentalView: View, ActionableView {
                 .padding(.horizontal)
 
             Divider()
-            
+
             Text(Constants.SpaceRental.pageBio)
                 .font(bioStyle)
                 .italic()

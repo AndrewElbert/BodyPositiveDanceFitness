@@ -177,7 +177,7 @@ struct HomeView: View {
                     .font(.sfProDisplayRegular(size: 19))
                     .foregroundColor(Constants.Colors.navy)
                     .italic()
-                
+
                 ModernPassesButton {
                     onAction?(.bookClass)
                 }

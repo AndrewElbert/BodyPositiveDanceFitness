@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AnimatedLogoView: View {
-    
+
     var height: CGFloat = 222
     @State private var animationComplete = false
     @State private var bounceHeight: CGFloat = 200
-    
+
     var body: some View {
         Image(Constants.Common.logoName)
             .resizable()
@@ -23,7 +23,7 @@ struct AnimatedLogoView: View {
             .onAppear {
                 withAnimation(Animation.spring(
                     response: 0.7,
-                    dampingFraction: 0.5, 
+                    dampingFraction: 0.5,
                     blendDuration: 0.5
                 ).delay(0.4)) {
                     animationComplete = true
@@ -31,4 +31,3 @@ struct AnimatedLogoView: View {
             }
     }
 }
-
