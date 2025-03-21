@@ -72,7 +72,7 @@ struct ContactView: View, ActionableView {
 
             Text(Constants.Contact.pageBio)
                 .font(.sfProRoundedTextRegular(size: 18))
-                .foregroundColor(.gray)
+                .foregroundColor(.black.opacity(0.7))
         }
         .padding(.top, 25)
     }
