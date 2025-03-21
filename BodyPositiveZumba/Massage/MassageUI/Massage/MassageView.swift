@@ -68,15 +68,15 @@ private extension MassageView {
     var headerSection: some View {
 
         VStack(spacing: 0) {
-            
+
             Text(viewState.pageTitle)
                 .font(.sfProDisplayBold(size: 34))
                 .multilineTextAlignment(.center)
                 .padding(.top, 0)
                 .padding(.bottom, 8)
-            
+
             Divider()
-            
+
             Text(viewState.pageBio)
                 .font(.sfProBodyTextRegular(size: 16))
                 .italic()

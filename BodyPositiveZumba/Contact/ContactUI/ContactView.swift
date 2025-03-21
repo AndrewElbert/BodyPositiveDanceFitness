@@ -115,7 +115,7 @@ struct ContactView: View, ActionableView {
 }
 
 struct ContactRowContainer: View {
-    
+
     let data: ContactRowData
     let isSelected: Bool
     let onSelect: () -> Void
@@ -163,7 +163,7 @@ struct ContactRow: View {
                     buttonVibration()
                     onAction()
                 }
-            ){
+            ) {
                 Text(data.text)
                     .font(.sfProRoundedTextRegular(size: 16))
                     .foregroundColor(.blue)
